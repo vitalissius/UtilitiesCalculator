@@ -1,9 +1,11 @@
 package utilitiescalculator;
 
+import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.*;
 
 public class UCWindow extends JFrame {
-
+    
     /**
      * Creates new form UCWindow
      */
@@ -19,14 +21,1165 @@ public class UCWindow extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dialogElecTariff = new javax.swing.JDialog();
+        panelElecBoundary = new javax.swing.JPanel();
+        tfElecBoundary = new javax.swing.JTextField();
+        lbElecPrice1 = new javax.swing.JLabel();
+        lbElecPrice2 = new javax.swing.JLabel();
+        panelElecPrice = new javax.swing.JPanel();
+        tfElecPriceBelow = new javax.swing.JTextField();
+        tfElecPriceAbove = new javax.swing.JTextField();
+        lbElecBelow1 = new javax.swing.JLabel();
+        lbElecBelow2 = new javax.swing.JLabel();
+        lbElecAbove1 = new javax.swing.JLabel();
+        lbElecAbove2 = new javax.swing.JLabel();
+        panelElecPrivilege = new javax.swing.JPanel();
+        tfElecPrivilege = new javax.swing.JTextField();
+        lbElecPrivilege1 = new javax.swing.JLabel();
+        lbElecPrivilege2 = new javax.swing.JLabel();
+        btElecTariffSave = new javax.swing.JButton();
+        btElecTariffCancel = new javax.swing.JButton();
+        panelElecMaxValue = new javax.swing.JPanel();
+        tfElecMaxValue = new javax.swing.JTextField();
+        dialogGasTariff = new javax.swing.JDialog();
+        panelGasPrice = new javax.swing.JPanel();
+        tfGasPrice = new javax.swing.JTextField();
+        lbGasPrice1 = new javax.swing.JLabel();
+        lbGasPrice2 = new javax.swing.JLabel();
+        btGasTariffSave = new javax.swing.JButton();
+        btGasTariffCancel = new javax.swing.JButton();
+        panelGasMaxValue = new javax.swing.JPanel();
+        tfGasMaxValue = new javax.swing.JTextField();
+        dialogPersonalData = new javax.swing.JDialog();
+        tfAccount = new javax.swing.JTextField();
+        lbAccount = new javax.swing.JLabel();
+        panelNames = new javax.swing.JPanel();
+        tfSurname = new javax.swing.JTextField();
+        tfFirstName = new javax.swing.JTextField();
+        tfPatronymic = new javax.swing.JTextField();
+        lbSurname = new javax.swing.JLabel();
+        lbFirstName = new javax.swing.JLabel();
+        lbPatronymic = new javax.swing.JLabel();
+        panelAddress = new javax.swing.JPanel();
+        tfStreet = new javax.swing.JTextField();
+        tfBuilding = new javax.swing.JTextField();
+        tfApartment = new javax.swing.JTextField();
+        lbStreet = new javax.swing.JLabel();
+        lbBuilding = new javax.swing.JLabel();
+        lbApartment = new javax.swing.JLabel();
+        btPersonalSave = new javax.swing.JButton();
+        btPersonalCancel = new javax.swing.JButton();
+        dialogViewAndPrint = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        buttonElecTariff = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jTextField8 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jTextField9 = new javax.swing.JTextField();
+        jTextField10 = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        jTextField12 = new javax.swing.JTextField();
+        jTextField13 = new javax.swing.JTextField();
+        jTextField14 = new javax.swing.JTextField();
+        jTextField15 = new javax.swing.JTextField();
+        jTextField16 = new javax.swing.JTextField();
+        jTextField17 = new javax.swing.JTextField();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBox8 = new javax.swing.JCheckBox();
+        jCheckBox9 = new javax.swing.JCheckBox();
+        jCheckBox10 = new javax.swing.JCheckBox();
+        jCheckBox11 = new javax.swing.JCheckBox();
+        jCheckBox12 = new javax.swing.JCheckBox();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        buttonViewAndPrint = new javax.swing.JButton();
+        buttonChangeSize = new javax.swing.JButton();
+        buttonChangeLanguage = new javax.swing.JButton();
+        buttonPersonalData = new javax.swing.JButton();
+
+        dialogElecTariff.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        dialogElecTariff.setIconImage(null);
+        dialogElecTariff.setResizable(false);
+
+        panelElecBoundary.setBorder(javax.swing.BorderFactory.createTitledBorder("Граничний обсяг електроенергії"));
+
+        tfElecBoundary.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        lbElecPrice1.setText("Граничний обсяг електроенергії (ГОЕ):");
+
+        lbElecPrice2.setText("кВт·год");
+
+        javax.swing.GroupLayout panelElecBoundaryLayout = new javax.swing.GroupLayout(panelElecBoundary);
+        panelElecBoundary.setLayout(panelElecBoundaryLayout);
+        panelElecBoundaryLayout.setHorizontalGroup(
+            panelElecBoundaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelElecBoundaryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbElecPrice1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addComponent(tfElecBoundary, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbElecPrice2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelElecBoundaryLayout.setVerticalGroup(
+            panelElecBoundaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelElecBoundaryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelElecBoundaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfElecBoundary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbElecPrice1)
+                    .addComponent(lbElecPrice2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelElecPrice.setBorder(javax.swing.BorderFactory.createTitledBorder("Ціна на електроенергію"));
+
+        tfElecPriceBelow.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        tfElecPriceAbove.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        lbElecBelow1.setText("За обсяг, спожитий до ГОЕ:");
+
+        lbElecBelow2.setText("копійок");
+
+        lbElecAbove1.setText("За обсяг, спожитий понад ГОЕ:");
+
+        lbElecAbove2.setText("копійок");
+
+        javax.swing.GroupLayout panelElecPriceLayout = new javax.swing.GroupLayout(panelElecPrice);
+        panelElecPrice.setLayout(panelElecPriceLayout);
+        panelElecPriceLayout.setHorizontalGroup(
+            panelElecPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelElecPriceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelElecPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbElecBelow1)
+                    .addComponent(lbElecAbove1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelElecPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfElecPriceBelow, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfElecPriceAbove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelElecPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbElecBelow2, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(lbElecAbove2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelElecPriceLayout.setVerticalGroup(
+            panelElecPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelElecPriceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelElecPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfElecPriceBelow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbElecBelow1)
+                    .addComponent(lbElecBelow2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelElecPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfElecPriceAbove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbElecAbove1)
+                    .addComponent(lbElecAbove2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelElecPrivilege.setBorder(javax.swing.BorderFactory.createTitledBorder("Пільга"));
+
+        tfElecPrivilege.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        lbElecPrivilege1.setText("Розмір пільги:");
+
+        lbElecPrivilege2.setText("%");
+
+        javax.swing.GroupLayout panelElecPrivilegeLayout = new javax.swing.GroupLayout(panelElecPrivilege);
+        panelElecPrivilege.setLayout(panelElecPrivilegeLayout);
+        panelElecPrivilegeLayout.setHorizontalGroup(
+            panelElecPrivilegeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelElecPrivilegeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbElecPrivilege1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tfElecPrivilege, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbElecPrivilege2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelElecPrivilegeLayout.setVerticalGroup(
+            panelElecPrivilegeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelElecPrivilegeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelElecPrivilegeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfElecPrivilege, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbElecPrivilege1)
+                    .addComponent(lbElecPrivilege2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btElecTariffSave.setText("Зберегти");
+
+        btElecTariffCancel.setText("Скасувати");
+
+        panelElecMaxValue.setBorder(javax.swing.BorderFactory.createTitledBorder("Максимальне значення електричного лічильника"));
+
+        tfElecMaxValue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        javax.swing.GroupLayout panelElecMaxValueLayout = new javax.swing.GroupLayout(panelElecMaxValue);
+        panelElecMaxValue.setLayout(panelElecMaxValueLayout);
+        panelElecMaxValueLayout.setHorizontalGroup(
+            panelElecMaxValueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelElecMaxValueLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tfElecMaxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelElecMaxValueLayout.setVerticalGroup(
+            panelElecMaxValueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelElecMaxValueLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tfElecMaxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dialogElecTariffLayout = new javax.swing.GroupLayout(dialogElecTariff.getContentPane());
+        dialogElecTariff.getContentPane().setLayout(dialogElecTariffLayout);
+        dialogElecTariffLayout.setHorizontalGroup(
+            dialogElecTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogElecTariffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogElecTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelElecBoundary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelElecPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelElecPrivilege, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogElecTariffLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btElecTariffSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btElecTariffCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelElecMaxValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        dialogElecTariffLayout.setVerticalGroup(
+            dialogElecTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogElecTariffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelElecBoundary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelElecPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelElecPrivilege, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelElecMaxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(dialogElecTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btElecTariffSave)
+                    .addComponent(btElecTariffCancel))
+                .addContainerGap())
+        );
+
+        dialogGasTariff.setResizable(false);
+
+        panelGasPrice.setBorder(javax.swing.BorderFactory.createTitledBorder("Ціна на газ"));
+
+        tfGasPrice.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        lbGasPrice1.setText("Ціна на газ:");
+
+        lbGasPrice2.setText("грн за м куб");
+
+        javax.swing.GroupLayout panelGasPriceLayout = new javax.swing.GroupLayout(panelGasPrice);
+        panelGasPrice.setLayout(panelGasPriceLayout);
+        panelGasPriceLayout.setHorizontalGroup(
+            panelGasPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGasPriceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbGasPrice1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(tfGasPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbGasPrice2)
+                .addContainerGap())
+        );
+        panelGasPriceLayout.setVerticalGroup(
+            panelGasPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGasPriceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelGasPriceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfGasPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbGasPrice1)
+                    .addComponent(lbGasPrice2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btGasTariffSave.setText("Зберегти");
+
+        btGasTariffCancel.setText("Скасувати");
+
+        panelGasMaxValue.setBorder(javax.swing.BorderFactory.createTitledBorder("Максимальне значення газового лічильника"));
+
+        tfGasMaxValue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        javax.swing.GroupLayout panelGasMaxValueLayout = new javax.swing.GroupLayout(panelGasMaxValue);
+        panelGasMaxValue.setLayout(panelGasMaxValueLayout);
+        panelGasMaxValueLayout.setHorizontalGroup(
+            panelGasMaxValueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGasMaxValueLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tfGasMaxValue, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelGasMaxValueLayout.setVerticalGroup(
+            panelGasMaxValueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelGasMaxValueLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tfGasMaxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout dialogGasTariffLayout = new javax.swing.GroupLayout(dialogGasTariff.getContentPane());
+        dialogGasTariff.getContentPane().setLayout(dialogGasTariffLayout);
+        dialogGasTariffLayout.setHorizontalGroup(
+            dialogGasTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogGasTariffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogGasTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelGasMaxValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelGasPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogGasTariffLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btGasTariffSave)
+                        .addGap(18, 18, 18)
+                        .addComponent(btGasTariffCancel)))
+                .addContainerGap())
+        );
+        dialogGasTariffLayout.setVerticalGroup(
+            dialogGasTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogGasTariffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelGasPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelGasMaxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(dialogGasTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btGasTariffCancel)
+                    .addComponent(btGasTariffSave))
+                .addContainerGap())
+        );
+
+        dialogPersonalData.setResizable(false);
+
+        tfAccount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        lbAccount.setText("Особистий рахунок:");
+
+        panelNames.setBorder(javax.swing.BorderFactory.createTitledBorder("Прізвище, ім’я та по батькові"));
+
+        lbSurname.setText("Прізвище:");
+
+        lbFirstName.setText("Ім’я:");
+
+        lbPatronymic.setText("По батькові:");
+
+        javax.swing.GroupLayout panelNamesLayout = new javax.swing.GroupLayout(panelNames);
+        panelNames.setLayout(panelNamesLayout);
+        panelNamesLayout.setHorizontalGroup(
+            panelNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNamesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbSurname)
+                    .addComponent(lbFirstName)
+                    .addComponent(lbPatronymic))
+                .addGap(18, 18, 18)
+                .addGroup(panelNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfFirstName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfSurname, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfPatronymic, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        panelNamesLayout.setVerticalGroup(
+            panelNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelNamesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbSurname))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbFirstName)
+                    .addComponent(tfFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(panelNamesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPatronymic)
+                    .addComponent(tfPatronymic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelAddress.setBorder(javax.swing.BorderFactory.createTitledBorder("Адреса"));
+
+        lbStreet.setText("Вулиця:");
+
+        lbBuilding.setText("Будинок:");
+
+        lbApartment.setText("Квартира:");
+
+        javax.swing.GroupLayout panelAddressLayout = new javax.swing.GroupLayout(panelAddress);
+        panelAddress.setLayout(panelAddressLayout);
+        panelAddressLayout.setHorizontalGroup(
+            panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAddressLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbStreet)
+                    .addComponent(lbBuilding)
+                    .addComponent(lbApartment))
+                .addGap(18, 18, 18)
+                .addGroup(panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfApartment)
+                    .addComponent(tfStreet)
+                    .addComponent(tfBuilding))
+                .addContainerGap())
+        );
+        panelAddressLayout.setVerticalGroup(
+            panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelAddressLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbStreet))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfBuilding, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbBuilding))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelAddressLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfApartment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbApartment))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btPersonalSave.setText("Зберегти");
+
+        btPersonalCancel.setText("Скасувати");
+
+        javax.swing.GroupLayout dialogPersonalDataLayout = new javax.swing.GroupLayout(dialogPersonalData.getContentPane());
+        dialogPersonalData.getContentPane().setLayout(dialogPersonalDataLayout);
+        dialogPersonalDataLayout.setHorizontalGroup(
+            dialogPersonalDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogPersonalDataLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogPersonalDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelNames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(dialogPersonalDataLayout.createSequentialGroup()
+                        .addComponent(lbAccount)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 50, Short.MAX_VALUE))
+                    .addComponent(panelAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPersonalDataLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btPersonalSave)
+                        .addGap(18, 18, 18)
+                        .addComponent(btPersonalCancel)))
+                .addContainerGap())
+        );
+        dialogPersonalDataLayout.setVerticalGroup(
+            dialogPersonalDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dialogPersonalDataLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogPersonalDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbAccount))
+                .addGap(18, 18, 18)
+                .addComponent(panelNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(dialogPersonalDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btPersonalCancel)
+                    .addComponent(btPersonalSave))
+                .addContainerGap())
+        );
+
+        dialogViewAndPrint.setResizable(false);
+
+        javax.swing.GroupLayout dialogViewAndPrintLayout = new javax.swing.GroupLayout(dialogViewAndPrint.getContentPane());
+        dialogViewAndPrint.getContentPane().setLayout(dialogViewAndPrintLayout);
+        dialogViewAndPrintLayout.setHorizontalGroup(
+            dialogViewAndPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        dialogViewAndPrintLayout.setVerticalGroup(
+            dialogViewAndPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setSize(new java.awt.Dimension(700, 500));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Дата"));
+
+        jLabel1.setText("Місяць:");
+
+        jComboBox1.setMaximumRowCount(12);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01 - Січень", "02 - Лютий", "03 - Березень", "04 - Квітень", "05 - Травень", "06 - Червень", "07 - Липень", "08 - Серпень", "09 - Вересень", "10 - Жовтень", "11 - Листопад", "12 - Грудень" }));
+
+        jLabel2.setText("Рік:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Показання електричного лічильника"));
+
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel3.setText("Початкові:");
+
+        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel4.setText("Кінцеві:");
+
+        jLabel5.setText("Різниця:");
+
+        buttonElecTariff.setText("Тариф...");
+        buttonElecTariff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonElecTariffActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("кВт·год");
+
+        jLabel7.setText("кВт·год");
+
+        jLabel8.setText("кВт·год");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonElecTariff))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox1)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel6)))
+                    .addComponent(jCheckBox1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8)
+                    .addComponent(buttonElecTariff))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Показання газового лічильника"));
+
+        jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel9.setText("Початкові:");
+
+        jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel10.setText("Кінцеві:");
+
+        jLabel11.setText("Різниця:");
+
+        jButton2.setText("Тариф...");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setText("м куб");
+
+        jLabel13.setText("м куб");
+
+        jLabel14.setText("м куб");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCheckBox2)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12)))
+                    .addComponent(jCheckBox2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel14)
+                    .addComponent(jButton2))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Всього"));
+
+        jLabel15.setText("Загалом:");
+
+        jTextField7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel16.setText("грн");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel16)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Платежі"));
+
+        jCheckBox3.setText("01 Електроенергія:");
+
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel17.setText("грн");
+
+        jCheckBox4.setText("02 Квартплата:");
+
+        jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField11.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField12.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField13.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField16.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jTextField17.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jCheckBox5.setText("03 Опалення:");
+
+        jCheckBox6.setText("04 Гаряча вода:");
+
+        jCheckBox7.setText("05 Холодна вода:");
+
+        jCheckBox8.setText("06 Каналізація:");
+
+        jCheckBox9.setText("07, 08 Газ природній:");
+
+        jCheckBox10.setText("33 Вивіз сміття:");
+
+        jCheckBox11.setText("35 Домофон:");
+
+        jCheckBox12.setText("49 Воля т.п.:");
+
+        jLabel18.setText("грн");
+
+        jLabel19.setText("грн");
+
+        jLabel20.setText("грн");
+
+        jLabel21.setText("грн");
+
+        jLabel22.setText("грн");
+
+        jLabel23.setText("грн");
+
+        jLabel24.setText("грн");
+
+        jLabel25.setText("грн");
+
+        jLabel26.setText("грн");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox3)
+                    .addComponent(jCheckBox4)
+                    .addComponent(jCheckBox5)
+                    .addComponent(jCheckBox6)
+                    .addComponent(jCheckBox7)
+                    .addComponent(jCheckBox8)
+                    .addComponent(jCheckBox9)
+                    .addComponent(jCheckBox10)
+                    .addComponent(jCheckBox11)
+                    .addComponent(jCheckBox12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField17, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .addComponent(jTextField16)
+                    .addComponent(jTextField15)
+                    .addComponent(jTextField14)
+                    .addComponent(jTextField13)
+                    .addComponent(jTextField12)
+                    .addComponent(jTextField11)
+                    .addComponent(jTextField10)
+                    .addComponent(jTextField9)
+                    .addComponent(jTextField8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17)
+                    .addComponent(jLabel18)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25)
+                    .addComponent(jLabel26))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox3)
+                    .addComponent(jLabel17))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox4)
+                    .addComponent(jLabel18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox5)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox6)
+                    .addComponent(jLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox7)
+                    .addComponent(jLabel21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox8)
+                    .addComponent(jLabel22))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox9)
+                    .addComponent(jLabel23))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox10)
+                    .addComponent(jLabel24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox11)
+                    .addComponent(jLabel25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox12)
+                    .addComponent(jLabel26))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        buttonViewAndPrint.setText("Переглянути і роздрукувати...");
+        buttonViewAndPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonViewAndPrintActionPerformed(evt);
+            }
+        });
+
+        buttonChangeSize.setText("Шрифт(11)");
+        buttonChangeSize.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonChangeSizeActionPerformed(evt);
+            }
+        });
+
+        buttonChangeLanguage.setText("Мова(Укр)");
+        buttonChangeLanguage.setActionCommand("Мова(Укр)");
+        buttonChangeLanguage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonChangeLanguageActionPerformed(evt);
+            }
+        });
+
+        buttonPersonalData.setText("Персональні дані платника...");
+        buttonPersonalData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonPersonalDataActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonViewAndPrint)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonChangeSize)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonChangeLanguage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonPersonalData))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonViewAndPrint)
+                    .addComponent(buttonPersonalData)
+                    .addComponent(buttonChangeSize)
+                    .addComponent(buttonChangeLanguage))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    enum FontSize {
+        ELEVEN(11),
+        THIRTEEN(13),
+        FIVETEEN(15);
+        Font[] fonts = { null, null, null };
+        private final int size;
+        FontSize(int size) {
+            this.size = size;
+        }
+        public int getSize() {
+            return size;
+        }
+        public Font getFont() {
+            int ordinal = ordinal();
+            if (fonts[ordinal] == null) {
+                fonts[ordinal] = new Font("Microsoft Sans Serif", Font.PLAIN, size);
+            }
+            return fonts[ordinal];
+        }
+    }
+    private FontSize fontSize = FontSize.ELEVEN;
+    private final StringBuilder str = new StringBuilder("Шрифт(11)");
+    private void buttonChangeSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChangeSizeActionPerformed
+        FontSize[] values = FontSize.values();
+        fontSize = values[(fontSize.ordinal() + 1) % values.length];
+        
+        int charAt = str.indexOf("(");
+        if (charAt != -1) {
+            buttonChangeSize.setText(str.replace(charAt + 1, charAt + 1 + 2, String.valueOf(fontSize.getSize())).toString());
+        }
+        applyFontToAllComponentsOnJFrame(fontSize.getFont());
+        
+        setSize(getPreferredSize());// correct size of the window
+    }//GEN-LAST:event_buttonChangeSizeActionPerformed
+
+    private void buttonChangeLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChangeLanguageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonChangeLanguageActionPerformed
+
+    private void buttonViewAndPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewAndPrintActionPerformed
+        dialogViewAndPrint.setSize(dialogViewAndPrint.getPreferredSize());
+        dialogViewAndPrint.setLocationRelativeTo(this);
+        dialogViewAndPrint.setVisible(true);
+        
+    }//GEN-LAST:event_buttonViewAndPrintActionPerformed
+    
+    private void buttonElecTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonElecTariffActionPerformed
+        
+        Font currFont = fontSize.getFont();
+        for (JPanel panel : new JPanel[]{ panelElecBoundary, panelElecPrice, panelElecPrivilege, panelElecMaxValue }) {
+            ((TitledBorder) panel.getBorder()).setTitleFont(currFont);
+        }
+        JComponent[] components = {
+            tfElecBoundary, tfElecPriceBelow, tfElecPriceAbove, tfElecPrivilege, tfElecMaxValue,
+            lbElecPrice1, lbElecPrice2, lbElecBelow1, lbElecBelow2, lbElecAbove1, lbElecAbove2, lbElecPrivilege1, lbElecPrivilege2,
+            btElecTariffSave, btElecTariffCancel,
+        };
+        for (JComponent component : components) {
+            component.setFont(currFont);
+        }
+        
+        dialogElecTariff.setTitle("Тариф на електроенергію");
+        dialogElecTariff.setTitle("" + dialogElecTariff.getPreferredSize());
+        dialogElecTariff.pack();
+        dialogElecTariff.setSize(dialogElecTariff.getPreferredSize());
+        dialogElecTariff.setLocationRelativeTo(this);
+        dialogElecTariff.setVisible(true);
+        
+    }//GEN-LAST:event_buttonElecTariffActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        Font currFont = fontSize.getFont();
+        dialogGasTariff.setFont(currFont);
+        ((javax.swing.border.TitledBorder) panelGasPrice.getBorder()).setTitleFont(currFont);
+        ((javax.swing.border.TitledBorder) panelGasMaxValue.getBorder()).setTitleFont(currFont);
+        tfGasPrice.setFont(currFont);
+        tfGasMaxValue.setFont(currFont);
+        lbGasPrice1.setFont(currFont);
+        lbGasPrice2.setFont(currFont);
+        btGasTariffCancel.setFont(currFont);
+        btGasTariffSave.setFont(currFont);
+        
+        dialogGasTariff.setTitle("Тариф на газ");
+        dialogGasTariff.pack();
+        dialogGasTariff.setSize(dialogGasTariff.getPreferredSize());
+        dialogGasTariff.setLocationRelativeTo(this);
+        dialogGasTariff.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void buttonPersonalDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPersonalDataActionPerformed
+        
+        Font currFont = fontSize.getFont();
+        
+        JPanel[] panels = { panelNames, panelAddress };
+        JComponent[] components = {
+            tfAccount, lbAccount,
+            tfSurname, tfFirstName, tfPatronymic,
+            lbSurname, lbFirstName, lbPatronymic,
+            tfStreet, tfBuilding, tfApartment,
+            lbStreet, lbBuilding, lbApartment,
+            btPersonalSave, btPersonalCancel,
+        };
+        for (JPanel panel : panels) {
+            ((TitledBorder) panel.getBorder()).setTitleFont(currFont);
+        }
+        for (JComponent component : components) {
+            component.setFont(currFont);
+        }
+        
+        dialogPersonalData.setTitle("Персональні дані");
+        dialogPersonalData.pack();
+        dialogPersonalData.setSize(dialogPersonalData.getPreferredSize());
+        dialogPersonalData.setLocationRelativeTo(this);
+        dialogPersonalData.setVisible(true);
+        
+        
+    }//GEN-LAST:event_buttonPersonalDataActionPerformed
+
+    private void applyFontToAllComponentsOnJFrame(Font font) {
+        for (java.awt.Component c : rootPane.getComponents()) {
+            if (c instanceof javax.swing.JLayeredPane) {
+                for (java.awt.Component cc : ((javax.swing.JLayeredPane) c).getComponents()) {
+                    if (cc instanceof javax.swing.JPanel) {
+                        for (java.awt.Component ccc : ((javax.swing.JPanel) cc).getComponents()) {
+                            if (ccc instanceof javax.swing.JButton) {
+                                ((javax.swing.JButton) ccc).setFont(font);
+                            } else if (ccc instanceof javax.swing.JPanel) {
+                                javax.swing.border.Border tb = ((javax.swing.JPanel) ccc).getBorder();
+                                if (tb != null) {
+                                    ((javax.swing.border.TitledBorder) tb).setTitleFont(font);
+                                }
+                                for (java.awt.Component cccc : ((javax.swing.JPanel) ccc).getComponents()) {
+                                    cccc.setFont(font);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     public static void main(String args[]) {
         try {
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(UCWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
@@ -38,5 +1191,122 @@ public class UCWindow extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btElecTariffCancel;
+    private javax.swing.JButton btElecTariffSave;
+    private javax.swing.JButton btGasTariffCancel;
+    private javax.swing.JButton btGasTariffSave;
+    private javax.swing.JButton btPersonalCancel;
+    private javax.swing.JButton btPersonalSave;
+    private javax.swing.JButton buttonChangeLanguage;
+    private javax.swing.JButton buttonChangeSize;
+    private javax.swing.JButton buttonElecTariff;
+    private javax.swing.JButton buttonPersonalData;
+    private javax.swing.JButton buttonViewAndPrint;
+    private javax.swing.JDialog dialogElecTariff;
+    private javax.swing.JDialog dialogGasTariff;
+    private javax.swing.JDialog dialogPersonalData;
+    private javax.swing.JDialog dialogViewAndPrint;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox10;
+    private javax.swing.JCheckBox jCheckBox11;
+    private javax.swing.JCheckBox jCheckBox12;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
+    private javax.swing.JTextField jTextField15;
+    private javax.swing.JTextField jTextField16;
+    private javax.swing.JTextField jTextField17;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lbAccount;
+    private javax.swing.JLabel lbApartment;
+    private javax.swing.JLabel lbBuilding;
+    private javax.swing.JLabel lbElecAbove1;
+    private javax.swing.JLabel lbElecAbove2;
+    private javax.swing.JLabel lbElecBelow1;
+    private javax.swing.JLabel lbElecBelow2;
+    private javax.swing.JLabel lbElecPrice1;
+    private javax.swing.JLabel lbElecPrice2;
+    private javax.swing.JLabel lbElecPrivilege1;
+    private javax.swing.JLabel lbElecPrivilege2;
+    private javax.swing.JLabel lbFirstName;
+    private javax.swing.JLabel lbGasPrice1;
+    private javax.swing.JLabel lbGasPrice2;
+    private javax.swing.JLabel lbPatronymic;
+    private javax.swing.JLabel lbStreet;
+    private javax.swing.JLabel lbSurname;
+    private javax.swing.JPanel panelAddress;
+    private javax.swing.JPanel panelElecBoundary;
+    private javax.swing.JPanel panelElecMaxValue;
+    private javax.swing.JPanel panelElecPrice;
+    private javax.swing.JPanel panelElecPrivilege;
+    private javax.swing.JPanel panelGasMaxValue;
+    private javax.swing.JPanel panelGasPrice;
+    private javax.swing.JPanel panelNames;
+    private javax.swing.JTextField tfAccount;
+    private javax.swing.JTextField tfApartment;
+    private javax.swing.JTextField tfBuilding;
+    private javax.swing.JTextField tfElecBoundary;
+    private javax.swing.JTextField tfElecMaxValue;
+    private javax.swing.JTextField tfElecPriceAbove;
+    private javax.swing.JTextField tfElecPriceBelow;
+    private javax.swing.JTextField tfElecPrivilege;
+    private javax.swing.JTextField tfFirstName;
+    private javax.swing.JTextField tfGasMaxValue;
+    private javax.swing.JTextField tfGasPrice;
+    private javax.swing.JTextField tfPatronymic;
+    private javax.swing.JTextField tfStreet;
+    private javax.swing.JTextField tfSurname;
     // End of variables declaration//GEN-END:variables
 }
