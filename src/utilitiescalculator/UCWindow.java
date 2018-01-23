@@ -1,8 +1,10 @@
 package utilitiescalculator;
 
-import java.awt.*;
+import java.awt.Container;
+import java.awt.Component;
 import javax.swing.*;
-import javax.swing.border.*;
+
+import java.util.*;
 
 public class UCWindow extends JFrame {
     
@@ -11,6 +13,10 @@ public class UCWindow extends JFrame {
      */
     public UCWindow() {
         initComponents();
+        
+        holdComponents();
+        applySize();
+        
     }
 
     /**
@@ -82,7 +88,7 @@ public class UCWindow extends JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        buttonElecTariff = new javax.swing.JButton();
+        btElecTariff = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -94,7 +100,7 @@ public class UCWindow extends JFrame {
         jTextField6 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btGasTariff = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -134,11 +140,12 @@ public class UCWindow extends JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        buttonViewAndPrint = new javax.swing.JButton();
-        buttonChangeSize = new javax.swing.JButton();
-        buttonChangeLanguage = new javax.swing.JButton();
-        buttonPersonalData = new javax.swing.JButton();
+        btViewAndPrint = new javax.swing.JButton();
+        btChangeSize = new javax.swing.JButton();
+        btChangeLanguage = new javax.swing.JButton();
+        btPersonalData = new javax.swing.JButton();
 
+        dialogElecTariff.setTitle("Тариф на електроенергію");
         dialogElecTariff.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         dialogElecTariff.setIconImage(null);
         dialogElecTariff.setResizable(false);
@@ -317,6 +324,7 @@ public class UCWindow extends JFrame {
                 .addContainerGap())
         );
 
+        dialogGasTariff.setTitle("Тариф на газ");
         dialogGasTariff.setResizable(false);
 
         panelGasPrice.setBorder(javax.swing.BorderFactory.createTitledBorder("Ціна на газ"));
@@ -406,6 +414,7 @@ public class UCWindow extends JFrame {
                 .addContainerGap())
         );
 
+        dialogPersonalData.setTitle("Персональні дані платника");
         dialogPersonalData.setResizable(false);
 
         tfAccount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -541,6 +550,7 @@ public class UCWindow extends JFrame {
                 .addContainerGap())
         );
 
+        dialogViewAndPrint.setTitle("Перегляд і роздруківка");
         dialogViewAndPrint.setResizable(false);
 
         javax.swing.GroupLayout dialogViewAndPrintLayout = new javax.swing.GroupLayout(dialogViewAndPrint.getContentPane());
@@ -555,6 +565,7 @@ public class UCWindow extends JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Сплата за комунальні послуги");
         setResizable(false);
         setSize(new java.awt.Dimension(700, 500));
 
@@ -580,7 +591,7 @@ public class UCWindow extends JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -608,10 +619,10 @@ public class UCWindow extends JFrame {
 
         jLabel5.setText("Різниця:");
 
-        buttonElecTariff.setText("Тариф...");
-        buttonElecTariff.addActionListener(new java.awt.event.ActionListener() {
+        btElecTariff.setText("Тариф...");
+        btElecTariff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonElecTariffActionPerformed(evt);
+                btElecTariffActionPerformed(evt);
             }
         });
 
@@ -641,7 +652,7 @@ public class UCWindow extends JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonElecTariff))
+                        .addComponent(btElecTariff))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -672,7 +683,7 @@ public class UCWindow extends JFrame {
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8)
-                    .addComponent(buttonElecTariff))
+                    .addComponent(btElecTariff))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -690,10 +701,10 @@ public class UCWindow extends JFrame {
 
         jLabel11.setText("Різниця:");
 
-        jButton2.setText("Тариф...");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btGasTariff.setText("Тариф...");
+        btGasTariff.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btGasTariffActionPerformed(evt);
             }
         });
 
@@ -723,7 +734,7 @@ public class UCWindow extends JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(btGasTariff))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -754,7 +765,7 @@ public class UCWindow extends JFrame {
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel14)
-                    .addComponent(jButton2))
+                    .addComponent(btGasTariff))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -951,32 +962,31 @@ public class UCWindow extends JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        buttonViewAndPrint.setText("Переглянути і роздрукувати...");
-        buttonViewAndPrint.addActionListener(new java.awt.event.ActionListener() {
+        btViewAndPrint.setText("Роздрукувати...");
+        btViewAndPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonViewAndPrintActionPerformed(evt);
+                btViewAndPrintActionPerformed(evt);
             }
         });
 
-        buttonChangeSize.setText("Шрифт(11)");
-        buttonChangeSize.addActionListener(new java.awt.event.ActionListener() {
+        btChangeSize.setText("Шрифт(11)");
+        btChangeSize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonChangeSizeActionPerformed(evt);
+                btChangeSizeActionPerformed(evt);
             }
         });
 
-        buttonChangeLanguage.setText("Мова(Укр)");
-        buttonChangeLanguage.setActionCommand("Мова(Укр)");
-        buttonChangeLanguage.addActionListener(new java.awt.event.ActionListener() {
+        btChangeLanguage.setText("Мова(Укр)");
+        btChangeLanguage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonChangeLanguageActionPerformed(evt);
+                btChangeLanguageActionPerformed(evt);
             }
         });
 
-        buttonPersonalData.setText("Персональні дані платника...");
-        buttonPersonalData.addActionListener(new java.awt.event.ActionListener() {
+        btPersonalData.setText("Персональні дані...");
+        btPersonalData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonPersonalDataActionPerformed(evt);
+                btPersonalDataActionPerformed(evt);
             }
         });
 
@@ -986,24 +996,22 @@ public class UCWindow extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonViewAndPrint)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonChangeSize)
-                        .addGap(18, 18, 18)
-                        .addComponent(buttonChangeLanguage)
+                        .addComponent(btViewAndPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addComponent(btChangeSize))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btChangeLanguage)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buttonPersonalData))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btPersonalData, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -1021,161 +1029,87 @@ public class UCWindow extends JFrame {
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonViewAndPrint)
-                    .addComponent(buttonPersonalData)
-                    .addComponent(buttonChangeSize)
-                    .addComponent(buttonChangeLanguage))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btViewAndPrint)
+                        .addComponent(btPersonalData))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btChangeSize)
+                        .addComponent(btChangeLanguage)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    enum FontSize {
-        ELEVEN(11),
-        THIRTEEN(13),
-        FIVETEEN(15);
-        Font[] fonts = { null, null, null };
-        private final int size;
-        FontSize(int size) {
-            this.size = size;
-        }
-        public int getSize() {
-            return size;
-        }
-        public Font getFont() {
-            int ordinal = ordinal();
-            if (fonts[ordinal] == null) {
-                fonts[ordinal] = new Font("Microsoft Sans Serif", Font.PLAIN, size);
-            }
-            return fonts[ordinal];
-        }
+    
+    private static final Resizer RESIZER = Resizer.getInstance("Шрифт", Resizer.FontSize.THIRTEEN);
+    private static final List<Component> COMPONENTS = new ArrayList<>();
+    private void holdComponents() {
+        COMPONENTS.addAll(getAllComponents(this));
+        COMPONENTS.addAll(getAllComponents(dialogElecTariff));
+        COMPONENTS.addAll(getAllComponents(dialogGasTariff));
+        COMPONENTS.addAll(getAllComponents(dialogViewAndPrint));
+        COMPONENTS.addAll(getAllComponents(dialogPersonalData));
     }
-    private FontSize fontSize = FontSize.ELEVEN;
-    private final StringBuilder str = new StringBuilder("Шрифт(11)");
-    private void buttonChangeSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChangeSizeActionPerformed
-        FontSize[] values = FontSize.values();
-        fontSize = values[(fontSize.ordinal() + 1) % values.length];
-        
-        int charAt = str.indexOf("(");
-        if (charAt != -1) {
-            buttonChangeSize.setText(str.replace(charAt + 1, charAt + 1 + 2, String.valueOf(fontSize.getSize())).toString());
+    private static List<Component> getAllComponents(final Container container) {
+        List<Component> components = new ArrayList<>();
+        for (java.awt.Component c : container.getComponents()) {
+            components.add(c);
+            if (c instanceof Container) {
+                components.addAll(getAllComponents((Container) c));
+            }
         }
-        applyFontToAllComponentsOnJFrame(fontSize.getFont());
-        
-        setSize(getPreferredSize());// correct size of the window
-    }//GEN-LAST:event_buttonChangeSizeActionPerformed
+        return components;
+    }
+    private void applySize() {
+        RESIZER.applyTo(COMPONENTS);
+        btChangeSize.setText(RESIZER.getText());
+        pack();
+        dialogElecTariff.pack();
+        dialogGasTariff.pack();
+        dialogViewAndPrint.pack();
+        dialogPersonalData.pack();
+    }
+    
+    private void btChangeSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChangeSizeActionPerformed
 
-    private void buttonChangeLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonChangeLanguageActionPerformed
+        RESIZER.shiftToNextFontSize();
+        applySize();
+
+    }//GEN-LAST:event_btChangeSizeActionPerformed
+
+    private void btChangeLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChangeLanguageActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonChangeLanguageActionPerformed
+    }//GEN-LAST:event_btChangeLanguageActionPerformed
 
-    private void buttonViewAndPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonViewAndPrintActionPerformed
-        dialogViewAndPrint.setSize(dialogViewAndPrint.getPreferredSize());
+    private void btViewAndPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btViewAndPrintActionPerformed
+
         dialogViewAndPrint.setLocationRelativeTo(this);
         dialogViewAndPrint.setVisible(true);
         
-    }//GEN-LAST:event_buttonViewAndPrintActionPerformed
+    }//GEN-LAST:event_btViewAndPrintActionPerformed
     
-    private void buttonElecTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonElecTariffActionPerformed
-        
-        Font currFont = fontSize.getFont();
-        for (JPanel panel : new JPanel[]{ panelElecBoundary, panelElecPrice, panelElecPrivilege, panelElecMaxValue }) {
-            ((TitledBorder) panel.getBorder()).setTitleFont(currFont);
-        }
-        JComponent[] components = {
-            tfElecBoundary, tfElecPriceBelow, tfElecPriceAbove, tfElecPrivilege, tfElecMaxValue,
-            lbElecPrice1, lbElecPrice2, lbElecBelow1, lbElecBelow2, lbElecAbove1, lbElecAbove2, lbElecPrivilege1, lbElecPrivilege2,
-            btElecTariffSave, btElecTariffCancel,
-        };
-        for (JComponent component : components) {
-            component.setFont(currFont);
-        }
-        
-        dialogElecTariff.setTitle("Тариф на електроенергію");
-        dialogElecTariff.setTitle("" + dialogElecTariff.getPreferredSize());
-        dialogElecTariff.pack();
-        dialogElecTariff.setSize(dialogElecTariff.getPreferredSize());
+    private void btElecTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btElecTariffActionPerformed
+
         dialogElecTariff.setLocationRelativeTo(this);
         dialogElecTariff.setVisible(true);
         
-    }//GEN-LAST:event_buttonElecTariffActionPerformed
+    }//GEN-LAST:event_btElecTariffActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btGasTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffActionPerformed
         
-        Font currFont = fontSize.getFont();
-        dialogGasTariff.setFont(currFont);
-        ((javax.swing.border.TitledBorder) panelGasPrice.getBorder()).setTitleFont(currFont);
-        ((javax.swing.border.TitledBorder) panelGasMaxValue.getBorder()).setTitleFont(currFont);
-        tfGasPrice.setFont(currFont);
-        tfGasMaxValue.setFont(currFont);
-        lbGasPrice1.setFont(currFont);
-        lbGasPrice2.setFont(currFont);
-        btGasTariffCancel.setFont(currFont);
-        btGasTariffSave.setFont(currFont);
-        
-        dialogGasTariff.setTitle("Тариф на газ");
-        dialogGasTariff.pack();
-        dialogGasTariff.setSize(dialogGasTariff.getPreferredSize());
         dialogGasTariff.setLocationRelativeTo(this);
         dialogGasTariff.setVisible(true);
         
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btGasTariffActionPerformed
 
-    private void buttonPersonalDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPersonalDataActionPerformed
+    private void btPersonalDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonalDataActionPerformed
         
-        Font currFont = fontSize.getFont();
-        
-        JPanel[] panels = { panelNames, panelAddress };
-        JComponent[] components = {
-            tfAccount, lbAccount,
-            tfSurname, tfFirstName, tfPatronymic,
-            lbSurname, lbFirstName, lbPatronymic,
-            tfStreet, tfBuilding, tfApartment,
-            lbStreet, lbBuilding, lbApartment,
-            btPersonalSave, btPersonalCancel,
-        };
-        for (JPanel panel : panels) {
-            ((TitledBorder) panel.getBorder()).setTitleFont(currFont);
-        }
-        for (JComponent component : components) {
-            component.setFont(currFont);
-        }
-        
-        dialogPersonalData.setTitle("Персональні дані");
-        dialogPersonalData.pack();
-        dialogPersonalData.setSize(dialogPersonalData.getPreferredSize());
         dialogPersonalData.setLocationRelativeTo(this);
         dialogPersonalData.setVisible(true);
         
-        
-    }//GEN-LAST:event_buttonPersonalDataActionPerformed
-
-    private void applyFontToAllComponentsOnJFrame(Font font) {
-        for (java.awt.Component c : rootPane.getComponents()) {
-            if (c instanceof javax.swing.JLayeredPane) {
-                for (java.awt.Component cc : ((javax.swing.JLayeredPane) c).getComponents()) {
-                    if (cc instanceof javax.swing.JPanel) {
-                        for (java.awt.Component ccc : ((javax.swing.JPanel) cc).getComponents()) {
-                            if (ccc instanceof javax.swing.JButton) {
-                                ((javax.swing.JButton) ccc).setFont(font);
-                            } else if (ccc instanceof javax.swing.JPanel) {
-                                javax.swing.border.Border tb = ((javax.swing.JPanel) ccc).getBorder();
-                                if (tb != null) {
-                                    ((javax.swing.border.TitledBorder) tb).setTitleFont(font);
-                                }
-                                for (java.awt.Component cccc : ((javax.swing.JPanel) ccc).getComponents()) {
-                                    cccc.setFont(font);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    }//GEN-LAST:event_btPersonalDataActionPerformed
     
     public static void main(String args[]) {
         try {
@@ -1186,27 +1120,29 @@ public class UCWindow extends JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new UCWindow().setVisible(true);
+            UCWindow window = new UCWindow();
+            window.setLocationRelativeTo(null);
+            window.setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btChangeLanguage;
+    private javax.swing.JButton btChangeSize;
+    private javax.swing.JButton btElecTariff;
     private javax.swing.JButton btElecTariffCancel;
     private javax.swing.JButton btElecTariffSave;
+    private javax.swing.JButton btGasTariff;
     private javax.swing.JButton btGasTariffCancel;
     private javax.swing.JButton btGasTariffSave;
     private javax.swing.JButton btPersonalCancel;
+    private javax.swing.JButton btPersonalData;
     private javax.swing.JButton btPersonalSave;
-    private javax.swing.JButton buttonChangeLanguage;
-    private javax.swing.JButton buttonChangeSize;
-    private javax.swing.JButton buttonElecTariff;
-    private javax.swing.JButton buttonPersonalData;
-    private javax.swing.JButton buttonViewAndPrint;
+    private javax.swing.JButton btViewAndPrint;
     private javax.swing.JDialog dialogElecTariff;
     private javax.swing.JDialog dialogGasTariff;
     private javax.swing.JDialog dialogPersonalData;
     private javax.swing.JDialog dialogViewAndPrint;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
