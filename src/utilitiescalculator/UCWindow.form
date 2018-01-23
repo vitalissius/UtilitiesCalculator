@@ -4,6 +4,7 @@
   <NonVisualComponents>
     <Container class="javax.swing.JDialog" name="dialogElecTariff">
       <Properties>
+        <Property name="title" type="java.lang.String" value="&#x422;&#x430;&#x440;&#x438;&#x444; &#x43d;&#x430; &#x435;&#x43b;&#x435;&#x43a;&#x442;&#x440;&#x43e;&#x435;&#x43d;&#x435;&#x440;&#x433;&#x456;&#x44e;"/>
         <Property name="bounds" type="java.awt.Rectangle" editor="org.netbeans.beaninfo.editors.RectangleEditor">
           <Rectangle value="[0, 0, 0, 0]"/>
         </Property>
@@ -302,6 +303,7 @@
     </Container>
     <Container class="javax.swing.JDialog" name="dialogGasTariff">
       <Properties>
+        <Property name="title" type="java.lang.String" value="&#x422;&#x430;&#x440;&#x438;&#x444; &#x43d;&#x430; &#x433;&#x430;&#x437;"/>
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>
 
@@ -448,6 +450,7 @@
     </Container>
     <Container class="javax.swing.JDialog" name="dialogPersonalData">
       <Properties>
+        <Property name="title" type="java.lang.String" value="&#x41f;&#x435;&#x440;&#x441;&#x43e;&#x43d;&#x430;&#x43b;&#x44c;&#x43d;&#x456; &#x434;&#x430;&#x43d;&#x456; &#x43f;&#x43b;&#x430;&#x442;&#x43d;&#x438;&#x43a;&#x430;"/>
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>
 
@@ -675,6 +678,7 @@
     </Container>
     <Container class="javax.swing.JDialog" name="dialogViewAndPrint">
       <Properties>
+        <Property name="title" type="java.lang.String" value="&#x41f;&#x435;&#x440;&#x435;&#x433;&#x43b;&#x44f;&#x434; &#x456; &#x440;&#x43e;&#x437;&#x434;&#x440;&#x443;&#x43a;&#x456;&#x432;&#x43a;&#x430;"/>
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>
 
@@ -694,6 +698,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="&#x421;&#x43f;&#x43b;&#x430;&#x442;&#x430; &#x437;&#x430; &#x43a;&#x43e;&#x43c;&#x443;&#x43d;&#x430;&#x43b;&#x44c;&#x43d;&#x456; &#x43f;&#x43e;&#x441;&#x43b;&#x443;&#x433;&#x438;"/>
     <Property name="resizable" type="boolean" value="false"/>
     <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[700, 500]"/>
@@ -720,27 +725,25 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="buttonViewAndPrint" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="buttonChangeSize" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="buttonChangeLanguage" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="buttonPersonalData" min="-2" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btViewAndPrint" min="-2" pref="180" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="btChangeSize" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
+                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btChangeLanguage" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btPersonalData" min="-2" pref="180" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -763,11 +766,15 @@
                   <Component id="jPanel5" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonViewAndPrint" alignment="3" max="-2" attributes="0"/>
-                  <Component id="buttonPersonalData" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonChangeSize" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buttonChangeLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btViewAndPrint" alignment="3" max="-2" attributes="0"/>
+                      <Component id="btPersonalData" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="btChangeSize" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btChangeLanguage" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -796,7 +803,7 @@
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jComboBox2" min="-2" pref="120" max="-2" attributes="0"/>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -892,7 +899,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="buttonElecTariff" min="-2" max="-2" attributes="0"/>
+                          <Component id="btElecTariff" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
@@ -933,7 +940,7 @@
                       <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="buttonElecTariff" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btElecTariff" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -971,12 +978,12 @@
             <Property name="text" type="java.lang.String" value="&#x420;&#x456;&#x437;&#x43d;&#x438;&#x446;&#x44f;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonElecTariff">
+        <Component class="javax.swing.JButton" name="btElecTariff">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x422;&#x430;&#x440;&#x438;&#x444;..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonElecTariffActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btElecTariffActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
@@ -1028,7 +1035,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="btGasTariff" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
@@ -1069,7 +1076,7 @@
                       <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btGasTariff" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -1107,12 +1114,12 @@
             <Property name="text" type="java.lang.String" value="&#x420;&#x456;&#x437;&#x43d;&#x438;&#x446;&#x44f;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btGasTariff">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x422;&#x430;&#x440;&#x438;&#x444;..."/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btGasTariffActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
@@ -1466,36 +1473,36 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="buttonViewAndPrint">
+    <Component class="javax.swing.JButton" name="btViewAndPrint">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x41f;&#x435;&#x440;&#x435;&#x433;&#x43b;&#x44f;&#x43d;&#x443;&#x442;&#x438; &#x456; &#x440;&#x43e;&#x437;&#x434;&#x440;&#x443;&#x43a;&#x443;&#x432;&#x430;&#x442;&#x438;..."/>
+        <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x437;&#x434;&#x440;&#x443;&#x43a;&#x443;&#x432;&#x430;&#x442;&#x438;..."/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonViewAndPrintActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btViewAndPrintActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonChangeSize">
+    <Component class="javax.swing.JButton" name="btChangeSize">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x428;&#x440;&#x438;&#x444;&#x442;(11)"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonChangeSizeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btChangeSizeActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonChangeLanguage">
+    <Component class="javax.swing.JButton" name="btChangeLanguage">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x41c;&#x43e;&#x432;&#x430;(&#x423;&#x43a;&#x440;)"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonChangeLanguageActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btChangeLanguageActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonPersonalData">
+    <Component class="javax.swing.JButton" name="btPersonalData">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x41f;&#x435;&#x440;&#x441;&#x43e;&#x43d;&#x430;&#x43b;&#x44c;&#x43d;&#x456; &#x434;&#x430;&#x43d;&#x456; &#x43f;&#x43b;&#x430;&#x442;&#x43d;&#x438;&#x43a;&#x430;..."/>
+        <Property name="text" type="java.lang.String" value="&#x41f;&#x435;&#x440;&#x441;&#x43e;&#x43d;&#x430;&#x43b;&#x44c;&#x43d;&#x456; &#x434;&#x430;&#x43d;&#x456;..."/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonPersonalDataActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPersonalDataActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
