@@ -20,16 +20,16 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="panelElecBoundary" max="32767" attributes="0"/>
-                      <Component id="panelElecPrice" alignment="0" max="32767" attributes="0"/>
-                      <Component id="panelElecPrivilege" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pnElecBoundary" max="32767" attributes="0"/>
+                      <Component id="pnElecPrice" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pnElecPrivilege" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="btElecTariffSave" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btElecTariffSave" min="-2" pref="110" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btElecTariffCancel" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="btElecTariffCancel" min="-2" pref="110" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="panelElecMaxValue" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pnElecMaxValue" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -39,13 +39,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="panelElecBoundary" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnElecBoundary" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="panelElecPrice" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnElecPrice" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="panelElecPrivilege" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnElecPrivilege" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="panelElecMaxValue" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnElecMaxValue" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="14" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btElecTariffSave" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -57,7 +57,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="panelElecBoundary">
+        <Container class="javax.swing.JPanel" name="pnElecBoundary">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -71,11 +71,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbElecPrice1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbElecBoundary1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="56" max="32767" attributes="0"/>
                       <Component id="tfElecBoundary" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbElecPrice2" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="lbElecBoundary2" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -86,8 +86,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="tfElecBoundary" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbElecPrice1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbElecPrice2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbElecBoundary1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbElecBoundary2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -100,19 +100,19 @@
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbElecPrice1">
+            <Component class="javax.swing.JLabel" name="lbElecBoundary1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x413;&#x440;&#x430;&#x43d;&#x438;&#x447;&#x43d;&#x438;&#x439; &#x43e;&#x431;&#x441;&#x44f;&#x433; &#x435;&#x43b;&#x435;&#x43a;&#x442;&#x440;&#x43e;&#x435;&#x43d;&#x435;&#x440;&#x433;&#x456;&#x457; (&#x413;&#x41e;&#x415;):"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbElecPrice2">
+            <Component class="javax.swing.JLabel" name="lbElecBoundary2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x43a;&#x412;&#x442;&#xb7;&#x433;&#x43e;&#x434;"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="panelElecPrice">
+        <Container class="javax.swing.JPanel" name="pnElecPrice">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -197,7 +197,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="panelElecPrivilege">
+        <Container class="javax.swing.JPanel" name="pnElecPrivilege">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -252,17 +252,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btElecTariffSave">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x417;&#x431;&#x435;&#x440;&#x435;&#x433;&#x442;&#x438;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btElecTariffCancel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x421;&#x43a;&#x430;&#x441;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
-          </Properties>
-        </Component>
-        <Container class="javax.swing.JPanel" name="panelElecMaxValue">
+        <Container class="javax.swing.JPanel" name="pnElecMaxValue">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -299,6 +289,16 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="btElecTariffSave">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x417;&#x431;&#x435;&#x440;&#x435;&#x433;&#x442;&#x438;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btElecTariffCancel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x421;&#x43a;&#x430;&#x441;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="dialogGasTariff">
@@ -313,13 +313,16 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="panelGasMaxValue" max="32767" attributes="0"/>
-                      <Component id="panelGasPrice" alignment="0" max="-2" attributes="0"/>
+                      <Component id="pnGasMaxValue" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="pnGasPrice" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="btGasTariffSave" min="-2" max="-2" attributes="0"/>
+                          <Component id="btGasTariffSave" min="-2" pref="110" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btGasTariffCancel" min="-2" max="-2" attributes="0"/>
+                          <Component id="btGasTariffCancel" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -330,9 +333,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="panelGasPrice" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnGasPrice" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="panelGasMaxValue" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnGasMaxValue" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btGasTariffCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -344,7 +347,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="panelGasPrice">
+        <Container class="javax.swing.JPanel" name="pnGasPrice">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -399,17 +402,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btGasTariffSave">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x417;&#x431;&#x435;&#x440;&#x435;&#x433;&#x442;&#x438;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btGasTariffCancel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x421;&#x43a;&#x430;&#x441;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
-          </Properties>
-        </Component>
-        <Container class="javax.swing.JPanel" name="panelGasMaxValue">
+        <Container class="javax.swing.JPanel" name="pnGasMaxValue">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -446,6 +439,16 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="btGasTariffSave">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x417;&#x431;&#x435;&#x440;&#x435;&#x433;&#x442;&#x438;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btGasTariffCancel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x421;&#x43a;&#x430;&#x441;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JDialog" name="dialogPersonalData">
@@ -460,14 +463,14 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="panelNames" max="32767" attributes="0"/>
+                      <Component id="pnNames" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="lbAccount" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="tfAccount" min="-2" pref="170" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="50" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="panelAddress" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pnAddress" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="btPersonalSave" min="-2" max="-2" attributes="0"/>
@@ -488,9 +491,9 @@
                       <Component id="lbAccount" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="panelNames" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnNames" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="panelAddress" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnAddress" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="15" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btPersonalCancel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -512,7 +515,7 @@
             <Property name="text" type="java.lang.String" value="&#x41e;&#x441;&#x43e;&#x431;&#x438;&#x441;&#x442;&#x438;&#x439; &#x440;&#x430;&#x445;&#x443;&#x43d;&#x43e;&#x43a;:"/>
           </Properties>
         </Component>
-        <Container class="javax.swing.JPanel" name="panelNames">
+        <Container class="javax.swing.JPanel" name="pnNames">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -588,7 +591,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="panelAddress">
+        <Container class="javax.swing.JPanel" name="pnAddress">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -731,10 +734,10 @@
                       <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
                       <Component id="btChangeSize" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jPanel3" alignment="1" max="32767" attributes="0"/>
-                  <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanel4" alignment="1" max="32767" attributes="0"/>
+                  <Component id="pnGas" alignment="1" max="32767" attributes="0"/>
+                  <Component id="pnDate" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnElec" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnTotal" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -743,7 +746,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btPersonalData" min="-2" pref="180" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnPayments" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -755,15 +758,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnDate" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnElec" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnGas" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      <Component id="pnTotal" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jPanel5" max="32767" attributes="0"/>
+                  <Component id="pnPayments" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -782,7 +785,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="pnDate">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -796,13 +799,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbMonth" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="cbMonth" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbYear" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jComboBox2" min="-2" pref="120" max="-2" attributes="0"/>
+                  <Component id="cbYear" min="-2" pref="120" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -812,10 +815,10 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbMonth" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbMonth" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbYear" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="26" max="32767" attributes="0"/>
               </Group>
@@ -823,12 +826,12 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lbMonth">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41c;&#x456;&#x441;&#x44f;&#x446;&#x44c;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cbMonth">
           <Properties>
             <Property name="maximumRowCount" type="int" value="12"/>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -852,12 +855,12 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lbYear">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x420;&#x456;&#x43a;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox2">
+        <Component class="javax.swing.JComboBox" name="cbYear">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
@@ -869,7 +872,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel2">
+    <Container class="javax.swing.JPanel" name="pnElec">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -884,31 +887,31 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbElecBegin" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbElecEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbElecTotal" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField3" pref="110" max="32767" attributes="0"/>
+                      <Component id="tfElecEnd" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfElecBegin" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfElecTotal" pref="110" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbElecKwh3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btElecTariff" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbElecKwh2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbElecKwh1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="chbElecPanelOnOff" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -922,24 +925,24 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfElecBegin" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbElecBegin" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbElecKwh1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbElecPanelOnOff" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfElecEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbElecEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbElecKwh2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfElecTotal" alignment="3" max="-2" attributes="0"/>
+                      <Component id="lbElecTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbElecKwh3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btElecTariff" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -948,32 +951,33 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="tfElecBegin">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JTextField" name="tfElecEnd">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfElecTotal">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbElecBegin">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x447;&#x430;&#x442;&#x43a;&#x43e;&#x432;&#x456;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField3">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="lbElecEnd">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41a;&#x456;&#x43d;&#x446;&#x435;&#x432;&#x456;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="lbElecTotal">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x420;&#x456;&#x437;&#x43d;&#x438;&#x446;&#x44f;:"/>
           </Properties>
@@ -986,26 +990,26 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btElecTariffActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="lbElecKwh1">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x43a;&#x412;&#x442;&#xb7;&#x433;&#x43e;&#x434;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="lbElecKwh2">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x43a;&#x412;&#x442;&#xb7;&#x433;&#x43e;&#x434;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="lbElecKwh3">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x43a;&#x412;&#x442;&#xb7;&#x433;&#x43e;&#x434;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="chbElecPanelOnOff">
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel3">
+    <Container class="javax.swing.JPanel" name="pnGas">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1020,31 +1024,31 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGasBegin" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGasEnd" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGasTotal" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField6" alignment="1" pref="110" max="32767" attributes="0"/>
+                      <Component id="tfGasEnd" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfGasBegin" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfGasTotal" alignment="1" pref="110" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbGasMc3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btGasTariff" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbGasMc2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbGasMc1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
+                          <Component id="chbGasPanelOnOff" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -1058,24 +1062,24 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="tfGasBegin" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbGasBegin" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbGasMc1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jCheckBox2" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbGasPanelOnOff" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfGasEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGasEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGasMc2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfGasTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGasTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGasMc3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btGasTariff" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -1084,32 +1088,33 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField4">
+        <Component class="javax.swing.JTextField" name="tfGasBegin">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
+        <Component class="javax.swing.JTextField" name="tfGasEnd">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfGasTotal">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbGasBegin">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x447;&#x430;&#x442;&#x43a;&#x43e;&#x432;&#x456;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField6">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="lbGasEnd">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x41a;&#x456;&#x43d;&#x446;&#x435;&#x432;&#x456;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel11">
+        <Component class="javax.swing.JLabel" name="lbGasTotal">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x420;&#x456;&#x437;&#x43d;&#x438;&#x446;&#x44f;:"/>
           </Properties>
@@ -1122,26 +1127,26 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btGasTariffActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel12">
+        <Component class="javax.swing.JLabel" name="lbGasMc1">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x43c; &#x43a;&#x443;&#x431;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel13">
+        <Component class="javax.swing.JLabel" name="lbGasMc2">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x43c; &#x43a;&#x443;&#x431;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel14">
+        <Component class="javax.swing.JLabel" name="lbGasMc3">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x43c; &#x43a;&#x443;&#x431;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+        <Component class="javax.swing.JCheckBox" name="chbGasPanelOnOff">
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel4">
+    <Container class="javax.swing.JPanel" name="pnTotal">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1155,12 +1160,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbTotal" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="jTextField7" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="tfTotal" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="lbTotalGrn" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btCalculate" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1169,9 +1176,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbTotalGrn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btCalculate" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -1179,24 +1187,29 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel15">
+        <Component class="javax.swing.JLabel" name="lbTotal">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x433;&#x430;&#x43b;&#x43e;&#x43c;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField7">
+        <Component class="javax.swing.JTextField" name="tfTotal">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel16">
+        <Component class="javax.swing.JLabel" name="lbTotalGrn">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JButton" name="btCalculate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x437;&#x440;&#x430;&#x445;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel5">
+    <Container class="javax.swing.JPanel" name="pnPayments">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1211,42 +1224,42 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox5" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox6" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox7" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox8" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox9" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox10" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox11" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox12" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbElec" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbRent" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbHeating" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbHotWater" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbColdWater" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbSeverage" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbGas" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbGarbage" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbIntercom" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbTv" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jTextField17" pref="110" max="32767" attributes="0"/>
-                      <Component id="jTextField16" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField15" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField14" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField13" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField12" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField11" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField10" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField9" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextField8" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfTv" pref="110" max="32767" attributes="0"/>
+                      <Component id="tfIntercom" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfGarbage" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfGas" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfSeverage" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfColdWater" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfHotWater" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfHeating" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfRent" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfElec" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel23" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel26" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn4" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn5" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn6" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn7" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn8" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn9" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn10" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -1257,63 +1270,63 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel17" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfElec" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbElec" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfRent" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbRent" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel19" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfHeating" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbHeating" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfHotWater" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbHotWater" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfColdWater" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbColdWater" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField13" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox8" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel22" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfSeverage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbSeverage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField14" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfGas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbGas" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField15" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfGarbage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbGarbage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField16" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox11" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfIntercom" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbIntercom" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField17" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCheckBox12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfTv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbTv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGrn10" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -1321,152 +1334,152 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+        <Component class="javax.swing.JCheckBox" name="chbElec">
           <Properties>
             <Property name="text" type="java.lang.String" value="01 &#x415;&#x43b;&#x435;&#x43a;&#x442;&#x440;&#x43e;&#x435;&#x43d;&#x435;&#x440;&#x433;&#x456;&#x44f;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField8">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel17">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox4">
+        <Component class="javax.swing.JCheckBox" name="chbRent">
           <Properties>
             <Property name="text" type="java.lang.String" value="02 &#x41a;&#x432;&#x430;&#x440;&#x442;&#x43f;&#x43b;&#x430;&#x442;&#x430;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField9">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField10">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField11">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField12">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField13">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField14">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField15">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField16">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextField17">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox5">
+        <Component class="javax.swing.JCheckBox" name="chbHeating">
           <Properties>
             <Property name="text" type="java.lang.String" value="03 &#x41e;&#x43f;&#x430;&#x43b;&#x435;&#x43d;&#x43d;&#x44f;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox6">
+        <Component class="javax.swing.JCheckBox" name="chbHotWater">
           <Properties>
             <Property name="text" type="java.lang.String" value="04 &#x413;&#x430;&#x440;&#x44f;&#x447;&#x430; &#x432;&#x43e;&#x434;&#x430;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox7">
+        <Component class="javax.swing.JCheckBox" name="chbColdWater">
           <Properties>
             <Property name="text" type="java.lang.String" value="05 &#x425;&#x43e;&#x43b;&#x43e;&#x434;&#x43d;&#x430; &#x432;&#x43e;&#x434;&#x430;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox8">
+        <Component class="javax.swing.JCheckBox" name="chbSeverage">
           <Properties>
             <Property name="text" type="java.lang.String" value="06 &#x41a;&#x430;&#x43d;&#x430;&#x43b;&#x456;&#x437;&#x430;&#x446;&#x456;&#x44f;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox9">
+        <Component class="javax.swing.JCheckBox" name="chbGas">
           <Properties>
             <Property name="text" type="java.lang.String" value="07, 08 &#x413;&#x430;&#x437; &#x43f;&#x440;&#x438;&#x440;&#x43e;&#x434;&#x43d;&#x456;&#x439;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox10">
+        <Component class="javax.swing.JCheckBox" name="chbGarbage">
           <Properties>
             <Property name="text" type="java.lang.String" value="33 &#x412;&#x438;&#x432;&#x456;&#x437; &#x441;&#x43c;&#x456;&#x442;&#x442;&#x44f;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox11">
+        <Component class="javax.swing.JCheckBox" name="chbIntercom">
           <Properties>
             <Property name="text" type="java.lang.String" value="35 &#x414;&#x43e;&#x43c;&#x43e;&#x444;&#x43e;&#x43d;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox12">
+        <Component class="javax.swing.JCheckBox" name="chbTv">
           <Properties>
             <Property name="text" type="java.lang.String" value="49 &#x412;&#x43e;&#x43b;&#x44f; &#x442;.&#x43f;.:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel18">
+        <Component class="javax.swing.JTextField" name="tfElec">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfRent">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfHeating">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfHotWater">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfColdWater">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfSeverage">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfGas">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfGarbage">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfIntercom">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfTv">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbGrn1">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel19">
+        <Component class="javax.swing.JLabel" name="lbGrn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel20">
+        <Component class="javax.swing.JLabel" name="lbGrn3">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel21">
+        <Component class="javax.swing.JLabel" name="lbGrn4">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel22">
+        <Component class="javax.swing.JLabel" name="lbGrn5">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel23">
+        <Component class="javax.swing.JLabel" name="lbGrn6">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel24">
+        <Component class="javax.swing.JLabel" name="lbGrn7">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel25">
+        <Component class="javax.swing.JLabel" name="lbGrn8">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel26">
+        <Component class="javax.swing.JLabel" name="lbGrn9">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbGrn10">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
