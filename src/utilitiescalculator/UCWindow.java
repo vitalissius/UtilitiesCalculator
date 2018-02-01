@@ -1,24 +1,27 @@
 package utilitiescalculator;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Component;
+import java.awt.Toolkit;
 import java.time.YearMonth;
 import javax.swing.*;
 
 import java.util.*;
 
 public class UCWindow extends JFrame {
-    private final Settings settings = Settings.getInstance();
+    private final String propertiesFileName = "utilities.properties";
+    private static final Settings settings = Settings.getInstance();
 
     /**
      * Creates new form UCWindow
      */
     public UCWindow() {
         initComponents();
-        
+
         applySize();
         
-        settings.loadProperties("utilities.properties");
+        settings.loadProperties(propertiesFileName);
         fillData();
     }
 
@@ -1009,10 +1012,10 @@ public class UCWindow extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btViewAndPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(101, 101, 101)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btChangeSize))
                     .addComponent(pnGas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1025,7 +1028,7 @@ public class UCWindow extends JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btPersonalData, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnPayments, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1043,12 +1046,11 @@ public class UCWindow extends JFrame {
                     .addComponent(pnPayments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btViewAndPrint)
-                        .addComponent(btPersonalData))
+                    .addComponent(btPersonalData)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btChangeSize)
-                        .addComponent(btChangeLanguage)))
+                        .addComponent(btChangeLanguage)
+                        .addComponent(btViewAndPrint)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1074,8 +1076,9 @@ public class UCWindow extends JFrame {
             }
         }
         
-        tfElecBegin.setText("" + settings.getElecBegin());
-        tfElecEnd.setText("" + settings.getElecEnd());
+        String format = String.format("%%0%dd", Integer.toString(settings.getElecMeterMaxValue()).length());
+        tfElecBegin.setText(String.format(format, settings.getElecBegin()));
+        tfElecEnd.setText(String.format(format, settings.getElecEnd()));
         tfElecTotal.setText("" + settings.getElecTotal());
         
         tfElec.setEnabled(!isSelected);
@@ -1090,14 +1093,36 @@ public class UCWindow extends JFrame {
             }
         }
         
-        tfGasBegin.setText("" + settings.getGasBegin());
-        tfGasEnd.setText("" + settings.getGasEnd());
+        String format = String.format("%%0%dd", Integer.toString(settings.getGasMeterMaxValue()).length());
+        tfGasBegin.setText(String.format(format, settings.getGasBegin()));
+        tfGasEnd.setText(String.format(format, settings.getGasEnd()));
         tfGasTotal.setText("" + settings.getGasTotal());
         
         tfGas.setEnabled(!isSelected);
     }
+    private void fillPayments() {
+        chbElec.setSelected(settings.getUsedElec());
+        chbRent.setSelected(settings.getUsedRent());
+        chbHeating.setSelected(settings.getUsedHeating());
+        chbHotWater.setSelected(settings.getUsedHotWater());
+        chbColdWater.setSelected(settings.getUsedColdWater());
+        chbSeverage.setSelected(settings.getUsedSeverage());
+        chbGas.setSelected(settings.getUsedGas());
+        chbGarbage.setSelected(settings.getUsedGarbage());
+        chbIntercom.setSelected(settings.getUsedIntercom());
+        chbTv.setSelected(settings.getUsedTv());
+        
+        
+        
+    }
     
     private void fillListeners() {
+        // Сохранение настроек во время закрытия окна программы:
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override public void windowClosing(java.awt.event.WindowEvent e) {
+                settings.storeProperties(propertiesFileName);
+            }
+        });
         chbElecPanelOnOff.addActionListener((event) -> {
             settings.setElecMeter(!settings.getElecMeter());
             fillElecPanel();
@@ -1106,58 +1131,70 @@ public class UCWindow extends JFrame {
             settings.setGasMeter(!settings.getGasMeter());
             fillGasPanel();
         });
+        
+        
+    }
+
+    static class MeterInputVerifier extends InputVerifier {
+        private final String regex;
+        private final int digitsNumber;
+        MeterInputVerifier(String regex, int digitsNumber) {
+            this.regex = regex;
+            this.digitsNumber = digitsNumber;
+        }
+        @Override
+        public boolean verify(JComponent component) {
+            JTextField tf = (JTextField) component;
+            if (!tf.getText().matches(regex)) {
+                tf.setSelectionColor(Color.decode("0x00b40000"));// red
+                tf.selectAll();
+                Runnable sound = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.asterisk");
+                if (sound != null) {
+                    sound.run();
+                }
+                
+                return false;
+            }
+            tf.setSelectionColor(Color.decode("0x000078d7"));// blue
+            
+            int value = Integer.valueOf(tf.getText());
+            tf.setText(String.format(String.format("%%0%dd", digitsNumber), value));
+            if (tf == tfElecBegin) {
+                settings.setElecBegin(value);
+            } else if (tf == tfElecEnd) {
+                settings.setElecEnd(value);
+            } else if (tf == tfGasBegin) {
+                settings.setGasBegin(value);
+            } else if (tf == tfGasEnd) {
+                settings.setGasEnd(value);
+            } else {
+                throw new RuntimeException("Some JTextField is not procceed");
+            }
+            tfElecTotal.setText(Integer.toString(settings.getElecTotal()));
+            tfGasTotal.setText(Integer.toString(settings.getGasTotal()));
+            
+            return true;
+        }
     }
     private void fillInputVerifiers() {
-        class MyInputVerifier extends javax.swing.InputVerifier {
-            private int digitsNumber = 0;
-            public MyInputVerifier(int digitsNumber) {
-                this.digitsNumber = digitsNumber;
-            }
-            @Override
-            public boolean verify(JComponent input) {
-                javax.swing.JTextField tf = (javax.swing.JTextField) input;
-                String text = tf.getText();
-                if (!text.matches(String.format("[0-9]{1,%d}", digitsNumber))) {
-                    tf.selectAll();
-                    tf.setSelectedTextColor(java.awt.Color.RED);
-                    Runnable r = (Runnable) java.awt.Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.asterisk");
-                    if (r != null) {
-                        r.run();
-                    }
-                    return false;
-                }
-                tf.setSelectedTextColor(java.awt.Color.BLACK);
-                
-                // Update values of elec and gas meters:
-                int value = Integer.parseInt(tf.getText());
-                if (tf.equals(tfElecBegin))
-                    settings.setElecBegin(value);
-                else if (tf.equals(tfElecEnd))
-                    settings.setElecEnd(value);
-                else if (tf.equals(tfGasBegin))
-                    settings.setGasBegin(value);
-                else if (tf.equals(tfGasEnd))
-                    settings.setGasEnd(value);
-                else
-                    throw new RuntimeException("Some JTextField is not procceed");
-                
-                return true;
-            }
-        }
-        int maxElecDigits = Integer.toString(settings.getElecMeterMaxValue()).length();
-        tfElecBegin.setInputVerifier(new MyInputVerifier(maxElecDigits));
-        tfElecEnd.setInputVerifier(new MyInputVerifier(maxElecDigits));
+        int digitsNumber = Integer.toString(settings.getElecMeterMaxValue()).length();
+        String regex = String.format("[0-9]{1,%d}", digitsNumber);
+
+        tfElecBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
+        tfElecEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
         
-        int maxGasDigits = Integer.toString(settings.getGasMeterMaxValue()).length();
-        tfGasBegin.setInputVerifier(new MyInputVerifier(maxGasDigits));
-        tfGasEnd.setInputVerifier(new MyInputVerifier(maxGasDigits));
-        
+        digitsNumber = Integer.toString(settings.getGasMeterMaxValue()).length();
+        regex = String.format("[0-9]{1,%d}", digitsNumber);
+
+        tfGasBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
+        tfGasEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
     }
     
     private void fillData() {
         fillDatePanel();
         fillElecPanel();
         fillGasPanel();
+        fillPayments();
         
         fillListeners();
         fillInputVerifiers();
@@ -1345,22 +1382,22 @@ public class UCWindow extends JFrame {
     private javax.swing.JTextField tfBuilding;
     private javax.swing.JTextField tfColdWater;
     private javax.swing.JTextField tfElec;
-    private javax.swing.JTextField tfElecBegin;
+    private static javax.swing.JTextField tfElecBegin;
     private javax.swing.JTextField tfElecBoundary;
-    private javax.swing.JTextField tfElecEnd;
+    private static javax.swing.JTextField tfElecEnd;
     private javax.swing.JTextField tfElecMaxValue;
     private javax.swing.JTextField tfElecPriceAbove;
     private javax.swing.JTextField tfElecPriceBelow;
     private javax.swing.JTextField tfElecPrivilege;
-    private javax.swing.JTextField tfElecTotal;
+    private static javax.swing.JTextField tfElecTotal;
     private javax.swing.JTextField tfFirstName;
     private javax.swing.JTextField tfGarbage;
     private javax.swing.JTextField tfGas;
-    private javax.swing.JTextField tfGasBegin;
-    private javax.swing.JTextField tfGasEnd;
+    private static javax.swing.JTextField tfGasBegin;
+    private static javax.swing.JTextField tfGasEnd;
     private javax.swing.JTextField tfGasMaxValue;
     private javax.swing.JTextField tfGasPrice;
-    private javax.swing.JTextField tfGasTotal;
+    private static javax.swing.JTextField tfGasTotal;
     private javax.swing.JTextField tfHeating;
     private javax.swing.JTextField tfHotWater;
     private javax.swing.JTextField tfIntercom;

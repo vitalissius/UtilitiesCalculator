@@ -43,6 +43,16 @@ public final class Settings {
         PaymentsGarbage("payments.garbage", "0.00"),
         PaymentsIntercom("payments.intercom", "0.00"),
         PaymentsTv("payments.tv", "0.00"),
+        UsedElec("used.elec", "false"),
+        UsedRent("used.rent", "false"),
+        UsedHeating("used.heating", "false"),
+        UsedHotWater("used.hotWater", "false"),
+        UsedColdWater("used.coldWater", "false"),
+        UsedSeverage("used.severage", "false"),
+        UsedGas("used.gas", "false"),
+        UsedGarbage("used.garbage", "false"),
+        UsedIntercom("used.intercom", "false"),
+        UsedTv("used.tv", "false"),
         PersonalAccount("personal.account", "000000000"),
         PersonalSurname("personal.surname", "Unknown surname"),
         PersonalFirstName("personal.firstName", "Unknown first name"),
@@ -52,7 +62,7 @@ public final class Settings {
         PersonalApartment("personal.apartment", "Unknown apartment");
     
         private final String key;
-        private final String value;
+        private String value;
         
         private Vls(String key, String defaultValue) {
             this.key = key;
@@ -62,7 +72,8 @@ public final class Settings {
             return Settings.PROPERTIES.getProperty(key, value);
         }
         void set(String value) {
-            Settings.PROPERTIES.setProperty(key, value);
+            this.value = value;
+            Settings.PROPERTIES.setProperty(key, this.value);
         }
     }
     
@@ -79,13 +90,13 @@ public final class Settings {
     private int gasEnd;
     private double gasPrice;
     private int gasMeterMaxValue;
-    private String personalAccount;
-    private String personalSurname;
-    private String personalFirstName;
-    private String personalPatronymic;
-    private String personalStreet;
-    private String personalBuilding;
-    private String personalApartment;
+    private String personalAccount = "";
+    private String personalSurname = "";
+    private String personalFirstName = "";
+    private String personalPatronymic = "";
+    private String personalStreet = "";
+    private String personalBuilding = "";
+    private String personalApartment = "";
     private double paymentsElec;
     private double paymentsRent;
     private double paymentsHeating;
@@ -96,6 +107,16 @@ public final class Settings {
     private double paymentsGarbage;
     private double paymentsIntercom;
     private double paymentsTv;
+    private boolean usedElec;
+    private boolean usedRent;
+    private boolean usedHeating;
+    private boolean usedHotWater;
+    private boolean usedColdWater;
+    private boolean usedSeverage;
+    private boolean usedGas;
+    private boolean usedGarbage;
+    private boolean usedIntercom;
+    private boolean usedTv;
     
     public void loadProperties(final String propertiesFileName) {
         try (BufferedReader input = 
@@ -132,7 +153,18 @@ public final class Settings {
         paymentsGarbage = Double.parseDouble(Vls.PaymentsGarbage.get());
         paymentsIntercom = Double.parseDouble(Vls.PaymentsIntercom.get());
         paymentsTv = Double.parseDouble(Vls.PaymentsTv.get());
-        
+
+        usedElec = Boolean.valueOf(Vls.UsedElec.get());
+        usedRent = Boolean.valueOf(Vls.UsedRent.get());
+        usedHeating = Boolean.valueOf(Vls.UsedHeating.get());
+        usedHotWater = Boolean.valueOf(Vls.UsedHotWater.get());
+        usedColdWater = Boolean.valueOf(Vls.UsedColdWater.get());
+        usedSeverage = Boolean.valueOf(Vls.UsedSeverage.get());
+        usedGas = Boolean.valueOf(Vls.UsedGas.get());
+        usedGarbage = Boolean.valueOf(Vls.UsedGarbage.get());
+        usedIntercom = Boolean.valueOf(Vls.UsedIntercom.get());
+        usedTv = Boolean.valueOf(Vls.UsedTv.get());
+
         personalAccount = Vls.PersonalAccount.get();
         personalSurname = Vls.PersonalSurname.get();
         personalFirstName = Vls.PersonalFirstName.get();
@@ -150,13 +182,13 @@ public final class Settings {
         Vls.ElecPriceAboveBoundary.set(Double.toString(elecPriceAboveBoundary));
         Vls.ElecPrivilege.set(Integer.toString(elecPrivilege));
         Vls.ElecMeterMaxValue.set(Integer.toString(elecMeterMaxValue));
-        
+
         Vls.GasMeter.set(Boolean.toString(gasMeter));
         Vls.GasBegin.set(Integer.toString(gasBegin));
         Vls.GasEnd.set(Integer.toString(gasEnd));
         Vls.GasPrice.set(Double.toString(gasPrice));
         Vls.GasMeterMaxValue.set(Integer.toString(gasMeterMaxValue));
-        
+
         Vls.PersonalAccount.set(personalAccount);
         Vls.PersonalSurname.set(personalSurname);
         Vls.PersonalFirstName.set(personalFirstName);
@@ -164,7 +196,7 @@ public final class Settings {
         Vls.PersonalStreet.set(personalStreet);
         Vls.PersonalBuilding.set(personalBuilding);
         Vls.PersonalApartment.set(personalApartment);
-        
+
         Vls.PaymentsElec.set(Double.toString(paymentsElec));
         Vls.PaymentsRent.set(Double.toString(paymentsRent));
         Vls.PaymentsHeating.set(Double.toString(paymentsHeating));
@@ -175,7 +207,18 @@ public final class Settings {
         Vls.PaymentsGarbage.set(Double.toString(paymentsGarbage));
         Vls.PaymentsIntercom.set(Double.toString(paymentsIntercom));
         Vls.PaymentsTv.set(Double.toString(paymentsTv));
-        
+
+        Vls.UsedElec.set(Boolean.toString(usedElec));
+        Vls.UsedRent.set(Boolean.toString(usedRent));
+        Vls.UsedHeating.set(Boolean.toString(usedHeating));
+        Vls.UsedHotWater.set(Boolean.toString(usedHotWater));
+        Vls.UsedColdWater.set(Boolean.toString(usedColdWater));
+        Vls.UsedSeverage.set(Boolean.toString(usedSeverage));
+        Vls.UsedGas.set(Boolean.toString(usedGas));
+        Vls.UsedGarbage.set(Boolean.toString(usedGarbage));
+        Vls.UsedIntercom.set(Boolean.toString(usedIntercom));
+        Vls.UsedTv.set(Boolean.toString(usedTv));
+
         try (OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream(USER_HOME + propertiesFileName))) {
             PROPERTIES.store(output, "Utilities' properties file. Don't delete.");
         } catch (IOException e) {
@@ -279,7 +322,37 @@ public final class Settings {
     public double getPaymentsTv() {
         return paymentsTv;
     }
-    
+    public boolean getUsedElec() {
+        return usedElec;
+    }
+    public boolean getUsedRent() {
+        return usedRent;
+    }
+    public boolean getUsedHeating() {
+        return usedHeating;
+    }
+    public boolean getUsedHotWater() {
+        return usedHotWater;
+    }
+    public boolean getUsedColdWater() {
+        return usedColdWater;
+    }
+    public boolean getUsedSeverage() {
+        return usedSeverage;
+    }
+    public boolean getUsedGas() {
+        return usedGas;
+    }
+    public boolean getUsedGarbage() {
+        return usedGarbage;
+    }
+    public boolean getUsedIntercom() {
+        return usedIntercom;
+    }
+    public boolean getUsedTv() {
+        return usedTv;
+    }
+
     public void setElecMeter(boolean elecMeter) {
         this.elecMeter = elecMeter;
     }
@@ -370,7 +443,37 @@ public final class Settings {
     public void setPaymentsTv(double paymentsTv) {
         this.paymentsTv = paymentsTv;
     }
-    
+    public void setUsedElec(boolean usedElec) {
+        this.usedElec = usedElec;
+    }
+    public void setUsedRent(boolean usedRent) {
+        this.usedRent = usedRent;
+    }
+    public void setUsedHeating(boolean usedHeating) {
+        this.usedHeating = usedHeating;
+    }
+    public void setUsedHotWater(boolean usedHotWater) {
+        this.usedHotWater = usedHotWater;
+    }
+    public void setUsedColdWater(boolean usedColdWater) {
+        this.usedColdWater = usedColdWater;
+    }
+    public void setUsedSeverage(boolean usedSeverage) {
+        this.usedSeverage = usedSeverage;
+    }
+    public void setUsedGas(boolean usedGas) {
+        this.usedGas = usedGas;
+    }
+    public void setUsedGarbage(boolean usedGarbage) {
+        this.usedGarbage = usedGarbage;
+    }
+    public void setUsedIntercom(boolean usedIntercom) {
+        this.usedIntercom = usedIntercom;
+    }
+    public void setUsedTv(boolean usedTv) {
+        this.usedTv = usedTv;
+    }
+
     public static void main(String[] args) {
         Settings settings = Settings.getInstance();
         settings.loadProperties("utilities.ini");
@@ -488,5 +591,27 @@ public final class Settings {
                 settings.getPaymentsGarbage(),
                 settings.getPaymentsIntercom(),
                 settings.getPaymentsTv());
+        
+        System.out.printf("is used payments:\n\t"
+                + "used electricity: %b\n\t"
+                + "used rent: %b\n\t"
+                + "used heating: %b\n\t"
+                + "used hot water: %b\n\t"
+                + "used cold water: %b\n\t"
+                + "used severage: %b\n\t"
+                + "used gas: %b\n\t"
+                + "used garbage: %b\n\t"
+                + "used intercom: %b\n\t"
+                + "used tv: %b\n",
+                settings.getUsedElec(),
+                settings.getUsedRent(),
+                settings.getUsedHeating(),
+                settings.getUsedHotWater(),
+                settings.getUsedColdWater(),
+                settings.getUsedSeverage(),
+                settings.getUsedGas(),
+                settings.getUsedGarbage(),
+                settings.getUsedIntercom(),
+                settings.getUsedTv());
     }
 }
