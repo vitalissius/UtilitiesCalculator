@@ -14,11 +14,14 @@ public final class Settings {
     private static final Properties PROPERTIES = new Properties();
     private static final String USER_HOME = System.getProperty("user.home") + File.separator;
     private static final Settings INSTANCE = new Settings();
+
     private Settings() {
     }
+
     public static Settings getInstance() {
         return INSTANCE;
     }
+
     private static enum Vls {
         ElecMeter("elec.meter", "false"),
         ElecBegin("elec.begin", "0"),
@@ -59,18 +62,24 @@ public final class Settings {
         PersonalPatronymic("personal.patronymic", "Unknown patronymic"),
         PersonalStreet("personal.street", "Unknown street"),
         PersonalBuilding("personal.building", "Unknown building"),
-        PersonalApartment("personal.apartment", "Unknown apartment");
-    
+        PersonalApartment("personal.apartment", "Unknown apartment"),
+        WindowPositionX("window.x", "0"),
+        WindowPositionY("window.y", "0"),
+        FontSize("font.size", Resizer.FontSize.ELEVEN.toString()),
+        Language("language", Dictionary.Language.UKRAINIAN.toString());
+
         private final String key;
         private String value;
-        
+
         private Vls(String key, String defaultValue) {
             this.key = key;
             this.value = defaultValue;
         }
+
         String get() {
             return Settings.PROPERTIES.getProperty(key, value);
         }
+
         void set(String value) {
             this.value = value;
             Settings.PROPERTIES.setProperty(key, this.value);
@@ -117,7 +126,11 @@ public final class Settings {
     private boolean usedGarbage;
     private boolean usedIntercom;
     private boolean usedTv;
-    
+    private int windowPositionX;
+    private int windowPositionY;
+    private Resizer.FontSize fontSize;
+    private Dictionary.Language language;
+
     public void loadProperties(final String propertiesFileName) {
         try (BufferedReader input = 
                 new BufferedReader(new InputStreamReader(new FileInputStream(USER_HOME + propertiesFileName)))) {
@@ -172,6 +185,11 @@ public final class Settings {
         personalStreet = Vls.PersonalStreet.get();
         personalBuilding = Vls.PersonalBuilding.get();
         personalApartment = Vls.PersonalApartment.get();
+
+        windowPositionX = Integer.parseInt(Vls.WindowPositionX.get());
+        windowPositionY = Integer.parseInt(Vls.WindowPositionY.get());
+        fontSize = Resizer.FontSize.valueOf(Vls.FontSize.get());
+        language = Dictionary.Language.valueOf(Vls.Language.get());
     }
     
     public void storeProperties(final String propertiesFileName) {
@@ -218,6 +236,11 @@ public final class Settings {
         Vls.UsedGarbage.set(Boolean.toString(usedGarbage));
         Vls.UsedIntercom.set(Boolean.toString(usedIntercom));
         Vls.UsedTv.set(Boolean.toString(usedTv));
+
+        Vls.WindowPositionX.set(Integer.toString(windowPositionX));
+        Vls.WindowPositionY.set(Integer.toString(windowPositionY));
+        Vls.FontSize.set(fontSize.toString());
+        Vls.Language.set(language.toString());
 
         try (OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream(USER_HOME + propertiesFileName))) {
             PROPERTIES.store(output, "Utilities' properties file. Don't delete.");
@@ -352,6 +375,18 @@ public final class Settings {
     public boolean getUsedTv() {
         return usedTv;
     }
+    public int getWindowPositionX() {
+        return windowPositionX;
+    }
+    public int getWindowPositionY() {
+        return windowPositionY;
+    }
+    public Resizer.FontSize getFontSize() {
+        return fontSize;
+    }
+    public Dictionary.Language getLanguage() {
+        return language;
+    }
 
     public void setElecMeter(boolean elecMeter) {
         this.elecMeter = elecMeter;
@@ -472,6 +507,18 @@ public final class Settings {
     }
     public void setUsedTv(boolean usedTv) {
         this.usedTv = usedTv;
+    }
+    public void setWindowPositionX(int position) {
+        windowPositionX = position;
+    }
+    public void setWindowPositionY(int position) {
+        windowPositionY = position;
+    }
+    public void setFontSize(Resizer.FontSize fontSize) {
+        this.fontSize = fontSize;
+    }
+    public void setLanguage(Dictionary.Language language) {
+        this.language = language;
     }
 
     public static void main(String[] args) {

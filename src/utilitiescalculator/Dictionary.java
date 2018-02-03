@@ -2,11 +2,15 @@ package utilitiescalculator;
 
 import java.util.*;
 
-public class Dictionary {
+public enum Dictionary {
+    INSTANCE;
+
     public enum Language {
         RUSSIAN, UKRAINIAN
     }
-    private Language language;
+
+    private static Language language;
+
     public enum Keyword {
         PANEL_DATE, PANEL_ELEC, PANEL_GAS, PANEL_PAYMENT, PANEL_TOTAL,
         MONTH, YEAR,
@@ -16,7 +20,9 @@ public class Dictionary {
         TOTAL,
         TARIFF, CALCULATE, VIEW_AND_PRINT, PERSONAL_DATA,
         ELEC, RENT, HEAT, HOT_WATER, COLD_WATER, SEVERAGE, GAS, GARBAGE, INTERCOM, TV,
+        LANGUAGE, LANG_DESCRIPTION,
     }
+
     private static final Map<Keyword, String[]> DICTIONARY = new HashMap<Keyword, String[]>() {{
         put(Keyword.PANEL_DATE, new String[]{"Дата", "Дата"});
         put(Keyword.PANEL_ELEC, new String[]{"Показания электрического счётчика", "Показання електричного лічильника"});
@@ -65,17 +71,33 @@ public class Dictionary {
         put(Keyword.GARBAGE, new String[]{"33 Вывоз мусора:", "33 Вивіз сміття:"});
         put(Keyword.INTERCOM, new String[]{"35 Домофон:", "35 Домофон:"});
         put(Keyword.TV, new String[]{"49 Воля Т.П.:", "49 Воля Т.П.:"});
+        put(Keyword.LANGUAGE, new String[]{"Язык", "Мова"});
+        put(Keyword.LANG_DESCRIPTION, new String[]{"Рус", "Укр"});
     }};
-    public Dictionary(Language language) {
-        this.language = language;
-    }
+
     public void setLanguage(Language language) {
-        this.language = language;
+        Dictionary.language = language;
     }
+
+    public Language getLanguage() {
+        return language;
+    }
+
     public String getWord(Keyword key) {
         return DICTIONARY.get(key)[language.ordinal()];
     }
     
+    public String getText() {
+        return INSTANCE.getWord(Keyword.LANGUAGE) + "(" + INSTANCE.getWord(Keyword.LANG_DESCRIPTION) + ")";
+    }
+    
+    public Language getNextLanguage() {
+        Language[] languages = Language.values();
+        int next = (language.ordinal() + 1) % languages.length;
+        language = languages[next];
+        return language;
+    }
+
     public static void main2(String[] args) {
         String[][] strings = new String[][] {
             {"Дата", "Дата"},

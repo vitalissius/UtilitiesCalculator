@@ -35,14 +35,10 @@ public enum Resizer {
         return INSTANCE;
     }
 
-    public static Resizer getInstance() {
-        return getInstance("", FontSize.ELEVEN);
-    }
-
     public void shiftToNextFontSize() {
-        FontSize[] values = FontSize.values();
-        int next = (fontSize.ordinal() + 1) % values.length;
-        fontSize = FontSize.values()[next];        
+        FontSize[] fontSizes = FontSize.values();
+        int next = (fontSize.ordinal() + 1) % fontSizes.length;
+        fontSize = fontSizes[next];        
     }
 
     public String getText() {
@@ -73,6 +69,14 @@ public enum Resizer {
         components.forEach((component) -> {
             apply(component);
         });
+    }
+
+    public FontSize getFontSize() {
+        return fontSize;
+    }
+
+    public void setFontSize(FontSize fontSize) {
+        Resizer.fontSize = fontSize;
     }
 
     @Override

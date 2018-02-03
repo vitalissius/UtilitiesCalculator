@@ -1,8 +1,10 @@
 package utilitiescalculator;
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.time.YearMonth;
 import javax.swing.*;
@@ -11,17 +13,21 @@ import java.util.*;
 
 public class UCWindow extends JFrame {
     private final String propertiesFileName = "utilities.properties";
-    private static final Settings settings = Settings.getInstance();
+    private static final Settings SETTINGS = Settings.getInstance();
+    private static final Dictionary DICT = Dictionary.INSTANCE;
 
     /**
      * Creates new form UCWindow
      */
     public UCWindow() {
+        SETTINGS.loadProperties(propertiesFileName);
+        DICT.setLanguage(SETTINGS.getLanguage());
+
         initComponents();
 
+        applyLanguage();
         applySize();
-        
-        settings.loadProperties(propertiesFileName);
+
         fillData();
     }
 
@@ -1067,7 +1073,7 @@ public class UCWindow extends JFrame {
         cbYear.setSelectedIndex(1);
     }
     private void fillElecPanel() {
-        boolean isSelected = settings.getElecMeter();
+        boolean isSelected = SETTINGS.getElecMeter();
         chbElecPanelOnOff.setSelected(isSelected);
         pnElec.setEnabled(isSelected);
         for (java.awt.Component c : pnElec.getComponents()) {
@@ -1076,15 +1082,15 @@ public class UCWindow extends JFrame {
             }
         }
         
-        String format = String.format("%%0%dd", Integer.toString(settings.getElecMeterMaxValue()).length());
-        tfElecBegin.setText(String.format(format, settings.getElecBegin()));
-        tfElecEnd.setText(String.format(format, settings.getElecEnd()));
-        tfElecTotal.setText("" + settings.getElecTotal());
+        String format = String.format("%%0%dd", Integer.toString(SETTINGS.getElecMeterMaxValue()).length());
+        tfElecBegin.setText(String.format(format, SETTINGS.getElecBegin()));
+        tfElecEnd.setText(String.format(format, SETTINGS.getElecEnd()));
+        tfElecTotal.setText("" + SETTINGS.getElecTotal());
         
         tfElec.setEnabled(!isSelected);
     }
     private void fillGasPanel() {
-        boolean isSelected = settings.getGasMeter();
+        boolean isSelected = SETTINGS.getGasMeter();
         chbGasPanelOnOff.setSelected(isSelected);
         pnGas.setEnabled(isSelected);
         for (java.awt.Component c : pnGas.getComponents()) {
@@ -1093,24 +1099,24 @@ public class UCWindow extends JFrame {
             }
         }
         
-        String format = String.format("%%0%dd", Integer.toString(settings.getGasMeterMaxValue()).length());
-        tfGasBegin.setText(String.format(format, settings.getGasBegin()));
-        tfGasEnd.setText(String.format(format, settings.getGasEnd()));
-        tfGasTotal.setText("" + settings.getGasTotal());
+        String format = String.format("%%0%dd", Integer.toString(SETTINGS.getGasMeterMaxValue()).length());
+        tfGasBegin.setText(String.format(format, SETTINGS.getGasBegin()));
+        tfGasEnd.setText(String.format(format, SETTINGS.getGasEnd()));
+        tfGasTotal.setText("" + SETTINGS.getGasTotal());
         
         tfGas.setEnabled(!isSelected);
     }
     private void fillPayments() {
-        chbElec.setSelected(settings.getUsedElec());
-        chbRent.setSelected(settings.getUsedRent());
-        chbHeating.setSelected(settings.getUsedHeating());
-        chbHotWater.setSelected(settings.getUsedHotWater());
-        chbColdWater.setSelected(settings.getUsedColdWater());
-        chbSeverage.setSelected(settings.getUsedSeverage());
-        chbGas.setSelected(settings.getUsedGas());
-        chbGarbage.setSelected(settings.getUsedGarbage());
-        chbIntercom.setSelected(settings.getUsedIntercom());
-        chbTv.setSelected(settings.getUsedTv());
+        chbElec.setSelected(SETTINGS.getUsedElec());
+        chbRent.setSelected(SETTINGS.getUsedRent());
+        chbHeating.setSelected(SETTINGS.getUsedHeating());
+        chbHotWater.setSelected(SETTINGS.getUsedHotWater());
+        chbColdWater.setSelected(SETTINGS.getUsedColdWater());
+        chbSeverage.setSelected(SETTINGS.getUsedSeverage());
+        chbGas.setSelected(SETTINGS.getUsedGas());
+        chbGarbage.setSelected(SETTINGS.getUsedGarbage());
+        chbIntercom.setSelected(SETTINGS.getUsedIntercom());
+        chbTv.setSelected(SETTINGS.getUsedTv());
         
         
         
@@ -1120,15 +1126,27 @@ public class UCWindow extends JFrame {
         // Сохранение настроек во время закрытия окна программы:
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override public void windowClosing(java.awt.event.WindowEvent e) {
-                settings.storeProperties(propertiesFileName);
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                Dimension windowSize = getSize();
+                Point location = getLocationOnScreen();
+                // Если хотя бы один край окна вышел за границы рабочего стола, - центрируем позицию окна
+                if ((location.getX() + windowSize.getWidth()) > screenSize.getWidth() ||
+                        (location.getY() + windowSize.getHeight()) > screenSize.getHeight()) {
+                    location.setLocation(screenSize.getWidth() / 2 - windowSize.getWidth() / 2,
+                            screenSize.getHeight() / 2 - windowSize.getHeight() / 2);
+                }
+                SETTINGS.setWindowPositionX((int) location.getX());
+                SETTINGS.setWindowPositionY((int) location.getY());
+
+                SETTINGS.storeProperties(propertiesFileName);
             }
         });
         chbElecPanelOnOff.addActionListener((event) -> {
-            settings.setElecMeter(!settings.getElecMeter());
+            SETTINGS.setElecMeter(!SETTINGS.getElecMeter());
             fillElecPanel();
         });
         chbGasPanelOnOff.addActionListener((event) -> {
-            settings.setGasMeter(!settings.getGasMeter());
+            SETTINGS.setGasMeter(!SETTINGS.getGasMeter());
             fillGasPanel();
         });
         
@@ -1146,7 +1164,7 @@ public class UCWindow extends JFrame {
         public boolean verify(JComponent component) {
             JTextField tf = (JTextField) component;
             if (!tf.getText().matches(regex)) {
-                tf.setSelectionColor(Color.decode("0x00b40000"));// red
+                tf.setSelectionColor(SystemColor.RED);
                 tf.selectAll();
                 Runnable sound = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.asterisk");
                 if (sound != null) {
@@ -1155,35 +1173,35 @@ public class UCWindow extends JFrame {
                 
                 return false;
             }
-            tf.setSelectionColor(Color.decode("0x000078d7"));// blue
+            tf.setSelectionColor(SystemColor.textHighlight);
             
             int value = Integer.valueOf(tf.getText());
             tf.setText(String.format(String.format("%%0%dd", digitsNumber), value));
             if (tf == tfElecBegin) {
-                settings.setElecBegin(value);
+                SETTINGS.setElecBegin(value);
             } else if (tf == tfElecEnd) {
-                settings.setElecEnd(value);
+                SETTINGS.setElecEnd(value);
             } else if (tf == tfGasBegin) {
-                settings.setGasBegin(value);
+                SETTINGS.setGasBegin(value);
             } else if (tf == tfGasEnd) {
-                settings.setGasEnd(value);
+                SETTINGS.setGasEnd(value);
             } else {
                 throw new RuntimeException("Some JTextField is not procceed");
             }
-            tfElecTotal.setText(Integer.toString(settings.getElecTotal()));
-            tfGasTotal.setText(Integer.toString(settings.getGasTotal()));
+            tfElecTotal.setText(Integer.toString(SETTINGS.getElecTotal()));
+            tfGasTotal.setText(Integer.toString(SETTINGS.getGasTotal()));
             
             return true;
         }
     }
     private void fillInputVerifiers() {
-        int digitsNumber = Integer.toString(settings.getElecMeterMaxValue()).length();
+        int digitsNumber = Integer.toString(SETTINGS.getElecMeterMaxValue()).length();
         String regex = String.format("[0-9]{1,%d}", digitsNumber);
 
         tfElecBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
         tfElecEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
         
-        digitsNumber = Integer.toString(settings.getGasMeterMaxValue()).length();
+        digitsNumber = Integer.toString(SETTINGS.getGasMeterMaxValue()).length();
         regex = String.format("[0-9]{1,%d}", digitsNumber);
 
         tfGasBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
@@ -1223,6 +1241,7 @@ public class UCWindow extends JFrame {
         return components;
     }
     private void applySize() {
+        RESIZER.setFontSize(SETTINGS.getFontSize());
         if (COMPONENTS.isEmpty()) {
             holdComponents();
         }
@@ -1234,16 +1253,28 @@ public class UCWindow extends JFrame {
         dialogViewAndPrint.pack();
         dialogPersonalData.pack();
     }
-    
+    private void applyLanguage() {
+        SETTINGS.setLanguage(DICT.getLanguage());
+        btChangeLanguage.setText(DICT.getText());
+        
+        
+        
+    }
+
+
     private void btChangeSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChangeSizeActionPerformed
 
         RESIZER.shiftToNextFontSize();
+        SETTINGS.setFontSize(RESIZER.getFontSize());
         applySize();
 
     }//GEN-LAST:event_btChangeSizeActionPerformed
 
     private void btChangeLanguageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChangeLanguageActionPerformed
-        // TODO add your handling code here:
+
+        DICT.setLanguage(DICT.getNextLanguage());
+        applyLanguage();
+
     }//GEN-LAST:event_btChangeLanguageActionPerformed
 
     private void btViewAndPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btViewAndPrintActionPerformed
@@ -1284,7 +1315,8 @@ public class UCWindow extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             UCWindow window = new UCWindow();
-            window.setLocationRelativeTo(null);
+            window.setLocation(SETTINGS.getWindowPositionX(), SETTINGS.getWindowPositionY());
+//            window.setLocationRelativeTo(null);
             window.setVisible(true);
         });
     }
