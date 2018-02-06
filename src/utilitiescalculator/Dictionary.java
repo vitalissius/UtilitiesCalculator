@@ -6,73 +6,130 @@ public enum Dictionary {
     INSTANCE;
 
     public enum Language {
-        RUSSIAN, UKRAINIAN
+        UKRAINIAN, RUSSIAN
     }
 
     private static Language language;
 
     public enum Keyword {
-        PANEL_DATE, PANEL_ELEC, PANEL_GAS, PANEL_PAYMENT, PANEL_TOTAL,
-        MONTH, YEAR,
+        TITLE_MAIN, TITLE_ELEC, TITLE_GAS, TITLE_PERSONAL, TITLE_PRINT,
+        PANEL_DATE, PANEL_ELEC, PANEL_GAS, PANEL_PAYMENT, PANEL_TOTAL, PANEL_BORDERED_ELEC_VOLUME, PANEL_ELEC_PRICE,
+            PANEL_PRIVILEGE, PANEL_ELEC_MAX_VALUE, PANEL_GAS_PRICE, PANEL_GAS_MAX_VALUE, PANEL_NAMES, PANEL_ADDRESS,
         JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC,
-        BEGIN, END, DIFF,
-        KWH, MCUBIC, HRN,
-        TOTAL,
-        TARIFF, CALCULATE, VIEW_AND_PRINT, PERSONAL_DATA,
+        BUTTON_TARIFF, BUTTON_CALCULATE, BUTTON_PERSONAL_DATA, BUTTON_VIEW_AND_PRINT, BUTTON_SAVE, BUTTON_CANCEL,
+            BUTTON_FONT, BUTTON_LANGUAGE, BUTTON_LANG_DESCRIPTION, BUTTON_PRINT,
         ELEC, RENT, HEAT, HOT_WATER, COLD_WATER, SEVERAGE, GAS, GARBAGE, INTERCOM, TV,
-        LANGUAGE, LANG_DESCRIPTION,
+        MONTH, YEAR, BEGIN, END, DIFF, TOTAL, VOLUME, BELOW_BORDER, ABOVE_BORDER, PRIVILEGE_VALUE, PRICE, PERSONAL_ACCOUNT, 
+            SURNAME, FIRST_NAME, PATRONYMIC, STREET, HOUSE, APARTMENT, 
+        KWH, MCUBIC, HRN, CENTS, PERCENT, GRN_PER_MCUBIC,
+        LINE_00, LINE_01, LINE_02, LINE_03, LINE_04, LINE_05, LINE_06, LINE_07, LINE_08, LINE_09, LINE_10, LINE_11,
+            LINE_12, LINE_13, LINE_14, LINE_15, LINE_16, LINE_17, LINE_18, LINE_19, LINE_20
     }
 
-    private static final Map<Keyword, String[]> DICTIONARY = new HashMap<Keyword, String[]>() {{
+    private static final Map<Keyword, String[]> DICTIONARY = new EnumMap<Keyword, String[]>(Keyword.class) {{
+        // frames
+        put(Keyword.TITLE_MAIN, new String[]{"Сплата комунальних послуг", "Оплата коммунальных услуг"});
+        put(Keyword.TITLE_ELEC, new String[]{"Тариф на електроенергію", "Тариф на электроенергию"});
+        put(Keyword.TITLE_GAS, new String[]{"Тариф на газ", "Тариф на газ"});
+        put(Keyword.TITLE_PERSONAL, new String[]{"Персональні дані платника", "Персональные данные плательщика"});
+        put(Keyword.TITLE_PRINT, new String[]{"Перегляд і роздруківка", "Просмотр и печать"});
+        // titled borders
         put(Keyword.PANEL_DATE, new String[]{"Дата", "Дата"});
-        put(Keyword.PANEL_ELEC, new String[]{"Показания электрического счётчика", "Показання електричного лічильника"});
-        put(Keyword.PANEL_GAS, new String[]{"Показания газового счётчика", "Показання газового лічильника"});
-        put(Keyword.PANEL_PAYMENT, new String[]{"Платежи", "Платежі"});
-        put(Keyword.PANEL_TOTAL, new String[]{"Всего", "Всьго"});
-        
-        put(Keyword.MONTH, new String[]{"Месяц:", "Місяць:"});
-        put(Keyword.YEAR, new String[]{"Год:", "Рік:"});
-        
-        put(Keyword.JAN, new String[]{"Январь", "Січень"});
-        put(Keyword.FEB, new String[]{"Февраль", "Лютий"});
-        put(Keyword.MAR, new String[]{"Март", "Березень"});
-        put(Keyword.APR, new String[]{"Апрель", "Квітень"});
-        put(Keyword.MAY, new String[]{"Май", "Травень"});
-        put(Keyword.JUN, new String[]{"Июнь", "Червень"});
-        put(Keyword.JUL, new String[]{"Июль", "Липень"});
-        put(Keyword.AUG, new String[]{"Август", "Серпень"});
-        put(Keyword.SEP, new String[]{"Сентябрь", "Вересень"});
-        put(Keyword.OCT, new String[]{"Октябрь", "Жовтень"});
-        put(Keyword.NOV, new String[]{"Ноябрь", "Листопад"});
-        put(Keyword.DEC, new String[]{"Декабрь", "Грудень"});
-        
-        put(Keyword.BEGIN, new String[]{"Начальные:", "Початкові:"});
-        put(Keyword.END, new String[]{"Конечные:", "Кінцеві:"});
-        put(Keyword.DIFF, new String[]{"Разница:", "Різниця:"});
-        
-        put(Keyword.KWH, new String[]{"кВт" + (char) 0x2219 + "час", "кВт·год"});
-        put(Keyword.MCUBIC, new String[]{"м куб", "м куб"});
-        put(Keyword.HRN, new String[]{"грн", "грн"});
-        
-        put(Keyword.TOTAL, new String[]{"В целом:", "Загалом:"});
-        
-        put(Keyword.TARIFF, new String[]{"Тариф...", "Тариф..."});
-        put(Keyword.CALCULATE, new String[]{"Рассчитать", "Розрахувати"});
-        put(Keyword.VIEW_AND_PRINT, new String[]{"Просмотреть и распечатать...", "Переглянути і роздрукувати..."});
-        put(Keyword.PERSONAL_DATA, new String[]{"Персональные данные плательщика...", "Персональні дані платника..."});
-        
-        put(Keyword.ELEC, new String[]{"01 Электроэнергия:", "01 Електроенергія:"});
+        put(Keyword.PANEL_ELEC, new String[]{"Показання електричного лічильника", "Показания электрического счётчика"});
+        put(Keyword.PANEL_GAS, new String[]{"Показання газового лічильника", "Показания газового счётчика"});
+        put(Keyword.PANEL_PAYMENT, new String[]{"Платежі", "Платежи"});
+        put(Keyword.PANEL_TOTAL, new String[]{"Всьго", "Всего"});
+        put(Keyword.PANEL_BORDERED_ELEC_VOLUME, new String[]{"Граничний обсяг електроенергії", "Граничный объём электроенергии"});
+        put(Keyword.PANEL_ELEC_PRICE, new String[]{"Ціна на електроенергію", "Цена на электроенергию"});
+        put(Keyword.PANEL_PRIVILEGE, new String[]{"Пільга", "Льгота"});
+        put(Keyword.PANEL_ELEC_MAX_VALUE, new String[]{"Максимальне значення електролічильника", "Максимальное значение электросчётчика"});
+        put(Keyword.PANEL_GAS_PRICE, new String[]{"Ціна на газ", "Цена на газ"});
+        put(Keyword.PANEL_GAS_MAX_VALUE, new String[]{"Максимальне значення газового лічильника", "Максимальное значение электрического счётчика"});
+        put(Keyword.PANEL_NAMES, new String[]{"Прізвище, ім’я та по батькові", "Фамилия, имя и отчество"});
+        put(Keyword.PANEL_ADDRESS, new String[]{"Адреса", "Адрес"});
+        // combo boxes
+        put(Keyword.JAN, new String[]{"Січень", "Январь"});
+        put(Keyword.FEB, new String[]{"Лютий", "Ферваль"});
+        put(Keyword.MAR, new String[]{"Березень", "Март"});
+        put(Keyword.APR, new String[]{"Квітень", "Апрель"});
+        put(Keyword.MAY, new String[]{"Травень", "Май"});
+        put(Keyword.JUN, new String[]{"Червень", "Июнь"});
+        put(Keyword.JUL, new String[]{"Липень", "Июль"});
+        put(Keyword.AUG, new String[]{"Серпень", "Август"});
+        put(Keyword.SEP, new String[]{"Вересень", "Сентябрь"});
+        put(Keyword.OCT, new String[]{"Жовтень", "Октябрь"});
+        put(Keyword.NOV, new String[]{"Листопад", "Ноябрь"});
+        put(Keyword.DEC, new String[]{"Грудень", "Декабрь"});
+        // buttons
+        put(Keyword.BUTTON_TARIFF, new String[]{"Тариф...", "Тариф..."});
+        put(Keyword.BUTTON_CALCULATE, new String[]{"Розрахувати", "Рассчитать"});
+        put(Keyword.BUTTON_PERSONAL_DATA, new String[]{"Персональні дані...", "Персональные данные..."});
+        put(Keyword.BUTTON_VIEW_AND_PRINT, new String[]{"Роздрукувати...", "Распечатать"});
+        put(Keyword.BUTTON_SAVE, new String[]{"Зберегти", "Сохранить"});
+        put(Keyword.BUTTON_CANCEL, new String[]{"Відмінити", "Отменить"});
+        put(Keyword.BUTTON_FONT, new String[]{"Шрифт", "Шрифт"});
+        put(Keyword.BUTTON_LANGUAGE, new String[]{"Мова", "Язык"});
+        put(Keyword.BUTTON_LANG_DESCRIPTION, new String[]{"Укр", "Рус"});
+        put(Keyword.BUTTON_PRINT, new String[]{"Роздрукувати", "Распечатать"});
+        // check boxes
+        put(Keyword.ELEC, new String[]{"01 Електроенергія:", "01 Электроэнергия:"});
         put(Keyword.RENT, new String[]{"02 Квартплата:", "02 Квартплата:"});
-        put(Keyword.HEAT, new String[]{"03 Отопление:", "03 Опалення:"});
-        put(Keyword.HOT_WATER, new String[]{"04 Горячая вода:", "04 Гаряча вода:"});
-        put(Keyword.COLD_WATER, new String[]{"05 Холодная вода:", "05 Холодна вода:"});
-        put(Keyword.SEVERAGE, new String[]{"06 Канализация:", "06 Каналізація:"});
-        put(Keyword.GAS, new String[]{"07,08 Газ природный:", "07,08 Газ природній:"});
-        put(Keyword.GARBAGE, new String[]{"33 Вывоз мусора:", "33 Вивіз сміття:"});
+        put(Keyword.HEAT, new String[]{"03 Опалення:", "03 Отопление:"});
+        put(Keyword.HOT_WATER, new String[]{"04 Гаряча вода:", "04 Горячая вода:"});
+        put(Keyword.COLD_WATER, new String[]{"05 Холодна вода:", "05 Холодная вода:"});
+        put(Keyword.SEVERAGE, new String[]{"06 Каналізація:", "06 Канализация:"});
+        put(Keyword.GAS, new String[]{"07,08 Газ природній:", "07,08 Газ природный:"});
+        put(Keyword.GARBAGE, new String[]{"33 Вивіз сміття:", "33 Вывоз мусора:"});
         put(Keyword.INTERCOM, new String[]{"35 Домофон:", "35 Домофон:"});
         put(Keyword.TV, new String[]{"49 Воля Т.П.:", "49 Воля Т.П.:"});
-        put(Keyword.LANGUAGE, new String[]{"Язык", "Мова"});
-        put(Keyword.LANG_DESCRIPTION, new String[]{"Рус", "Укр"});
+        // labels (before)
+        put(Keyword.MONTH, new String[]{"Місяць:", "Месяц:"});
+        put(Keyword.YEAR, new String[]{"Рік:", "Год:"});
+        put(Keyword.BEGIN, new String[]{"Початкові:", "Начальные:"});
+        put(Keyword.END, new String[]{"Кінцеві:", "Конечные:"});
+        put(Keyword.DIFF, new String[]{"Різниця:", "Разница:"});
+        put(Keyword.TOTAL, new String[]{"Загалом:", "Итого:"});
+        put(Keyword.VOLUME, new String[]{"Граничний обсяг електроенергії (ГОЕ):", "Граничный объём электроэнергии (ГОЭ):"});
+        put(Keyword.BELOW_BORDER, new String[]{"За обсяг, спожитий до ГОЕ:", "За объём, потреблённый до ГОЭ:"});
+        put(Keyword.ABOVE_BORDER, new String[]{"За обсяг, спожитий понад ГОЕ:", "За объём, потреблённый сверх ГОЭ:"});
+        put(Keyword.PRIVILEGE_VALUE, new String[]{"Розмір пільги:", "Размер льготы:"});
+        put(Keyword.PRICE, new String[]{"Ціна:", "Цена:"});
+        put(Keyword.PERSONAL_ACCOUNT, new String[]{"Особистий рахунок:", "Персональный счёт:"});
+        put(Keyword.SURNAME, new String[]{"Прізвище:", "Фамилия:"});
+        put(Keyword.FIRST_NAME, new String[]{"Ім’я:", "Имя:"});
+        put(Keyword.PATRONYMIC, new String[]{"По батькові:", "Отчество:"});
+        put(Keyword.STREET, new String[]{"Вулиця:", "Улица:"});
+        put(Keyword.HOUSE, new String[]{"Будинок:", "Дом:"});
+        put(Keyword.APARTMENT, new String[]{"Квартира:", "Квартира:"});
+        // labels (after)
+        put(Keyword.KWH, new String[]{"кВт·год", "кВт·час"});
+        put(Keyword.MCUBIC, new String[]{"м куб", "м куб"});
+        put(Keyword.HRN, new String[]{"грн", "грн"});
+        put(Keyword.CENTS, new String[]{"копійок", "копеек"});
+        put(Keyword.PERCENT, new String[]{"%", "%"});
+        put(Keyword.GRN_PER_MCUBIC, new String[]{"грн за м куб", "грн за м куб"});
+        // print lines
+        put(Keyword.LINE_00, new String[]{"СПЛАТА ЗА КОМУНАЛЬНІ ПОСЛУГИ", null});
+        put(Keyword.LINE_01, new String[]{"ВАТ «Мегабанк» рахунок одержувача 290231 МФО 351629 ЄДРПОУ 09804119", null});
+        put(Keyword.LINE_02, new String[]{"Особистий рахунок:", null});//+
+        put(Keyword.LINE_03, new String[]{"Прізвище, ім’я, по батькові:", null});
+        put(Keyword.LINE_04, new String[]{"Адреса:", null});
+        put(Keyword.LINE_05, new String[]{"вул.", null});
+        put(Keyword.LINE_06, new String[]{"буд.", null});
+        put(Keyword.LINE_07, new String[]{"кв.", null});
+        put(Keyword.LINE_08, new String[]{"Пільга, %", null});
+        put(Keyword.LINE_09, new String[]{"Вид платежу", null});
+        put(Keyword.LINE_10, new String[]{"Міс.", null});
+        put(Keyword.LINE_11, new String[]{"Рік", null});
+        put(Keyword.LINE_12, new String[]{"Сума", null});
+        put(Keyword.LINE_13, new String[]{"Показання лічильників", null});
+        put(Keyword.LINE_14, new String[]{"Кінцеві", null});
+        put(Keyword.LINE_15, new String[]{"Початкові", null});
+        put(Keyword.LINE_16, new String[]{"Різниця", null});
+        put(Keyword.LINE_17, new String[]{"Тариф", null});
+        put(Keyword.LINE_18, new String[]{"Інші", null});
+        put(Keyword.LINE_19, new String[]{"Усього:", null});
+        put(Keyword.LINE_20, new String[]{"Підпис платника:", null});
     }};
 
     public void setLanguage(Language language) {
@@ -84,13 +141,15 @@ public enum Dictionary {
     }
 
     public String getWord(Keyword key) {
-        return DICTIONARY.get(key)[language.ordinal()];
+        return DICTIONARY.get(key)[language.ordinal()] != null ? 
+                DICTIONARY.get(key)[language.ordinal()] :           // use current language
+                DICTIONARY.get(key)[Language.UKRAINIAN.ordinal()];  // use ukrainian
     }
-    
+
     public String getText() {
-        return INSTANCE.getWord(Keyword.LANGUAGE) + "(" + INSTANCE.getWord(Keyword.LANG_DESCRIPTION) + ")";
+        return INSTANCE.getWord(Keyword.BUTTON_LANGUAGE) + "(" + INSTANCE.getWord(Keyword.BUTTON_LANG_DESCRIPTION) + ")";
     }
-    
+
     public Language getNextLanguage() {
         Language[] languages = Language.values();
         int next = (language.ordinal() + 1) % languages.length;
@@ -98,108 +157,14 @@ public enum Dictionary {
         return language;
     }
 
-    public static void main2(String[] args) {
-        String[][] strings = new String[][] {
-            {"Дата", "Дата"},
-            {"Показания электрического счётчика", "Показання електричного лічильника"},
-            {"Показания газового счётчика", "Показання газового лічильника"},
-            {"Платежи", "Платежі"},
-            {"Всего", "Всьго"},
-            {"Месяц:", "Місяць:"},
-            {"Год:", "Рік:"},
-            {"Январь", "Січень"},
-            {"Февраль", "Лютий"},
-            {"Март", "Березень"},
-            {"Апрель", "Квітень"},
-            {"Май", "Травень"},
-            {"Июнь", "Червень"},
-            {"Июль", "Липень"},
-            {"Август", "Серпень"},
-            {"Сентябрь", "Вересень"},
-            {"Октябрь", "Жовтень"},
-            {"Ноябрь", "Листопад"},
-            {"Декабрь", "Грудень"},
-            {"Начальные:", "Початкові:"},
-            {"Конечные:", "Кінцеві:"},
-            {"Разница:", "Різниця:"},
-            {"кВт" + (char) 0x2219 + "час", "кВт·год"},
-            {"м куб", "м куб"},
-            {"₴", "₴"},
-            {"В целом:", "Загалом:"},
-            {"Тариф...", "Тариф..."},
-            {"Рассчитать", "Розрахувати"},
-            {"Просмотреть и распечатать...", "Переглянути і роздрукувати..."},
-            {"Персональные данные плательщика...", "Персональні дані платника..."},
-            {"01 Электроэнергия:", "01 Електроенергія:"},
-            {"02 Квартплата:", "02 Квартплата:"},
-            {"03 Отопление:", "03 Опалення:"},
-            {"04 Горячая вода:", "04 Гаряча вода:"},
-            {"05 Холодная вода:", "05 Холодна вода:"},
-            {"06 Канализация:", "06 Каналізація:"},
-            {"07,08 Газ природный:", "07,08 Газ природній:"},
-            {"33 Вывоз мусора:", "33 Вивіз сміття:"},
-            {"35 Домофон:", "35 Домофон:"},
-            {"49 Воля Т.П.:", "49 Воля Т.П.:"},
-            {"Шрифт()", "Шрифт()"},
-            {"Мова()", "Язык()"},
-            
-            // PERSONAL_ACCOUNT, FLM_NAMES, LAST_NAME, FIRST_NAME, MIDDLE_NAME, ADDRESS, STREET, HOUSE, APARTMENT, SAVE, CANCEL,
-            // TARIFFS, BORDERED_ELEC_VOLUME, VOLUME, ELEC_TARIFF, BELOW_BORDER, ABOVE_BORDER, CENTS, PRIVILEGE, PRIVILEGE_VALUE, PERCENT, GRN,
-            {"Плательщик", "Платник"},// -
-            {"Персональный счёт:", "Особистий рахунок:"},
-            {"Ф.И.О.", "П.І.Б."},
-            {"Фамилия:", "Прізвище:"},
-            {"Имя:", "Ім’я:"},
-            {"Отчество:", "По батькові:"},
-            {"Адрес", "Адреса"},
-            {"Улица:", "Вулиця:"},
-            {"Дом:", "Будинок:"},
-            {"Квартира:", "Квартира:"},
-            {"Сохранить", "Зберегти"},
-            {"Отменить", "Скасувати"},
-            {"Тарифы", "Тарифи"},// -
-            {"Граничный объём электроэнергии (ГОЭ)", "Граничний обсяг електроенергії (ГОЕ)"},
-            {"Объём:", "Обсяг:"},
-            {"Тарифы на электроэнергию для населения", "Тарифи на електроенергію для населення"},
-            {"За объём, потреблённый до ГОЭ", "За обсяг, спожитий до ГОЕ:"},
-            {"За объём, потреблённый сверх ГОЭ", "За обсяг, спожитий понад ГОЕ:"},
-            {"Копеек", "Копійок"},
-            {"Льгота", "Пільга"},
-            {"Размер льготы:", "Розмір пільги:"},
-            {"%", "%"},
-            {"грн", "₴"},
-            // LINE00, LINE01, LINE02, LINE03, LINE04, LINE05, LINE06, LINE07, LINE08, LINE09, 
-            // LINE10, LINE11, LINE12, LINE13, LINE14, LINE15, LINE16, LINE17, LINE18, LINE19, 
-            // LINE20, LINE21, LINE22, LINE23, 
-            {"СПЛАТА ЗА КОМУНАЛЬНІ ПОСЛУГИ", ""},
-            {"ВАТ «Мегабанк» рахунок одержувача 290231 МФО 351629 ЄДРПОУ 09804119", ""},
-            {"Особистий рахунок:", ""},
-            {"Прізвище, ім’я, по батькові:", ""},
-            {"Адреса:", ""},
-            {"вул.", ""},
-            {"буд.", ""},
-            {"кв.", ""},
-            {"Пільга, %", ""},
-            {"Вид платежу", ""},
-            {"Міс.", ""},
-            {"Рік", ""},
-            {"Сума", ""},
-            {"Показання лічильників", ""},
-            {"Кінцеві", ""},
-            {"Початкові", ""},
-            {"Різниця", ""},
-            {"Тариф", ""},
-            {"Інші", ""},
-            {"Усього:", ""},
-            {"Підпис платника:", ""},
-            {"Переглянути", ""},
-            {"Роздрукувати", ""},
-            {"Вийти з діалогу", ""},
-        };
+    public static void main(String[] args) {
+        Dictionary dict = Dictionary.INSTANCE;
         
-        
-        for (Keyword key : Keyword.values()) {
-            System.out.println(strings[key.ordinal()][Language.RUSSIAN.ordinal()]);
-        }
+        EnumSet.allOf(Dictionary.Keyword.class).forEach((key) -> {
+            dict.setLanguage(Dictionary.Language.UKRAINIAN);
+            System.out.format("%-26s -> %-68s -> ", key, dict.getWord(key));
+            dict.setLanguage(Dictionary.Language.RUSSIAN);
+            System.out.format("%s\n", dict.getWord(key));
+        });
     }
 }
