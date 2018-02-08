@@ -1180,7 +1180,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="tfTotal" min="-2" pref="130" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lbTotalGrn" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbTotalHrn" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btCalculate" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -1194,7 +1194,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbTotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbTotalGrn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbTotalHrn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btCalculate" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -1213,7 +1213,7 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbTotalGrn">
+        <Component class="javax.swing.JLabel" name="lbTotalHrn">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
@@ -1266,16 +1266,16 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbGrn1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn2" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn4" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn5" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn6" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn7" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn8" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn9" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn10" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn4" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn5" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn6" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn7" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn8" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn9" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn10" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -1288,61 +1288,61 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfElec" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbElec" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfRent" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbRent" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfHeating" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbHeating" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfHotWater" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbHotWater" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfColdWater" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbColdWater" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn5" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfSeverage" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbSeverage" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn6" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfGas" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbGas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfGarbage" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbGarbage" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn8" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfIntercom" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbIntercom" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfTv" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="chbTv" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGrn10" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbHrn10" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -1450,52 +1450,52 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn1">
+        <Component class="javax.swing.JLabel" name="lbHrn1">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn2">
+        <Component class="javax.swing.JLabel" name="lbHrn2">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn3">
+        <Component class="javax.swing.JLabel" name="lbHrn3">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn4">
+        <Component class="javax.swing.JLabel" name="lbHrn4">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn5">
+        <Component class="javax.swing.JLabel" name="lbHrn5">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn6">
+        <Component class="javax.swing.JLabel" name="lbHrn6">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn7">
+        <Component class="javax.swing.JLabel" name="lbHrn7">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn8">
+        <Component class="javax.swing.JLabel" name="lbHrn8">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn9">
+        <Component class="javax.swing.JLabel" name="lbHrn9">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGrn10">
+        <Component class="javax.swing.JLabel" name="lbHrn10">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x433;&#x440;&#x43d;"/>
           </Properties>
