@@ -86,7 +86,7 @@ public final class Settings {
         }
     }
     
-    private boolean elecMeter;
+    private boolean usedElecMeter;
     private int elecBegin;
     private int elecEnd;
     private int elecBoundary;
@@ -94,7 +94,7 @@ public final class Settings {
     private double elecPriceAboveBoundary;
     private int elecPrivilege;
     private int elecMeterMaxValue;
-    private boolean gasMeter;
+    private boolean usedGasMeter;
     private int gasBegin;
     private int gasEnd;
     private double gasPrice;
@@ -141,7 +141,7 @@ public final class Settings {
             throw new RuntimeException("Unknown I/O exception: " + e.getMessage());
         }
 
-        elecMeter = Boolean.parseBoolean(Vls.ElecMeter.get());
+        usedElecMeter = Boolean.parseBoolean(Vls.ElecMeter.get());
         elecBegin = Integer.parseInt(Vls.ElecBegin.get());
         elecEnd = Integer.parseInt(Vls.ElecEnd.get());
         elecBoundary = Integer.parseInt(Vls.ElecBoundary.get());
@@ -150,7 +150,7 @@ public final class Settings {
         elecPrivilege = Integer.parseInt(Vls.ElecPrivilege.get());
         elecMeterMaxValue = Integer.parseInt(Vls.ElecMeterMaxValue.get());
 
-        gasMeter = Boolean.parseBoolean(Vls.GasMeter.get());
+        usedGasMeter = Boolean.parseBoolean(Vls.GasMeter.get());
         gasBegin = Integer.parseInt(Vls.GasBegin.get());
         gasEnd = Integer.parseInt(Vls.GasEnd.get());
         gasPrice = Double.parseDouble(Vls.GasPrice.get());
@@ -193,7 +193,7 @@ public final class Settings {
     }
     
     public void storeProperties(final String propertiesFileName) {
-        Vls.ElecMeter.set(Boolean.toString(elecMeter));
+        Vls.ElecMeter.set(Boolean.toString(usedElecMeter));
         Vls.ElecBegin.set(Integer.toString(elecBegin));
         Vls.ElecEnd.set(Integer.toString(elecEnd));
         Vls.ElecPriceBelowBoundary.set(Double.toString(elecPriceBelowBoundary));
@@ -201,7 +201,7 @@ public final class Settings {
         Vls.ElecPrivilege.set(Integer.toString(elecPrivilege));
         Vls.ElecMeterMaxValue.set(Integer.toString(elecMeterMaxValue));
 
-        Vls.GasMeter.set(Boolean.toString(gasMeter));
+        Vls.GasMeter.set(Boolean.toString(usedGasMeter));
         Vls.GasBegin.set(Integer.toString(gasBegin));
         Vls.GasEnd.set(Integer.toString(gasEnd));
         Vls.GasPrice.set(Double.toString(gasPrice));
@@ -249,8 +249,8 @@ public final class Settings {
         }
     }
     
-    public boolean getElecMeter() {
-        return elecMeter;
+    public boolean getUsedElecMeter() {
+        return usedElecMeter;
     }
     public int getElecBegin() {
         return elecBegin;
@@ -276,8 +276,8 @@ public final class Settings {
     public int getElecMeterMaxValue() {
         return elecMeterMaxValue;
     }
-    public boolean getGasMeter() {
-        return gasMeter;
+    public boolean getUsedGasMeter() {
+        return usedGasMeter;
     }
     public int getGasBegin() {
         return gasBegin;
@@ -388,8 +388,8 @@ public final class Settings {
         return language;
     }
 
-    public void setElecMeter(boolean elecMeter) {
-        this.elecMeter = elecMeter;
+    public void setUsedElecMeter(boolean elecMeter) {
+        this.usedElecMeter = elecMeter;
     }
     public void setElecBegin(int elecBegin) {
         this.elecBegin = elecBegin;
@@ -412,8 +412,8 @@ public final class Settings {
     public void setElecMeterMaxValue(int elecMeterMaxValue) {
         this.elecMeterMaxValue = elecMeterMaxValue;
     }
-    public void setGasMeter(boolean gasMeter) {
-        this.gasMeter = gasMeter;
+    public void setUsedGasMeter(boolean gasMeter) {
+        this.usedGasMeter = gasMeter;
     }
     public void setGasBegin(int gasBegin) {
         this.gasBegin = gasBegin;
@@ -525,7 +525,7 @@ public final class Settings {
         Settings settings = Settings.getInstance();
         settings.loadProperties("utilities.ini");
         
-        settings.setElecMeter(true);
+        settings.setUsedElecMeter(true);
         settings.setElecBegin(1000);
         settings.setElecEnd(1111);
         settings.setElecBoundary(100);
@@ -534,7 +534,7 @@ public final class Settings {
         settings.setElecPrivilege(1);
         settings.setElecMeterMaxValue(9999);
         
-        settings.setGasMeter(true);
+        settings.setUsedGasMeter(true);
         settings.setGasBegin(2000);
         settings.setGasEnd(2222);
         settings.setGasPrice(6.70);
@@ -577,7 +577,7 @@ public final class Settings {
                 + "price above boundary: %f\n\t"
                 + "privilege: %d\n\t"
                 + "meter max value: %d\n",
-                settings.getElecMeter(),
+                settings.getUsedElecMeter(),
                 settings.getElecBegin(),
                 settings.getElecEnd(),
                 settings.getElecTotal(),
@@ -594,7 +594,7 @@ public final class Settings {
                 + "total: %d\n\t"
                 + "price: %f\n\t"
                 + "meter max value: %d\n",
-                settings.getGasMeter(),
+                settings.getUsedGasMeter(),
                 settings.getGasBegin(),
                 settings.getGasEnd(),
                 settings.getGasTotal(),

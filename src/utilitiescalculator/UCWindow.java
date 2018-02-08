@@ -6,10 +6,14 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.YearMonth;
 import javax.swing.*;
 
 import java.util.*;
+import javax.swing.border.TitledBorder;
 
 public class UCWindow extends JFrame {
     private final String propertiesFileName = "utilities.properties";
@@ -120,7 +124,7 @@ public class UCWindow extends JFrame {
         pnTotal = new javax.swing.JPanel();
         lbTotal = new javax.swing.JLabel();
         tfTotal = new javax.swing.JTextField();
-        lbTotalGrn = new javax.swing.JLabel();
+        lbTotalHrn = new javax.swing.JLabel();
         btCalculate = new javax.swing.JButton();
         pnPayments = new javax.swing.JPanel();
         chbElec = new javax.swing.JCheckBox();
@@ -143,16 +147,16 @@ public class UCWindow extends JFrame {
         tfGarbage = new javax.swing.JTextField();
         tfIntercom = new javax.swing.JTextField();
         tfTv = new javax.swing.JTextField();
-        lbGrn1 = new javax.swing.JLabel();
-        lbGrn2 = new javax.swing.JLabel();
-        lbGrn3 = new javax.swing.JLabel();
-        lbGrn4 = new javax.swing.JLabel();
-        lbGrn5 = new javax.swing.JLabel();
-        lbGrn6 = new javax.swing.JLabel();
-        lbGrn7 = new javax.swing.JLabel();
-        lbGrn8 = new javax.swing.JLabel();
-        lbGrn9 = new javax.swing.JLabel();
-        lbGrn10 = new javax.swing.JLabel();
+        lbHrn1 = new javax.swing.JLabel();
+        lbHrn2 = new javax.swing.JLabel();
+        lbHrn3 = new javax.swing.JLabel();
+        lbHrn4 = new javax.swing.JLabel();
+        lbHrn5 = new javax.swing.JLabel();
+        lbHrn6 = new javax.swing.JLabel();
+        lbHrn7 = new javax.swing.JLabel();
+        lbHrn8 = new javax.swing.JLabel();
+        lbHrn9 = new javax.swing.JLabel();
+        lbHrn10 = new javax.swing.JLabel();
         btViewAndPrint = new javax.swing.JButton();
         btChangeSize = new javax.swing.JButton();
         btChangeLanguage = new javax.swing.JButton();
@@ -792,7 +796,7 @@ public class UCWindow extends JFrame {
 
         tfTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        lbTotalGrn.setText("грн");
+        lbTotalHrn.setText("грн");
 
         btCalculate.setText("Розрахувати");
 
@@ -806,7 +810,7 @@ public class UCWindow extends JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbTotalGrn)
+                .addComponent(lbTotalHrn)
                 .addGap(18, 18, 18)
                 .addComponent(btCalculate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -818,7 +822,7 @@ public class UCWindow extends JFrame {
                 .addGroup(pnTotalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTotal)
-                    .addComponent(lbTotalGrn)
+                    .addComponent(lbTotalHrn)
                     .addComponent(btCalculate))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -865,25 +869,25 @@ public class UCWindow extends JFrame {
 
         tfTv.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        lbGrn1.setText("грн");
+        lbHrn1.setText("грн");
 
-        lbGrn2.setText("грн");
+        lbHrn2.setText("грн");
 
-        lbGrn3.setText("грн");
+        lbHrn3.setText("грн");
 
-        lbGrn4.setText("грн");
+        lbHrn4.setText("грн");
 
-        lbGrn5.setText("грн");
+        lbHrn5.setText("грн");
 
-        lbGrn6.setText("грн");
+        lbHrn6.setText("грн");
 
-        lbGrn7.setText("грн");
+        lbHrn7.setText("грн");
 
-        lbGrn8.setText("грн");
+        lbHrn8.setText("грн");
 
-        lbGrn9.setText("грн");
+        lbHrn9.setText("грн");
 
-        lbGrn10.setText("грн");
+        lbHrn10.setText("грн");
 
         javax.swing.GroupLayout pnPaymentsLayout = new javax.swing.GroupLayout(pnPayments);
         pnPayments.setLayout(pnPaymentsLayout);
@@ -916,16 +920,16 @@ public class UCWindow extends JFrame {
                     .addComponent(tfElec))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbGrn1)
-                    .addComponent(lbGrn2)
-                    .addComponent(lbGrn3)
-                    .addComponent(lbGrn4)
-                    .addComponent(lbGrn5)
-                    .addComponent(lbGrn6)
-                    .addComponent(lbGrn7)
-                    .addComponent(lbGrn8)
-                    .addComponent(lbGrn9)
-                    .addComponent(lbGrn10))
+                    .addComponent(lbHrn1)
+                    .addComponent(lbHrn2)
+                    .addComponent(lbHrn3)
+                    .addComponent(lbHrn4)
+                    .addComponent(lbHrn5)
+                    .addComponent(lbHrn6)
+                    .addComponent(lbHrn7)
+                    .addComponent(lbHrn8)
+                    .addComponent(lbHrn9)
+                    .addComponent(lbHrn10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnPaymentsLayout.setVerticalGroup(
@@ -935,52 +939,52 @@ public class UCWindow extends JFrame {
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfElec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbElec)
-                    .addComponent(lbGrn1))
+                    .addComponent(lbHrn1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfRent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbRent)
-                    .addComponent(lbGrn2))
+                    .addComponent(lbHrn2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfHeating, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbHeating)
-                    .addComponent(lbGrn3))
+                    .addComponent(lbHrn3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfHotWater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbHotWater)
-                    .addComponent(lbGrn4))
+                    .addComponent(lbHrn4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfColdWater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbColdWater)
-                    .addComponent(lbGrn5))
+                    .addComponent(lbHrn5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfSeverage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbSeverage)
-                    .addComponent(lbGrn6))
+                    .addComponent(lbHrn6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfGas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbGas)
-                    .addComponent(lbGrn7))
+                    .addComponent(lbHrn7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfGarbage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbGarbage)
-                    .addComponent(lbGrn8))
+                    .addComponent(lbHrn8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfIntercom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbIntercom)
-                    .addComponent(lbGrn9))
+                    .addComponent(lbHrn9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfTv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbTv)
-                    .addComponent(lbGrn10))
+                    .addComponent(lbHrn10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1063,18 +1067,23 @@ public class UCWindow extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private static final YearMonth NOW = YearMonth.now();
+
+    private void selectMonth() {
+        cbMonth.setSelectedIndex(NOW.getMonthValue() - 1);
+    }
+    
     private void fillDatePanel() {
-        final YearMonth now = YearMonth.now();
-        cbMonth.setSelectedIndex(now.getMonthValue() - 1);
+        selectMonth();
         
         for (int i = -1; i <= 1; i++) {
-            cbYear.addItem(Integer.toString(now.getYear() + i));
+            cbYear.addItem(Integer.toString(NOW.getYear() + i));
         }
         cbYear.setSelectedIndex(1);
     }
+
     private void fillElecPanel() {
-        boolean isSelected = SETTINGS.getElecMeter();
-        chbElecPanelOnOff.setSelected(isSelected);
+        boolean isSelected = SETTINGS.getUsedElecMeter();
         pnElec.setEnabled(isSelected);
         for (java.awt.Component c : pnElec.getComponents()) {
             if (c != chbElecPanelOnOff) {
@@ -1086,12 +1095,10 @@ public class UCWindow extends JFrame {
         tfElecBegin.setText(String.format(format, SETTINGS.getElecBegin()));
         tfElecEnd.setText(String.format(format, SETTINGS.getElecEnd()));
         tfElecTotal.setText("" + SETTINGS.getElecTotal());
-        
-        tfElec.setEnabled(!isSelected);
     }
+
     private void fillGasPanel() {
-        boolean isSelected = SETTINGS.getGasMeter();
-        chbGasPanelOnOff.setSelected(isSelected);
+        boolean isSelected = SETTINGS.getUsedGasMeter();
         pnGas.setEnabled(isSelected);
         for (java.awt.Component c : pnGas.getComponents()) {
             if (c != chbGasPanelOnOff) {
@@ -1103,9 +1110,8 @@ public class UCWindow extends JFrame {
         tfGasBegin.setText(String.format(format, SETTINGS.getGasBegin()));
         tfGasEnd.setText(String.format(format, SETTINGS.getGasEnd()));
         tfGasTotal.setText("" + SETTINGS.getGasTotal());
-        
-        tfGas.setEnabled(!isSelected);
     }
+
     private void fillPayments() {
         chbElec.setSelected(SETTINGS.getUsedElec());
         chbRent.setSelected(SETTINGS.getUsedRent());
@@ -1121,11 +1127,34 @@ public class UCWindow extends JFrame {
         
         
     }
+    class Checker implements java.awt.event.ActionListener {
+        JCheckBox chb;
+        Checker(JCheckBox chb) {
+            this.chb = chb;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (chb == chbElec) {
+                tfElec.setText(chb.getActionCommand());
+            } else if (chb == chbRent) {
+            } else if (chb == chbHeating) {
+            } else if (chb == chbHotWater) {
+            } else if (chb == chbColdWater) {
+            } else if (chb == chbSeverage) {
+            } else if (chb == chbGas) {
+            } else if (chb == chbGarbage) {
+            } else if (chb == chbIntercom) {
+            } else if (chb == chbTv) {
+            } else {
+                throw new RuntimeException("Ine of the payment's checkboxes is not proceed");
+            }
+        }
+    };
     
     private void fillListeners() {
         // Сохранение настроек во время закрытия окна программы:
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override public void windowClosing(java.awt.event.WindowEvent e) {
+        addWindowListener(new WindowAdapter() {
+            @Override public void windowClosing(WindowEvent e) {
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 Dimension windowSize = getSize();
                 Point location = getLocationOnScreen();
@@ -1141,13 +1170,56 @@ public class UCWindow extends JFrame {
                 SETTINGS.storeProperties(propertiesFileName);
             }
         });
-        chbElecPanelOnOff.addActionListener((event) -> {
-            SETTINGS.setElecMeter(!SETTINGS.getElecMeter());
+
+        chbElecPanelOnOff.addActionListener((e) -> {
+            SETTINGS.setUsedElecMeter(!SETTINGS.getUsedElecMeter());
             fillElecPanel();
         });
-        chbGasPanelOnOff.addActionListener((event) -> {
-            SETTINGS.setGasMeter(!SETTINGS.getGasMeter());
+        chbGasPanelOnOff.addActionListener((e) -> {
+            SETTINGS.setUsedGasMeter(!SETTINGS.getUsedGasMeter());
             fillGasPanel();
+        });
+        
+        
+        chbElec.addActionListener((e) -> {
+            SETTINGS.setUsedElec(chbElec.isSelected());
+            tfElec.setEnabled(SETTINGS.getUsedElec());
+        });
+        chbRent.addActionListener((e) -> {
+            SETTINGS.setUsedRent(chbRent.isSelected());
+            
+        });
+        chbHeating.addActionListener((e) -> {
+            SETTINGS.setUsedHeating(chbHeating.isSelected());
+            
+        });
+        chbHotWater.addActionListener((e) -> {
+            SETTINGS.setUsedHotWater(chbHotWater.isSelected());
+            
+        });
+        chbColdWater.addActionListener((e) -> {
+            SETTINGS.setUsedColdWater(chbColdWater.isSelected());
+            
+        });
+        chbSeverage.addActionListener((e) -> {
+            SETTINGS.setUsedSeverage(chbSeverage.isSelected());
+            
+        });
+        chbGas.addActionListener((e) -> {
+            SETTINGS.setUsedGas(chbGas.isSelected());
+            
+        });
+        chbGarbage.addActionListener((e) -> {
+            SETTINGS.setUsedGarbage(chbGarbage.isSelected());
+            
+        });
+        chbIntercom.addActionListener((e) -> {
+            SETTINGS.setUsedIntercom(chbIntercom.isSelected());
+            
+        });
+        chbTv.addActionListener((e) -> {
+            SETTINGS.setUsedTv(chbTv.isSelected());
+            
         });
         
         
@@ -1194,6 +1266,7 @@ public class UCWindow extends JFrame {
             return true;
         }
     }
+
     private void fillInputVerifiers() {
         int digitsNumber = Integer.toString(SETTINGS.getElecMeterMaxValue()).length();
         String regex = String.format("[0-9]{1,%d}", digitsNumber);
@@ -1223,6 +1296,7 @@ public class UCWindow extends JFrame {
     
     private static final Resizer RESIZER = Resizer.getInstance("Шрифт", Resizer.FontSize.ELEVEN);
     private static final List<Component> COMPONENTS = new ArrayList<>();
+
     private void holdComponents() {
         COMPONENTS.addAll(getAllComponents(this));
         COMPONENTS.addAll(getAllComponents(dialogElecTariff));
@@ -1230,6 +1304,7 @@ public class UCWindow extends JFrame {
         COMPONENTS.addAll(getAllComponents(dialogViewAndPrint));
         COMPONENTS.addAll(getAllComponents(dialogPersonalData));
     }
+
     private static List<Component> getAllComponents(final Container container) {
         List<Component> components = new ArrayList<>();
         for (java.awt.Component c : container.getComponents()) {
@@ -1240,6 +1315,7 @@ public class UCWindow extends JFrame {
         }
         return components;
     }
+
     private void applySize() {
         RESIZER.setFontSize(SETTINGS.getFontSize());
         if (COMPONENTS.isEmpty()) {
@@ -1253,14 +1329,115 @@ public class UCWindow extends JFrame {
         dialogViewAndPrint.pack();
         dialogPersonalData.pack();
     }
+
     private void applyLanguage() {
         SETTINGS.setLanguage(DICT.getLanguage());
+        
+        // main window and all dialogs
+        this.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_MAIN));
+        dialogElecTariff.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_ELEC));
+        dialogGasTariff.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_GAS));
+        dialogPersonalData.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_PERSONAL));
+        dialogViewAndPrint.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_PRINT));
+        // all buttons
+        btCalculate.setText(DICT.getWord(Dictionary.Keyword.BT_CALCULATE));
         btChangeLanguage.setText(DICT.getText());
-        
-        
-        
+        btChangeSize.setText(RESIZER.getText());
+        btElecTariff.setText(DICT.getWord(Dictionary.Keyword.BT_TARIFF));
+        btElecTariffCancel.setText(DICT.getWord(Dictionary.Keyword.BT_CANCEL));
+        btElecTariffSave.setText(DICT.getWord(Dictionary.Keyword.BT_SAVE));
+        btGasTariff.setText(DICT.getWord(Dictionary.Keyword.BT_TARIFF));
+        btGasTariffCancel.setText(DICT.getWord(Dictionary.Keyword.BT_CANCEL));
+        btGasTariffSave.setText(DICT.getWord(Dictionary.Keyword.BT_SAVE));
+        btPersonalCancel.setText(DICT.getWord(Dictionary.Keyword.BT_CANCEL));
+        btPersonalData.setText(DICT.getWord(Dictionary.Keyword.BT_PERSONAL_DATA));
+        btPersonalSave.setText(DICT.getWord(Dictionary.Keyword.BT_SAVE));
+        btViewAndPrint.setText(DICT.getWord(Dictionary.Keyword.BT_VIEW_AND_PRINT));
+        // one combobox
+        cbMonth.removeAllItems();
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_JAN));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_FEB));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_MAR));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_APR));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_MAY));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_JUN));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_JUL));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_AUG));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_SEP));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_OCT));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_NOV));
+        cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_DEC));
+        selectMonth();
+        // 'payment' checboxes
+        chbColdWater.setText(DICT.getWord(Dictionary.Keyword.PAY_COLD_WATER));
+        chbElec.setText(DICT.getWord(Dictionary.Keyword.PAY_ELEC));
+        chbGarbage.setText(DICT.getWord(Dictionary.Keyword.PAY_GARBAGE));
+        chbGas.setText(DICT.getWord(Dictionary.Keyword.PAY_GAS));
+        chbHeating.setText(DICT.getWord(Dictionary.Keyword.PAY_HEATING));
+        chbHotWater.setText(DICT.getWord(Dictionary.Keyword.PAY_HOT_WATER));
+        chbIntercom.setText(DICT.getWord(Dictionary.Keyword.PAY_INTERCOM));
+        chbRent.setText(DICT.getWord(Dictionary.Keyword.PAY_RENT));
+        chbSeverage.setText(DICT.getWord(Dictionary.Keyword.PAY_SEVERAGE));
+        chbTv.setText(DICT.getWord(Dictionary.Keyword.PAY_TV));
+        // all panels with titled border
+        ((TitledBorder) pnAddress.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ADDRESS));
+        ((TitledBorder) pnDate.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_DATE));
+        ((TitledBorder) pnElec.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ELEC));
+        ((TitledBorder) pnElecBoundary.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ELEC_BOUNDARY));
+        ((TitledBorder) pnElecMaxValue.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ELEC_MAX_VALUE));
+        ((TitledBorder) pnElecPrice.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ELEC_PRICE));
+        ((TitledBorder) pnElecPrivilege.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ELEC_PRIVILEGE));
+        ((TitledBorder) pnGas.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_GAS));
+        ((TitledBorder) pnGasMaxValue.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_GAS_MAX_VALUE));
+        ((TitledBorder) pnGasPrice.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_GAS_PRICE));
+        ((TitledBorder) pnNames.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_NAMES));
+        ((TitledBorder) pnPayments.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_PAYMENT));
+        ((TitledBorder) pnTotal.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_TOTAL));
+        // all labels
+        lbYear.setText(DICT.getWord(Dictionary.Keyword.LB_YEAR));
+        lbMonth.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbElecBegin.setText(DICT.getWord(Dictionary.Keyword.LB_BEGIN));
+        lbElecEnd.setText(DICT.getWord(Dictionary.Keyword.LB_END));
+        lbElecTotal.setText(DICT.getWord(Dictionary.Keyword.LB_TOTAL));
+        lbElecKwh1.setText(DICT.getWord(Dictionary.Keyword.LB_KWH));
+        lbElecKwh2.setText(DICT.getWord(Dictionary.Keyword.LB_KWH));
+        lbElecKwh3.setText(DICT.getWord(Dictionary.Keyword.LB_KWH));
+        lbGasBegin.setText(DICT.getWord(Dictionary.Keyword.LB_BEGIN));
+        lbGasEnd.setText(DICT.getWord(Dictionary.Keyword.LB_END));
+        lbGasTotal.setText(DICT.getWord(Dictionary.Keyword.LB_TOTAL));
+        lbGasMc1.setText(DICT.getWord(Dictionary.Keyword.LB_MCUBIC));
+        lbGasMc2.setText(DICT.getWord(Dictionary.Keyword.LB_MCUBIC));
+        lbGasMc3.setText(DICT.getWord(Dictionary.Keyword.LB_MCUBIC));
+        lbTotal.setText(DICT.getWord(Dictionary.Keyword.LB_TOTAL));
+        lbTotalHrn.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn1.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn2.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn3.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn4.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn5.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn6.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn7.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn8.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn9.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbHrn10.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbElecBoundary1.setText(DICT.getWord(Dictionary.Keyword.LB_BOUNDARY));
+        lbElecBoundary2.setText(DICT.getWord(Dictionary.Keyword.LB_KWH));
+        lbElecBelow1.setText(DICT.getWord(Dictionary.Keyword.LB_BELOW_BOUNDARY));
+        lbElecBelow2.setText(DICT.getWord(Dictionary.Keyword.LB_CENTS));
+        lbElecAbove1.setText(DICT.getWord(Dictionary.Keyword.LB_ABOVE_BOUNDARY));
+        lbElecAbove2.setText(DICT.getWord(Dictionary.Keyword.LB_CENTS));
+        lbElecPrivilege1.setText(DICT.getWord(Dictionary.Keyword.LB_PRIVILEGE_VALUE));
+        lbElecPrivilege2.setText(DICT.getWord(Dictionary.Keyword.LB_PERCENT));
+        lbGasPrice1.setText(DICT.getWord(Dictionary.Keyword.LB_PRICE));
+        lbGasPrice2.setText(DICT.getWord(Dictionary.Keyword.LB_HRN_PER_MCUBIC));
+        lbAccount.setText(DICT.getWord(Dictionary.Keyword.LB_PERSONAL_ACCOUNT));
+        lbSurname.setText(DICT.getWord(Dictionary.Keyword.LB_SURNAME));
+        lbFirstName.setText(DICT.getWord(Dictionary.Keyword.LB_FIRST_NAME));
+        lbPatronymic.setText(DICT.getWord(Dictionary.Keyword.LB_PATRONYMIC));
+        lbStreet.setText(DICT.getWord(Dictionary.Keyword.LB_STREET));
+        lbBuilding.setText(DICT.getWord(Dictionary.Keyword.LB_BUILDING));
+        lbApartment.setText(DICT.getWord(Dictionary.Keyword.LB_APARTMENT));
     }
-
 
     private void btChangeSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChangeSizeActionPerformed
 
@@ -1379,22 +1556,22 @@ public class UCWindow extends JFrame {
     private javax.swing.JLabel lbGasPrice1;
     private javax.swing.JLabel lbGasPrice2;
     private javax.swing.JLabel lbGasTotal;
-    private javax.swing.JLabel lbGrn1;
-    private javax.swing.JLabel lbGrn10;
-    private javax.swing.JLabel lbGrn2;
-    private javax.swing.JLabel lbGrn3;
-    private javax.swing.JLabel lbGrn4;
-    private javax.swing.JLabel lbGrn5;
-    private javax.swing.JLabel lbGrn6;
-    private javax.swing.JLabel lbGrn7;
-    private javax.swing.JLabel lbGrn8;
-    private javax.swing.JLabel lbGrn9;
+    private javax.swing.JLabel lbHrn1;
+    private javax.swing.JLabel lbHrn10;
+    private javax.swing.JLabel lbHrn2;
+    private javax.swing.JLabel lbHrn3;
+    private javax.swing.JLabel lbHrn4;
+    private javax.swing.JLabel lbHrn5;
+    private javax.swing.JLabel lbHrn6;
+    private javax.swing.JLabel lbHrn7;
+    private javax.swing.JLabel lbHrn8;
+    private javax.swing.JLabel lbHrn9;
     private javax.swing.JLabel lbMonth;
     private javax.swing.JLabel lbPatronymic;
     private javax.swing.JLabel lbStreet;
     private javax.swing.JLabel lbSurname;
     private javax.swing.JLabel lbTotal;
-    private javax.swing.JLabel lbTotalGrn;
+    private javax.swing.JLabel lbTotalHrn;
     private javax.swing.JLabel lbYear;
     private javax.swing.JPanel pnAddress;
     private javax.swing.JPanel pnDate;
