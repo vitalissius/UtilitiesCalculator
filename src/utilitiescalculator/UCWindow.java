@@ -19,6 +19,8 @@ public class UCWindow extends JFrame {
     private final String propertiesFileName = "utilities.properties";
     private static final Settings SETTINGS = Settings.getInstance();
     private static final Dictionary DICT = Dictionary.INSTANCE;
+    private static final YearMonth NOW = YearMonth.now();
+    private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
 
     /**
      * Creates new form UCWindow
@@ -1067,8 +1069,6 @@ public class UCWindow extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private static final YearMonth NOW = YearMonth.now();
-
     private void selectMonth() {
         cbMonth.setSelectedIndex(NOW.getMonthValue() - 1);
     }
@@ -1084,6 +1084,7 @@ public class UCWindow extends JFrame {
 
     private void fillElecPanel() {
         boolean isSelected = SETTINGS.getUsedElecMeter();
+        chbElecPanelOnOff.setSelected(isSelected);
         pnElec.setEnabled(isSelected);
         for (java.awt.Component c : pnElec.getComponents()) {
             if (c != chbElecPanelOnOff) {
@@ -1099,6 +1100,7 @@ public class UCWindow extends JFrame {
 
     private void fillGasPanel() {
         boolean isSelected = SETTINGS.getUsedGasMeter();
+        chbGasPanelOnOff.setSelected(isSelected);
         pnGas.setEnabled(isSelected);
         for (java.awt.Component c : pnGas.getComponents()) {
             if (c != chbGasPanelOnOff) {
@@ -1124,30 +1126,74 @@ public class UCWindow extends JFrame {
         chbIntercom.setSelected(SETTINGS.getUsedIntercom());
         chbTv.setSelected(SETTINGS.getUsedTv());
         
+        tfElec.setEnabled(SETTINGS.getUsedElec());
+        tfRent.setEnabled(SETTINGS.getUsedRent());
+        tfHeating.setEnabled(SETTINGS.getUsedHeating());
+        tfHotWater.setEnabled(SETTINGS.getUsedHotWater());
+        tfColdWater.setEnabled(SETTINGS.getUsedColdWater());
+        tfSeverage.setEnabled(SETTINGS.getUsedSeverage());
+        tfGas.setEnabled(SETTINGS.getUsedGas());
+        tfGarbage.setEnabled(SETTINGS.getUsedGarbage());
+        tfIntercom.setEnabled(SETTINGS.getUsedIntercom());
+        tfTv.setEnabled(SETTINGS.getUsedTv());
         
+        tfElec.setText(String.format("%.2f", SETTINGS.getPaymentsElec()));
+        tfRent.setText(String.format("%.2f", SETTINGS.getPaymentsRent()));
+        tfHeating.setText(String.format("%.2f", SETTINGS.getPaymentsHeating()));
+        tfHotWater.setText(String.format("%.2f", SETTINGS.getPaymentsHotWater()));
+        tfColdWater.setText(String.format("%.2f", SETTINGS.getPaymentsColdWater()));
+        tfSeverage.setText(String.format("%.2f", SETTINGS.getPaymentsSeverage()));
+        tfGas.setText(String.format("%.2f", SETTINGS.getPaymentsGas()));
+        tfGarbage.setText(String.format("%.2f", SETTINGS.getPaymentsGarbage()));
+        tfIntercom.setText(String.format("%.2f", SETTINGS.getPaymentsIntercom()));
+        tfTv.setText(String.format("%.2f", SETTINGS.getPaymentsTv()));
         
     }
-    class Checker implements java.awt.event.ActionListener {
-        JCheckBox chb;
-        Checker(JCheckBox chb) {
-            this.chb = chb;
-        }
+    class PaymentsVerifier extends InputVerifier {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            if (chb == chbElec) {
-                tfElec.setText(chb.getActionCommand());
-            } else if (chb == chbRent) {
-            } else if (chb == chbHeating) {
-            } else if (chb == chbHotWater) {
-            } else if (chb == chbColdWater) {
-            } else if (chb == chbSeverage) {
-            } else if (chb == chbGas) {
-            } else if (chb == chbGarbage) {
-            } else if (chb == chbIntercom) {
-            } else if (chb == chbTv) {
-            } else {
-                throw new RuntimeException("Ine of the payment's checkboxes is not proceed");
+        public boolean verify(JComponent input) {
+            JTextField tf = (JTextField) input;
+            String text = tf.getText();
+            if (!text.matches("\\d+(\\.|,)\\d{1,2}")) {
+                tf.setSelectionColor(SystemColor.RED);
+                tf.selectAll();
+                Runnable sound = (Runnable) TOOLKIT.getDesktopProperty("win.sound.asterisk");
+                if (sound != null) {
+                    sound.run();
+                }
+                return false;
             }
+            tf.setSelectionColor(SystemColor.textHighlight);
+
+            // Если в качестве разделителя при выводе дробных чисел в текстовые поля используется запятая
+            // (из-за настроек локали), просто чтобы дать возможность вводить точку или запятую на выбор
+            // и не использовать конкретные настройки локали:
+            text = text.replace(',', '.');
+
+            if (tf == tfElec) {
+                SETTINGS.setPaymentsElec(Double.parseDouble(text));
+            } else if (tf == tfRent) {
+                SETTINGS.setPaymentsRent(Double.parseDouble(text));
+            } else if (tf == tfHeating) {
+                SETTINGS.setPaymentsHeating(Double.parseDouble(text));
+            } else if (tf == tfHotWater) {
+                SETTINGS.setPaymentsHotWater(Double.parseDouble(text));
+            } else if (tf == tfColdWater) {
+                SETTINGS.setPaymentsColdWater(Double.parseDouble(text));
+            } else if (tf == tfSeverage) {
+                SETTINGS.setPaymentsSeverage(Double.parseDouble(text));
+            } else if (tf == tfGas) {
+                SETTINGS.setPaymentsGas(Double.parseDouble(text));
+            } else if (tf == tfGarbage) {
+                SETTINGS.setPaymentsGarbage(Double.parseDouble(text));
+            } else if (tf == tfIntercom) {
+                SETTINGS.setPaymentsIntercom(Double.parseDouble(text));
+            } else if (tf == tfTv) {
+                SETTINGS.setPaymentsTv(Double.parseDouble(text));
+            } else {
+                throw new RuntimeException("One of the payment's text fields is not processed");
+            }
+            return true;
         }
     };
     
@@ -1155,7 +1201,7 @@ public class UCWindow extends JFrame {
         // Сохранение настроек во время закрытия окна программы:
         addWindowListener(new WindowAdapter() {
             @Override public void windowClosing(WindowEvent e) {
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                Dimension screenSize = TOOLKIT.getScreenSize();
                 Dimension windowSize = getSize();
                 Point location = getLocationOnScreen();
                 // Если хотя бы один край окна вышел за границы рабочего стола, - центрируем позицию окна
@@ -1179,50 +1225,58 @@ public class UCWindow extends JFrame {
             SETTINGS.setUsedGasMeter(!SETTINGS.getUsedGasMeter());
             fillGasPanel();
         });
-        
-        
+
         chbElec.addActionListener((e) -> {
             SETTINGS.setUsedElec(chbElec.isSelected());
             tfElec.setEnabled(SETTINGS.getUsedElec());
         });
         chbRent.addActionListener((e) -> {
             SETTINGS.setUsedRent(chbRent.isSelected());
-            
+            tfRent.setEnabled(SETTINGS.getUsedRent());
         });
         chbHeating.addActionListener((e) -> {
             SETTINGS.setUsedHeating(chbHeating.isSelected());
-            
+            tfHeating.setEnabled(SETTINGS.getUsedHeating());
         });
         chbHotWater.addActionListener((e) -> {
             SETTINGS.setUsedHotWater(chbHotWater.isSelected());
-            
+            tfHotWater.setEnabled(SETTINGS.getUsedHotWater());
         });
         chbColdWater.addActionListener((e) -> {
             SETTINGS.setUsedColdWater(chbColdWater.isSelected());
-            
+            tfColdWater.setEnabled(SETTINGS.getUsedColdWater());
         });
         chbSeverage.addActionListener((e) -> {
             SETTINGS.setUsedSeverage(chbSeverage.isSelected());
-            
+            tfSeverage.setEnabled(SETTINGS.getUsedSeverage());
         });
         chbGas.addActionListener((e) -> {
             SETTINGS.setUsedGas(chbGas.isSelected());
-            
+            tfGas.setEnabled(SETTINGS.getUsedGas());
         });
         chbGarbage.addActionListener((e) -> {
             SETTINGS.setUsedGarbage(chbGarbage.isSelected());
-            
+            tfGarbage.setEnabled(SETTINGS.getUsedGarbage());
         });
         chbIntercom.addActionListener((e) -> {
             SETTINGS.setUsedIntercom(chbIntercom.isSelected());
-            
+            tfIntercom.setEnabled(SETTINGS.getUsedIntercom());
         });
         chbTv.addActionListener((e) -> {
             SETTINGS.setUsedTv(chbTv.isSelected());
-            
+            tfTv.setEnabled(SETTINGS.getUsedTv());
         });
         
-        
+        tfElec.setInputVerifier(new PaymentsVerifier());
+        tfRent.setInputVerifier(new PaymentsVerifier());
+        tfHeating.setInputVerifier(new PaymentsVerifier());
+        tfHotWater.setInputVerifier(new PaymentsVerifier());
+        tfColdWater.setInputVerifier(new PaymentsVerifier());
+        tfSeverage.setInputVerifier(new PaymentsVerifier());
+        tfGas.setInputVerifier(new PaymentsVerifier());
+        tfGarbage.setInputVerifier(new PaymentsVerifier());
+        tfIntercom.setInputVerifier(new PaymentsVerifier());
+        tfTv.setInputVerifier(new PaymentsVerifier());
     }
 
     static class MeterInputVerifier extends InputVerifier {
@@ -1238,7 +1292,7 @@ public class UCWindow extends JFrame {
             if (!tf.getText().matches(regex)) {
                 tf.setSelectionColor(SystemColor.RED);
                 tf.selectAll();
-                Runnable sound = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.asterisk");
+                Runnable sound = (Runnable) TOOLKIT.getDesktopProperty("win.sound.asterisk");
                 if (sound != null) {
                     sound.run();
                 }
@@ -1258,7 +1312,7 @@ public class UCWindow extends JFrame {
             } else if (tf == tfGasEnd) {
                 SETTINGS.setGasEnd(value);
             } else {
-                throw new RuntimeException("Some JTextField is not procceed");
+                throw new RuntimeException("Some JTextField is not processed");
             }
             tfElecTotal.setText(Integer.toString(SETTINGS.getElecTotal()));
             tfGasTotal.setText(Integer.toString(SETTINGS.getGasTotal()));
