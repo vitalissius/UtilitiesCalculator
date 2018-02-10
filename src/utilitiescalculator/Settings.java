@@ -30,12 +30,12 @@ public final class Settings {
         ElecPriceBelowBoundary("elec.priceBelowBoundary", "0.00"),
         ElecPriceAboveBoundary("elec.priceAboveBoundary", "0.00"),
         ElecPrivilege("elec.privilege", "0"),
-        ElecMeterMaxValue("elec.meterMaxValue", "0"),
+        ElecMeterMaxValue("elec.meterMaxValue", "9999"),
         GasMeter("gas.meter", "false"),
         GasBegin("gas.begin", "0"),
         GasEnd("gas.end", "0"),
         GasPrice("gas.price", "0.00"),
-        GasMeterMaxValue("gas.meterMaxValue", "0"),
+        GasMeterMaxValue("gas.meterMaxValue", "99999"),
         PaymentsElec("payments.elec", "0.00"),
         PaymentsRent("payments.rent", "0.00"),
         PaymentsHeating("payments.heating", "0.00"),
@@ -85,7 +85,7 @@ public final class Settings {
             Settings.PROPERTIES.setProperty(key, this.value);
         }
     }
-    
+
     private boolean usedElecMeter;
     private int elecBegin;
     private int elecEnd;
@@ -131,6 +131,56 @@ public final class Settings {
     private Resizer.FontSize fontSize;
     private Dictionary.Language language;
 
+    /*
+     * Цель функций getInt(), getDouble(), getFontSize() и getLanguage() заключается в предотвращении
+     * возникновения исключений из-за того, что данные в файле настроек могут быть испорчены.
+     * Функции getBoolean() и getString() используются просто для поддержания общего стиля кодирования
+     * с вышеупомянутыми функциями.
+     */
+    private static int getInt(Vls vls, int defaultValue) {
+        try {
+            return Integer.parseInt(vls.get());
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
+    }
+
+    private static int getInt(Vls vls) {
+        return getInt(vls, 0);
+    }
+
+    private static double getDouble(Vls vls) {
+        try {
+            return Double.parseDouble(vls.get());
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
+
+    private static Resizer.FontSize getFontSize(Vls vls) {
+        try {
+            return Resizer.FontSize.valueOf(vls.get());
+        } catch (IllegalArgumentException e) {
+            return Resizer.FontSize.ELEVEN;
+        }
+    }
+
+    private static Dictionary.Language getLanguage(Vls vls) {
+        try {
+            return Dictionary.Language.valueOf(vls.get());
+        } catch (IllegalArgumentException e) {
+            return Dictionary.Language.UKRAINIAN;
+        }
+    }
+
+    private static boolean getBoolean(Vls vls) {
+        return Boolean.valueOf(vls.get());
+    }
+
+    private static String getString(Vls vls) {
+        return vls.get();
+    }
+
     public void loadProperties(final String propertiesFileName) {
         try (BufferedReader input = 
                 new BufferedReader(new InputStreamReader(new FileInputStream(USER_HOME + propertiesFileName)))) {
@@ -141,57 +191,58 @@ public final class Settings {
             throw new RuntimeException("Unknown I/O exception: " + e.getMessage());
         }
 
-        usedElecMeter = Boolean.parseBoolean(Vls.ElecMeter.get());
-        elecBegin = Integer.parseInt(Vls.ElecBegin.get());
-        elecEnd = Integer.parseInt(Vls.ElecEnd.get());
-        elecBoundary = Integer.parseInt(Vls.ElecBoundary.get());
-        elecPriceBelowBoundary = Double.parseDouble(Vls.ElecPriceBelowBoundary.get());
-        elecPriceAboveBoundary = Double.parseDouble(Vls.ElecPriceAboveBoundary.get());
-        elecPrivilege = Integer.parseInt(Vls.ElecPrivilege.get());
-        elecMeterMaxValue = Integer.parseInt(Vls.ElecMeterMaxValue.get());
+        usedElecMeter = getBoolean(Vls.ElecMeter);
+        elecBegin = getInt(Vls.ElecBegin);
+        elecEnd = getInt(Vls.ElecEnd);
+        elecBoundary = getInt(Vls.ElecBoundary);
+        elecPriceBelowBoundary = getDouble(Vls.ElecPriceBelowBoundary);
+        elecPriceAboveBoundary = getDouble(Vls.ElecPriceAboveBoundary);
+        elecPrivilege = getInt(Vls.ElecPrivilege);
+        elecMeterMaxValue = getInt(Vls.ElecMeterMaxValue, 9999);
 
-        usedGasMeter = Boolean.parseBoolean(Vls.GasMeter.get());
-        gasBegin = Integer.parseInt(Vls.GasBegin.get());
-        gasEnd = Integer.parseInt(Vls.GasEnd.get());
-        gasPrice = Double.parseDouble(Vls.GasPrice.get());
-        gasMeterMaxValue = Integer.parseInt(Vls.GasMeterMaxValue.get());
+        usedGasMeter = getBoolean(Vls.GasMeter);
+        gasBegin = getInt(Vls.GasBegin);
+        gasEnd = getInt(Vls.GasEnd);
+        gasPrice = getDouble(Vls.GasPrice);
+        gasMeterMaxValue = getInt(Vls.GasMeterMaxValue, 99999);
 
-        paymentsElec = Double.parseDouble(Vls.PaymentsElec.get());
-        paymentsRent = Double.parseDouble(Vls.PaymentsRent.get());
-        paymentsHeating = Double.parseDouble(Vls.PaymentsHeating.get());
-        paymentsHotWater = Double.parseDouble(Vls.PaymentsHotWater.get());
-        paymentsColdWater = Double.parseDouble(Vls.PaymentsColdWater.get());
-        paymentsSeverage = Double.parseDouble(Vls.PaymentsSeverage.get());
-        paymentsGas = Double.parseDouble(Vls.PaymentsGas.get());
-        paymentsGarbage = Double.parseDouble(Vls.PaymentsGarbage.get());
-        paymentsIntercom = Double.parseDouble(Vls.PaymentsIntercom.get());
-        paymentsTv = Double.parseDouble(Vls.PaymentsTv.get());
+        paymentsElec = getDouble(Vls.PaymentsElec);
+        paymentsRent = getDouble(Vls.PaymentsRent);
+        paymentsHeating = getDouble(Vls.PaymentsHeating);
+        paymentsHotWater = getDouble(Vls.PaymentsHotWater);
+        paymentsColdWater = getDouble(Vls.PaymentsColdWater);
+        paymentsSeverage = getDouble(Vls.PaymentsSeverage);
+        paymentsGas = getDouble(Vls.PaymentsGas);
+        paymentsGarbage = getDouble(Vls.PaymentsGarbage);
+        paymentsIntercom = getDouble(Vls.PaymentsIntercom);
+        paymentsTv = getDouble(Vls.PaymentsTv);
 
-        usedElec = Boolean.valueOf(Vls.UsedElec.get());
-        usedRent = Boolean.valueOf(Vls.UsedRent.get());
-        usedHeating = Boolean.valueOf(Vls.UsedHeating.get());
-        usedHotWater = Boolean.valueOf(Vls.UsedHotWater.get());
-        usedColdWater = Boolean.valueOf(Vls.UsedColdWater.get());
-        usedSeverage = Boolean.valueOf(Vls.UsedSeverage.get());
-        usedGas = Boolean.valueOf(Vls.UsedGas.get());
-        usedGarbage = Boolean.valueOf(Vls.UsedGarbage.get());
-        usedIntercom = Boolean.valueOf(Vls.UsedIntercom.get());
-        usedTv = Boolean.valueOf(Vls.UsedTv.get());
+        usedElec = getBoolean(Vls.UsedElec);
+        usedRent = getBoolean(Vls.UsedRent);
+        usedHeating = getBoolean(Vls.UsedHeating);
+        usedHotWater = getBoolean(Vls.UsedHotWater);
+        usedColdWater = getBoolean(Vls.UsedColdWater);
+        usedSeverage = getBoolean(Vls.UsedSeverage);
+        usedGas = getBoolean(Vls.UsedGas);
+        usedGarbage = getBoolean(Vls.UsedGarbage);
+        usedIntercom = getBoolean(Vls.UsedIntercom);
+        usedTv = getBoolean(Vls.UsedTv);
 
-        personalAccount = Vls.PersonalAccount.get();
-        personalSurname = Vls.PersonalSurname.get();
-        personalFirstName = Vls.PersonalFirstName.get();
-        personalPatronymic = Vls.PersonalPatronymic.get();
-        personalStreet = Vls.PersonalStreet.get();
-        personalBuilding = Vls.PersonalBuilding.get();
-        personalApartment = Vls.PersonalApartment.get();
+        personalAccount = getString(Vls.PersonalAccount);
+        personalSurname = getString(Vls.PersonalSurname);
+        personalFirstName = getString(Vls.PersonalFirstName);
+        personalPatronymic = getString(Vls.PersonalPatronymic);
+        personalStreet = getString(Vls.PersonalStreet);
+        personalBuilding = getString(Vls.PersonalBuilding);
+        personalApartment = getString(Vls.PersonalApartment);
 
-        windowPositionX = Integer.parseInt(Vls.WindowPositionX.get());
-        windowPositionY = Integer.parseInt(Vls.WindowPositionY.get());
-        fontSize = Resizer.FontSize.valueOf(Vls.FontSize.get());
-        language = Dictionary.Language.valueOf(Vls.Language.get());
+        windowPositionX = getInt(Vls.WindowPositionX);
+        windowPositionY = getInt(Vls.WindowPositionY);
+
+        fontSize = getFontSize(Vls.FontSize);
+        language = getLanguage(Vls.Language);
     }
-    
+
     public void storeProperties(final String propertiesFileName) {
         Vls.ElecMeter.set(Boolean.toString(usedElecMeter));
         Vls.ElecBegin.set(Integer.toString(elecBegin));
@@ -248,7 +299,7 @@ public final class Settings {
             throw new RuntimeException("Unknown I/O exception: " + e.getMessage());
         }
     }
-    
+
     public boolean getUsedElecMeter() {
         return usedElecMeter;
     }
@@ -259,7 +310,11 @@ public final class Settings {
         return elecEnd;
     }
     public int getElecTotal() {
-        return elecEnd - elecBegin;
+        int result = elecEnd - elecBegin;
+        if (result < 0) {
+            result += (getElecMeterMaxValue() + 1);
+        }
+        return result;
     }
     public int getElecBoundary() {
         return elecBoundary;
@@ -286,7 +341,11 @@ public final class Settings {
         return gasEnd;
     }
     public int getGasTotal() {
-        return gasEnd - gasBegin;
+        int result = gasEnd - gasBegin;
+        if (result < 0) {
+            result += (getGasMeterMaxValue() + 1);
+        }
+        return result;
     }
     public double getGasPrice() {
         return gasPrice;
@@ -519,146 +578,5 @@ public final class Settings {
     }
     public void setLanguage(Dictionary.Language language) {
         this.language = language;
-    }
-
-    public static void main(String[] args) {
-        Settings settings = Settings.getInstance();
-        settings.loadProperties("utilities.ini");
-        
-        settings.setUsedElecMeter(true);
-        settings.setElecBegin(1000);
-        settings.setElecEnd(1111);
-        settings.setElecBoundary(100);
-        settings.setElecPriceBelowBoundary(10);
-        settings.setElecPriceAboveBoundary(20);
-        settings.setElecPrivilege(1);
-        settings.setElecMeterMaxValue(9999);
-        
-        settings.setUsedGasMeter(true);
-        settings.setGasBegin(2000);
-        settings.setGasEnd(2222);
-        settings.setGasPrice(6.70);
-        settings.setGasMeterMaxValue(99999);
-        
-        settings.setPersonalAccount("222222222");
-        settings.setPersonalSurname("Jonny");
-        settings.setPersonalFirstName("John");
-        settings.setPersonalPatronymic("Johnovich");
-        settings.setPersonalStreet("John St.");
-        settings.setPersonalBuilding("13-C");
-        settings.setPersonalApartment("11");
-        
-        settings.setPaymentsElec(1.10);
-        settings.setPaymentsRent(2.20);
-        settings.setPaymentsHeating(3.30);
-        settings.setPaymentsHotWater(4.40);
-        settings.setPaymentsColdWater(5.50);
-        settings.setPaymentsSeverage(6.60);
-        settings.setPaymentsGas(7.70);
-        settings.setPaymentsGarbage(8.80);
-        settings.setPaymentsIntercom(9.90);
-        settings.setPaymentsTv(10.10);
-        
-
-        settings.storeProperties("utilities.ini");
-
-
-        
-        settings = Settings.getInstance();
-        settings.loadProperties("utilities.ini");
-        
-        System.out.printf("electricity:\n\t"
-                + "meter: %b\n\t"
-                + "begin: %d\n\t"
-                + "end: %d\n\t"
-                + "total: %d\n\t"
-                + "boundary: %d\n\t"
-                + "price below boundary: %f\n\t"
-                + "price above boundary: %f\n\t"
-                + "privilege: %d\n\t"
-                + "meter max value: %d\n",
-                settings.getUsedElecMeter(),
-                settings.getElecBegin(),
-                settings.getElecEnd(),
-                settings.getElecTotal(),
-                settings.getElecBoundary(),
-                settings.getElecPriceBelowBoundary(),
-                settings.getElecPriceAboveBoundary(),
-                settings.getElecPrivilege(),
-                settings.getElecMeterMaxValue());
-        
-        System.out.printf("gas:\n\t"
-                + "meter: %b\n\t"
-                + "start: %d\n\t"
-                + "end: %d\n\t"
-                + "total: %d\n\t"
-                + "price: %f\n\t"
-                + "meter max value: %d\n",
-                settings.getUsedGasMeter(),
-                settings.getGasBegin(),
-                settings.getGasEnd(),
-                settings.getGasTotal(),
-                settings.getGasPrice(),
-                settings.getGasMeterMaxValue());
-        
-        System.out.printf("pesonals:\n\t"
-                + "account: %s\n\t"
-                + "surname: %s\n\t"
-                + "name: %s\n\t"
-                + "patronymic: %s\n\t"
-                + "street: %s\n\t"
-                + "building: %s\n\t"
-                + "apartment: %s\n",
-                settings.getPersonalAccount(),
-                settings.getPersonalSurname(),
-                settings.getPersonalFirstName(),
-                settings.getPersonalPatronymic(),
-                settings.getPersonalStreet(),
-                settings.getPersonalBuilding(),
-                settings.getPersonalApartment());
-        
-        System.out.printf("payments:\n\t"
-                + "electricity: %f\n\t"
-                + "rent: %f\n\t"
-                + "heating: %f\n\t"
-                + "hot water: %f\n\t"
-                + "cold water: %f\n\t"
-                + "severage: %f\n\t"
-                + "gas: %f\n\t"
-                + "garbage: %f\n\t"
-                + "intercom: %f\n\t"
-                + "tv: %f\n",
-                settings.getPaymentsElec(),
-                settings.getPaymentsRent(),
-                settings.getPaymentsHeating(),
-                settings.getPaymentsHotWater(),
-                settings.getPaymentsColdWater(),
-                settings.getPaymentsSeverage(),
-                settings.getPaymentsGas(),
-                settings.getPaymentsGarbage(),
-                settings.getPaymentsIntercom(),
-                settings.getPaymentsTv());
-        
-        System.out.printf("is used payments:\n\t"
-                + "used electricity: %b\n\t"
-                + "used rent: %b\n\t"
-                + "used heating: %b\n\t"
-                + "used hot water: %b\n\t"
-                + "used cold water: %b\n\t"
-                + "used severage: %b\n\t"
-                + "used gas: %b\n\t"
-                + "used garbage: %b\n\t"
-                + "used intercom: %b\n\t"
-                + "used tv: %b\n",
-                settings.getUsedElec(),
-                settings.getUsedRent(),
-                settings.getUsedHeating(),
-                settings.getUsedHotWater(),
-                settings.getUsedColdWater(),
-                settings.getUsedSeverage(),
-                settings.getUsedGas(),
-                settings.getUsedGarbage(),
-                settings.getUsedIntercom(),
-                settings.getUsedTv());
     }
 }

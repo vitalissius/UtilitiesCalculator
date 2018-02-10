@@ -796,6 +796,7 @@ public class UCWindow extends JFrame {
 
         lbTotal.setText("Загалом:");
 
+        tfTotal.setEditable(false);
         tfTotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lbTotalHrn.setText("грн");
@@ -1149,6 +1150,28 @@ public class UCWindow extends JFrame {
         tfTv.setText(String.format("%.2f", SETTINGS.getPaymentsTv()));
         
     }
+
+    private void fillTariffs() {
+        tfElecBoundary.setText("" + SETTINGS.getElecBoundary());
+        tfElecPriceBelow.setText(String.format("%.2f", SETTINGS.getElecPriceBelowBoundary()));
+        tfElecPriceAbove.setText(String.format("%.2f", SETTINGS.getElecPriceAboveBoundary()));
+        tfElecPrivilege.setText("" + SETTINGS.getElecPrivilege());
+        tfElecMaxValue.setText("" + SETTINGS.getElecMeterMaxValue());
+        
+        tfGasPrice.setText(String.format("%.2f", SETTINGS.getGasPrice()));
+        tfGasMaxValue.setText("" + SETTINGS.getGasMeterMaxValue());
+    }
+
+    private void fillPersonalData() {
+        tfAccount.setText(SETTINGS.getPersonalAccount());
+        tfSurname.setText(SETTINGS.getPersonalSurname());
+        tfFirstName.setText(SETTINGS.getPersonalFirstName());
+        tfPatronymic.setText(SETTINGS.getPersonalPatronymic());
+        tfStreet.setText(SETTINGS.getPersonalStreet());
+        tfBuilding.setText(SETTINGS.getPersonalBuilding());
+        tfApartment.setText(SETTINGS.getPersonalApartment());
+    }
+
     class PaymentsVerifier extends InputVerifier {
         @Override
         public boolean verify(JComponent input) {
@@ -1340,12 +1363,11 @@ public class UCWindow extends JFrame {
         fillElecPanel();
         fillGasPanel();
         fillPayments();
-        
+        fillTariffs();
+        fillPersonalData();
+
         fillListeners();
         fillInputVerifiers();
-        
-        
-        
     }
     
     private static final Resizer RESIZER = Resizer.getInstance("Шрифт", Resizer.FontSize.ELEVEN);
@@ -1449,7 +1471,7 @@ public class UCWindow extends JFrame {
         ((TitledBorder) pnTotal.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_TOTAL));
         // all labels
         lbYear.setText(DICT.getWord(Dictionary.Keyword.LB_YEAR));
-        lbMonth.setText(DICT.getWord(Dictionary.Keyword.LB_HRN));
+        lbMonth.setText(DICT.getWord(Dictionary.Keyword.LB_MONTH));
         lbElecBegin.setText(DICT.getWord(Dictionary.Keyword.LB_BEGIN));
         lbElecEnd.setText(DICT.getWord(Dictionary.Keyword.LB_END));
         lbElecTotal.setText(DICT.getWord(Dictionary.Keyword.LB_TOTAL));
