@@ -7,6 +7,13 @@ import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.YearMonth;
@@ -1083,7 +1090,7 @@ public class UCWindow extends JFrame {
         cbYear.setSelectedIndex(1);
     }
 
-    private void fillElecPanel() {
+    private void updadeElecPanelComponents() {
         boolean isSelected = SETTINGS.getUsedElecMeter();
         chbElecPanelOnOff.setSelected(isSelected);
         pnElec.setEnabled(isSelected);
@@ -1092,7 +1099,10 @@ public class UCWindow extends JFrame {
                 c.setEnabled(isSelected);
             }
         }
-        
+    }
+
+    private void fillElecPanel() {
+        updadeElecPanelComponents();
         String format = String.format("%%0%dd", Integer.toString(SETTINGS.getElecMeterMaxValue()).length());
         tfElecBegin.setText(String.format(format, SETTINGS.getElecBegin()));
         tfElecEnd.setText(String.format(format, SETTINGS.getElecEnd()));
@@ -1108,13 +1118,32 @@ public class UCWindow extends JFrame {
                 c.setEnabled(isSelected);
             }
         }
-        
+
         String format = String.format("%%0%dd", Integer.toString(SETTINGS.getGasMeterMaxValue()).length());
         tfGasBegin.setText(String.format(format, SETTINGS.getGasBegin()));
         tfGasEnd.setText(String.format(format, SETTINGS.getGasEnd()));
         tfGasTotal.setText("" + SETTINGS.getGasTotal());
     }
 
+    /* Используется для инициализации состояния панелей счётчиков электроэнергии и газа.
+     * Инициализация заключается в следующем:
+     * - если панель активна (электроэнергии или газа):
+     *     - соответствующий флажок "платежей" должен быть включён;
+     *     - соответствующее текстовое поле - заблокировано, т.к. ввод осуществляется по показанияю счётчика;
+     * - в противном случае (если панель неактивна):
+     *     - соответствующий флажок "платежей" устанавливается в зависимости от соответствующих настроек;
+     *     - состояние соответствущего текстового поля устанавливается в зависимости от того же состояния флажка;
+     */
+    private void setUpMeter(boolean isPanelOn, JCheckBox chb, JTextField tf) {
+        if (isPanelOn) {
+            chb.setSelected(true);
+            tf.setEnabled(false);
+        } else {
+            chb.setSelected(SETTINGS.getUsedElec());
+            tf.setEnabled(SETTINGS.getUsedElec());
+        }
+    }
+    
     private void fillPayments() {
         chbElec.setSelected(SETTINGS.getUsedElec());
         chbRent.setSelected(SETTINGS.getUsedRent());
@@ -1127,7 +1156,7 @@ public class UCWindow extends JFrame {
         chbIntercom.setSelected(SETTINGS.getUsedIntercom());
         chbTv.setSelected(SETTINGS.getUsedTv());
         
-        tfElec.setEnabled(SETTINGS.getUsedElec());
+        setUpMeter(chbElecPanelOnOff.isSelected(), chbElec, tfElec);
         tfRent.setEnabled(SETTINGS.getUsedRent());
         tfHeating.setEnabled(SETTINGS.getUsedHeating());
         tfHotWater.setEnabled(SETTINGS.getUsedHotWater());
@@ -1241,18 +1270,47 @@ public class UCWindow extends JFrame {
         });
 
         chbElecPanelOnOff.addActionListener((e) -> {
-            SETTINGS.setUsedElecMeter(!SETTINGS.getUsedElecMeter());
-            fillElecPanel();
+            /*
+             * Состояние флажка вкл/откл панели счётчика электроэнергии сохраняется. Если данный флажок
+             * установлен, - устанавливается флажок учёта "оплаты" за электроэнергию, а также сохраняется
+             * состояние отображающее включение "оплаты" за электроэнергию. Если флажок счётчика
+             * включён, то блокируется ввод в текстовое поле "оплаты" за электроэнергию, в противном случае - 
+             * ввод разрешается - т.е. если счётчик отключён, то производится ручной ввод оплыты.
+             * Обновляются компоненты панели счётчика электроэнергии, при этом будут выполнены необходимые
+             * изменения состояний компонентов в зависимости от сохранённых настроект.
+             */
+            boolean isSelected = chbElecPanelOnOff.isSelected();
+            SETTINGS.setUsedElecMeter(isSelected);
+            if (isSelected) {
+                chbElec.setSelected(isSelected);
+                SETTINGS.setUsedElec(isSelected);
+            }
+            tfElec.setEnabled(!isSelected);
+            updadeElecPanelComponents();
         });
+        chbElec.addActionListener((e) -> {
+            /*
+             * Если флажок учёта "платежа" за электроэнегрию установлен, то соответствующему ему текстовому полю
+             * посылается сообщение об его активированию. При этом, если упомянутый флажок был выключен, то
+             * сохраняется настройка о том, что счётчик также отключён. Состояние упомянутого флажка сохраняется.
+             * Обновляются компоненты панели счётчика электроэнергии, при этом будут выполнены необходимые
+             * изменения состояний компонентов в зависимости от сохранённых настроект.
+             */
+            boolean isSelected = chbElec.isSelected();
+            tfElec.setEnabled(isSelected);
+            if (!isSelected) {
+                SETTINGS.setUsedElecMeter(isSelected);
+            }
+            SETTINGS.setUsedElec(isSelected);
+            updadeElecPanelComponents();
+        });
+        
         chbGasPanelOnOff.addActionListener((e) -> {
             SETTINGS.setUsedGasMeter(!SETTINGS.getUsedGasMeter());
             fillGasPanel();
         });
 
-        chbElec.addActionListener((e) -> {
-            SETTINGS.setUsedElec(chbElec.isSelected());
-            tfElec.setEnabled(SETTINGS.getUsedElec());
-        });
+        
         chbRent.addActionListener((e) -> {
             SETTINGS.setUsedRent(chbRent.isSelected());
             tfRent.setEnabled(SETTINGS.getUsedRent());
