@@ -6,14 +6,10 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.YearMonth;
@@ -23,17 +19,32 @@ import java.util.*;
 import javax.swing.border.TitledBorder;
 
 public class UCWindow extends JFrame {
-    private final String propertiesFileName = "utilities.properties";
+    private static final String PROPERTIES_FILE_NAME = "utilities.properties";
     private static final Settings SETTINGS = Settings.getInstance();
     private static final Dictionary DICT = Dictionary.INSTANCE;
     private static final YearMonth NOW = YearMonth.now();
     private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
+    private static final Resizer RESIZER = Resizer.getInstance("Шрифт", Resizer.FontSize.ELEVEN);
+    private static final List<Component> COMPONENTS = new ArrayList<>();
+
+    private final MeterManager mmElec = new MeterManager() {
+        @Override boolean isUsedPayment() { return SETTINGS.getUsedElec(); }
+        @Override void setUsedPayment(boolean isUsed) { SETTINGS.setUsedElec(isUsed); }
+        @Override void setUsedMeter(boolean isUsed) { SETTINGS.setUsedElecMeter(isUsed); }
+        @Override void update() { updadeElecPanelComponents(); }
+    };
+    private final MeterManager mmGas = new MeterManager() {
+        @Override boolean isUsedPayment() { return SETTINGS.getUsedGas(); }
+        @Override void setUsedPayment(boolean isUsed) { SETTINGS.setUsedGas(isUsed); }
+        @Override void setUsedMeter(boolean isUsed) { SETTINGS.setUsedGasMeter(isUsed); }
+        @Override void update() { updateGasPanelComponents(); }
+    };
 
     /**
      * Creates new form UCWindow
      */
     public UCWindow() {
-        SETTINGS.loadProperties(propertiesFileName);
+        SETTINGS.loadProperties(PROPERTIES_FILE_NAME);
         DICT.setLanguage(SETTINGS.getLanguage());
 
         initComponents();
@@ -1108,8 +1119,8 @@ public class UCWindow extends JFrame {
         tfElecEnd.setText(String.format(format, SETTINGS.getElecEnd()));
         tfElecTotal.setText("" + SETTINGS.getElecTotal());
     }
-
-    private void fillGasPanel() {
+    
+    private void updateGasPanelComponents() {
         boolean isSelected = SETTINGS.getUsedGasMeter();
         chbGasPanelOnOff.setSelected(isSelected);
         pnGas.setEnabled(isSelected);
@@ -1118,32 +1129,16 @@ public class UCWindow extends JFrame {
                 c.setEnabled(isSelected);
             }
         }
+    }
 
+    private void fillGasPanel() {
+        updateGasPanelComponents();
         String format = String.format("%%0%dd", Integer.toString(SETTINGS.getGasMeterMaxValue()).length());
         tfGasBegin.setText(String.format(format, SETTINGS.getGasBegin()));
         tfGasEnd.setText(String.format(format, SETTINGS.getGasEnd()));
         tfGasTotal.setText("" + SETTINGS.getGasTotal());
     }
 
-    /* Используется для инициализации состояния панелей счётчиков электроэнергии и газа.
-     * Инициализация заключается в следующем:
-     * - если панель активна (электроэнергии или газа):
-     *     - соответствующий флажок "платежей" должен быть включён;
-     *     - соответствующее текстовое поле - заблокировано, т.к. ввод осуществляется по показанияю счётчика;
-     * - в противном случае (если панель неактивна):
-     *     - соответствующий флажок "платежей" устанавливается в зависимости от соответствующих настроек;
-     *     - состояние соответствущего текстового поля устанавливается в зависимости от того же состояния флажка;
-     */
-    private void setUpMeter(boolean isPanelOn, JCheckBox chb, JTextField tf) {
-        if (isPanelOn) {
-            chb.setSelected(true);
-            tf.setEnabled(false);
-        } else {
-            chb.setSelected(SETTINGS.getUsedElec());
-            tf.setEnabled(SETTINGS.getUsedElec());
-        }
-    }
-    
     private void fillPayments() {
         chbElec.setSelected(SETTINGS.getUsedElec());
         chbRent.setSelected(SETTINGS.getUsedRent());
@@ -1156,13 +1151,13 @@ public class UCWindow extends JFrame {
         chbIntercom.setSelected(SETTINGS.getUsedIntercom());
         chbTv.setSelected(SETTINGS.getUsedTv());
         
-        setUpMeter(chbElecPanelOnOff.isSelected(), chbElec, tfElec);
+        mmElec.setUpMeter(chbElecPanelOnOff, chbElec, tfElec);
+        mmGas.setUpMeter(chbGasPanelOnOff, chbGas, tfGas);
         tfRent.setEnabled(SETTINGS.getUsedRent());
         tfHeating.setEnabled(SETTINGS.getUsedHeating());
         tfHotWater.setEnabled(SETTINGS.getUsedHotWater());
         tfColdWater.setEnabled(SETTINGS.getUsedColdWater());
         tfSeverage.setEnabled(SETTINGS.getUsedSeverage());
-        tfGas.setEnabled(SETTINGS.getUsedGas());
         tfGarbage.setEnabled(SETTINGS.getUsedGarbage());
         tfIntercom.setEnabled(SETTINGS.getUsedIntercom());
         tfTv.setEnabled(SETTINGS.getUsedTv());
@@ -1177,7 +1172,6 @@ public class UCWindow extends JFrame {
         tfGarbage.setText(String.format("%.2f", SETTINGS.getPaymentsGarbage()));
         tfIntercom.setText(String.format("%.2f", SETTINGS.getPaymentsIntercom()));
         tfTv.setText(String.format("%.2f", SETTINGS.getPaymentsTv()));
-        
     }
 
     private void fillTariffs() {
@@ -1199,6 +1193,150 @@ public class UCWindow extends JFrame {
         tfStreet.setText(SETTINGS.getPersonalStreet());
         tfBuilding.setText(SETTINGS.getPersonalBuilding());
         tfApartment.setText(SETTINGS.getPersonalApartment());
+    }
+    
+    private void fillListeners() {
+        // Слушатель отвечающий за сохранение настроек во время закрытия окна программы:
+        addWindowListener(new WindowAdapter() {
+            @Override public void windowClosing(WindowEvent e) {
+                Dimension screenSize = TOOLKIT.getScreenSize();
+                Dimension windowSize = getSize();
+                Point location = getLocationOnScreen();
+                // Если хотя бы один край окна вышел за границы рабочего стола, - центрируем позицию окна
+                if ((location.getX() + windowSize.getWidth()) > screenSize.getWidth() ||
+                        (location.getY() + windowSize.getHeight()) > screenSize.getHeight()) {
+                    location.setLocation(screenSize.getWidth() / 2 - windowSize.getWidth() / 2,
+                            screenSize.getHeight() / 2 - windowSize.getHeight() / 2);
+                }
+                SETTINGS.setWindowPositionX((int) location.getX());
+                SETTINGS.setWindowPositionY((int) location.getY());
+
+                SETTINGS.storeProperties(PROPERTIES_FILE_NAME);
+            }
+        });
+
+        // Слушатель включения панели электросчётчика:
+        chbElecPanelOnOff.addActionListener((e) -> mmElec.panelOnOff());
+        // Слушатель активации поля ввода оплаты за электричество:
+        chbElec.addActionListener((e) -> mmElec.payments());
+        // Случатель позволяющий редактирование суммы к оплате за электроэнергию
+        // при блокированном поле ввода (при использовании электросчётчика):
+        tfElec.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SETTINGS.getUsedElecMeter()) {
+                    tfElec.setEnabled(true);
+                    tfElec.requestFocusInWindow();
+                }
+            }
+        });
+        // Слушатель блокирующий поле ввода при завершении редактирования суммы к оплате
+        // за электроэнергию при использовании электросчётчика:
+        tfElec.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (SETTINGS.getUsedElecMeter()) {
+                    tfElec.setEnabled(false);
+                }
+            }
+        });
+
+        // Та же самая логика, что и выше, но для панели газового счётчика и поля
+        // ввода оплаты за газ:
+        chbGasPanelOnOff.addActionListener((e) -> mmGas.panelOnOff());
+        chbGas.addActionListener((e) -> mmGas.payments());
+        tfGas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SETTINGS.getUsedGasMeter()) {
+                    tfGas.setEnabled(true);
+                    tfGas.requestFocusInWindow();
+                }
+            }
+        });
+        tfGas.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (SETTINGS.getUsedGasMeter()) {
+                    tfGas.setEnabled(false);
+                }
+            }
+        });
+
+        chbRent.addActionListener((e) -> {
+            SETTINGS.setUsedRent(chbRent.isSelected());
+            tfRent.setEnabled(SETTINGS.getUsedRent());
+        });
+        chbHeating.addActionListener((e) -> {
+            SETTINGS.setUsedHeating(chbHeating.isSelected());
+            tfHeating.setEnabled(SETTINGS.getUsedHeating());
+        });
+        chbHotWater.addActionListener((e) -> {
+            SETTINGS.setUsedHotWater(chbHotWater.isSelected());
+            tfHotWater.setEnabled(SETTINGS.getUsedHotWater());
+        });
+        chbColdWater.addActionListener((e) -> {
+            SETTINGS.setUsedColdWater(chbColdWater.isSelected());
+            tfColdWater.setEnabled(SETTINGS.getUsedColdWater());
+        });
+        chbSeverage.addActionListener((e) -> {
+            SETTINGS.setUsedSeverage(chbSeverage.isSelected());
+            tfSeverage.setEnabled(SETTINGS.getUsedSeverage());
+        });
+        chbGarbage.addActionListener((e) -> {
+            SETTINGS.setUsedGarbage(chbGarbage.isSelected());
+            tfGarbage.setEnabled(SETTINGS.getUsedGarbage());
+        });
+        chbIntercom.addActionListener((e) -> {
+            SETTINGS.setUsedIntercom(chbIntercom.isSelected());
+            tfIntercom.setEnabled(SETTINGS.getUsedIntercom());
+        });
+        chbTv.addActionListener((e) -> {
+            SETTINGS.setUsedTv(chbTv.isSelected());
+            tfTv.setEnabled(SETTINGS.getUsedTv());
+        });
+    }
+
+    static class MeterInputVerifier extends InputVerifier {
+        private final String regex;
+        private final int digitsNumber;
+        MeterInputVerifier(String regex, int digitsNumber) {
+            this.regex = regex;
+            this.digitsNumber = digitsNumber;
+        }
+        @Override
+        public boolean verify(JComponent component) {
+            JTextField tf = (JTextField) component;
+            if (!tf.getText().matches(regex)) {
+                tf.setSelectionColor(SystemColor.RED);
+                tf.selectAll();
+                Runnable sound = (Runnable) TOOLKIT.getDesktopProperty("win.sound.asterisk");
+                if (sound != null) {
+                    sound.run();
+                }
+                
+                return false;
+            }
+            tf.setSelectionColor(SystemColor.textHighlight);
+            
+            int value = Integer.valueOf(tf.getText());
+            tf.setText(String.format(String.format("%%0%dd", digitsNumber), value));
+            if (tf == tfElecBegin) {
+                SETTINGS.setElecBegin(value);
+            } else if (tf == tfElecEnd) {
+                SETTINGS.setElecEnd(value);
+            } else if (tf == tfGasBegin) {
+                SETTINGS.setGasBegin(value);
+            } else if (tf == tfGasEnd) {
+                SETTINGS.setGasEnd(value);
+            } else {
+                throw new RuntimeException("Some JTextField is not processed");
+            }
+            tfElecTotal.setText(Integer.toString(SETTINGS.getElecTotal()));
+            tfGasTotal.setText(Integer.toString(SETTINGS.getGasTotal()));
+            
+            return true;
+        }
     }
 
     class PaymentsVerifier extends InputVerifier {
@@ -1248,106 +1386,20 @@ public class UCWindow extends JFrame {
             return true;
         }
     };
-    
-    private void fillListeners() {
-        // Сохранение настроек во время закрытия окна программы:
-        addWindowListener(new WindowAdapter() {
-            @Override public void windowClosing(WindowEvent e) {
-                Dimension screenSize = TOOLKIT.getScreenSize();
-                Dimension windowSize = getSize();
-                Point location = getLocationOnScreen();
-                // Если хотя бы один край окна вышел за границы рабочего стола, - центрируем позицию окна
-                if ((location.getX() + windowSize.getWidth()) > screenSize.getWidth() ||
-                        (location.getY() + windowSize.getHeight()) > screenSize.getHeight()) {
-                    location.setLocation(screenSize.getWidth() / 2 - windowSize.getWidth() / 2,
-                            screenSize.getHeight() / 2 - windowSize.getHeight() / 2);
-                }
-                SETTINGS.setWindowPositionX((int) location.getX());
-                SETTINGS.setWindowPositionY((int) location.getY());
 
-                SETTINGS.storeProperties(propertiesFileName);
-            }
-        });
+    private void fillInputVerifiers() {
+        int digitsNumber = Integer.toString(SETTINGS.getElecMeterMaxValue()).length();
+        String regex = String.format("[0-9]{1,%d}", digitsNumber);
 
-        chbElecPanelOnOff.addActionListener((e) -> {
-            /*
-             * Состояние флажка вкл/откл панели счётчика электроэнергии сохраняется. Если данный флажок
-             * установлен, - устанавливается флажок учёта "оплаты" за электроэнергию, а также сохраняется
-             * состояние отображающее включение "оплаты" за электроэнергию. Если флажок счётчика
-             * включён, то блокируется ввод в текстовое поле "оплаты" за электроэнергию, в противном случае - 
-             * ввод разрешается - т.е. если счётчик отключён, то производится ручной ввод оплыты.
-             * Обновляются компоненты панели счётчика электроэнергии, при этом будут выполнены необходимые
-             * изменения состояний компонентов в зависимости от сохранённых настроект.
-             */
-            boolean isSelected = chbElecPanelOnOff.isSelected();
-            SETTINGS.setUsedElecMeter(isSelected);
-            if (isSelected) {
-                chbElec.setSelected(isSelected);
-                SETTINGS.setUsedElec(isSelected);
-            }
-            tfElec.setEnabled(!isSelected);
-            updadeElecPanelComponents();
-        });
-        chbElec.addActionListener((e) -> {
-            /*
-             * Если флажок учёта "платежа" за электроэнегрию установлен, то соответствующему ему текстовому полю
-             * посылается сообщение об его активированию. При этом, если упомянутый флажок был выключен, то
-             * сохраняется настройка о том, что счётчик также отключён. Состояние упомянутого флажка сохраняется.
-             * Обновляются компоненты панели счётчика электроэнергии, при этом будут выполнены необходимые
-             * изменения состояний компонентов в зависимости от сохранённых настроект.
-             */
-            boolean isSelected = chbElec.isSelected();
-            tfElec.setEnabled(isSelected);
-            if (!isSelected) {
-                SETTINGS.setUsedElecMeter(isSelected);
-            }
-            SETTINGS.setUsedElec(isSelected);
-            updadeElecPanelComponents();
-        });
-        
-        chbGasPanelOnOff.addActionListener((e) -> {
-            SETTINGS.setUsedGasMeter(!SETTINGS.getUsedGasMeter());
-            fillGasPanel();
-        });
+        tfElecBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
+        tfElecEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
 
-        
-        chbRent.addActionListener((e) -> {
-            SETTINGS.setUsedRent(chbRent.isSelected());
-            tfRent.setEnabled(SETTINGS.getUsedRent());
-        });
-        chbHeating.addActionListener((e) -> {
-            SETTINGS.setUsedHeating(chbHeating.isSelected());
-            tfHeating.setEnabled(SETTINGS.getUsedHeating());
-        });
-        chbHotWater.addActionListener((e) -> {
-            SETTINGS.setUsedHotWater(chbHotWater.isSelected());
-            tfHotWater.setEnabled(SETTINGS.getUsedHotWater());
-        });
-        chbColdWater.addActionListener((e) -> {
-            SETTINGS.setUsedColdWater(chbColdWater.isSelected());
-            tfColdWater.setEnabled(SETTINGS.getUsedColdWater());
-        });
-        chbSeverage.addActionListener((e) -> {
-            SETTINGS.setUsedSeverage(chbSeverage.isSelected());
-            tfSeverage.setEnabled(SETTINGS.getUsedSeverage());
-        });
-        chbGas.addActionListener((e) -> {
-            SETTINGS.setUsedGas(chbGas.isSelected());
-            tfGas.setEnabled(SETTINGS.getUsedGas());
-        });
-        chbGarbage.addActionListener((e) -> {
-            SETTINGS.setUsedGarbage(chbGarbage.isSelected());
-            tfGarbage.setEnabled(SETTINGS.getUsedGarbage());
-        });
-        chbIntercom.addActionListener((e) -> {
-            SETTINGS.setUsedIntercom(chbIntercom.isSelected());
-            tfIntercom.setEnabled(SETTINGS.getUsedIntercom());
-        });
-        chbTv.addActionListener((e) -> {
-            SETTINGS.setUsedTv(chbTv.isSelected());
-            tfTv.setEnabled(SETTINGS.getUsedTv());
-        });
-        
+        digitsNumber = Integer.toString(SETTINGS.getGasMeterMaxValue()).length();
+        regex = String.format("[0-9]{1,%d}", digitsNumber);
+
+        tfGasBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
+        tfGasEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
+
         tfElec.setInputVerifier(new PaymentsVerifier());
         tfRent.setInputVerifier(new PaymentsVerifier());
         tfHeating.setInputVerifier(new PaymentsVerifier());
@@ -1358,62 +1410,6 @@ public class UCWindow extends JFrame {
         tfGarbage.setInputVerifier(new PaymentsVerifier());
         tfIntercom.setInputVerifier(new PaymentsVerifier());
         tfTv.setInputVerifier(new PaymentsVerifier());
-    }
-
-    static class MeterInputVerifier extends InputVerifier {
-        private final String regex;
-        private final int digitsNumber;
-        MeterInputVerifier(String regex, int digitsNumber) {
-            this.regex = regex;
-            this.digitsNumber = digitsNumber;
-        }
-        @Override
-        public boolean verify(JComponent component) {
-            JTextField tf = (JTextField) component;
-            if (!tf.getText().matches(regex)) {
-                tf.setSelectionColor(SystemColor.RED);
-                tf.selectAll();
-                Runnable sound = (Runnable) TOOLKIT.getDesktopProperty("win.sound.asterisk");
-                if (sound != null) {
-                    sound.run();
-                }
-                
-                return false;
-            }
-            tf.setSelectionColor(SystemColor.textHighlight);
-            
-            int value = Integer.valueOf(tf.getText());
-            tf.setText(String.format(String.format("%%0%dd", digitsNumber), value));
-            if (tf == tfElecBegin) {
-                SETTINGS.setElecBegin(value);
-            } else if (tf == tfElecEnd) {
-                SETTINGS.setElecEnd(value);
-            } else if (tf == tfGasBegin) {
-                SETTINGS.setGasBegin(value);
-            } else if (tf == tfGasEnd) {
-                SETTINGS.setGasEnd(value);
-            } else {
-                throw new RuntimeException("Some JTextField is not processed");
-            }
-            tfElecTotal.setText(Integer.toString(SETTINGS.getElecTotal()));
-            tfGasTotal.setText(Integer.toString(SETTINGS.getGasTotal()));
-            
-            return true;
-        }
-    }
-
-    private void fillInputVerifiers() {
-        int digitsNumber = Integer.toString(SETTINGS.getElecMeterMaxValue()).length();
-        String regex = String.format("[0-9]{1,%d}", digitsNumber);
-
-        tfElecBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
-        tfElecEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
-        
-        digitsNumber = Integer.toString(SETTINGS.getGasMeterMaxValue()).length();
-        regex = String.format("[0-9]{1,%d}", digitsNumber);
-
-        tfGasBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
-        tfGasEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
     }
     
     private void fillData() {
@@ -1427,9 +1423,6 @@ public class UCWindow extends JFrame {
         fillListeners();
         fillInputVerifiers();
     }
-    
-    private static final Resizer RESIZER = Resizer.getInstance("Шрифт", Resizer.FontSize.ELEVEN);
-    private static final List<Component> COMPONENTS = new ArrayList<>();
 
     private void holdComponents() {
         COMPONENTS.addAll(getAllComponents(this));
@@ -1627,7 +1620,6 @@ public class UCWindow extends JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             UCWindow window = new UCWindow();
             window.setLocation(SETTINGS.getWindowPositionX(), SETTINGS.getWindowPositionY());
-//            window.setLocationRelativeTo(null);
             window.setVisible(true);
         });
     }
@@ -1752,4 +1744,93 @@ public class UCWindow extends JFrame {
     private javax.swing.JTextField tfTotal;
     private javax.swing.JTextField tfTv;
     // End of variables declaration//GEN-END:variables
+}
+
+/**
+ * Класс MeterManager реализует логику управления компонентами панели электросчётчика
+ * и соответствующего поля ввода в панели оплаты, а также газового счётчика с полем ввода
+ * в панели оплаты.
+ * 
+ * Метод setUpMeter() используется для инициализации состояния панелей электросчётчика и
+ * газового счётчика. Инициализация заключается в следующем:
+ * - если панель счётчика активна, то соответствующий флажок платежа должен быть включён;
+ *   и также соответствующее этому флажку поле ввода - заблокировано, т.к. ввод будет
+ *   осуществляться по показанию счётчика.
+ * - если панель счётчика неактивна, то соответствующий флажок платежа устанавливается
+ *   в зависимости от соответствующих ему настроек из класса настроек; и также состояние
+ *   соответствующее этому флажку поле воода устанавливается в зависимости от состояния 
+ *   самого флажка - флажок включён - активно поле ввода, т.к. ввод будет осуществляться
+ *   вручную, без помощи счётчика.
+ * 
+ * Метод panelOnOff() отвечает за следующее:
+ * - состояние флажка включения/отключения панели сохраняется (методом setUsedMeter());
+ * - если вышеупомянутый флажок установлен, - устанавливается соответствующий флажок
+ *   платежа, а также сохраняется состояние этого флажка (методом setUsedPayment());
+ * - если флажок счётчика влючён, то блокируется ввод в соответствующее текстовое поле
+ *   "оплаты", в противном случае ввод разрешается - т.е. если счётчик отключён, то
+ *   производится ручной ввод оплаты.
+ * - обновляются компоненты панели счётчика (методом update()); при этом выполняются все
+ *   необходимые изменения состояний компонентов в зависимости от сохранённых настроек 
+ *   на предыдущих шагах.
+ * 
+ * Метод payments() отвечает за следующее:
+ * - если флажок учёта "платежа" установлен, то соответствующее ему текстовое поле
+ *   деблокируется;
+ * - если вышеупомянутый флажок был выключён, то сохраняется настройка о том, что счётчик
+ *   отключён (методом setUsedMeter());
+ * - состояние упомянутого флажка также сохраняется (методом setUsedPayment());
+ * - обновляются компоненты панели счётчика (методом update()); при этом выполняются все
+ *   необходимые изменения состояний компонентов в зависимости от сохранённых настроек 
+ *   на предыдущих шагах.
+ */
+abstract class MeterManager {
+    private JCheckBox chbOnOff;
+    private JCheckBox chb;
+    private JTextField tf;
+
+    MeterManager() {
+    }
+
+    abstract boolean isUsedPayment();
+
+    abstract void setUsedPayment(boolean isUsed);
+
+    abstract void setUsedMeter(boolean isUsed);
+
+    abstract void update();
+
+    void setUpMeter(JCheckBox chbOnOff, JCheckBox chb, JTextField tf) {
+        this.chbOnOff = chbOnOff;
+        this.chb = chb;
+        this.tf = tf;
+        if (this.chbOnOff.isSelected()) {
+            this.chb.setSelected(true);
+            this.tf.setEnabled(false);
+        } else {
+            boolean isUsed = isUsedPayment();
+            this.chb.setSelected(isUsed);
+            this.tf.setEnabled(isUsed);
+        }
+    }
+
+    void panelOnOff() {
+        boolean isSelected = this.chbOnOff.isSelected();
+        setUsedMeter(isSelected);
+        if (isSelected) {
+            this.chb.setSelected(isSelected);
+            setUsedPayment(isSelected);
+        }
+        this.tf.setEnabled(!isSelected);
+        update();
+    }
+
+    void payments() {
+        boolean isSelected = this.chb.isSelected();
+        this.tf.setEnabled(isSelected);
+        if (!isSelected) {
+            setUsedMeter(isSelected);
+        }
+        setUsedPayment(isSelected);
+        update();
+    }
 }
