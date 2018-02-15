@@ -57,18 +57,18 @@ public enum Dictionary {
         put(Keyword.PN_NAMES, new String[]{"Прізвище, ім’я та по батькові", "Фамилия, имя и отчество"});
         put(Keyword.PN_ADDRESS, new String[]{"Адреса", "Адрес"});
         // combo boxes
-        put(Keyword.MTH_JAN, new String[]{"01 Січень", "01 Январь"});
-        put(Keyword.MTH_FEB, new String[]{"02 Лютий", "02 Ферваль"});
-        put(Keyword.MTH_MAR, new String[]{"03 Березень", "03 Март"});
-        put(Keyword.MTH_APR, new String[]{"04 Квітень", "04 Апрель"});
-        put(Keyword.MTH_MAY, new String[]{"05 Травень", "05 Май"});
-        put(Keyword.MTH_JUN, new String[]{"06 Червень", "06 Июнь"});
-        put(Keyword.MTH_JUL, new String[]{"07 Липень", "07 Июль"});
-        put(Keyword.MTH_AUG, new String[]{"08 Серпень", "08 Август"});
-        put(Keyword.MTH_SEP, new String[]{"09 Вересень", "09 Сентябрь"});
-        put(Keyword.MTH_OCT, new String[]{"10 Жовтень", "10 Октябрь"});
-        put(Keyword.MTH_NOV, new String[]{"11 Листопад", "11 Ноябрь"});
-        put(Keyword.MTH_DEC, new String[]{"12 Грудень", "12 Декабрь"});
+        put(Keyword.MTH_JAN, new String[]{"01 - Січень", "01 - Январь"});
+        put(Keyword.MTH_FEB, new String[]{"02 - Лютий", "02 - Ферваль"});
+        put(Keyword.MTH_MAR, new String[]{"03 - Березень", "03 - Март"});
+        put(Keyword.MTH_APR, new String[]{"04 - Квітень", "04 - Апрель"});
+        put(Keyword.MTH_MAY, new String[]{"05 - Травень", "05 - Май"});
+        put(Keyword.MTH_JUN, new String[]{"06 - Червень", "06 - Июнь"});
+        put(Keyword.MTH_JUL, new String[]{"07 - Липень", "07 - Июль"});
+        put(Keyword.MTH_AUG, new String[]{"08 - Серпень", "08 - Август"});
+        put(Keyword.MTH_SEP, new String[]{"09 - Вересень", "09 - Сентябрь"});
+        put(Keyword.MTH_OCT, new String[]{"10 - Жовтень", "10 - Октябрь"});
+        put(Keyword.MTH_NOV, new String[]{"11 - Листопад", "11 - Ноябрь"});
+        put(Keyword.MTH_DEC, new String[]{"12 - Грудень", "12 - Декабрь"});
         // buttons
         put(Keyword.BT_TARIFF, new String[]{"Тариф...", "Тариф..."});
         put(Keyword.BT_CALCULATE, new String[]{"Розрахувати", "Рассчитать"});

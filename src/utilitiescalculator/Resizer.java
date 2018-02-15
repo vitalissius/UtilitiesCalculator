@@ -25,7 +25,7 @@ public enum Resizer {
     private static final Map<FontSize, Font> map = new EnumMap<>(FontSize.class);
     static {
         for (FontSize fs : FontSize.values()) {
-            map.put(fs, new Font("Microsoft Sans Serif", java.awt.Font.PLAIN, fs.size));
+            map.put(fs, new Font("Tahoma", java.awt.Font.PLAIN, fs.size));
         }
     }
     
