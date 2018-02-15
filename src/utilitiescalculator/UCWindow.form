@@ -848,6 +848,7 @@
                 <StringItem index="11" value="12 - &#x413;&#x440;&#x443;&#x434;&#x435;&#x43d;&#x44c;"/>
               </StringArray>
             </Property>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -863,6 +864,7 @@
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>
             </Property>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -897,19 +899,17 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="lbElecKwh3" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="chbElecPanelOnOff" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbElecKwh" min="-2" max="-2" attributes="0"/>
+                              <Component id="btSwapElec" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btElecTariff" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="lbElecKwh2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="lbElecKwh1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="chbElecPanelOnOff" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -925,7 +925,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="tfElecBegin" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbElecBegin" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbElecKwh1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="chbElecPanelOnOff" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -934,13 +933,13 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfElecEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbElecEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbElecKwh2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btSwapElec" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfElecTotal" alignment="3" max="-2" attributes="0"/>
                       <Component id="lbElecTotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbElecKwh3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbElecKwh" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btElecTariff" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -992,27 +991,30 @@
         <Component class="javax.swing.JButton" name="btElecTariff">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x422;&#x430;&#x440;&#x438;&#x444;..."/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btElecTariffActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbElecKwh1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x43a;&#x412;&#x442;&#xb7;&#x433;&#x43e;&#x434;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbElecKwh2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x43a;&#x412;&#x442;&#xb7;&#x433;&#x43e;&#x434;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbElecKwh3">
+        <Component class="javax.swing.JLabel" name="lbElecKwh">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x43a;&#x412;&#x442;&#xb7;&#x433;&#x43e;&#x434;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chbElecPanelOnOff">
+          <Properties>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btSwapElec">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="^"/>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSwapElecActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1044,18 +1046,16 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbGasMc3" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="chbGasPanelOnOff" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbGasMc" min="-2" max="-2" attributes="0"/>
+                              <Component id="btSwapGas" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btGasTariff" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbGasMc2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbGasMc1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="chbGasPanelOnOff" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -1071,7 +1071,6 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="tfGasBegin" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lbGasBegin" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbGasMc1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="chbGasPanelOnOff" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1080,13 +1079,13 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfGasEnd" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbGasEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGasMc2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btSwapGas" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfGasTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbGasTotal" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGasMc3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbGasMc" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btGasTariff" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -1138,27 +1137,30 @@
         <Component class="javax.swing.JButton" name="btGasTariff">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x422;&#x430;&#x440;&#x438;&#x444;..."/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btGasTariffActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGasMc1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x43c; &#x43a;&#x443;&#x431;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbGasMc2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="&#x43c; &#x43a;&#x443;&#x431;"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbGasMc3">
+        <Component class="javax.swing.JLabel" name="lbGasMc">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x43c; &#x43a;&#x443;&#x431;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="chbGasPanelOnOff">
+          <Properties>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btSwapGas">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="^"/>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btSwapGasActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -1212,6 +1214,7 @@
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbTotalHrn">
@@ -1222,6 +1225,7 @@
         <Component class="javax.swing.JButton" name="btCalculate">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x437;&#x440;&#x430;&#x445;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
+            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -1506,6 +1510,7 @@
     <Component class="javax.swing.JButton" name="btViewAndPrint">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x437;&#x434;&#x440;&#x443;&#x43a;&#x443;&#x432;&#x430;&#x442;&#x438;..."/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btViewAndPrintActionPerformed"/>
@@ -1514,6 +1519,7 @@
     <Component class="javax.swing.JButton" name="btChangeSize">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x428;&#x440;&#x438;&#x444;&#x442;(11)"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btChangeSizeActionPerformed"/>
@@ -1522,6 +1528,7 @@
     <Component class="javax.swing.JButton" name="btChangeLanguage">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x41c;&#x43e;&#x432;&#x430;(&#x423;&#x43a;&#x440;)"/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btChangeLanguageActionPerformed"/>
@@ -1530,6 +1537,7 @@
     <Component class="javax.swing.JButton" name="btPersonalData">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x41f;&#x435;&#x440;&#x441;&#x43e;&#x43d;&#x430;&#x43b;&#x44c;&#x43d;&#x456; &#x434;&#x430;&#x43d;&#x456;..."/>
+        <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPersonalDataActionPerformed"/>
