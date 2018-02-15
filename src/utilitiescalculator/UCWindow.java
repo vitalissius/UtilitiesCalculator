@@ -12,11 +12,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
 import java.time.YearMonth;
 import javax.swing.*;
 
 import java.util.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 
 public class UCWindow extends JFrame {
     private static final String PROPERTIES_FILE_NAME = "utilities.properties";
@@ -93,7 +96,6 @@ public class UCWindow extends JFrame {
         btGasTariffSave = new javax.swing.JButton();
         btGasTariffCancel = new javax.swing.JButton();
         dialogPersonalData = new javax.swing.JDialog();
-        tfAccount = new javax.swing.JTextField();
         lbAccount = new javax.swing.JLabel();
         pnNames = new javax.swing.JPanel();
         tfSurname = new javax.swing.JTextField();
@@ -111,6 +113,7 @@ public class UCWindow extends JFrame {
         lbApartment = new javax.swing.JLabel();
         btPersonalSave = new javax.swing.JButton();
         btPersonalCancel = new javax.swing.JButton();
+        ftfAccount = new javax.swing.JFormattedTextField();
         dialogViewAndPrint = new javax.swing.JDialog();
         pnDate = new javax.swing.JPanel();
         lbMonth = new javax.swing.JLabel();
@@ -183,6 +186,7 @@ public class UCWindow extends JFrame {
         dialogElecTariff.setTitle("Тариф на електроенергію");
         dialogElecTariff.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         dialogElecTariff.setIconImage(null);
+        dialogElecTariff.setModal(true);
         dialogElecTariff.setResizable(false);
 
         pnElecBoundary.setBorder(javax.swing.BorderFactory.createTitledBorder("Граничний обсяг електроенергії"));
@@ -360,6 +364,7 @@ public class UCWindow extends JFrame {
         );
 
         dialogGasTariff.setTitle("Тариф на газ");
+        dialogGasTariff.setModal(true);
         dialogGasTariff.setResizable(false);
 
         pnGasPrice.setBorder(javax.swing.BorderFactory.createTitledBorder("Ціна на газ"));
@@ -452,9 +457,8 @@ public class UCWindow extends JFrame {
         );
 
         dialogPersonalData.setTitle("Персональні дані платника");
+        dialogPersonalData.setModal(true);
         dialogPersonalData.setResizable(false);
-
-        tfAccount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         lbAccount.setText("Особистий рахунок:");
 
@@ -545,8 +549,20 @@ public class UCWindow extends JFrame {
         );
 
         btPersonalSave.setText("Зберегти");
+        btPersonalSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPersonalSaveActionPerformed(evt);
+            }
+        });
 
         btPersonalCancel.setText("Скасувати");
+        btPersonalCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPersonalCancelActionPerformed(evt);
+            }
+        });
+
+        ftfAccount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout dialogPersonalDataLayout = new javax.swing.GroupLayout(dialogPersonalData.getContentPane());
         dialogPersonalData.getContentPane().setLayout(dialogPersonalDataLayout);
@@ -559,11 +575,11 @@ public class UCWindow extends JFrame {
                     .addGroup(dialogPersonalDataLayout.createSequentialGroup()
                         .addComponent(lbAccount)
                         .addGap(18, 18, 18)
-                        .addComponent(tfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 50, Short.MAX_VALUE))
+                        .addComponent(ftfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(pnAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogPersonalDataLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 157, Short.MAX_VALUE)
                         .addComponent(btPersonalSave)
                         .addGap(18, 18, 18)
                         .addComponent(btPersonalCancel)))
@@ -574,8 +590,8 @@ public class UCWindow extends JFrame {
             .addGroup(dialogPersonalDataLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(dialogPersonalDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbAccount))
+                    .addComponent(lbAccount)
+                    .addComponent(ftfAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnNames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -588,6 +604,7 @@ public class UCWindow extends JFrame {
         );
 
         dialogViewAndPrint.setTitle("Перегляд і роздруківка");
+        dialogViewAndPrint.setModal(true);
         dialogViewAndPrint.setResizable(false);
 
         javax.swing.GroupLayout dialogViewAndPrintLayout = new javax.swing.GroupLayout(dialogViewAndPrint.getContentPane());
@@ -1201,7 +1218,7 @@ public class UCWindow extends JFrame {
     }
 
     private void fillPersonalData() {
-        tfAccount.setText(SETTINGS.getPersonalAccount());
+        ftfAccount.setText(SETTINGS.getPersonalAccount());
         tfSurname.setText(SETTINGS.getPersonalSurname());
         tfFirstName.setText(SETTINGS.getPersonalFirstName());
         tfPatronymic.setText(SETTINGS.getPersonalPatronymic());
@@ -1426,8 +1443,20 @@ public class UCWindow extends JFrame {
         tfIntercom.setInputVerifier(new PaymentsVerifier());
         tfTv.setInputVerifier(new PaymentsVerifier());
     }
-    
+
+    private void fillFormatters() {
+        MaskFormatter maskFormatter;
+        try {
+            maskFormatter = new MaskFormatter("#########");
+        } catch (ParseException e) {
+            maskFormatter = new MaskFormatter();
+        }
+        ftfAccount.setFormatterFactory(new DefaultFormatterFactory(maskFormatter));
+    }
+
     private void fillData() {
+        fillFormatters();// установка форматтеров должна предшествовать заполнению форматируемых полей данными
+
         fillDatePanel();
         fillElecPanel();
         fillGasPanel();
@@ -1596,28 +1625,35 @@ public class UCWindow extends JFrame {
 
         dialogViewAndPrint.setLocationRelativeTo(this);
         dialogViewAndPrint.setVisible(true);
-        
+
     }//GEN-LAST:event_btViewAndPrintActionPerformed
     
     private void btElecTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btElecTariffActionPerformed
 
         dialogElecTariff.setLocationRelativeTo(this);
         dialogElecTariff.setVisible(true);
-        
+
     }//GEN-LAST:event_btElecTariffActionPerformed
 
     private void btGasTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffActionPerformed
-        
+
         dialogGasTariff.setLocationRelativeTo(this);
         dialogGasTariff.setVisible(true);
-        
+
     }//GEN-LAST:event_btGasTariffActionPerformed
 
     private void btPersonalDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonalDataActionPerformed
-        
+
+        ftfAccount.setText(SETTINGS.getPersonalAccount());
+        tfSurname.setText(SETTINGS.getPersonalSurname());
+        tfFirstName.setText(SETTINGS.getPersonalFirstName());
+        tfPatronymic.setText(SETTINGS.getPersonalPatronymic());
+        tfStreet.setText(SETTINGS.getPersonalStreet());
+        tfBuilding.setText(SETTINGS.getPersonalBuilding());
+        tfApartment.setText(SETTINGS.getPersonalApartment());
         dialogPersonalData.setLocationRelativeTo(this);
         dialogPersonalData.setVisible(true);
-        
+
     }//GEN-LAST:event_btPersonalDataActionPerformed
 
     private void btSwapElecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSwapElecActionPerformed
@@ -1643,6 +1679,25 @@ public class UCWindow extends JFrame {
         tfGasEnd.requestFocusInWindow();
 
     }//GEN-LAST:event_btSwapGasActionPerformed
+
+    private void btPersonalSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonalSaveActionPerformed
+
+        SETTINGS.setPersonalAccount(ftfAccount.getText());
+        SETTINGS.setPersonalSurname(tfSurname.getText());
+        SETTINGS.setPersonalFirstName(tfFirstName.getText());
+        SETTINGS.setPersonalPatronymic(tfPatronymic.getText());
+        SETTINGS.setPersonalStreet(tfStreet.getText());
+        SETTINGS.setPersonalBuilding(tfBuilding.getText());
+        SETTINGS.setPersonalApartment(tfApartment.getText());
+        dialogPersonalData.setVisible(false);
+
+    }//GEN-LAST:event_btPersonalSaveActionPerformed
+
+    private void btPersonalCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPersonalCancelActionPerformed
+
+        dialogPersonalData.setVisible(false);
+
+    }//GEN-LAST:event_btPersonalCancelActionPerformed
     
     public static void main(String args[]) {
         try {
@@ -1693,6 +1748,7 @@ public class UCWindow extends JFrame {
     private javax.swing.JDialog dialogGasTariff;
     private javax.swing.JDialog dialogPersonalData;
     private javax.swing.JDialog dialogViewAndPrint;
+    private javax.swing.JFormattedTextField ftfAccount;
     private javax.swing.JLabel lbAccount;
     private javax.swing.JLabel lbApartment;
     private javax.swing.JLabel lbBuilding;
@@ -1745,7 +1801,6 @@ public class UCWindow extends JFrame {
     private javax.swing.JPanel pnNames;
     private javax.swing.JPanel pnPayments;
     private javax.swing.JPanel pnTotal;
-    private javax.swing.JTextField tfAccount;
     private javax.swing.JTextField tfApartment;
     private javax.swing.JTextField tfBuilding;
     private javax.swing.JTextField tfColdWater;
