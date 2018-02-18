@@ -940,12 +940,14 @@
                       <Component id="chbElecPanelOnOff" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfElecEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbElecEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btSwapElec" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tfElecEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbElecEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btSwapElec" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfElecTotal" alignment="3" max="-2" attributes="0"/>
                       <Component id="lbElecTotal" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1086,12 +1088,14 @@
                       <Component id="chbGasPanelOnOff" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfGasEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGasEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btSwapGas" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="tfGasEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbGasEnd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="btSwapGas" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="tfGasTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbGasTotal" alignment="3" min="-2" max="-2" attributes="0"/>
