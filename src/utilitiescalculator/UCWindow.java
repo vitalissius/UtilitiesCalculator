@@ -43,12 +43,25 @@ public class UCWindow extends JFrame {
         @Override void update() { updateGasPanelComponents(); }
     };
 
+    private final LineInputVerifier integerInputVerifier = new LineInputVerifier("\\d+");
+    private final LineInputVerifier floatInputVerifier = new LineInputVerifier("\\d+(\\.|,)\\d{1,2}");
+    private final LineInputVerifier maxValueInputVerifier = new LineInputVerifier("9+");
+    private String elecGasRegex = "0?[0-9]{1,%d}";
+    private int elecDigitsNumber;
+    private MeterInputVerifier elecMeterInputVerifier;
+    private int gasDigitsNumber;
+    private MeterInputVerifier gasMeterInputVerifier;
+
     /**
      * Creates new form UCWindow
      */
     public UCWindow() {
         SETTINGS.loadProperties(PROPERTIES_FILE_NAME);
         DICT.setLanguage(SETTINGS.getLanguage());
+        elecDigitsNumber = ("" + SETTINGS.getElecMeterMaxValue()).length();
+        elecMeterInputVerifier = new MeterInputVerifier(elecGasRegex, elecDigitsNumber);
+        gasDigitsNumber = ("" + SETTINGS.getGasMeterMaxValue()).length();
+        gasMeterInputVerifier = new MeterInputVerifier(elecGasRegex, gasDigitsNumber);
 
         initComponents();
 
@@ -324,8 +337,18 @@ public class UCWindow extends JFrame {
         );
 
         btElecTariffSave.setText("Зберегти");
+        btElecTariffSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btElecTariffSaveActionPerformed(evt);
+            }
+        });
 
         btElecTariffCancel.setText("Скасувати");
+        btElecTariffCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btElecTariffCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dialogElecTariffLayout = new javax.swing.GroupLayout(dialogElecTariff.getContentPane());
         dialogElecTariff.getContentPane().setLayout(dialogElecTariffLayout);
@@ -421,8 +444,18 @@ public class UCWindow extends JFrame {
         );
 
         btGasTariffSave.setText("Зберегти");
+        btGasTariffSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGasTariffSaveActionPerformed(evt);
+            }
+        });
 
         btGasTariffCancel.setText("Скасувати");
+        btGasTariffCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGasTariffCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dialogGasTariffLayout = new javax.swing.GroupLayout(dialogGasTariff.getContentPane());
         dialogGasTariff.getContentPane().setLayout(dialogGasTariffLayout);
@@ -1125,10 +1158,10 @@ public class UCWindow extends JFrame {
     private void selectMonth() {
         cbMonth.setSelectedIndex(NOW.getMonthValue() - 1);
     }
-    
+
     private void fillDatePanel() {
         selectMonth();
-        
+
         for (int i = -1; i <= 1; i++) {
             cbYear.addItem(Integer.toString(NOW.getYear() + i));
         }
@@ -1153,7 +1186,7 @@ public class UCWindow extends JFrame {
         tfElecEnd.setText(String.format(format, SETTINGS.getElecEnd()));
         tfElecTotal.setText("" + SETTINGS.getElecTotal());
     }
-    
+
     private void updateGasPanelComponents() {
         boolean isSelected = SETTINGS.getUsedGasMeter();
         chbGasPanelOnOff.setSelected(isSelected);
@@ -1184,7 +1217,7 @@ public class UCWindow extends JFrame {
         chbGarbage.setSelected(SETTINGS.getUsedGarbage());
         chbIntercom.setSelected(SETTINGS.getUsedIntercom());
         chbTv.setSelected(SETTINGS.getUsedTv());
-        
+
         mmElec.setUpMeter(chbElecPanelOnOff, chbElec, tfElec);
         mmGas.setUpMeter(chbGasPanelOnOff, chbGas, tfGas);
         tfRent.setEnabled(SETTINGS.getUsedRent());
@@ -1195,7 +1228,7 @@ public class UCWindow extends JFrame {
         tfGarbage.setEnabled(SETTINGS.getUsedGarbage());
         tfIntercom.setEnabled(SETTINGS.getUsedIntercom());
         tfTv.setEnabled(SETTINGS.getUsedTv());
-        
+
         tfElec.setText(String.format("%.2f", SETTINGS.getPaymentsElec()));
         tfRent.setText(String.format("%.2f", SETTINGS.getPaymentsRent()));
         tfHeating.setText(String.format("%.2f", SETTINGS.getPaymentsHeating()));
@@ -1209,12 +1242,21 @@ public class UCWindow extends JFrame {
     }
 
     private void fillTariffs() {
+        tfElecBoundary.setInputVerifier(integerInputVerifier);          // new LineInputVerifier("\\d+"));
+        tfElecPriceBelow.setInputVerifier(floatInputVerifier);          // new LineInputVerifier("\\d+(\\.|,)\\d{1,2}"));
+        tfElecPriceAbove.setInputVerifier(floatInputVerifier);          // new LineInputVerifier("\\d+(\\.|,)\\d{1,2}"));
+        tfElecPrivilege.setInputVerifier(integerInputVerifier);         // new LineInputVerifier("\\d+"));
+        tfElecMaxValue.setInputVerifier(maxValueInputVerifier);         // new LineInputVerifier("9+"));
+
         tfElecBoundary.setText("" + SETTINGS.getElecBoundary());
         tfElecPriceBelow.setText(String.format("%.2f", SETTINGS.getElecPriceBelowBoundary()));
         tfElecPriceAbove.setText(String.format("%.2f", SETTINGS.getElecPriceAboveBoundary()));
         tfElecPrivilege.setText("" + SETTINGS.getElecPrivilege());
         tfElecMaxValue.setText("" + SETTINGS.getElecMeterMaxValue());
-        
+
+        tfGasPrice.setInputVerifier(floatInputVerifier);                 // new LineInputVerifier("\\d+(\\.|,)\\d{1,2}"));
+        tfGasMaxValue.setInputVerifier(maxValueInputVerifier);          // new LineInputVerifier("9+"));
+
         tfGasPrice.setText(String.format("%.2f", SETTINGS.getGasPrice()));
         tfGasMaxValue.setText("" + SETTINGS.getGasMeterMaxValue());
     }
@@ -1228,7 +1270,7 @@ public class UCWindow extends JFrame {
         tfBuilding.setText(SETTINGS.getPersonalBuilding());
         tfApartment.setText(SETTINGS.getPersonalApartment());
     }
-    
+
     private void fillListeners() {
         // Слушатель отвечающий за сохранение настроек во время закрытия окна программы:
         addWindowListener(new WindowAdapter() {
@@ -1331,28 +1373,16 @@ public class UCWindow extends JFrame {
         });
     }
 
-    static class MeterInputVerifier extends InputVerifier {
-        private final String regex;
+    static class MeterInputVerifier extends LineInputVerifier {
         private final int digitsNumber;
+
         MeterInputVerifier(String regex, int digitsNumber) {
-            this.regex = regex;
+            super(String.format(String.format(regex, digitsNumber), digitsNumber));
             this.digitsNumber = digitsNumber;
         }
+
         @Override
-        public boolean verify(JComponent component) {
-            JTextField tf = (JTextField) component;
-            if (!tf.getText().matches(regex)) {
-                tf.setSelectionColor(SystemColor.RED);
-                tf.selectAll();
-                Runnable sound = (Runnable) TOOLKIT.getDesktopProperty("win.sound.asterisk");
-                if (sound != null) {
-                    sound.run();
-                }
-                
-                return false;
-            }
-            tf.setSelectionColor(SystemColor.textHighlight);
-            
+        public void ifTrue(JTextField tf) {
             int value = Integer.valueOf(tf.getText());
             tf.setText(String.format(String.format("%%0%dd", digitsNumber), value));
             if (tf == tfElecBegin) {
@@ -1368,31 +1398,20 @@ public class UCWindow extends JFrame {
             }
             tfElecTotal.setText(Integer.toString(SETTINGS.getElecTotal()));
             tfGasTotal.setText(Integer.toString(SETTINGS.getGasTotal()));
-            
-            return true;
         }
     }
 
-    class PaymentsVerifier extends InputVerifier {
-        @Override
-        public boolean verify(JComponent input) {
-            JTextField tf = (JTextField) input;
-            String text = tf.getText();
-            if (!text.matches("\\d+(\\.|,)\\d{1,2}")) {
-                tf.setSelectionColor(SystemColor.RED);
-                tf.selectAll();
-                Runnable sound = (Runnable) TOOLKIT.getDesktopProperty("win.sound.asterisk");
-                if (sound != null) {
-                    sound.run();
-                }
-                return false;
-            }
-            tf.setSelectionColor(SystemColor.textHighlight);
+    static class PaymentsVerifier extends LineInputVerifier {
+        PaymentsVerifier(String regex) {
+            super(regex);
+        }
 
+        @Override
+        public void ifTrue(JTextField tf) {
             // Если в качестве разделителя при выводе дробных чисел в текстовые поля используется запятая
             // (из-за настроек локали), просто чтобы дать возможность вводить точку или запятую на выбор
             // и не использовать конкретные настройки локали:
-            text = text.replace(',', '.');
+            String text = tf.getText().replace(',', '.');
 
             if (tf == tfElec) {
                 SETTINGS.setPaymentsElec(Double.parseDouble(text));
@@ -1417,33 +1436,27 @@ public class UCWindow extends JFrame {
             } else {
                 throw new RuntimeException("One of the payment's text fields is not processed");
             }
-            return true;
         }
     };
 
     private void fillInputVerifiers() {
-        int digitsNumber = Integer.toString(SETTINGS.getElecMeterMaxValue()).length();
-        String regex = String.format("[0-9]{1,%d}", digitsNumber);
+        tfElecBegin.setInputVerifier(elecMeterInputVerifier);
+        tfElecEnd.setInputVerifier(elecMeterInputVerifier);
 
-        tfElecBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
-        tfElecEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
+        tfGasBegin.setInputVerifier(gasMeterInputVerifier);
+        tfGasEnd.setInputVerifier(gasMeterInputVerifier);
 
-        digitsNumber = Integer.toString(SETTINGS.getGasMeterMaxValue()).length();
-        regex = String.format("[0-9]{1,%d}", digitsNumber);
-
-        tfGasBegin.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
-        tfGasEnd.setInputVerifier(new MeterInputVerifier(regex, digitsNumber));
-
-        tfElec.setInputVerifier(new PaymentsVerifier());
-        tfRent.setInputVerifier(new PaymentsVerifier());
-        tfHeating.setInputVerifier(new PaymentsVerifier());
-        tfHotWater.setInputVerifier(new PaymentsVerifier());
-        tfColdWater.setInputVerifier(new PaymentsVerifier());
-        tfSeverage.setInputVerifier(new PaymentsVerifier());
-        tfGas.setInputVerifier(new PaymentsVerifier());
-        tfGarbage.setInputVerifier(new PaymentsVerifier());
-        tfIntercom.setInputVerifier(new PaymentsVerifier());
-        tfTv.setInputVerifier(new PaymentsVerifier());
+        String paymentsRegex = "\\d+(\\.|,)\\d{1,2}";
+        tfElec.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfRent.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfHeating.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfHotWater.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfColdWater.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfSeverage.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfGas.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfGarbage.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfIntercom.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfTv.setInputVerifier(new PaymentsVerifier(paymentsRegex));
     }
 
     private void fillFormatters() {
@@ -1505,7 +1518,7 @@ public class UCWindow extends JFrame {
 
     private void applyLanguage() {
         SETTINGS.setLanguage(DICT.getLanguage());
-        
+
         // main window and all dialogs
         this.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_MAIN));
         dialogElecTariff.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_ELEC));
@@ -1629,9 +1642,14 @@ public class UCWindow extends JFrame {
         dialogViewAndPrint.setVisible(true);
 
     }//GEN-LAST:event_btViewAndPrintActionPerformed
-    
+
     private void btElecTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btElecTariffActionPerformed
 
+        tfElecBoundary.setText("" + SETTINGS.getElecBoundary());
+        tfElecPriceBelow.setText(String.format("%.2f", SETTINGS.getElecPriceBelowBoundary()));
+        tfElecPriceAbove.setText(String.format("%.2f", SETTINGS.getElecPriceAboveBoundary()));
+        tfElecPrivilege.setText("" + SETTINGS.getElecPrivilege());
+        tfElecMaxValue.setText("" + SETTINGS.getElecMeterMaxValue());
         dialogElecTariff.setLocationRelativeTo(this);
         dialogElecTariff.setVisible(true);
 
@@ -1639,6 +1657,8 @@ public class UCWindow extends JFrame {
 
     private void btGasTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffActionPerformed
 
+        tfGasPrice.setText(String.format("%.2f", SETTINGS.getGasPrice()));
+        tfGasMaxValue.setText("" + SETTINGS.getGasMeterMaxValue());
         dialogGasTariff.setLocationRelativeTo(this);
         dialogGasTariff.setVisible(true);
 
@@ -1666,7 +1686,8 @@ public class UCWindow extends JFrame {
         tfElecEnd.setText(begin);
         SETTINGS.setElecBegin(Integer.parseInt(end));
         SETTINGS.setElecEnd(Integer.parseInt(begin));
-        tfElecEnd.requestFocusInWindow();
+        tfElecBegin.requestFocus();
+        tfElecEnd.requestFocus();
 
     }//GEN-LAST:event_btSwapElecActionPerformed
 
@@ -1678,7 +1699,8 @@ public class UCWindow extends JFrame {
         tfGasEnd.setText(begin);
         SETTINGS.setGasBegin(Integer.parseInt(end));
         SETTINGS.setGasEnd(Integer.parseInt(begin));
-        tfGasEnd.requestFocusInWindow();
+        tfGasBegin.requestFocus();
+        tfGasEnd.requestFocus();
 
     }//GEN-LAST:event_btSwapGasActionPerformed
 
@@ -1700,7 +1722,68 @@ public class UCWindow extends JFrame {
         dialogPersonalData.setVisible(false);
 
     }//GEN-LAST:event_btPersonalCancelActionPerformed
-    
+
+    private void btElecTariffSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btElecTariffSaveActionPerformed
+
+        if (integerInputVerifier.verify(tfElecBoundary) &&
+                floatInputVerifier.verify(tfElecPriceBelow) &&
+                floatInputVerifier.verify(tfElecPriceAbove) &&
+                integerInputVerifier.verify(tfElecPrivilege) &&
+                elecMeterInputVerifier.verify(tfElecMaxValue)) {
+            SETTINGS.setElecBoundary(Integer.parseInt(tfElecBoundary.getText()));
+            SETTINGS.setElecPriceBelowBoundary(Double.parseDouble(tfElecPriceBelow.getText().replace(',', '.')));
+            SETTINGS.setElecPriceAboveBoundary(Double.parseDouble(tfElecPriceAbove.getText().replace(',', '.')));
+            SETTINGS.setElecPrivilege(Integer.parseInt(tfElecPrivilege.getText()));
+            int maxValue = Integer.parseInt(tfElecMaxValue.getText());
+            int digitsNumber = ("" + maxValue).length();
+            if (digitsNumber != elecDigitsNumber) {
+                elecDigitsNumber = digitsNumber;
+                SETTINGS.setElecMeterMaxValue(maxValue);
+                elecMeterInputVerifier = new MeterInputVerifier(elecGasRegex, elecDigitsNumber);
+                tfElecBegin.setInputVerifier(elecMeterInputVerifier);
+                tfElecEnd.setInputVerifier(elecMeterInputVerifier);
+                tfElecBegin.requestFocus();
+                tfElecEnd.requestFocus();
+                tfElecBegin.requestFocus();
+            }
+            dialogElecTariff.setVisible(false);
+        }
+
+    }//GEN-LAST:event_btElecTariffSaveActionPerformed
+
+    private void btElecTariffCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btElecTariffCancelActionPerformed
+
+        dialogElecTariff.setVisible(false);
+
+    }//GEN-LAST:event_btElecTariffCancelActionPerformed
+
+    private void btGasTariffSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffSaveActionPerformed
+
+        if (floatInputVerifier.verify(tfGasPrice) && maxValueInputVerifier.verify(tfGasMaxValue)) {
+            SETTINGS.setGasPrice(Double.parseDouble(tfGasPrice.getText().replace(',', '.')));
+            int maxValue = Integer.parseInt(tfGasMaxValue.getText());
+            int digitsNumber = ("" + maxValue).length();
+            if (digitsNumber != gasDigitsNumber) {
+                gasDigitsNumber = digitsNumber;
+                SETTINGS.setGasMeterMaxValue(maxValue);
+                gasMeterInputVerifier = new MeterInputVerifier(elecGasRegex, gasDigitsNumber);
+                tfGasBegin.setInputVerifier(gasMeterInputVerifier);
+                tfGasEnd.setInputVerifier(gasMeterInputVerifier);
+                tfGasBegin.requestFocus();
+                tfGasEnd.requestFocus();
+                tfGasBegin.requestFocus();
+            }
+            dialogGasTariff.setVisible(false);
+        }
+
+    }//GEN-LAST:event_btGasTariffSaveActionPerformed
+
+    private void btGasTariffCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffCancelActionPerformed
+
+        dialogGasTariff.setVisible(false);
+
+    }//GEN-LAST:event_btGasTariffCancelActionPerformed
+
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -1805,8 +1888,8 @@ public class UCWindow extends JFrame {
     private javax.swing.JPanel pnTotal;
     private javax.swing.JTextField tfApartment;
     private javax.swing.JTextField tfBuilding;
-    private javax.swing.JTextField tfColdWater;
-    private javax.swing.JTextField tfElec;
+    private static javax.swing.JTextField tfColdWater;
+    private static javax.swing.JTextField tfElec;
     private static javax.swing.JTextField tfElecBegin;
     private javax.swing.JTextField tfElecBoundary;
     private static javax.swing.JTextField tfElecEnd;
@@ -1816,31 +1899,61 @@ public class UCWindow extends JFrame {
     private javax.swing.JTextField tfElecPrivilege;
     private static javax.swing.JTextField tfElecTotal;
     private javax.swing.JTextField tfFirstName;
-    private javax.swing.JTextField tfGarbage;
-    private javax.swing.JTextField tfGas;
+    private static javax.swing.JTextField tfGarbage;
+    private static javax.swing.JTextField tfGas;
     private static javax.swing.JTextField tfGasBegin;
     private static javax.swing.JTextField tfGasEnd;
     private javax.swing.JTextField tfGasMaxValue;
     private javax.swing.JTextField tfGasPrice;
     private static javax.swing.JTextField tfGasTotal;
-    private javax.swing.JTextField tfHeating;
-    private javax.swing.JTextField tfHotWater;
-    private javax.swing.JTextField tfIntercom;
+    private static javax.swing.JTextField tfHeating;
+    private static javax.swing.JTextField tfHotWater;
+    private static javax.swing.JTextField tfIntercom;
     private javax.swing.JTextField tfPatronymic;
-    private javax.swing.JTextField tfRent;
-    private javax.swing.JTextField tfSeverage;
+    private static javax.swing.JTextField tfRent;
+    private static javax.swing.JTextField tfSeverage;
     private javax.swing.JTextField tfStreet;
     private javax.swing.JTextField tfSurname;
     private javax.swing.JTextField tfTotal;
-    private javax.swing.JTextField tfTv;
+    private static javax.swing.JTextField tfTv;
     // End of variables declaration//GEN-END:variables
+}
+
+class LineInputVerifier extends InputVerifier {
+    private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
+    private final String regex;
+
+    LineInputVerifier(String regex) {
+        this.regex = regex;
+    }
+
+    @Override
+    public boolean verify(JComponent input) {
+        JTextField tf = (JTextField) input;
+        if (!tf.getText().matches(regex)) {
+            tf.setSelectionColor(SystemColor.RED);
+            tf.selectAll();
+            Runnable sound = (Runnable) TOOLKIT.getDesktopProperty("win.sound.asterisk");
+            if (sound != null) {
+                sound.run();
+            }
+            return false;
+        }
+        tf.setSelectionColor(SystemColor.textHighlight);
+
+        ifTrue(tf);
+
+        return true;
+    }
+
+    void ifTrue(JTextField tf) {}
 }
 
 /**
  * Класс MeterManager реализует логику управления компонентами панели электросчётчика
  * и соответствующего поля ввода в панели оплаты, а также газового счётчика с полем ввода
  * в панели оплаты.
- * 
+ *
  * Метод setUpMeter() используется для инициализации состояния панелей электросчётчика и
  * газового счётчика. Инициализация заключается в следующем:
  * - если панель счётчика активна, то соответствующий флажок платежа должен быть включён;
@@ -1848,10 +1961,10 @@ public class UCWindow extends JFrame {
  *   осуществляться по показанию счётчика.
  * - если панель счётчика неактивна, то соответствующий флажок платежа устанавливается
  *   в зависимости от соответствующих ему настроек из класса настроек; и также состояние
- *   соответствующее этому флажку поле воода устанавливается в зависимости от состояния 
+ *   соответствующее этому флажку поле воода устанавливается в зависимости от состояния
  *   самого флажка - флажок включён - активно поле ввода, т.к. ввод будет осуществляться
  *   вручную, без помощи счётчика.
- * 
+ *
  * Метод panelOnOff() отвечает за следующее:
  * - состояние флажка включения/отключения панели сохраняется (методом setUsedMeter());
  * - если вышеупомянутый флажок установлен, - устанавливается соответствующий флажок
@@ -1860,9 +1973,9 @@ public class UCWindow extends JFrame {
  *   "оплаты", в противном случае ввод разрешается - т.е. если счётчик отключён, то
  *   производится ручной ввод оплаты.
  * - обновляются компоненты панели счётчика (методом update()); при этом выполняются все
- *   необходимые изменения состояний компонентов в зависимости от сохранённых настроек 
+ *   необходимые изменения состояний компонентов в зависимости от сохранённых настроек
  *   на предыдущих шагах.
- * 
+ *
  * Метод payments() отвечает за следующее:
  * - если флажок учёта "платежа" установлен, то соответствующее ему текстовое поле
  *   деблокируется;
@@ -1870,7 +1983,7 @@ public class UCWindow extends JFrame {
  *   отключён (методом setUsedMeter());
  * - состояние упомянутого флажка также сохраняется (методом setUsedPayment());
  * - обновляются компоненты панели счётчика (методом update()); при этом выполняются все
- *   необходимые изменения состояний компонентов в зависимости от сохранённых настроек 
+ *   необходимые изменения состояний компонентов в зависимости от сохранённых настроек
  *   на предыдущих шагах.
  */
 abstract class MeterManager {

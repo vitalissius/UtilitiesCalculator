@@ -182,7 +182,7 @@ public final class Settings {
     }
 
     public void loadProperties(final String propertiesFileName) {
-        try (BufferedReader input = 
+        try (BufferedReader input =
                 new BufferedReader(new InputStreamReader(new FileInputStream(USER_HOME + propertiesFileName)))) {
             PROPERTIES.load(input);
         } catch (FileNotFoundException e) {
@@ -247,6 +247,7 @@ public final class Settings {
         Vls.ElecMeter.set(Boolean.toString(usedElecMeter));
         Vls.ElecBegin.set(Integer.toString(elecBegin));
         Vls.ElecEnd.set(Integer.toString(elecEnd));
+        Vls.ElecBoundary.set(Integer.toString(elecBoundary));
         Vls.ElecPriceBelowBoundary.set(Double.toString(elecPriceBelowBoundary));
         Vls.ElecPriceAboveBoundary.set(Double.toString(elecPriceAboveBoundary));
         Vls.ElecPrivilege.set(Integer.toString(elecPrivilege));
