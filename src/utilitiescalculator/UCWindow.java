@@ -1729,7 +1729,7 @@ public class UCWindow extends JFrame {
                 floatInputVerifier.verify(tfElecPriceBelow) &&
                 floatInputVerifier.verify(tfElecPriceAbove) &&
                 integerInputVerifier.verify(tfElecPrivilege) &&
-                elecMeterInputVerifier.verify(tfElecMaxValue)) {
+                maxValueInputVerifier.verify(tfElecMaxValue)) {
             SETTINGS.setElecBoundary(Integer.parseInt(tfElecBoundary.getText()));
             SETTINGS.setElecPriceBelowBoundary(Double.parseDouble(tfElecPriceBelow.getText().replace(',', '.')));
             SETTINGS.setElecPriceAboveBoundary(Double.parseDouble(tfElecPriceAbove.getText().replace(',', '.')));
