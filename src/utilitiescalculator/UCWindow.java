@@ -882,7 +882,11 @@ public class UCWindow extends JFrame {
         lbTotalHrn.setText("грн");
 
         btCalculate.setText("Розрахувати");
-        btCalculate.setFocusable(false);
+        btCalculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCalculateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnTotalLayout = new javax.swing.GroupLayout(pnTotal);
         pnTotal.setLayout(pnTotalLayout);
@@ -1396,7 +1400,27 @@ public class UCWindow extends JFrame {
             } else {
                 throw new RuntimeException("Some JTextField is not processed");
             }
-            tfElecTotal.setText(Integer.toString(SETTINGS.getElecTotal()));
+
+            if (tf == tfElecBegin || tf == tfElecEnd) {
+                tfElecTotal.setText(Integer.toString(SETTINGS.getElecTotal()));
+
+                int total = SETTINGS.getElecTotal();
+                int boundary = SETTINGS.getElecBoundary();
+                double priceBelow = SETTINGS.getElecPriceBelowBoundary() / 100;
+
+                double price;
+
+                if (total <= boundary) {
+                    price = total * priceBelow;
+                } else {
+                    price = boundary * priceBelow;
+                    price = price + (total - boundary) * (SETTINGS.getElecPriceAboveBoundary() / 100);
+                }
+
+                SETTINGS.setPaymentsElec(price);
+                tfElec.setText(String.format("%.2f", SETTINGS.getPaymentsElec()));
+            }
+
             tfGasTotal.setText(Integer.toString(SETTINGS.getGasTotal()));
         }
     }
@@ -1783,6 +1807,12 @@ public class UCWindow extends JFrame {
         dialogGasTariff.setVisible(false);
 
     }//GEN-LAST:event_btGasTariffCancelActionPerformed
+
+    private void btCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalculateActionPerformed
+
+
+
+    }//GEN-LAST:event_btCalculateActionPerformed
 
     public static void main(String args[]) {
         try {
