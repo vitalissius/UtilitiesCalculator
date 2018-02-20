@@ -1817,7 +1817,39 @@ public class UCWindow extends JFrame {
 
     private void btCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalculateActionPerformed
 
+        double total = 0.0;
 
+        if (chbElec.isSelected()) {
+            total += SETTINGS.getPaymentsElec();
+        }
+        if (chbRent.isSelected()) {
+            total += SETTINGS.getPaymentsRent();
+        }
+        if (chbHeating.isSelected()) {
+            total += SETTINGS.getPaymentsHeating();
+        }
+        if (chbHotWater.isSelected()) {
+            total += SETTINGS.getPaymentsHotWater();
+        }
+        if (chbColdWater.isSelected()) {
+            total += SETTINGS.getPaymentsColdWater();
+        }
+        if (chbSeverage.isSelected()) {
+            total += SETTINGS.getPaymentsSeverage();
+        }
+        if (chbGas.isSelected()) {
+            total += SETTINGS.getPaymentsGas();
+        }
+        if (chbGarbage.isSelected()) {
+            total += SETTINGS.getPaymentsGarbage();
+        }
+        if (chbIntercom.isSelected()) {
+            total += SETTINGS.getPaymentsIntercom();
+        }
+        if (chbTv.isSelected()) {
+            total += SETTINGS.getPaymentsTv();
+        }
+        tfTotal.setText(String.format("%.2f", total));
 
     }//GEN-LAST:event_btCalculateActionPerformed
 
