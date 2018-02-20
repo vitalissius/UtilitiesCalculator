@@ -1251,8 +1251,10 @@
         <Component class="javax.swing.JButton" name="btCalculate">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x420;&#x43e;&#x437;&#x440;&#x430;&#x445;&#x443;&#x432;&#x430;&#x442;&#x438;"/>
-            <Property name="focusable" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btCalculateActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
