@@ -46,7 +46,7 @@ public class UCWindow extends JFrame {
     private final LineInputVerifier integerInputVerifier = new LineInputVerifier("\\d+");
     private final LineInputVerifier floatInputVerifier = new LineInputVerifier("\\d+(\\.|,)\\d{1,2}");
     private final LineInputVerifier maxValueInputVerifier = new LineInputVerifier("9+");
-    private String elecGasRegex = "0?[0-9]{1,%d}";
+    private final String elecGasRegex = "0?[0-9]{1,%d}";
     private int elecDigitsNumber;
     private MeterInputVerifier elecMeterInputVerifier;
     private int gasDigitsNumber;
@@ -1421,7 +1421,14 @@ public class UCWindow extends JFrame {
                 tfElec.setText(String.format("%.2f", SETTINGS.getPaymentsElec()));
             }
 
-            tfGasTotal.setText(Integer.toString(SETTINGS.getGasTotal()));
+            if (tf == tfGasBegin || tf == tfGasEnd) {
+                tfGasTotal.setText(Integer.toString(SETTINGS.getGasTotal()));
+
+                double price = SETTINGS.getGasTotal() * SETTINGS.getGasPrice();
+
+                SETTINGS.setPaymentsGas(price);
+                tfGas.setText(String.format("%.2f", SETTINGS.getPaymentsGas()));
+            }
         }
     }
 
@@ -1766,10 +1773,10 @@ public class UCWindow extends JFrame {
                 elecMeterInputVerifier = new MeterInputVerifier(elecGasRegex, elecDigitsNumber);
                 tfElecBegin.setInputVerifier(elecMeterInputVerifier);
                 tfElecEnd.setInputVerifier(elecMeterInputVerifier);
-                tfElecBegin.requestFocus();
-                tfElecEnd.requestFocus();
-                tfElecBegin.requestFocus();
             }
+            tfElecBegin.requestFocus();
+            tfElecEnd.requestFocus();
+            tfElecBegin.requestFocus();
             dialogElecTariff.setVisible(false);
         }
 
@@ -1793,10 +1800,10 @@ public class UCWindow extends JFrame {
                 gasMeterInputVerifier = new MeterInputVerifier(elecGasRegex, gasDigitsNumber);
                 tfGasBegin.setInputVerifier(gasMeterInputVerifier);
                 tfGasEnd.setInputVerifier(gasMeterInputVerifier);
-                tfGasBegin.requestFocus();
-                tfGasEnd.requestFocus();
-                tfGasBegin.requestFocus();
             }
+            tfGasBegin.requestFocus();
+            tfGasEnd.requestFocus();
+            tfGasBegin.requestFocus();
             dialogGasTariff.setVisible(false);
         }
 
