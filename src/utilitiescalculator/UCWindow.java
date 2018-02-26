@@ -130,6 +130,8 @@ public class UCWindow extends JFrame {
         btPersonalCancel = new javax.swing.JButton();
         ftfAccount = new javax.swing.JFormattedTextField();
         dialogViewAndPrint = new javax.swing.JDialog();
+        pnPreview = new Previewer();
+        btPrint = new javax.swing.JButton();
         pnDate = new javax.swing.JPanel();
         lbMonth = new javax.swing.JLabel();
         cbMonth = new javax.swing.JComboBox<>();
@@ -640,17 +642,46 @@ public class UCWindow extends JFrame {
 
         dialogViewAndPrint.setTitle("Перегляд і роздруківка");
         dialogViewAndPrint.setModal(true);
+        dialogViewAndPrint.setPreferredSize(new java.awt.Dimension(670, 570));
         dialogViewAndPrint.setResizable(false);
+        dialogViewAndPrint.setSize(new java.awt.Dimension(0, 0));
+
+        pnPreview.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout pnPreviewLayout = new javax.swing.GroupLayout(pnPreview);
+        pnPreview.setLayout(pnPreviewLayout);
+        pnPreviewLayout.setHorizontalGroup(
+            pnPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnPreviewLayout.setVerticalGroup(
+            pnPreviewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 510, Short.MAX_VALUE)
+        );
+
+        btPrint.setText("Роздрукувати");
 
         javax.swing.GroupLayout dialogViewAndPrintLayout = new javax.swing.GroupLayout(dialogViewAndPrint.getContentPane());
         dialogViewAndPrint.getContentPane().setLayout(dialogViewAndPrintLayout);
         dialogViewAndPrintLayout.setHorizontalGroup(
             dialogViewAndPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(dialogViewAndPrintLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(dialogViewAndPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnPreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(dialogViewAndPrintLayout.createSequentialGroup()
+                        .addGap(0, 510, Short.MAX_VALUE)
+                        .addComponent(btPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         dialogViewAndPrintLayout.setVerticalGroup(
             dialogViewAndPrintLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(dialogViewAndPrintLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnPreview, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btPrint)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1915,6 +1946,7 @@ public class UCWindow extends JFrame {
     private javax.swing.JButton btPersonalCancel;
     private javax.swing.JButton btPersonalData;
     private javax.swing.JButton btPersonalSave;
+    private javax.swing.JButton btPrint;
     private javax.swing.JButton btSwapElec;
     private javax.swing.JButton btSwapGas;
     private javax.swing.JButton btViewAndPrint;
@@ -1988,6 +2020,7 @@ public class UCWindow extends JFrame {
     private javax.swing.JPanel pnGasPrice;
     private javax.swing.JPanel pnNames;
     private javax.swing.JPanel pnPayments;
+    private javax.swing.JPanel pnPreview;
     private javax.swing.JPanel pnTotal;
     private javax.swing.JTextField tfApartment;
     private javax.swing.JTextField tfBuilding;
