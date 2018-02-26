@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.SystemColor;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -1375,6 +1377,38 @@ public class UCWindow extends JFrame {
             SETTINGS.setUsedTv(chbTv.isSelected());
             tfTv.setEnabled(SETTINGS.getUsedTv());
         });
+
+        // Обработка нажатия Enter во время ввода в текстовое поле
+        final ActionListener action = new ActionListener() {
+            ArrayList<JTextField> tfs = new ArrayList<>(Arrays.asList(tfElecBegin, tfElecEnd,
+                    tfGasBegin, tfGasEnd, tfElec, tfRent, tfHeating, tfHotWater, tfColdWater,
+                    tfSeverage, tfGas, tfGarbage, tfIntercom, tfTv));
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int where = (tfs.indexOf(e.getSource()) + 1) % tfs.size();
+                JTextField who = tfs.get(where);
+                while (!who.isEnabled()) {
+                    who = tfs.get(++where % tfs.size());
+                }
+                who.requestFocus();
+                btCalculateActionPerformed(null);
+            }
+        };
+        tfElecBegin.addActionListener(action);
+        tfElecEnd.addActionListener(action);
+        tfGasBegin.addActionListener(action);
+        tfGasEnd.addActionListener(action);
+        tfElec.addActionListener(action);
+        tfRent.addActionListener(action);
+        tfHeating.addActionListener(action);
+        tfHotWater.addActionListener(action);
+        tfColdWater.addActionListener(action);
+        tfSeverage.addActionListener(action);
+        tfGas.addActionListener(action);
+        tfGarbage.addActionListener(action);
+        tfIntercom.addActionListener(action);
+        tfTv.addActionListener(action);
     }
 
     static class MeterInputVerifier extends LineInputVerifier {
