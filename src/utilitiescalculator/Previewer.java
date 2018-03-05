@@ -13,9 +13,11 @@ public class Previewer extends JPanel {
     private static final java.awt.Font FONT_VERTICAL = new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN, 17);
 
     private static final Dictionary DICT = Dictionary.INSTANCE;
+    private static final Settings SETT = Settings.getInstance();
 
     public Previewer() {
     }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -111,7 +113,7 @@ public class Previewer extends JPanel {
 
         gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_15), 428, 48 + 22 * 4 + 32 + 12);//INITIAL
 
-        gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_16), 520, 48 + 22 * 4 + 32);//DIFFERENCE
+        gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_16), 512, 48 + 22 * 4 + 32);//DIFFERENCE
 
         gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_17), 580, 48 + 22 * 4 + 32);//TARIFF
 
@@ -139,6 +141,71 @@ public class Previewer extends JPanel {
         gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_20), 280, 48 + 22 * 4 + 32 + 34 + 21 * 9 + 60);//SIGNATURE
 
 
+
+        gg.setFont(FONT_TITLE);
+        String personalAccount = SETT.getPersonalAccount();
+        gg.drawString(personalAccount, 272, 48 + 22 + 1);
+
+        gg.setFont(FONT_DATA);
+        String initials = SETT.getPersonalSurname() + " " + SETT.getPersonalFirstName() + " " + SETT.getPersonalPatronymic();
+        gg.drawString(initials, 250, 48 + 23 * 2);
+
+        String street = SETT.getPersonalStreet();
+        String building = SETT.getPersonalBuilding();
+        String apartment = SETT.getPersonalApartment();
+        gg.drawString(street, 140, 48 + 22 * 3);
+        gg.drawString(building, 420, 48 + 22 * 3);
+        gg.drawString(apartment, 530, 48 + 22 * 3);
+
+        String privilege = "" + SETT.getElecPrivilege();
+        gg.drawString(privilege, 100, 48 + 22 * 4);
+
+
+        gg.setFont(FONT_ITEM);
+        String month = SETT.getMonth().substring(0, 2);
+        String year = SETT.getYear();
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21 * 2);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21 * 2);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21 * 3);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21 * 3);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21 * 4);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21 * 4);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21 * 5);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21 * 5);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21 * 6);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21 * 6);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21 * 7);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21 * 7);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21 * 8);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21 * 8);
+
+        gg.drawString(month, 184, 48 + 22 * 4 + 32 + 34 + 21 * 9);
+        gg.drawString(year, 220, 48 + 22 * 4 + 32 + 34 + 21 * 9);
+
+/*
+        48 + 22 * 4 + 32 + 34
+        48 + 22 * 4 + 32 + 34 + 21
+        48 + 22 * 4 + 32 + 34 + 21 * 2
+        48 + 22 * 4 + 32 + 34 + 21 * 3
+        48 + 22 * 4 + 32 + 34 + 21 * 4
+        48 + 22 * 4 + 32 + 34 + 21 * 5
+        48 + 22 * 4 + 32 + 34 + 21 * 6
+        48 + 22 * 4 + 32 + 34 + 21 * 7
+        48 + 22 * 4 + 32 + 34 + 21 * 8
+        48 + 22 * 4 + 32 + 34 + 21 * 9
+*/
 
     }
 }

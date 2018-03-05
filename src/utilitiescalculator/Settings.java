@@ -130,6 +130,8 @@ public final class Settings {
     private int windowPositionY;
     private Resizer.FontSize fontSize;
     private Dictionary.Language language;
+    private String month;
+    private String year;
 
     /*
      * Цель функций getInt(), getDouble(), getFontSize() и getLanguage() заключается в предотвращении
@@ -447,6 +449,12 @@ public final class Settings {
     public Dictionary.Language getLanguage() {
         return language;
     }
+    public String getMonth() {
+        return month;
+    }
+    public String getYear() {
+        return year;
+    }
 
     public void setUsedElecMeter(boolean elecMeter) {
         this.usedElecMeter = elecMeter;
@@ -579,5 +587,11 @@ public final class Settings {
     }
     public void setLanguage(Dictionary.Language language) {
         this.language = language;
+    }
+    public void setMonth(String month) {
+        this.month = month;
+    }
+    public void setYear(String year) {
+        this.year = year;
     }
 }

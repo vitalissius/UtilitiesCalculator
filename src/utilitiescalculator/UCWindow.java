@@ -696,10 +696,20 @@ public class UCWindow extends JFrame {
         cbMonth.setMaximumRowCount(12);
         cbMonth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01 - Січень", "02 - Лютий", "03 - Березень", "04 - Квітень", "05 - Травень", "06 - Червень", "07 - Липень", "08 - Серпень", "09 - Вересень", "10 - Жовтень", "11 - Листопад", "12 - Грудень" }));
         cbMonth.setFocusable(false);
+        cbMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMonthActionPerformed(evt);
+            }
+        });
 
         lbYear.setText("Рік:");
 
         cbYear.setFocusable(false);
+        cbYear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbYearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnDateLayout = new javax.swing.GroupLayout(pnDate);
         pnDate.setLayout(pnDateLayout);
@@ -1917,6 +1927,18 @@ public class UCWindow extends JFrame {
         tfTotal.setText(String.format("%.2f", total));
 
     }//GEN-LAST:event_btCalculateActionPerformed
+
+    private void cbMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMonthActionPerformed
+
+        SETTINGS.setMonth((String) ((JComboBox) evt.getSource()).getSelectedItem());
+
+    }//GEN-LAST:event_cbMonthActionPerformed
+
+    private void cbYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbYearActionPerformed
+
+        SETTINGS.setYear((String) ((JComboBox) evt.getSource()).getSelectedItem());
+
+    }//GEN-LAST:event_cbYearActionPerformed
 
     public static void main(String args[]) {
         try {
