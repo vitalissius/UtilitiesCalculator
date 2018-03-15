@@ -27,12 +27,14 @@ public enum Dictionary {
 
         LB_MONTH, LB_YEAR, LB_BEGIN, LB_END, LB_DIFF, LB_TOTAL, LB_BOUNDARY, LB_BELOW_BOUNDARY, LB_ABOVE_BOUNDARY,
         LB_PRIVILEGE_VALUE, LB_PRICE, LB_PERSONAL_ACCOUNT, LB_SURNAME, LB_FIRST_NAME, LB_PATRONYMIC, LB_STREET,
-        LB_BUILDING, LB_APARTMENT, 
+        LB_BUILDING, LB_APARTMENT,
 
         LB_KWH, LB_MCUBIC, LB_HRN, LB_CENTS, LB_PERCENT, LB_HRN_PER_MCUBIC,
 
-        LINE_00, LINE_01, LINE_02, LINE_03, LINE_04, LINE_05, LINE_06, LINE_07, LINE_08, LINE_09, LINE_10, LINE_11,
-        LINE_12, LINE_13, LINE_14, LINE_15, LINE_16, LINE_17, LINE_18, LINE_19, LINE_20
+        LINE_TITLE, LINE_OTHER, LINE_REQUISITES, LINE_SPECIES, LINE_MONTH, LINE_YEAR, LINE_AMOUNT, LINE_REGISTRATION,
+        LINE_FINITE, LINE_INITIAL, LINE_DIFFERENCE, LINE_TARIFF, LINE_ELEC, LINE_RENT, LINE_HEATING, LINE_HOT_WATER,
+        LINE_COLD_WATER, LINE_SEVERAGE, LINE_GAS, LINE_GARBAGE, LINE_INTERCOM, LINE_TV, LINE_ACCOUNT, LINE_INITIALS,
+        LINE_ADDRESS, LINE_STREET, LINE_HOUSE, LINE_APARTMENT, LINE_PREFERENCE, LINE_TOTAL, LINE_SIGNATURE,
     }
 
     private static final Map<Keyword, String[]> DICTIONARY = new EnumMap<Keyword, String[]>(Keyword.class) {{
@@ -118,27 +120,37 @@ public enum Dictionary {
         put(Keyword.LB_PERCENT, new String[]{"%", "%"});
         put(Keyword.LB_HRN_PER_MCUBIC, new String[]{"грн за м куб", "грн за м куб"});
         // print lines
-        put(Keyword.LINE_00, new String[]{"СПЛАТА ЗА КОМУНАЛЬНІ ПОСЛУГИ", null});
-        put(Keyword.LINE_01, new String[]{"ВАТ «Мегабанк» рахунок одержувача 290231 МФО 351629 ЄДРПОУ 09804119", null});
-        put(Keyword.LINE_02, new String[]{"Особистий рахунок:", null});//+
-        put(Keyword.LINE_03, new String[]{"Прізвище, ім’я, по батькові:", null});
-        put(Keyword.LINE_04, new String[]{"Адреса:", null});
-        put(Keyword.LINE_05, new String[]{"вул.", null});
-        put(Keyword.LINE_06, new String[]{"буд.", null});
-        put(Keyword.LINE_07, new String[]{"кв.", null});
-        put(Keyword.LINE_08, new String[]{"Пільга, %", null});
-        put(Keyword.LINE_09, new String[]{"Вид платежу", null});
-        put(Keyword.LINE_10, new String[]{"Міс.", null});
-        put(Keyword.LINE_11, new String[]{"Рік", null});
-        put(Keyword.LINE_12, new String[]{"Сума", null});
-        put(Keyword.LINE_13, new String[]{"Показання лічильників", null});
-        put(Keyword.LINE_14, new String[]{"Кінцеві", null});
-        put(Keyword.LINE_15, new String[]{"Початкові", null});
-        put(Keyword.LINE_16, new String[]{"Різниця", null});
-        put(Keyword.LINE_17, new String[]{"Тариф", null});
-        put(Keyword.LINE_18, new String[]{"Інші", null});
-        put(Keyword.LINE_19, new String[]{"Усього:", null});
-        put(Keyword.LINE_20, new String[]{"Підпис платника:", null});
+        put(Keyword.LINE_TITLE, new String[]{"СПЛАТА ЗА КОМУНАЛЬНІ ПОСЛУГИ", null});
+        put(Keyword.LINE_REQUISITES, new String[]{"ВАТ «Мегабанк» рахунок одержувача 290231 МФО 351629 ЄДРПОУ 09804119", null});
+        put(Keyword.LINE_ACCOUNT, new String[]{"Особистий рахунок:", null});//+
+        put(Keyword.LINE_INITIALS, new String[]{"Прізвище, ім’я, по батькові:", null});
+        put(Keyword.LINE_ADDRESS, new String[]{"Адреса:", null});
+        put(Keyword.LINE_STREET, new String[]{"вул.", null});
+        put(Keyword.LINE_HOUSE, new String[]{"буд.", null});
+        put(Keyword.LINE_APARTMENT, new String[]{"кв.", null});
+        put(Keyword.LINE_PREFERENCE, new String[]{"Пільга, %", null});
+        put(Keyword.LINE_SPECIES, new String[]{"Вид платежу", null});
+        put(Keyword.LINE_MONTH, new String[]{"Міс.", null});
+        put(Keyword.LINE_YEAR, new String[]{"Рік", null});
+        put(Keyword.LINE_AMOUNT, new String[]{"Сума", null});
+        put(Keyword.LINE_REGISTRATION, new String[]{"Показання лічильників", null});
+        put(Keyword.LINE_FINITE, new String[]{"Кінцеві", null});
+        put(Keyword.LINE_INITIAL, new String[]{"Початкові", null});
+        put(Keyword.LINE_DIFFERENCE, new String[]{"Різниця", null});
+        put(Keyword.LINE_TARIFF, new String[]{"Тариф", null});
+        put(Keyword.LINE_ELEC, new String[]{"01 Електроенергія", null});
+        put(Keyword.LINE_RENT, new String[]{"02 Квартплата", null});
+        put(Keyword.LINE_HEATING, new String[]{"03 Опалення", null});
+        put(Keyword.LINE_HOT_WATER, new String[]{"04 Гаряча вода", null});
+        put(Keyword.LINE_COLD_WATER, new String[]{"05 Холодна вода", null});
+        put(Keyword.LINE_SEVERAGE, new String[]{"06 Каналізація", null});
+        put(Keyword.LINE_GAS, new String[]{"07,08 Газ природній", null});
+        put(Keyword.LINE_OTHER, new String[]{"Інші", null});
+        put(Keyword.LINE_GARBAGE, new String[]{"33 Вивіз сміття", null});
+        put(Keyword.LINE_INTERCOM, new String[]{"35 Домофон", null});
+        put(Keyword.LINE_TV, new String[]{"49 Воля Т.П.", null});
+        put(Keyword.LINE_TOTAL, new String[]{"Усього:", null});
+        put(Keyword.LINE_SIGNATURE, new String[]{"Підпис платника:", null});
     }};
 
     public void setLanguage(Language language) {
@@ -150,7 +162,7 @@ public enum Dictionary {
     }
 
     public String getWord(Keyword key) {
-        return DICTIONARY.get(key)[language.ordinal()] != null ? 
+        return DICTIONARY.get(key)[language.ordinal()] != null ?
                 DICTIONARY.get(key)[language.ordinal()] :           // use current language
                 DICTIONARY.get(key)[Language.UKRAINIAN.ordinal()];  // use ukrainian
     }
@@ -168,7 +180,7 @@ public enum Dictionary {
 
     public static void main(String[] args) {
         Dictionary dict = Dictionary.INSTANCE;
-        
+
         EnumSet.allOf(Dictionary.Keyword.class).forEach((key) -> {
             dict.setLanguage(Dictionary.Language.UKRAINIAN);
             System.out.format("%-26s -> %-68s -> ", key, dict.getWord(key));
