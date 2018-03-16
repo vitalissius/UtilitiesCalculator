@@ -130,8 +130,11 @@ public final class Settings {
     private int windowPositionY;
     private Resizer.FontSize fontSize;
     private Dictionary.Language language;
-    private String month;
-    private String year;
+    private String lineMonth;
+    private String lineYear;
+    private String lineElecBegin;
+    private String lineElecEnd;
+    private double total;
 
     /*
      * Цель функций getInt(), getDouble(), getFontSize() и getLanguage() заключается в предотвращении
@@ -449,11 +452,22 @@ public final class Settings {
     public Dictionary.Language getLanguage() {
         return language;
     }
-    public String getMonth() {
-        return month;
+    public String getLineMonth() {
+        return lineMonth;
     }
-    public String getYear() {
-        return year;
+    public String getLineYear() {
+        return lineYear;
+    }
+    public String getLineElecBegin() {
+        return lineElecBegin != null ? lineElecBegin :
+                String.format(String.format("%%0%dd", ("" + getElecMeterMaxValue()).length()), getElecBegin());
+    }
+    public String getLineElecEnd() {
+        return lineElecEnd != null ? lineElecEnd :
+                String.format(String.format("%%0%dd", ("" + getElecMeterMaxValue()).length()), getElecEnd());
+    }
+    public double getTotal() {
+        return total;
     }
 
     public void setUsedElecMeter(boolean elecMeter) {
@@ -588,10 +602,19 @@ public final class Settings {
     public void setLanguage(Dictionary.Language language) {
         this.language = language;
     }
-    public void setMonth(String month) {
-        this.month = month;
+    public void setLineMonth(String lineMonth) {
+        this.lineMonth = lineMonth;
     }
-    public void setYear(String year) {
-        this.year = year;
+    public void setLineYear(String lineYear) {
+        this.lineYear = lineYear;
+    }
+    public void setLineElecBegin(String lineElecBegin) {
+        this.lineElecBegin = lineElecBegin;
+    }
+    public void setLineElecEnd(String lineElecEnd) {
+        this.lineElecEnd = lineElecEnd;
+    }
+    public void setTotal(double total) {
+        this.total = total;
     }
 }

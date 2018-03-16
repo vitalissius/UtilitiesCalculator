@@ -642,7 +642,6 @@ public class UCWindow extends JFrame {
 
         dialogViewAndPrint.setTitle("Перегляд і роздруківка");
         dialogViewAndPrint.setModal(true);
-        dialogViewAndPrint.setPreferredSize(new java.awt.Dimension(670, 570));
         dialogViewAndPrint.setResizable(false);
         dialogViewAndPrint.setSize(new java.awt.Dimension(0, 0));
 
@@ -1120,7 +1119,6 @@ public class UCWindow extends JFrame {
         );
 
         btViewAndPrint.setText("Роздрукувати...");
-        btViewAndPrint.setFocusable(false);
         btViewAndPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btViewAndPrintActionPerformed(evt);
@@ -1493,6 +1491,8 @@ public class UCWindow extends JFrame {
                 }
 
                 SETTINGS.setPaymentsElec(price);
+                SETTINGS.setLineElecBegin(tfElecBegin.getText());
+                SETTINGS.setLineElecEnd(tfElecEnd.getText());
                 tfElec.setText(String.format("%.2f", SETTINGS.getPaymentsElec()));
             }
 
@@ -1924,19 +1924,20 @@ public class UCWindow extends JFrame {
         if (chbTv.isSelected()) {
             total += SETTINGS.getPaymentsTv();
         }
+        SETTINGS.setTotal(total);
         tfTotal.setText(String.format("%.2f", total));
 
     }//GEN-LAST:event_btCalculateActionPerformed
 
     private void cbMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMonthActionPerformed
 
-        SETTINGS.setMonth((String) ((JComboBox) evt.getSource()).getSelectedItem());
+        SETTINGS.setLineMonth((String) ((JComboBox) evt.getSource()).getSelectedItem());
 
     }//GEN-LAST:event_cbMonthActionPerformed
 
     private void cbYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbYearActionPerformed
 
-        SETTINGS.setYear((String) ((JComboBox) evt.getSource()).getSelectedItem());
+        SETTINGS.setLineYear((String) ((JComboBox) evt.getSource()).getSelectedItem());
 
     }//GEN-LAST:event_cbYearActionPerformed
 
