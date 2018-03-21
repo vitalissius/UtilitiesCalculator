@@ -34,7 +34,7 @@ public enum Dictionary {
         LINE_TITLE, LINE_OTHER, LINE_REQUISITES, LINE_SPECIES, LINE_MONTH, LINE_YEAR, LINE_AMOUNT, LINE_REGISTRATION,
         LINE_FINITE, LINE_INITIAL, LINE_DIFFERENCE, LINE_TARIFF, LINE_ELEC, LINE_RENT, LINE_HEATING, LINE_HOT_WATER,
         LINE_COLD_WATER, LINE_SEVERAGE, LINE_GAS, LINE_GARBAGE, LINE_INTERCOM, LINE_TV, LINE_ACCOUNT, LINE_INITIALS,
-        LINE_ADDRESS, LINE_STREET, LINE_HOUSE, LINE_APARTMENT, LINE_PREFERENCE, LINE_TOTAL, LINE_SIGNATURE,
+        LINE_ADDRESS, LINE_STREET, LINE_BUILDING, LINE_APARTMENT, LINE_PRIVILEGE, LINE_TOTAL, LINE_SIGNATURE,
     }
 
     private static final Map<Keyword, String[]> DICTIONARY = new EnumMap<Keyword, String[]>(Keyword.class) {{
@@ -126,9 +126,9 @@ public enum Dictionary {
         put(Keyword.LINE_INITIALS, new String[]{"Прізвище, ім’я, по батькові:", null});
         put(Keyword.LINE_ADDRESS, new String[]{"Адреса:", null});
         put(Keyword.LINE_STREET, new String[]{"вул.", null});
-        put(Keyword.LINE_HOUSE, new String[]{"буд.", null});
+        put(Keyword.LINE_BUILDING, new String[]{"буд.", null});
         put(Keyword.LINE_APARTMENT, new String[]{"кв.", null});
-        put(Keyword.LINE_PREFERENCE, new String[]{"Пільга, %", null});
+        put(Keyword.LINE_PRIVILEGE, new String[]{"Пільга, %", null});
         put(Keyword.LINE_SPECIES, new String[]{"Вид платежу", null});
         put(Keyword.LINE_MONTH, new String[]{"Міс.", null});
         put(Keyword.LINE_YEAR, new String[]{"Рік", null});
