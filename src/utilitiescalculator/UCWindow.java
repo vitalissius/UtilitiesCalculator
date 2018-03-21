@@ -1744,6 +1744,7 @@ public class UCWindow extends JFrame {
 
     private void btViewAndPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btViewAndPrintActionPerformed
 
+        btCalculate.doClick();
         dialogViewAndPrint.setLocationRelativeTo(this);
         dialogViewAndPrint.setVisible(true);
 
