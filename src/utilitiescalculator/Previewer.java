@@ -7,7 +7,7 @@ import java.awt.RenderingHints;
 import javax.swing.JPanel;
 
 public class Previewer extends JPanel {
-    private static final Printer PRINTER = new Printer();
+    private static final Printer PRINTER = Printer.getInstance();
 
     @Override
     public void paint(Graphics g) {

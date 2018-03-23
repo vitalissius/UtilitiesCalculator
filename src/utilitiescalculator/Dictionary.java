@@ -35,6 +35,8 @@ public enum Dictionary {
         LINE_FINITE, LINE_INITIAL, LINE_DIFFERENCE, LINE_TARIFF, LINE_ELEC, LINE_RENT, LINE_HEATING, LINE_HOT_WATER,
         LINE_COLD_WATER, LINE_SEVERAGE, LINE_GAS, LINE_GARBAGE, LINE_INTERCOM, LINE_TV, LINE_ACCOUNT, LINE_INITIALS,
         LINE_ADDRESS, LINE_STREET, LINE_BUILDING, LINE_APARTMENT, LINE_PRIVILEGE, LINE_TOTAL, LINE_SIGNATURE,
+
+        LINE_NOTICE, LINE_RECEIPT, LINE_TELLER
     }
 
     private static final Map<Keyword, String[]> DICTIONARY = new EnumMap<Keyword, String[]>(Keyword.class) {{
@@ -151,6 +153,10 @@ public enum Dictionary {
         put(Keyword.LINE_TV, new String[]{"49 Воля Т.П.", null});
         put(Keyword.LINE_TOTAL, new String[]{"Усього:", null});
         put(Keyword.LINE_SIGNATURE, new String[]{"Підпис платника:", null});
+        // additianal lines
+        put(Keyword.LINE_NOTICE, new String[]{"Повідомлення", null});
+        put(Keyword.LINE_RECEIPT, new String[]{"Квитанція", null});
+        put(Keyword.LINE_TELLER, new String[]{"Касир", null});
     }};
 
     public void setLanguage(Language language) {
