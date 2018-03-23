@@ -1,9 +1,19 @@
 package utilitiescalculator;
 
+import java.awt.BasicStroke;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
+import java.awt.print.Book;
+import java.awt.print.PageFormat;
+import java.awt.print.Paper;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -95,10 +105,25 @@ public class Printer {
 
     private final DecimalFormat format;
 
-    public Printer() {
+    private Printer() {
         DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
         symbols.setDecimalSeparator('-');
         format = new DecimalFormat("0.00", symbols);
+    }
+
+    private static volatile Printer instance;
+
+    public static Printer getInstance() {
+        Printer inst = Printer.instance;
+        if (inst == null) {
+            synchronized (Printer.class) {
+                inst = Printer.instance;
+                if (inst == null) {
+                    Printer.instance = inst = new Printer();
+                }
+            }
+        }
+        return inst;
     }
 
     public void printPreview(Graphics2D gg) {
@@ -282,5 +307,137 @@ public class Printer {
             int centerX = (int) FONT_ITEM.getStringBounds(s, gg.getFontRenderContext()).getCenterX();
             gg.drawString(s, (third + (fourth - third) / 2) - centerX, y);
         }
+    }
+
+
+
+    public static class Report implements Printable {
+        @Override public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) {
+            if (pageIndex > Printable.PAGE_EXISTS) {
+                return Printable.NO_SUCH_PAGE;
+            }
+
+            Graphics2D gg = (Graphics2D) graphics;
+
+            gg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+            gg.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+
+            gg.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+            final Font font = new Font(Font.SERIF, Font.ITALIC | Font.BOLD, 13);
+            gg.setFont(font);
+            gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_NOTICE), 5, 45);
+            gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_TELLER), 5, 275);
+            gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_RECEIPT), 5, 395);
+            gg.drawString(DICT.getWord(Dictionary.Keyword.LINE_TELLER), 5, 625);
+
+            gg.setStroke(new BasicStroke(0.3f));
+            gg.drawLine(90, 35, 90, 350);
+            gg.drawLine(90, 380, 90, 700);
+            gg.drawLine(10, 365, 520, 365);
+
+
+            Printer printer = new Printer();
+            gg.translate(86, 23);
+            gg.setStroke(new BasicStroke(0.5f));
+            gg.scale(0.7, 0.7);
+            printer.printPreview(gg);
+
+            gg.scale(1 / 0.7, 1 / 0.7);
+            gg.translate(0, 455 - (120 - 23) - 7);
+            gg.scale(0.7, 0.7);
+            printer.printPreview(gg);
+
+            return Printable.PAGE_EXISTS;
+        }
+
+        private Paper makePaper(PaperSize paperSize, PaperMargins paperMargins) {
+            double width = paperSize.getWidth() * PPI;
+            double height = paperSize.getHeight() * PPI;
+            double left = paperMargins.getLeftMargin() * PPI;
+            double right = paperMargins.getRightMargin() * PPI;
+            double top = paperMargins.getTopMargin() * PPI;
+            double bottom = paperMargins.getBottomMargin() * PPI;
+
+            Paper paper = new Paper();
+            paper.setSize(width, height);
+            paper.setImageableArea(left, top, width - left - right, height - top - bottom);
+            return paper;
+        }
+
+        public void printReport() {
+            PageFormat pf = new PageFormat();
+            pf.setPaper(this.makePaper(PaperSize.A4, PaperMargins.NARROW2));
+
+            Book b = new Book();
+            b.append(new Report(), pf);
+
+            PrinterJob pj = PrinterJob.getPrinterJob();
+            pj.setPageable(b);
+
+            if (pj.printDialog()) {
+                try {
+                    pj.print();
+                } catch (PrinterException e) {
+                    // ignore
+                }
+            }
+        }
+        private static final double PPI = 72;
+    }
+}
+
+enum PaperMargins {
+    NARROW(0.5, 0.5, 0.5, 0.5),
+    NARROW2(0.5, 0.5, 0.4, 0.5);
+
+    private final double leftMargin;
+    private final double topMargin;
+    private final double rightMargin;
+    private final double bottomMargin;
+
+    private PaperMargins(double leftMargin, double topMargin, double rightMargin, double bottomMargin) {
+        this.leftMargin = leftMargin;
+        this.topMargin = topMargin;
+        this.rightMargin = rightMargin;
+        this.bottomMargin = bottomMargin;
+    }
+
+    public double getLeftMargin() {
+        return leftMargin;
+    }
+
+    public double getTopMargin() {
+        return topMargin;
+    }
+
+    public double getRightMargin() {
+        return rightMargin;
+    }
+
+    public double getBottomMargin() {
+        return bottomMargin;
+    }
+}
+
+
+
+enum PaperSize {
+    A4(8.3, 11.7);
+
+    private final double width;
+    private final double height;
+
+    private PaperSize(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
     }
 }
