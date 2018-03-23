@@ -659,6 +659,11 @@ public class UCWindow extends JFrame {
         );
 
         btPrint.setText("Роздрукувати");
+        btPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPrintActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout dialogViewAndPrintLayout = new javax.swing.GroupLayout(dialogViewAndPrint.getContentPane());
         dialogViewAndPrint.getContentPane().setLayout(dialogViewAndPrintLayout);
@@ -1941,6 +1946,12 @@ public class UCWindow extends JFrame {
         SETTINGS.setLineYear((String) ((JComboBox) evt.getSource()).getSelectedItem());
 
     }//GEN-LAST:event_cbYearActionPerformed
+
+    private void btPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrintActionPerformed
+
+        new Printer.Report().printReport();
+
+    }//GEN-LAST:event_btPrintActionPerformed
 
     public static void main(String args[]) {
         try {
