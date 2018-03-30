@@ -28,7 +28,6 @@ public class UCWindow extends JFrame {
     private static final Settings SETTINGS = Settings.getInstance();
     private static final Dictionary DICT = Dictionary.INSTANCE;
     private static final YearMonth NOW = YearMonth.now();
-    private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
     private static final Resizer RESIZER = Resizer.getInstance("Шрифт", Resizer.FontSize.ELEVEN);
     private static final List<Component> COMPONENTS = new ArrayList<>();
 
@@ -1325,7 +1324,7 @@ public class UCWindow extends JFrame {
         // Слушатель отвечающий за сохранение настроек во время закрытия окна программы:
         addWindowListener(new WindowAdapter() {
             @Override public void windowClosing(WindowEvent e) {
-                Dimension screenSize = TOOLKIT.getScreenSize();
+                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 Dimension windowSize = getSize();
                 Point location = getLocationOnScreen();
                 // Если хотя бы один край окна вышел за границы рабочего стола, - центрируем позицию окна
@@ -2091,7 +2090,6 @@ public class UCWindow extends JFrame {
 }
 
 class LineInputVerifier extends InputVerifier {
-    private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
     private final String regex;
 
     LineInputVerifier(String regex) {
@@ -2104,7 +2102,7 @@ class LineInputVerifier extends InputVerifier {
         if (!tf.getText().matches(regex)) {
             tf.setSelectionColor(SystemColor.RED);
             tf.selectAll();
-            Runnable sound = (Runnable) TOOLKIT.getDesktopProperty("win.sound.asterisk");
+            Runnable sound = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.asterisk");
             if (sound != null) {
                 sound.run();
             }
