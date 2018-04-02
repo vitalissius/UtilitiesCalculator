@@ -28,7 +28,7 @@ public class UCWindow extends JFrame {
     private static final Settings SETTINGS = Settings.getInstance();
     private static final Dictionary DICT = Dictionary.INSTANCE;
     private static final YearMonth NOW = YearMonth.now();
-    private static final Resizer RESIZER = Resizer.getInstance("Шрифт", Resizer.FontSize.ELEVEN);
+    private static final Resizer RESIZER = Resizer.getInstance(Resizer.FontSize.ELEVEN);
     private static final List<Component> COMPONENTS = new ArrayList<>();
 
     private final MeterManager mmElec = new MeterManager() {

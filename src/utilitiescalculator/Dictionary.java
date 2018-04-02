@@ -9,7 +9,7 @@ public enum Dictionary {
         UKRAINIAN, RUSSIAN
     }
 
-    private static Language language;
+    private static Language language = Language.UKRAINIAN;
 
     public enum Keyword {
         TITLE_MAIN, TITLE_ELEC, TITLE_GAS, TITLE_PERSONAL, TITLE_PRINT,
@@ -168,9 +168,11 @@ public enum Dictionary {
     }
 
     public String getWord(Keyword key) {
-        return DICTIONARY.get(key)[language.ordinal()] != null ?
-                DICTIONARY.get(key)[language.ordinal()] :           // use current language
-                DICTIONARY.get(key)[Language.UKRAINIAN.ordinal()];  // use ukrainian
+        String s = DICTIONARY.get(key)[language.ordinal()];
+        if (s == null) {
+            return DICTIONARY.get(key)[Language.UKRAINIAN.ordinal()];  // uses ukrainian
+        }
+        return s;                                                       // uses current language
     }
 
     public String getText() {
