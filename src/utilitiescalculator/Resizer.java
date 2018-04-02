@@ -80,9 +80,7 @@ public enum Resizer {
     }
 
     public void applyTo(List<Component> components) {
-        components.forEach((component) -> {
-            apply(component);
-        });
+        components.forEach(this::apply);
     }
 
     public FontSize getFontSize() {
