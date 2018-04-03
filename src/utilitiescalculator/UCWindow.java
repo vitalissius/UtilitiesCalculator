@@ -25,10 +25,10 @@ import javax.swing.text.MaskFormatter;
 
 public class UCWindow extends JFrame {
     private static final String PROPERTIES_FILE_NAME = "utilities.properties";
-    private static final Settings SETTINGS = Settings.getInstance();
+    private static final Settings SETTINGS = Settings.INSTANCE;
     private static final Dictionary DICT = Dictionary.INSTANCE;
     private static final YearMonth NOW = YearMonth.now();
-    private static final Resizer RESIZER = Resizer.getInstance(Resizer.FontSize.ELEVEN);
+    private static final Resizer RESIZER = Resizer.INSTANCE;
     private static final List<Component> COMPONENTS = new ArrayList<>();
 
     private final MeterManager mmElec = new MeterManager() {
@@ -1618,7 +1618,7 @@ public class UCWindow extends JFrame {
             holdComponents();
         }
         RESIZER.applyTo(COMPONENTS);
-        btChangeSize.setText(RESIZER.getText());
+        btChangeSize.setText(RESIZER.toString());
         pack();
         dialogElecTariff.pack();
         dialogGasTariff.pack();
@@ -1638,7 +1638,7 @@ public class UCWindow extends JFrame {
         // all buttons
         btCalculate.setText(DICT.getWord(Dictionary.Keyword.BT_CALCULATE));
         btChangeLanguage.setText(DICT.getText());
-        btChangeSize.setText(RESIZER.getText());
+        btChangeSize.setText(RESIZER.toString());
         btElecTariff.setText(DICT.getWord(Dictionary.Keyword.BT_TARIFF));
         btElecTariffCancel.setText(DICT.getWord(Dictionary.Keyword.BT_CANCEL));
         btElecTariffSave.setText(DICT.getWord(Dictionary.Keyword.BT_SAVE));

@@ -96,7 +96,7 @@ public class Printer {
     }};
 
     private static final Dictionary DICT = Dictionary.INSTANCE;
-    private static final Settings SETT = Settings.getInstance();
+    private static final Settings SETT = Settings.INSTANCE;
 
     private static final java.awt.Font FONT_TITLE = new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.BOLD, 18);
     private static final java.awt.Font FONT_DATA = new java.awt.Font(java.awt.Font.SERIF, java.awt.Font.PLAIN, 18);

@@ -19,26 +19,30 @@ public enum Resizer {
 
         private final int size;
 
-        private FontSize(int size) {
+        FontSize(int size) {
             this.size = size;
         }
     }
 
     private static final StringBuilder text = new StringBuilder();
-    private static FontSize fontSize = FontSize.ELEVEN;
 
     private static final Map<FontSize, Font> map = new EnumMap<>(FontSize.class);
+
     static {
         for (FontSize fs : FontSize.values()) {
             map.put(fs, new Font("Tahoma", Font.PLAIN, fs.size));
         }
     }
 
-    public static Resizer getInstance(FontSize fontSize) {
-        String prefix = Dictionary.INSTANCE.getWord(Dictionary.Keyword.BT_FONT);
-        text.append(prefix).append("(").append(String.valueOf(fontSize.size)).append(")");
-        Resizer.fontSize = fontSize;
-        return INSTANCE;
+    private static FontSize fontSize;
+
+    static {
+        final FontSize fntSize = FontSize.ELEVEN;
+        Resizer.fontSize = fntSize;
+
+        final String interfix = String.valueOf(fntSize.size);
+        final String prefix = Dictionary.INSTANCE.getWord(Dictionary.Keyword.BT_FONT);
+        text.append(prefix).append("(").append(interfix).append(")");
     }
 
     public void shiftToNextFontSize() {
@@ -54,7 +58,8 @@ public enum Resizer {
         }
     }
 
-    public String getText() {
+    @Override
+    public String toString() {
         updateTextByLanguage();
         return text.toString();
     }

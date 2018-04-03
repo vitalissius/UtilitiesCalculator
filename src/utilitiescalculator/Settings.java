@@ -10,17 +10,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-public final class Settings {
+public enum Settings {
+    INSTANCE;
     private static final Properties PROPERTIES = new Properties();
     private static final String USER_HOME = System.getProperty("user.home") + File.separator;
-    private static final Settings INSTANCE = new Settings();
-
-    private Settings() {
-    }
-
-    public static Settings getInstance() {
-        return INSTANCE;
-    }
 
     private static enum Vls {
         ElecMeter("elec.meter", "false"),
