@@ -459,6 +459,13 @@ public enum Settings {
         return lineElecEnd != null ? lineElecEnd :
                 String.format(String.format("%%0%dd", ("" + getElecMeterMaxValue()).length()), getElecEnd());
     }
+    public String getLineGasBegin() {
+        return String.format(String.format("%%0%dd", ("" + getGasMeterMaxValue()).length()), getGasBegin());
+    }
+    public String getLineGasEnd() {
+        return String.format(String.format("%%0%dd", ("" + getGasMeterMaxValue()).length()), getGasEnd());
+
+    }
     public double getTotal() {
         return total;
     }

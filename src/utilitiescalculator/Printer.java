@@ -218,7 +218,6 @@ public class Printer {
             +--------+-----+----+------+------+-----+----+
             |        |1st  |    |      |      |     |    |
             |        |     |2nd |      |      |     |    |
-            |        |     |    |      |      |     |    |
             |        |     |    |3rd   |      |     |    |
             |        |     |    |      |4th   |     |    |
             |        |     |    |      |      |5th  |    |
@@ -232,11 +231,11 @@ public class Printer {
         int y = Printer.FIELDS_XY.get(Dictionary.Keyword.LINE_ELEC).y;
         printMonthAndYear(gg, y);
         if (SETT.getUsedElec()) {
-            _printElec(gg, format.format(SETT.getPaymentsElec()), third, fourth, y);
+            _printWithinBorders(gg, format.format(SETT.getPaymentsElec()), third, fourth, y);
         }
-        _printElec(gg, SETT.getLineElecEnd(), fourth, fifth, y);
-        _printElec(gg, SETT.getLineElecBegin(), fifth, sixth, y);
-        _printElec(gg, "" + SETT.getElecTotal(), sixth, seventh, y);
+        _printWithinBorders(gg, SETT.getLineElecEnd(), fourth, fifth, y);
+        _printWithinBorders(gg, SETT.getLineElecBegin(), fifth, sixth, y);
+        _printWithinBorders(gg, "" + SETT.getElecTotal(), sixth, seventh, y);
     }
 
     private void printRent(Graphics2D gg) {
@@ -265,8 +264,14 @@ public class Printer {
     }
 
     private void printGas(Graphics2D gg) {
-        _printOther(gg, SETT.getUsedGas(), format.format(SETT.getPaymentsGas()),
-                FIELDS_XY.get(Dictionary.Keyword.LINE_GAS).y);
+        int y = FIELDS_XY.get(Dictionary.Keyword.LINE_GAS).y;
+        printMonthAndYear(gg, y);
+        if (SETT.getUsedElec()) {
+            _printWithinBorders(gg, format.format(SETT.getPaymentsGas()), third, fourth, y);
+        }
+        _printWithinBorders(gg, SETT.getLineGasEnd(), fourth, fifth, y);
+        _printWithinBorders(gg, SETT.getLineGasBegin(), fifth, sixth, y);
+        _printWithinBorders(gg, "" + SETT.getGasTotal(), sixth, seventh, y);
     }
 
     private void printGarbage(Graphics2D gg) {
@@ -296,7 +301,7 @@ public class Printer {
         gg.drawString(str, x, y);
     }
 
-    private void _printElec(Graphics2D gg, String s, int leftBorder, int rightBorder, int y) {
+    private void _printWithinBorders(Graphics2D gg, String s, int leftBorder, int rightBorder, int y) {
         Rectangle2D rect = FONT_ITEM.getStringBounds(s, gg.getFontRenderContext());
         gg.drawString(s, (leftBorder + (rightBorder - leftBorder) / 2) - (int) (rect.getCenterX()), y);
     }
