@@ -1495,8 +1495,6 @@ public class UCWindow extends JFrame {
                 }
 
                 SETTINGS.setPaymentsElec(price);
-                SETTINGS.setLineElecBegin(tfElecBegin.getText());
-                SETTINGS.setLineElecEnd(tfElecEnd.getText());
                 tfElec.setText(String.format("%.2f", SETTINGS.getPaymentsElec()));
             }
 

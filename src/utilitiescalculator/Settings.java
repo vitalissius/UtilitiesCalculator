@@ -125,8 +125,6 @@ public enum Settings {
     private Dictionary.Language language;
     private String lineMonth;
     private String lineYear;
-    private String lineElecBegin;
-    private String lineElecEnd;
     private double total;
 
     /*
@@ -452,12 +450,10 @@ public enum Settings {
         return lineYear;
     }
     public String getLineElecBegin() {
-        return lineElecBegin != null ? lineElecBegin :
-                String.format(String.format("%%0%dd", ("" + getElecMeterMaxValue()).length()), getElecBegin());
+        return String.format(String.format("%%0%dd", ("" + getElecMeterMaxValue()).length()), getElecBegin());
     }
     public String getLineElecEnd() {
-        return lineElecEnd != null ? lineElecEnd :
-                String.format(String.format("%%0%dd", ("" + getElecMeterMaxValue()).length()), getElecEnd());
+        return String.format(String.format("%%0%dd", ("" + getElecMeterMaxValue()).length()), getElecEnd());
     }
     public String getLineGasBegin() {
         return String.format(String.format("%%0%dd", ("" + getGasMeterMaxValue()).length()), getGasBegin());
@@ -607,12 +603,6 @@ public enum Settings {
     }
     public void setLineYear(String lineYear) {
         this.lineYear = lineYear;
-    }
-    public void setLineElecBegin(String lineElecBegin) {
-        this.lineElecBegin = lineElecBegin;
-    }
-    public void setLineElecEnd(String lineElecEnd) {
-        this.lineElecEnd = lineElecEnd;
     }
     public void setTotal(double total) {
         this.total = total;
