@@ -1303,10 +1303,10 @@ public class UCWindow extends JFrame {
         tfElecPrivilege.setText("" + SETTINGS.getElecPrivilege());
         tfElecMaxValue.setText("" + SETTINGS.getElecMeterMaxValue());
 
-        tfGasPrice.setInputVerifier(floatInputVerifier);                 // new LineInputVerifier("\\d+(\\.|,)\\d{1,2}"));
+        tfGasPrice.setInputVerifier(new LineInputVerifier("\\d+(\\.|,)\\d{1,4}")/*floatInputVerifier*/);
         tfGasMaxValue.setInputVerifier(maxValueInputVerifier);          // new LineInputVerifier("9+"));
 
-        tfGasPrice.setText(String.format("%.2f", SETTINGS.getGasPrice()));
+        tfGasPrice.setText(String.format("%.4f", SETTINGS.getGasPrice()));
         tfGasMaxValue.setText("" + SETTINGS.getGasMeterMaxValue());
     }
 
@@ -1542,7 +1542,7 @@ public class UCWindow extends JFrame {
             } else if (tf == tfTv) {
                 SETTINGS.setPaymentsTv(Double.parseDouble(text));
             } else {
-                throw new RuntimeException("One of the payment's text fields is not processed");
+                throw new RuntimeException("One of the payment's text fields is not handling");
             }
         }
     };
@@ -1766,7 +1766,7 @@ public class UCWindow extends JFrame {
 
     private void btGasTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffActionPerformed
 
-        tfGasPrice.setText(String.format("%.2f", SETTINGS.getGasPrice()));
+        tfGasPrice.setText(String.format("%.4f", SETTINGS.getGasPrice()));
         tfGasMaxValue.setText("" + SETTINGS.getGasMeterMaxValue());
         dialogGasTariff.setLocationRelativeTo(this);
         dialogGasTariff.setVisible(true);
@@ -1868,7 +1868,7 @@ public class UCWindow extends JFrame {
 
     private void btGasTariffSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffSaveActionPerformed
 
-        if (floatInputVerifier.verify(tfGasPrice) && maxValueInputVerifier.verify(tfGasMaxValue)) {
+        if (tfGasPrice.getInputVerifier().verify(tfGasPrice) && maxValueInputVerifier.verify(tfGasMaxValue)) {
             SETTINGS.setGasPrice(Double.parseDouble(tfGasPrice.getText().replace(',', '.')));
             int maxValue = Integer.parseInt(tfGasMaxValue.getText());
             int digitsNumber = ("" + maxValue).length();
