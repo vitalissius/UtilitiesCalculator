@@ -24,7 +24,6 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
 public class UCWindow extends JFrame {
-    private static final String PROPERTIES_FILE_NAME = "utilities.properties";
     private static final Settings SETTINGS = Settings.INSTANCE;
     private static final Dictionary DICT = Dictionary.INSTANCE;
     private static final YearMonth NOW = YearMonth.now();
@@ -57,7 +56,7 @@ public class UCWindow extends JFrame {
      * Creates new form UCWindow
      */
     public UCWindow() {
-        SETTINGS.loadProperties(PROPERTIES_FILE_NAME);
+        SETTINGS.loadProperties();
         DICT.setLanguage(SETTINGS.getLanguage());
         elecDigitsNumber = ("" + SETTINGS.getElecMeterMaxValue()).length();
         elecMeterInputVerifier = new MeterInputVerifier(elecGasRegex, elecDigitsNumber);
@@ -1336,7 +1335,7 @@ public class UCWindow extends JFrame {
                 SETTINGS.setWindowPositionX((int) location.getX());
                 SETTINGS.setWindowPositionY((int) location.getY());
 
-                SETTINGS.storeProperties(PROPERTIES_FILE_NAME);
+                SETTINGS.storeProperties();
             }
         });
 

@@ -1,19 +1,25 @@
 package utilitiescalculator;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.Properties;
-import java.io.InputStreamReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public enum Settings {
+
     INSTANCE;
+
     private static final Properties PROPERTIES = new Properties();
-    private static final String USER_HOME = System.getProperty("user.home") + File.separator;
+
+    public static final String USER_HOME = System.getProperty("user.home");
+    public static final String UC_FOLDER_NAME = ".utilities-calculator";
+    public static final String UC_PROPERTIES_FILE_NAME = "properties.ucp";
+    public static final String UC_STATISTICS_FILE_NAME = "statistics.ucs";
+
+    private static final Path UC_PROPERTIES_FILE_PATH = Paths.get(USER_HOME, UC_PROPERTIES_FILE_NAME);
 
     private static enum Vls {
         ElecMeter("elec.meter", "false"),
@@ -177,14 +183,14 @@ public enum Settings {
         return vls.get();
     }
 
-    public void loadProperties(final String propertiesFileName) {
-        try (BufferedReader input =
-                new BufferedReader(new InputStreamReader(new FileInputStream(USER_HOME + propertiesFileName)))) {
+    public void loadProperties() {
+        try (BufferedReader input = Files.newBufferedReader(UC_PROPERTIES_FILE_PATH)) {
+
             PROPERTIES.load(input);
-        } catch (FileNotFoundException e) {
-            /* ignored */
+
         } catch (IOException e) {
-            throw new RuntimeException("Unknown I/O exception: " + e.getMessage());
+            e.printStackTrace(System.err);
+            throw new RuntimeException("Load: " + e.getMessage());
         }
 
         usedElecMeter = getBoolean(Vls.ElecMeter);
@@ -239,7 +245,7 @@ public enum Settings {
         language = getLanguage(Vls.Language);
     }
 
-    public void storeProperties(final String propertiesFileName) {
+    public void storeProperties() {
         Vls.ElecMeter.set(Boolean.toString(usedElecMeter));
         Vls.ElecBegin.set(Integer.toString(elecBegin));
         Vls.ElecEnd.set(Integer.toString(elecEnd));
@@ -290,10 +296,13 @@ public enum Settings {
         Vls.FontSize.set(fontSize.toString());
         Vls.Language.set(language.toString());
 
-        try (OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream(USER_HOME + propertiesFileName))) {
+        try (OutputStreamWriter output = new OutputStreamWriter(Files.newOutputStream(UC_PROPERTIES_FILE_PATH))) {
+
             PROPERTIES.store(output, "Utilities' properties file. Don't delete.");
+
         } catch (IOException e) {
-            throw new RuntimeException("Unknown I/O exception: " + e.getMessage());
+            e.printStackTrace(System.err);
+            throw new RuntimeException("Store: " + e.getMessage());
         }
     }
 
