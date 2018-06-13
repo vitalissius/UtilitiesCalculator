@@ -19,7 +19,7 @@ public enum Settings {
     public static final String UC_PROPERTIES_FILE_NAME = "properties.ucp";
     public static final String UC_STATISTICS_FILE_NAME = "statistics.ucs";
 
-    private static final Path UC_PROPERTIES_FILE_PATH = Paths.get(USER_HOME, UC_PROPERTIES_FILE_NAME);
+    private static final Path UC_PROPERTIES_FILE_PATH = Paths.get(USER_HOME, UC_FOLDER_NAME, UC_PROPERTIES_FILE_NAME);
 
     private static enum Vls {
         ElecMeter("elec.meter", "false"),
@@ -189,8 +189,7 @@ public enum Settings {
             PROPERTIES.load(input);
 
         } catch (IOException e) {
-            e.printStackTrace(System.err);
-            throw new RuntimeException("Load: " + e.getMessage());
+            /* ignored */
         }
 
         usedElecMeter = getBoolean(Vls.ElecMeter);
@@ -301,8 +300,7 @@ public enum Settings {
             PROPERTIES.store(output, "Utilities' properties file. Don't delete.");
 
         } catch (IOException e) {
-            e.printStackTrace(System.err);
-            throw new RuntimeException("Store: " + e.getMessage());
+            /* ignored */
         }
     }
 
