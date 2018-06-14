@@ -1,6 +1,7 @@
 package utilitiescalculator;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.util.Properties;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -15,11 +16,12 @@ public enum Settings {
     private static final Properties PROPERTIES = new Properties();
 
     public static final String USER_HOME = System.getProperty("user.home");
-    public static final String UC_FOLDER_NAME = ".utilities-calculator";
+    public static final String UC_FOLDER_NAME = ".ucfiles";
     public static final String UC_PROPERTIES_FILE_NAME = "properties.ucp";
     public static final String UC_STATISTICS_FILE_NAME = "statistics.ucs";
 
-    private static final Path UC_PROPERTIES_FILE_PATH = Paths.get(USER_HOME, UC_FOLDER_NAME, UC_PROPERTIES_FILE_NAME);
+    public static final Path UC_PROPERTIES_FILE_PATH = Paths.get(USER_HOME, UC_FOLDER_NAME, UC_PROPERTIES_FILE_NAME);
+    public static final Path UC_STATISTICS_FILE_PATH = Paths.get(USER_HOME, UC_FOLDER_NAME, UC_STATISTICS_FILE_NAME);
 
     private static enum Vls {
         ElecMeter("elec.meter", "false"),
@@ -295,9 +297,14 @@ public enum Settings {
         Vls.FontSize.set(fontSize.toString());
         Vls.Language.set(language.toString());
 
+        File parent = UC_STATISTICS_FILE_PATH.toFile().getParentFile();
+        if (!parent.exists()) {
+            parent.mkdir();
+        }
+
         try (OutputStreamWriter output = new OutputStreamWriter(Files.newOutputStream(UC_PROPERTIES_FILE_PATH))) {
 
-            PROPERTIES.store(output, "Utilities' properties file. Don't delete.");
+            PROPERTIES.store(output, "Do not delete this file!");
 
         } catch (IOException e) {
             /* ignored */
