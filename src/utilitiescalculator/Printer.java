@@ -81,7 +81,7 @@ public class Printer {
         put(Dictionary.Keyword.LINE_HEATING, new Point(26, 48 + 22 * 4 + 32 + 34 + 21 * 2));
         put(Dictionary.Keyword.LINE_HOT_WATER, new Point(26, 48 + 22 * 4 + 32 + 34 + 21 * 3));
         put(Dictionary.Keyword.LINE_COLD_WATER, new Point(26, 48 + 22 * 4 + 32 + 34 + 21 * 4));
-        put(Dictionary.Keyword.LINE_SEVERAGE, new Point(26, 48 + 22 * 4 + 32 + 34 + 21 * 5));
+        put(Dictionary.Keyword.LINE_SEWERAGE, new Point(26, 48 + 22 * 4 + 32 + 34 + 21 * 5));
         put(Dictionary.Keyword.LINE_GAS, new Point(26, 48 + 22 * 4 + 32 + 34 + 21 * 6));
         put(Dictionary.Keyword.LINE_GARBAGE, new Point(60, 48 + 22 * 4 + 32 + 34 + 21 * 7));
         put(Dictionary.Keyword.LINE_INTERCOM, new Point(60, 48 + 22 * 4 + 32 + 34 + 21 * 8));
@@ -196,7 +196,7 @@ public class Printer {
         printHeating(gg);
         printHotWater(gg);
         printColdWater(gg);
-        printSeverage(gg);
+        printSewerage(gg);
         printGas(gg);
         printGarbage(gg);
         printIntercom(gg);
@@ -261,9 +261,9 @@ public class Printer {
                 FIELDS_XY.get(Dictionary.Keyword.LINE_COLD_WATER).y);
     }
 
-    private void printSeverage(Graphics2D gg) {
-        _printOther(gg, SETT.getUsedSeverage(), format.format(SETT.getPaymentsSeverage()),
-                FIELDS_XY.get(Dictionary.Keyword.LINE_SEVERAGE).y);
+    private void printSewerage(Graphics2D gg) {
+        _printOther(gg, SETT.getUsedSewerage(), format.format(SETT.getPaymentsSewerage()),
+                FIELDS_XY.get(Dictionary.Keyword.LINE_SEWERAGE).y);
     }
 
     private void printGas(Graphics2D gg) {
@@ -415,8 +415,8 @@ public class Printer {
             if (SETT.getUsedColdWater()) {
                 sb.coldWater(SETT.getPaymentsColdWater());
             }
-            if (SETT.getUsedSeverage()) {
-                sb.sewerage(SETT.getPaymentsSeverage());
+            if (SETT.getUsedSewerage()) {
+                sb.sewerage(SETT.getPaymentsSewerage());
             }
             if (SETT.getUsedGas()) {
                 sb.gas(SETT.getGasTotal(), SETT.getPaymentsGas());

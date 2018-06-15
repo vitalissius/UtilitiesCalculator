@@ -22,7 +22,7 @@ public enum Dictionary {
         BT_TARIFF, BT_CALCULATE, BT_PERSONAL_DATA, BT_VIEW_AND_PRINT, BT_SAVE, BT_CANCEL,
         BT_FONT, BT_LANGUAGE, BT_LANG_DESCRIPTION, BT_PRINT,
 
-        PAY_ELEC, PAY_RENT, PAY_HEATING, PAY_HOT_WATER, PAY_COLD_WATER, PAY_SEVERAGE, PAY_GAS, PAY_GARBAGE,
+        PAY_ELEC, PAY_RENT, PAY_HEATING, PAY_HOT_WATER, PAY_COLD_WATER, PAY_SEWERAGE, PAY_GAS, PAY_GARBAGE,
         PAY_INTERCOM, PAY_TV,
 
         LB_MONTH, LB_YEAR, LB_BEGIN, LB_END, LB_DIFF, LB_TOTAL, LB_BOUNDARY, LB_BELOW_BOUNDARY, LB_ABOVE_BOUNDARY,
@@ -33,7 +33,7 @@ public enum Dictionary {
 
         LINE_TITLE, LINE_OTHER, LINE_REQUISITES, LINE_SPECIES, LINE_MONTH, LINE_YEAR, LINE_AMOUNT, LINE_REGISTRATION,
         LINE_FINITE, LINE_INITIAL, LINE_DIFFERENCE, LINE_TARIFF, LINE_ELEC, LINE_RENT, LINE_HEATING, LINE_HOT_WATER,
-        LINE_COLD_WATER, LINE_SEVERAGE, LINE_GAS, LINE_GARBAGE, LINE_INTERCOM, LINE_TV, LINE_ACCOUNT, LINE_INITIALS,
+        LINE_COLD_WATER, LINE_SEWERAGE, LINE_GAS, LINE_GARBAGE, LINE_INTERCOM, LINE_TV, LINE_ACCOUNT, LINE_INITIALS,
         LINE_ADDRESS, LINE_STREET, LINE_BUILDING, LINE_APARTMENT, LINE_PRIVILEGE, LINE_TOTAL, LINE_SIGNATURE,
 
         LINE_NOTICE, LINE_RECEIPT, LINE_TELLER
@@ -90,7 +90,7 @@ public enum Dictionary {
         put(Keyword.PAY_HEATING, new String[]{"03 Опалення:", "03 Отопление:"});
         put(Keyword.PAY_HOT_WATER, new String[]{"04 Гаряча вода:", "04 Горячая вода:"});
         put(Keyword.PAY_COLD_WATER, new String[]{"05 Холодна вода:", "05 Холодная вода:"});
-        put(Keyword.PAY_SEVERAGE, new String[]{"06 Каналізація:", "06 Канализация:"});
+        put(Keyword.PAY_SEWERAGE, new String[]{"06 Каналізація:", "06 Канализация:"});
         put(Keyword.PAY_GAS, new String[]{"07,08 Газ природній:", "07,08 Газ природный:"});
         put(Keyword.PAY_GARBAGE, new String[]{"33 Вивіз сміття:", "33 Вывоз мусора:"});
         put(Keyword.PAY_INTERCOM, new String[]{"35 Домофон:", "35 Домофон:"});
@@ -145,7 +145,7 @@ public enum Dictionary {
         put(Keyword.LINE_HEATING, new String[]{"03 Опалення", null});
         put(Keyword.LINE_HOT_WATER, new String[]{"04 Гаряча вода", null});
         put(Keyword.LINE_COLD_WATER, new String[]{"05 Холодна вода", null});
-        put(Keyword.LINE_SEVERAGE, new String[]{"06 Каналізація", null});
+        put(Keyword.LINE_SEWERAGE, new String[]{"06 Каналізація", null});
         put(Keyword.LINE_GAS, new String[]{"07,08 Газ природній", null});
         put(Keyword.LINE_OTHER, new String[]{"Інші", null});
         put(Keyword.LINE_GARBAGE, new String[]{"33 Вивіз сміття", null});

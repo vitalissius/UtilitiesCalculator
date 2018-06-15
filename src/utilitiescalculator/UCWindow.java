@@ -168,7 +168,7 @@ public class UCWindow extends JFrame {
         chbHeating = new javax.swing.JCheckBox();
         chbHotWater = new javax.swing.JCheckBox();
         chbColdWater = new javax.swing.JCheckBox();
-        chbSeverage = new javax.swing.JCheckBox();
+        chbSewerage = new javax.swing.JCheckBox();
         chbGas = new javax.swing.JCheckBox();
         chbGarbage = new javax.swing.JCheckBox();
         chbIntercom = new javax.swing.JCheckBox();
@@ -178,7 +178,7 @@ public class UCWindow extends JFrame {
         tfHeating = new javax.swing.JTextField();
         tfHotWater = new javax.swing.JTextField();
         tfColdWater = new javax.swing.JTextField();
-        tfSeverage = new javax.swing.JTextField();
+        tfSewerage = new javax.swing.JTextField();
         tfGas = new javax.swing.JTextField();
         tfGarbage = new javax.swing.JTextField();
         tfIntercom = new javax.swing.JTextField();
@@ -972,7 +972,7 @@ public class UCWindow extends JFrame {
 
         chbColdWater.setText("05 Холодна вода:");
 
-        chbSeverage.setText("06 Каналізація:");
+        chbSewerage.setText("06 Каналізація:");
 
         chbGas.setText("07, 08 Газ природній:");
 
@@ -992,7 +992,7 @@ public class UCWindow extends JFrame {
 
         tfColdWater.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        tfSeverage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        tfSewerage.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         tfGas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -1034,7 +1034,7 @@ public class UCWindow extends JFrame {
                     .addComponent(chbHeating)
                     .addComponent(chbHotWater)
                     .addComponent(chbColdWater)
-                    .addComponent(chbSeverage)
+                    .addComponent(chbSewerage)
                     .addComponent(chbGas)
                     .addComponent(chbGarbage)
                     .addComponent(chbIntercom)
@@ -1045,7 +1045,7 @@ public class UCWindow extends JFrame {
                     .addComponent(tfIntercom)
                     .addComponent(tfGarbage)
                     .addComponent(tfGas)
-                    .addComponent(tfSeverage)
+                    .addComponent(tfSewerage)
                     .addComponent(tfColdWater)
                     .addComponent(tfHotWater)
                     .addComponent(tfHeating)
@@ -1095,8 +1095,8 @@ public class UCWindow extends JFrame {
                     .addComponent(lbHrn5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfSeverage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chbSeverage)
+                    .addComponent(tfSewerage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chbSewerage)
                     .addComponent(lbHrn6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1260,7 +1260,7 @@ public class UCWindow extends JFrame {
         chbHeating.setSelected(SETTINGS.getUsedHeating());
         chbHotWater.setSelected(SETTINGS.getUsedHotWater());
         chbColdWater.setSelected(SETTINGS.getUsedColdWater());
-        chbSeverage.setSelected(SETTINGS.getUsedSeverage());
+        chbSewerage.setSelected(SETTINGS.getUsedSewerage());
         chbGas.setSelected(SETTINGS.getUsedGas());
         chbGarbage.setSelected(SETTINGS.getUsedGarbage());
         chbIntercom.setSelected(SETTINGS.getUsedIntercom());
@@ -1272,7 +1272,7 @@ public class UCWindow extends JFrame {
         tfHeating.setEnabled(SETTINGS.getUsedHeating());
         tfHotWater.setEnabled(SETTINGS.getUsedHotWater());
         tfColdWater.setEnabled(SETTINGS.getUsedColdWater());
-        tfSeverage.setEnabled(SETTINGS.getUsedSeverage());
+        tfSewerage.setEnabled(SETTINGS.getUsedSewerage());
         tfGarbage.setEnabled(SETTINGS.getUsedGarbage());
         tfIntercom.setEnabled(SETTINGS.getUsedIntercom());
         tfTv.setEnabled(SETTINGS.getUsedTv());
@@ -1282,7 +1282,7 @@ public class UCWindow extends JFrame {
         tfHeating.setText(String.format("%.2f", SETTINGS.getPaymentsHeating()));
         tfHotWater.setText(String.format("%.2f", SETTINGS.getPaymentsHotWater()));
         tfColdWater.setText(String.format("%.2f", SETTINGS.getPaymentsColdWater()));
-        tfSeverage.setText(String.format("%.2f", SETTINGS.getPaymentsSeverage()));
+        tfSewerage.setText(String.format("%.2f", SETTINGS.getPaymentsSewerage()));
         tfGas.setText(String.format("%.2f", SETTINGS.getPaymentsGas()));
         tfGarbage.setText(String.format("%.2f", SETTINGS.getPaymentsGarbage()));
         tfIntercom.setText(String.format("%.2f", SETTINGS.getPaymentsIntercom()));
@@ -1403,9 +1403,9 @@ public class UCWindow extends JFrame {
             SETTINGS.setUsedColdWater(chbColdWater.isSelected());
             tfColdWater.setEnabled(SETTINGS.getUsedColdWater());
         });
-        chbSeverage.addActionListener((e) -> {
-            SETTINGS.setUsedSeverage(chbSeverage.isSelected());
-            tfSeverage.setEnabled(SETTINGS.getUsedSeverage());
+        chbSewerage.addActionListener((e) -> {
+            SETTINGS.setUsedSewerage(chbSewerage.isSelected());
+            tfSewerage.setEnabled(SETTINGS.getUsedSewerage());
         });
         chbGarbage.addActionListener((e) -> {
             SETTINGS.setUsedGarbage(chbGarbage.isSelected());
@@ -1424,7 +1424,7 @@ public class UCWindow extends JFrame {
         final ActionListener action = new ActionListener() {
             ArrayList<JTextField> tfs = new ArrayList<>(Arrays.asList(tfElecBegin, tfElecEnd,
                     tfGasBegin, tfGasEnd, tfElec, tfRent, tfHeating, tfHotWater, tfColdWater,
-                    tfSeverage, tfGas, tfGarbage, tfIntercom, tfTv));
+                    tfSewerage, tfGas, tfGarbage, tfIntercom, tfTv));
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1446,7 +1446,7 @@ public class UCWindow extends JFrame {
         tfHeating.addActionListener(action);
         tfHotWater.addActionListener(action);
         tfColdWater.addActionListener(action);
-        tfSeverage.addActionListener(action);
+        tfSewerage.addActionListener(action);
         tfGas.addActionListener(action);
         tfGarbage.addActionListener(action);
         tfIntercom.addActionListener(action);
@@ -1530,8 +1530,8 @@ public class UCWindow extends JFrame {
                 SETTINGS.setPaymentsHotWater(Double.parseDouble(text));
             } else if (tf == tfColdWater) {
                 SETTINGS.setPaymentsColdWater(Double.parseDouble(text));
-            } else if (tf == tfSeverage) {
-                SETTINGS.setPaymentsSeverage(Double.parseDouble(text));
+            } else if (tf == tfSewerage) {
+                SETTINGS.setPaymentsSewerage(Double.parseDouble(text));
             } else if (tf == tfGas) {
                 SETTINGS.setPaymentsGas(Double.parseDouble(text));
             } else if (tf == tfGarbage) {
@@ -1559,7 +1559,7 @@ public class UCWindow extends JFrame {
         tfHeating.setInputVerifier(new PaymentsVerifier(paymentsRegex));
         tfHotWater.setInputVerifier(new PaymentsVerifier(paymentsRegex));
         tfColdWater.setInputVerifier(new PaymentsVerifier(paymentsRegex));
-        tfSeverage.setInputVerifier(new PaymentsVerifier(paymentsRegex));
+        tfSewerage.setInputVerifier(new PaymentsVerifier(paymentsRegex));
         tfGas.setInputVerifier(new PaymentsVerifier(paymentsRegex));
         tfGarbage.setInputVerifier(new PaymentsVerifier(paymentsRegex));
         tfIntercom.setInputVerifier(new PaymentsVerifier(paymentsRegex));
@@ -1670,7 +1670,7 @@ public class UCWindow extends JFrame {
         chbHotWater.setText(DICT.getWord(Dictionary.Keyword.PAY_HOT_WATER));
         chbIntercom.setText(DICT.getWord(Dictionary.Keyword.PAY_INTERCOM));
         chbRent.setText(DICT.getWord(Dictionary.Keyword.PAY_RENT));
-        chbSeverage.setText(DICT.getWord(Dictionary.Keyword.PAY_SEVERAGE));
+        chbSewerage.setText(DICT.getWord(Dictionary.Keyword.PAY_SEWERAGE));
         chbTv.setText(DICT.getWord(Dictionary.Keyword.PAY_TV));
         // all panels with titled border
         ((TitledBorder) pnAddress.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ADDRESS));
@@ -1911,8 +1911,8 @@ public class UCWindow extends JFrame {
         if (chbColdWater.isSelected()) {
             total += SETTINGS.getPaymentsColdWater();
         }
-        if (chbSeverage.isSelected()) {
-            total += SETTINGS.getPaymentsSeverage();
+        if (chbSewerage.isSelected()) {
+            total += SETTINGS.getPaymentsSewerage();
         }
         if (chbGas.isSelected()) {
             total += SETTINGS.getPaymentsGas();
@@ -1993,7 +1993,7 @@ public class UCWindow extends JFrame {
     private javax.swing.JCheckBox chbHotWater;
     private javax.swing.JCheckBox chbIntercom;
     private javax.swing.JCheckBox chbRent;
-    private javax.swing.JCheckBox chbSeverage;
+    private javax.swing.JCheckBox chbSewerage;
     private javax.swing.JCheckBox chbTv;
     private javax.swing.JDialog dialogElecTariff;
     private javax.swing.JDialog dialogGasTariff;
@@ -2078,7 +2078,7 @@ public class UCWindow extends JFrame {
     private static javax.swing.JTextField tfIntercom;
     private javax.swing.JTextField tfPatronymic;
     private static javax.swing.JTextField tfRent;
-    private static javax.swing.JTextField tfSeverage;
+    private static javax.swing.JTextField tfSewerage;
     private javax.swing.JTextField tfStreet;
     private javax.swing.JTextField tfSurname;
     private javax.swing.JTextField tfTotal;

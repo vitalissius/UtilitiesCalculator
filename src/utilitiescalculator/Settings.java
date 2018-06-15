@@ -42,7 +42,7 @@ public enum Settings {
         PaymentsHeating("payments.heating", "0.00"),
         PaymentsHotWater("payments.hotWater", "0.00"),
         PaymentsColdWater("payments.coldWater", "0.00"),
-        PaymentsSeverage("payments.severage", "0.00"),
+        PaymentsSewerage("payments.sewerage", "0.00"),
         PaymentsGas("payments.gas", "0.00"),
         PaymentsGarbage("payments.garbage", "0.00"),
         PaymentsIntercom("payments.intercom", "0.00"),
@@ -52,7 +52,7 @@ public enum Settings {
         UsedHeating("used.heating", "false"),
         UsedHotWater("used.hotWater", "false"),
         UsedColdWater("used.coldWater", "false"),
-        UsedSeverage("used.severage", "false"),
+        UsedSewerage("used.sewerage", "false"),
         UsedGas("used.gas", "false"),
         UsedGarbage("used.garbage", "false"),
         UsedIntercom("used.intercom", "false"),
@@ -112,7 +112,7 @@ public enum Settings {
     private double paymentsHeating;
     private double paymentsHotWater;
     private double paymentsColdWater;
-    private double paymentsSeverage;
+    private double paymentsSewerage;
     private double paymentsGas;
     private double paymentsGarbage;
     private double paymentsIntercom;
@@ -122,7 +122,7 @@ public enum Settings {
     private boolean usedHeating;
     private boolean usedHotWater;
     private boolean usedColdWater;
-    private boolean usedSeverage;
+    private boolean usedSewerage;
     private boolean usedGas;
     private boolean usedGarbage;
     private boolean usedIntercom;
@@ -214,7 +214,7 @@ public enum Settings {
         paymentsHeating = getDouble(Vls.PaymentsHeating);
         paymentsHotWater = getDouble(Vls.PaymentsHotWater);
         paymentsColdWater = getDouble(Vls.PaymentsColdWater);
-        paymentsSeverage = getDouble(Vls.PaymentsSeverage);
+        paymentsSewerage = getDouble(Vls.PaymentsSewerage);
         paymentsGas = getDouble(Vls.PaymentsGas);
         paymentsGarbage = getDouble(Vls.PaymentsGarbage);
         paymentsIntercom = getDouble(Vls.PaymentsIntercom);
@@ -225,7 +225,7 @@ public enum Settings {
         usedHeating = getBoolean(Vls.UsedHeating);
         usedHotWater = getBoolean(Vls.UsedHotWater);
         usedColdWater = getBoolean(Vls.UsedColdWater);
-        usedSeverage = getBoolean(Vls.UsedSeverage);
+        usedSewerage = getBoolean(Vls.UsedSewerage);
         usedGas = getBoolean(Vls.UsedGas);
         usedGarbage = getBoolean(Vls.UsedGarbage);
         usedIntercom = getBoolean(Vls.UsedIntercom);
@@ -275,7 +275,7 @@ public enum Settings {
         Vls.PaymentsHeating.set(Double.toString(paymentsHeating));
         Vls.PaymentsHotWater.set(Double.toString(paymentsHotWater));
         Vls.PaymentsColdWater.set(Double.toString(paymentsColdWater));
-        Vls.PaymentsSeverage.set(Double.toString(paymentsSeverage));
+        Vls.PaymentsSewerage.set(Double.toString(paymentsSewerage));
         Vls.PaymentsGas.set(Double.toString(paymentsGas));
         Vls.PaymentsGarbage.set(Double.toString(paymentsGarbage));
         Vls.PaymentsIntercom.set(Double.toString(paymentsIntercom));
@@ -286,7 +286,7 @@ public enum Settings {
         Vls.UsedHeating.set(Boolean.toString(usedHeating));
         Vls.UsedHotWater.set(Boolean.toString(usedHotWater));
         Vls.UsedColdWater.set(Boolean.toString(usedColdWater));
-        Vls.UsedSeverage.set(Boolean.toString(usedSeverage));
+        Vls.UsedSewerage.set(Boolean.toString(usedSewerage));
         Vls.UsedGas.set(Boolean.toString(usedGas));
         Vls.UsedGarbage.set(Boolean.toString(usedGarbage));
         Vls.UsedIntercom.set(Boolean.toString(usedIntercom));
@@ -400,8 +400,8 @@ public enum Settings {
     public double getPaymentsColdWater() {
         return paymentsColdWater;
     }
-    public double getPaymentsSeverage() {
-        return paymentsSeverage;
+    public double getPaymentsSewerage() {
+        return paymentsSewerage;
     }
     public double getPaymentsGas() {
         return paymentsGas;
@@ -430,8 +430,8 @@ public enum Settings {
     public boolean getUsedColdWater() {
         return usedColdWater;
     }
-    public boolean getUsedSeverage() {
-        return usedSeverage;
+    public boolean getUsedSewerage() {
+        return usedSewerage;
     }
     public boolean getUsedGas() {
         return usedGas;
@@ -555,8 +555,8 @@ public enum Settings {
     public void setPaymentsColdWater(double paymentsColdWater) {
         this.paymentsColdWater = paymentsColdWater;
     }
-    public void setPaymentsSeverage(double paymentsSeverage) {
-        this.paymentsSeverage = paymentsSeverage;
+    public void setPaymentsSewerage(double paymentsSewerage) {
+        this.paymentsSewerage = paymentsSewerage;
     }
     public void setPaymentsGas(double paymentsGas) {
         this.paymentsGas = paymentsGas;
@@ -585,8 +585,8 @@ public enum Settings {
     public void setUsedColdWater(boolean usedColdWater) {
         this.usedColdWater = usedColdWater;
     }
-    public void setUsedSeverage(boolean usedSeverage) {
-        this.usedSeverage = usedSeverage;
+    public void setUsedSewerage(boolean usedSewerage) {
+        this.usedSewerage = usedSewerage;
     }
     public void setUsedGas(boolean usedGas) {
         this.usedGas = usedGas;

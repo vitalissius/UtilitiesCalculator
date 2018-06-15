@@ -1339,7 +1339,7 @@
                       <Component id="chbHeating" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="chbHotWater" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="chbColdWater" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="chbSeverage" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbSewerage" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="chbGas" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="chbGarbage" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="chbIntercom" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -1351,7 +1351,7 @@
                       <Component id="tfIntercom" alignment="0" max="32767" attributes="0"/>
                       <Component id="tfGarbage" alignment="0" max="32767" attributes="0"/>
                       <Component id="tfGas" alignment="0" max="32767" attributes="0"/>
-                      <Component id="tfSeverage" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tfSewerage" alignment="0" max="32767" attributes="0"/>
                       <Component id="tfColdWater" alignment="0" max="32767" attributes="0"/>
                       <Component id="tfHotWater" alignment="0" max="32767" attributes="0"/>
                       <Component id="tfHeating" alignment="0" max="32767" attributes="0"/>
@@ -1410,8 +1410,8 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfSeverage" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="chbSeverage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfSewerage" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="chbSewerage" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbHrn6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -1469,7 +1469,7 @@
             <Property name="text" type="java.lang.String" value="05 &#x425;&#x43e;&#x43b;&#x43e;&#x434;&#x43d;&#x430; &#x432;&#x43e;&#x434;&#x430;:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="chbSeverage">
+        <Component class="javax.swing.JCheckBox" name="chbSewerage">
           <Properties>
             <Property name="text" type="java.lang.String" value="06 &#x41a;&#x430;&#x43d;&#x430;&#x43b;&#x456;&#x437;&#x430;&#x446;&#x456;&#x44f;:"/>
           </Properties>
@@ -1534,7 +1534,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfSeverage">
+        <Component class="javax.swing.JTextField" name="tfSewerage">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
