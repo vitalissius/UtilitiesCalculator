@@ -17,9 +17,12 @@ import java.awt.print.PrinterJob;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import utilitiescalculator.statistics.Statistics;
+import utilitiescalculator.statistics.StatisticsReadWriter;
 
 public class Printer {
     private static final Rectangle[] TABLE_COORDS = {
@@ -383,11 +386,54 @@ public class Printer {
             if (pj.printDialog()) {
                 try {
                     pj.print();
+                    saveStatistics();
                 } catch (PrinterException e) {
                     // ignore
                 }
             }
         }
+
+        private void saveStatistics() {
+            Statistics.Builder sb = new Statistics.Builder();
+
+            sb.timestamp(new Date().getTime());
+            sb.month(Integer.parseInt(SETT.getLineMonth().substring(0, 2)));
+            sb.year(Integer.parseInt(SETT.getLineYear()));
+
+            if (SETT.getUsedElec()) {
+                sb.electricity(SETT.getElecTotal(), SETT.getPaymentsElec());
+            }
+            if (SETT.getUsedRent()) {
+                sb.rent(SETT.getPaymentsRent());
+            }
+            if (SETT.getUsedHeating()) {
+                sb.heating(SETT.getPaymentsHeating());
+            }
+            if (SETT.getUsedHotWater()) {
+                sb.hotWater(SETT.getPaymentsHotWater());
+            }
+            if (SETT.getUsedColdWater()) {
+                sb.coldWater(SETT.getPaymentsColdWater());
+            }
+            if (SETT.getUsedSeverage()) {
+                sb.sewerage(SETT.getPaymentsSeverage());
+            }
+            if (SETT.getUsedGas()) {
+                sb.gas(SETT.getGasTotal(), SETT.getPaymentsGas());
+            }
+            if (SETT.getUsedGarbage()) {
+                sb.garbage(SETT.getPaymentsGarbage());
+            }
+            if (SETT.getUsedIntercom()) {
+                sb.intercom(SETT.getPaymentsIntercom());
+            }
+            if (SETT.getUsedTv()) {
+                sb.tv(SETT.getPaymentsTv());
+            }
+
+            new StatisticsReadWriter().write(sb.build());
+        }
+
         private static final double PPI = 72;
     }
 }
