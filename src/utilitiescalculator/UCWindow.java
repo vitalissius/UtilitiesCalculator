@@ -689,7 +689,7 @@ public class UCWindow extends JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Сплата за комунальні послуги");
         setResizable(false);
-        setSize(new java.awt.Dimension(700, 500));
+        setSize(new java.awt.Dimension(0, 0));
 
         pnDate.setBorder(javax.swing.BorderFactory.createTitledBorder("Дата"));
 
@@ -1197,7 +1197,7 @@ public class UCWindow extends JFrame {
                         .addComponent(btChangeSize)
                         .addComponent(btChangeLanguage)
                         .addComponent(btViewAndPrint)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -1726,6 +1726,8 @@ public class UCWindow extends JFrame {
         lbStreet.setText(DICT.getWord(Dictionary.Keyword.LB_STREET));
         lbBuilding.setText(DICT.getWord(Dictionary.Keyword.LB_BUILDING));
         lbApartment.setText(DICT.getWord(Dictionary.Keyword.LB_APARTMENT));
+
+        pack();
     }
 
     private void btChangeSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChangeSizeActionPerformed
