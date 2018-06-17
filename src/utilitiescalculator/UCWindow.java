@@ -130,6 +130,10 @@ public class UCWindow extends JFrame {
         dialogViewAndPrint = new javax.swing.JDialog();
         pnPreview = new Previewer();
         btPrint = new javax.swing.JButton();
+        jFrame1 = new javax.swing.JFrame();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         pnDate = new javax.swing.JPanel();
         lbMonth = new javax.swing.JLabel();
         cbMonth = new javax.swing.JComboBox<>();
@@ -193,6 +197,7 @@ public class UCWindow extends JFrame {
         lbHrn8 = new javax.swing.JLabel();
         lbHrn9 = new javax.swing.JLabel();
         lbHrn10 = new javax.swing.JLabel();
+        btStatistics = new javax.swing.JButton();
         btViewAndPrint = new javax.swing.JButton();
         btChangeSize = new javax.swing.JButton();
         btChangeLanguage = new javax.swing.JButton();
@@ -686,6 +691,38 @@ public class UCWindow extends JFrame {
                 .addContainerGap())
         );
 
+        jFrame1.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        jScrollPane1.setBorder(null);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Маркер часу", "Маркер дати", "Електроенергія", "Квартплата", "Опалення", "Гаряча вода", "Холодна вода", "Каналізація", "Газ", "Вивіз мусора", "Домофон", "Воля т.п."
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setFillsViewportHeight(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+
+        jTabbedPane1.addTab("Таблиця", jScrollPane1);
+
+        jFrame1.getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Сплата за комунальні послуги");
         setResizable(false);
@@ -1022,6 +1059,13 @@ public class UCWindow extends JFrame {
 
         lbHrn10.setText("грн");
 
+        btStatistics.setText("Статистика...");
+        btStatistics.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btStatisticsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnPaymentsLayout = new javax.swing.GroupLayout(pnPayments);
         pnPayments.setLayout(pnPaymentsLayout);
         pnPaymentsLayout.setHorizontalGroup(
@@ -1064,6 +1108,10 @@ public class UCWindow extends JFrame {
                     .addComponent(lbHrn9)
                     .addComponent(lbHrn10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPaymentsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btStatistics)
+                .addContainerGap())
         );
         pnPaymentsLayout.setVerticalGroup(
             pnPaymentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1118,7 +1166,9 @@ public class UCWindow extends JFrame {
                     .addComponent(tfTv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chbTv)
                     .addComponent(lbHrn10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btStatistics)
+                .addContainerGap())
         );
 
         btViewAndPrint.setText("Роздрукувати...");
@@ -1596,9 +1646,13 @@ public class UCWindow extends JFrame {
         COMPONENTS.addAll(getAllComponents(dialogGasTariff));
         COMPONENTS.addAll(getAllComponents(dialogViewAndPrint));
         COMPONENTS.addAll(getAllComponents(dialogPersonalData));
+        COMPONENTS.addAll(getAllComponents(jFrame1));
+        COMPONENTS.addAll(getAllComponents(jTabbedPane1));
+        COMPONENTS.addAll(getAllComponents(jTable1));
+        COMPONENTS.add(jTable1.getTableHeader());
     }
 
-    private static List<Component> getAllComponents(final Container container) {
+    private List<Component> getAllComponents(final Container container) {
         List<Component> components = new ArrayList<>();
         for (java.awt.Component c : container.getComponents()) {
             components.add(c);
@@ -1621,6 +1675,7 @@ public class UCWindow extends JFrame {
         dialogGasTariff.pack();
         dialogViewAndPrint.pack();
         dialogPersonalData.pack();
+//        jFrame1.pack();
     }
 
     private void applyLanguage() {
@@ -1646,6 +1701,7 @@ public class UCWindow extends JFrame {
         btPersonalData.setText(DICT.getWord(Dictionary.Keyword.BT_PERSONAL_DATA));
         btPersonalSave.setText(DICT.getWord(Dictionary.Keyword.BT_SAVE));
         btViewAndPrint.setText(DICT.getWord(Dictionary.Keyword.BT_VIEW_AND_PRINT));
+        btStatistics.setText(DICT.getWord(Dictionary.Keyword.BT_STATISTICS));
         // one combobox
         cbMonth.removeAllItems();
         cbMonth.addItem(DICT.getWord(Dictionary.Keyword.MTH_JAN));
@@ -1951,6 +2007,14 @@ public class UCWindow extends JFrame {
 
     }//GEN-LAST:event_btPrintActionPerformed
 
+    private void btStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStatisticsActionPerformed
+
+        jFrame1.pack();
+        jFrame1.setLocationRelativeTo(this);
+        jFrame1.setVisible(true);
+
+    }//GEN-LAST:event_btStatisticsActionPerformed
+
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -1980,6 +2044,7 @@ public class UCWindow extends JFrame {
     private javax.swing.JButton btPersonalData;
     private javax.swing.JButton btPersonalSave;
     private javax.swing.JButton btPrint;
+    private javax.swing.JButton btStatistics;
     private javax.swing.JButton btSwapElec;
     private javax.swing.JButton btSwapGas;
     private javax.swing.JButton btViewAndPrint;
@@ -2002,6 +2067,10 @@ public class UCWindow extends JFrame {
     private javax.swing.JDialog dialogPersonalData;
     private javax.swing.JDialog dialogViewAndPrint;
     private javax.swing.JFormattedTextField ftfAccount;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbAccount;
     private javax.swing.JLabel lbApartment;
     private javax.swing.JLabel lbBuilding;

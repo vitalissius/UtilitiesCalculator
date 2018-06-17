@@ -20,7 +20,7 @@ public enum Dictionary {
         MTH_JAN, MTH_FEB, MTH_MAR, MTH_APR, MTH_MAY, MTH_JUN, MTH_JUL, MTH_AUG, MTH_SEP, MTH_OCT, MTH_NOV, MTH_DEC,
 
         BT_TARIFF, BT_CALCULATE, BT_PERSONAL_DATA, BT_VIEW_AND_PRINT, BT_SAVE, BT_CANCEL,
-        BT_FONT, BT_LANGUAGE, BT_LANG_DESCRIPTION, BT_PRINT,
+        BT_FONT, BT_LANGUAGE, BT_LANG_DESCRIPTION, BT_PRINT, BT_STATISTICS,
 
         PAY_ELEC, PAY_RENT, PAY_HEATING, PAY_HOT_WATER, PAY_COLD_WATER, PAY_SEWERAGE, PAY_GAS, PAY_GARBAGE,
         PAY_INTERCOM, PAY_TV,
@@ -84,6 +84,7 @@ public enum Dictionary {
         put(Keyword.BT_LANGUAGE, new String[]{"Мова", "Язык"});
         put(Keyword.BT_LANG_DESCRIPTION, new String[]{"Укр", "Рус"});
         put(Keyword.BT_PRINT, new String[]{"Роздрукувати", "Распечатать"});
+        put(Keyword.BT_STATISTICS, new String[]{"Статистика...", "Статистика..."});
         // check boxes
         put(Keyword.PAY_ELEC, new String[]{"01 Електроенергія:", "01 Электроэнергия:"});
         put(Keyword.PAY_RENT, new String[]{"02 Квартплата:", "02 Квартплата:"});
