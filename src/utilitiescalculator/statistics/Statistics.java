@@ -4,8 +4,8 @@ public class Statistics {
 
     public static class Builder {
         private long timestamp;
-        private int month;
-        private int year;
+        private String month;
+        private String year;
         private Electricity electricity;
         private double rent;
         private double heating;
@@ -26,12 +26,12 @@ public class Statistics {
             return this;
         }
 
-        public Builder month(int month) {
+        public Builder month(String month) {
             this.month = month;
             return this;
         }
 
-        public Builder year(int year) {
+        public Builder year(String year) {
             this.year = year;
             return this;
         }
@@ -98,8 +98,8 @@ public class Statistics {
     }
 
     private long timestamp;
-    private int month;
-    private int year;
+    private String month;
+    private String year;
     private Electricity electricity;
     private double rent;
     private double heating;
@@ -117,7 +117,7 @@ public class Statistics {
     }
 
     private Statistics(Builder builder) {
-        this.timestamp = builder.timestamp;
+        this.timestamp = builder.timestamp != 0L ? builder.timestamp : System.currentTimeMillis();
         this.month = builder.month;
         this.year = builder.year;
         this.electricity = builder.electricity != null ? builder.electricity : new Electricity();
@@ -136,11 +136,11 @@ public class Statistics {
         return timestamp;
     }
 
-    public int getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 

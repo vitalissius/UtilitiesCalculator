@@ -396,9 +396,8 @@ public class Printer {
         private void saveStatistics() {
             Statistics.Builder sb = new Statistics.Builder();
 
-            sb.timestamp(new Date().getTime());
-            sb.month(Integer.parseInt(SETT.getLineMonth().substring(0, 2)));
-            sb.year(Integer.parseInt(SETT.getLineYear()));
+            sb.month(SETT.getLineMonth().substring(0, 2));
+            sb.year(SETT.getLineYear());
 
             if (SETT.getUsedElec()) {
                 sb.electricity(SETT.getElecTotal(), SETT.getPaymentsElec());

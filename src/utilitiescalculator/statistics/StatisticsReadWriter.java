@@ -16,7 +16,7 @@ public class StatisticsReadWriter {
 
     private static final String RGX_FILE_LINE_FORMAT = "\\{" +
                 "\"timestamp\":([0-9]*)," +
-                "\"month\":([0-9]{1,2})," +
+                "\"month\":([0-9]{2})," +
                 "\"year\":([0-9]{4})," +
                 "\"electricity\":\\{\"kwh\":([0-9]*),\"price\":([0-9]*\\.?[0-9]*)}," +
                 "\"rent\":([0-9]*\\.?[0-9]*)," +
@@ -56,8 +56,8 @@ public class StatisticsReadWriter {
                 if (matcher.find()) {
 
                     long timestamp = Long.parseLong(matcher.group(1));
-                    int month = Integer.parseInt(matcher.group(2));
-                    int year = Integer.parseInt(matcher.group(3));
+                    String month = matcher.group(2);
+                    String year = matcher.group(3);
                     int electricity_kwh = Integer.parseInt(matcher.group(4));
                     double electricity_price = Double.parseDouble(matcher.group(5));
                     double rent = Double.parseDouble(matcher.group(6));
