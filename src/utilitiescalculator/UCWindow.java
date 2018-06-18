@@ -15,13 +15,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
+import java.time.Instant;
 import java.time.YearMonth;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
 import java.util.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import utilitiescalculator.statistics.Statistics;
+import utilitiescalculator.statistics.StatisticsReadWriter;
 
 public class UCWindow extends JFrame {
     private static final Settings SETTINGS = Settings.INSTANCE;
@@ -130,10 +136,10 @@ public class UCWindow extends JFrame {
         dialogViewAndPrint = new javax.swing.JDialog();
         pnPreview = new Previewer();
         btPrint = new javax.swing.JButton();
-        jFrame1 = new javax.swing.JFrame();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        frameStatistics = new javax.swing.JFrame();
+        tbbPnStatistics = new javax.swing.JTabbedPane();
+        scrPnStatistics = new javax.swing.JScrollPane();
+        tbStatistics = new javax.swing.JTable();
         pnDate = new javax.swing.JPanel();
         lbMonth = new javax.swing.JLabel();
         cbMonth = new javax.swing.JComboBox<>();
@@ -691,37 +697,34 @@ public class UCWindow extends JFrame {
                 .addContainerGap())
         );
 
-        jFrame1.setPreferredSize(new java.awt.Dimension(800, 600));
+        frameStatistics.setPreferredSize(new java.awt.Dimension(800, 600));
 
-        jScrollPane1.setBorder(null);
+        scrPnStatistics.setBorder(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbStatistics.setAutoCreateRowSorter(true);
+        tbStatistics.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Маркер часу", "Маркер дати", "Електроенергія", "Квартплата", "Опалення", "Гаряча вода", "Холодна вода", "Каналізація", "Газ", "Вивіз мусора", "Домофон", "Воля т.п."
+                "Маркер часу", "Маркер дати", "Електроенергія", "Квартплата", "Опалення", "Гаряча вода", "Холодна вода", "Каналізація", "Газ", "Вивіз мусора", "Домофон", "Воля т.п.", "Кіловат годин", "Кубічні метри"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setFillsViewportHeight(true);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
+        tbStatistics.setFillsViewportHeight(true);
+        tbStatistics.getTableHeader().setReorderingAllowed(false);
+        scrPnStatistics.setViewportView(tbStatistics);
 
-        jTabbedPane1.addTab("Таблиця", jScrollPane1);
+        tbbPnStatistics.addTab("Таблиця", scrPnStatistics);
 
-        jFrame1.getContentPane().add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        frameStatistics.getContentPane().add(tbbPnStatistics, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Сплата за комунальні послуги");
@@ -1646,10 +1649,10 @@ public class UCWindow extends JFrame {
         COMPONENTS.addAll(getAllComponents(dialogGasTariff));
         COMPONENTS.addAll(getAllComponents(dialogViewAndPrint));
         COMPONENTS.addAll(getAllComponents(dialogPersonalData));
-        COMPONENTS.addAll(getAllComponents(jFrame1));
-        COMPONENTS.addAll(getAllComponents(jTabbedPane1));
-        COMPONENTS.addAll(getAllComponents(jTable1));
-        COMPONENTS.add(jTable1.getTableHeader());
+        COMPONENTS.addAll(getAllComponents(frameStatistics));
+        COMPONENTS.addAll(getAllComponents(tbbPnStatistics));
+        COMPONENTS.addAll(getAllComponents(tbStatistics));
+        COMPONENTS.add(tbStatistics.getTableHeader());
     }
 
     private List<Component> getAllComponents(final Container container) {
@@ -2009,9 +2012,36 @@ public class UCWindow extends JFrame {
 
     private void btStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStatisticsActionPerformed
 
-        jFrame1.pack();
-        jFrame1.setLocationRelativeTo(this);
-        jFrame1.setVisible(true);
+        DefaultTableModel dtm = (DefaultTableModel) tbStatistics.getModel();
+        dtm.setRowCount(0); // ignore table rows if they already added (literally clear a table)
+
+        List<Statistics> stats = new StatisticsReadWriter().read();
+
+        for (int i = stats.size() - 1; i >= 0; i--) {
+            Statistics stat = stats.get(i);
+            dtm.addRow(new Object[]{
+                Instant.ofEpochMilli(stat.getTimestamp())
+                        .atZone(ZoneId.systemDefault())
+                        .format(DateTimeFormatter.ofPattern("dd-MM-yy hh:mm")),
+                stat.getMonth() + "-" + stat.getYear(),
+                stat.getElectricity().getPrice(),
+                stat.getRent(),
+                stat.getHeating(),
+                stat.getHotWater(),
+                stat.getColdWater(),
+                stat.getSewerage(),
+                stat.getGas().getPrice(),
+                stat.getGarbage(),
+                stat.getIntercom(),
+                stat.getTv(),
+                stat.getElectricity().getKwh(),
+                stat.getGas().getMeterCubic()
+            });
+        }
+
+        frameStatistics.pack();
+        frameStatistics.setLocationRelativeTo(this);
+        frameStatistics.setVisible(true);
 
     }//GEN-LAST:event_btStatisticsActionPerformed
 
@@ -2066,11 +2096,8 @@ public class UCWindow extends JFrame {
     private javax.swing.JDialog dialogGasTariff;
     private javax.swing.JDialog dialogPersonalData;
     private javax.swing.JDialog dialogViewAndPrint;
+    private javax.swing.JFrame frameStatistics;
     private javax.swing.JFormattedTextField ftfAccount;
-    private javax.swing.JFrame jFrame1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbAccount;
     private javax.swing.JLabel lbApartment;
     private javax.swing.JLabel lbBuilding;
@@ -2124,6 +2151,9 @@ public class UCWindow extends JFrame {
     private javax.swing.JPanel pnPayments;
     private javax.swing.JPanel pnPreview;
     private javax.swing.JPanel pnTotal;
+    private javax.swing.JScrollPane scrPnStatistics;
+    private javax.swing.JTable tbStatistics;
+    private javax.swing.JTabbedPane tbbPnStatistics;
     private javax.swing.JTextField tfApartment;
     private javax.swing.JTextField tfBuilding;
     private static javax.swing.JTextField tfColdWater;
