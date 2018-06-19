@@ -12,7 +12,7 @@ public enum Dictionary {
     private static Language language = Language.UKRAINIAN;
 
     public enum Keyword {
-        TITLE_MAIN, TITLE_ELEC, TITLE_GAS, TITLE_PERSONAL, TITLE_PRINT,
+        TITLE_MAIN, TITLE_ELEC, TITLE_GAS, TITLE_PERSONAL, TITLE_PRINT, TITLE_STATISTICS,
 
         PN_DATE, PN_ELEC, PN_GAS, PN_PAYMENT, PN_TOTAL, PN_ELEC_BOUNDARY, PN_ELEC_PRICE,
         PN_ELEC_PRIVILEGE, PN_ELEC_MAX_VALUE, PN_GAS_PRICE, PN_GAS_MAX_VALUE, PN_NAMES, PN_ADDRESS,
@@ -46,6 +46,7 @@ public enum Dictionary {
         put(Keyword.TITLE_GAS, new String[]{"Тариф на газ", "Тариф на газ"});
         put(Keyword.TITLE_PERSONAL, new String[]{"Персональні дані платника", "Персональные данные плательщика"});
         put(Keyword.TITLE_PRINT, new String[]{"Перегляд і роздруківка", "Просмотр и печать"});
+        put(Keyword.TITLE_STATISTICS, new String[]{"Статистика платежів", "Статистика по платежам"});
         // titled borders
         put(Keyword.PN_DATE, new String[]{"Дата", "Дата"});
         put(Keyword.PN_ELEC, new String[]{"Показання електричного лічильника", "Показания электрического счётчика"});

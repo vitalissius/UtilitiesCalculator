@@ -701,7 +701,6 @@ public class UCWindow extends JFrame {
 
         scrPnStatistics.setBorder(null);
 
-        tbStatistics.setAutoCreateRowSorter(true);
         tbStatistics.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -711,7 +710,7 @@ public class UCWindow extends JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, true, true, true
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1690,6 +1689,7 @@ public class UCWindow extends JFrame {
         dialogGasTariff.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_GAS));
         dialogPersonalData.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_PERSONAL));
         dialogViewAndPrint.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_PRINT));
+        frameStatistics.setTitle(DICT.getWord(Dictionary.Keyword.TITLE_STATISTICS));
         // all buttons
         btCalculate.setText(DICT.getWord(Dictionary.Keyword.BT_CALCULATE));
         btChangeLanguage.setText(DICT.getText());
@@ -2006,7 +2006,7 @@ public class UCWindow extends JFrame {
 
     private void btPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrintActionPerformed
 
-        new Printer.Report().printReport();
+        new Printer.Report().printReportWithStatisticsSaving(Settings.UC_STATISTICS_FILE_PATH);
 
     }//GEN-LAST:event_btPrintActionPerformed
 
@@ -2015,29 +2015,31 @@ public class UCWindow extends JFrame {
         DefaultTableModel dtm = (DefaultTableModel) tbStatistics.getModel();
         dtm.setRowCount(0); // ignore table rows if they already added (literally clear a table)
 
-        List<Statistics> stats = new StatisticsReadWriter().read();
+        SwingUtilities.invokeLater(() -> {
+            List<Statistics> stats = new StatisticsReadWriter().read(Settings.UC_STATISTICS_FILE_PATH);
 
-        for (int i = stats.size() - 1; i >= 0; i--) {
-            Statistics stat = stats.get(i);
-            dtm.addRow(new Object[]{
-                Instant.ofEpochMilli(stat.getTimestamp())
-                        .atZone(ZoneId.systemDefault())
-                        .format(DateTimeFormatter.ofPattern("dd-MM-yy hh:mm")),
-                stat.getMonth() + "-" + stat.getYear(),
-                stat.getElectricity().getPrice(),
-                stat.getRent(),
-                stat.getHeating(),
-                stat.getHotWater(),
-                stat.getColdWater(),
-                stat.getSewerage(),
-                stat.getGas().getPrice(),
-                stat.getGarbage(),
-                stat.getIntercom(),
-                stat.getTv(),
-                stat.getElectricity().getKwh(),
-                stat.getGas().getMeterCubic()
-            });
-        }
+            for (int i = stats.size() - 1; i >= 0; i--) {
+                Statistics stat = stats.get(i);
+                dtm.addRow(new Object[]{
+                    Instant.ofEpochMilli(stat.getTimestamp())
+                            .atZone(ZoneId.systemDefault())
+                            .format(DateTimeFormatter.ofPattern("dd-MM-yy hh:mm")),
+                    stat.getMonth() + "-" + stat.getYear(),
+                    stat.getElectricity().getPrice(),
+                    stat.getRent(),
+                    stat.getHeating(),
+                    stat.getHotWater(),
+                    stat.getColdWater(),
+                    stat.getSewerage(),
+                    stat.getGas().getPrice(),
+                    stat.getGarbage(),
+                    stat.getIntercom(),
+                    stat.getTv(),
+                    stat.getElectricity().getKwh(),
+                    stat.getGas().getMeterCubic()
+                });
+            }
+        });
 
         frameStatistics.pack();
         frameStatistics.setLocationRelativeTo(this);

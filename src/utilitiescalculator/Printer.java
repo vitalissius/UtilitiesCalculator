@@ -14,10 +14,10 @@ import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -374,6 +374,14 @@ public class Printer {
         }
 
         public void printReport() {
+            _printReport(null);
+        }
+
+        public void printReportWithStatisticsSaving(Path statisticsFilePath) {
+            _printReport(statisticsFilePath);
+        }
+
+        private void _printReport(Path statisticsFilePath) {
             PageFormat pf = new PageFormat();
             pf.setPaper(this.makePaper(PaperSize.A4, PaperMargins.NARROW2));
 
@@ -386,14 +394,16 @@ public class Printer {
             if (pj.printDialog()) {
                 try {
                     pj.print();
-                    saveStatistics();
+                    if (statisticsFilePath != null) {
+                        saveStatistics(statisticsFilePath);
+                    }
                 } catch (PrinterException e) {
                     // ignore
                 }
             }
         }
 
-        private void saveStatistics() {
+        private void saveStatistics(Path statisticsFilePath) {
             Statistics.Builder sb = new Statistics.Builder();
 
             sb.month(SETT.getLineMonth().substring(0, 2));
@@ -430,7 +440,7 @@ public class Printer {
                 sb.tv(SETT.getPaymentsTv());
             }
 
-            new StatisticsReadWriter().write(sb.build());
+            new StatisticsReadWriter().write(statisticsFilePath, sb.build());
         }
 
         private static final double PPI = 72;
