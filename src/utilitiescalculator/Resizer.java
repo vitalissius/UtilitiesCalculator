@@ -17,10 +17,14 @@ public enum Resizer {
         THIRTEEN(13),
         FIFTEEN(15);
 
-        private final int size;
+        private final int sizeCode;
 
-        FontSize(int size) {
-            this.size = size;
+        FontSize(int sizeCode) {
+            this.sizeCode = sizeCode;
+        }
+
+        public int getSizeCode() {
+            return sizeCode;
         }
     }
 
@@ -30,7 +34,7 @@ public enum Resizer {
 
     static {
         for (FontSize fs : FontSize.values()) {
-            map.put(fs, new Font("Tahoma", Font.PLAIN, fs.size));
+            map.put(fs, new Font("Tahoma", Font.PLAIN, fs.sizeCode));
         }
     }
 
@@ -40,7 +44,7 @@ public enum Resizer {
         final FontSize fntSize = FontSize.ELEVEN;
         Resizer.fontSize = fntSize;
 
-        final String interfix = String.valueOf(fntSize.size);
+        final String interfix = String.valueOf(fntSize.sizeCode);
         final String prefix = Dictionary.INSTANCE.getWord(Dictionary.Keyword.BT_FONT);
         text.append(prefix).append("(").append(interfix).append(")");
     }
@@ -67,7 +71,7 @@ public enum Resizer {
     private void updateTextBySize() {
         int charAt = text.indexOf("(");
         if (charAt != -1) {
-            text.replace(charAt + 1, charAt + 1 + 2, Integer.toString(fontSize.size));
+            text.replace(charAt + 1, charAt + 1 + 2, Integer.toString(fontSize.sizeCode));
         }
     }
 
