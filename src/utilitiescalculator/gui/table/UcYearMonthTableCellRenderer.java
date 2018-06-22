@@ -15,7 +15,7 @@ public class UcYearMonthTableCellRenderer extends DefaultTableCellRenderer {
     private static final Color BACKGROUND_COLOR_SPRING = new Color(174,238,193);
     private static final Color BACKGROUND_COLOR_SUMMER = new Color(252,199,202);
     private static final Color BACKGROUND_COLOR_AUTUMN = new Color(255,231,145);
-    private static final Locale LOCALE =
+    private final Locale LOCALE =
             Locale.forLanguageTag(Dictionary.INSTANCE.getWord(Dictionary.Keyword.LANGUAGE_TAG));
 
     @Override
@@ -24,6 +24,7 @@ public class UcYearMonthTableCellRenderer extends DefaultTableCellRenderer {
         int yearNumber = ymValue.getYear();
         String monthLocalName = ymValue.getMonth().getDisplayName(TextStyle.FULL_STANDALONE, LOCALE);
         super.setValue(yearNumber + " " + monthLocalName);
+        System.out.println(LOCALE);
     }
 
     @Override
