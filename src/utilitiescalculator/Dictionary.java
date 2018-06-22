@@ -36,7 +36,14 @@ public enum Dictionary {
         LINE_COLD_WATER, LINE_SEWERAGE, LINE_GAS, LINE_GARBAGE, LINE_INTERCOM, LINE_TV, LINE_ACCOUNT, LINE_INITIALS,
         LINE_ADDRESS, LINE_STREET, LINE_BUILDING, LINE_APARTMENT, LINE_PRIVILEGE, LINE_TOTAL, LINE_SIGNATURE,
 
-        LINE_NOTICE, LINE_RECEIPT, LINE_TELLER
+        LINE_NOTICE, LINE_RECEIPT, LINE_TELLER,
+
+        TAB_TABLE,
+
+        TC_TIMESTAMP, TC_YEARMONTH, TC_ELEC, TC_RENT, TC_HEATING, TC_HOT_WATER, TC_COLD_WATER, TC_SEWERAGE, TC_GAS,
+        TC_GARBAGE, TC_INTERCOM, TC_TV, TC_KWH, TC_MCUBIC,
+
+        LANGUAGE_TAG,
     }
 
     private static final Map<Keyword, String[]> DICTIONARY = new EnumMap<Keyword, String[]>(Keyword.class) {{
@@ -159,6 +166,25 @@ public enum Dictionary {
         put(Keyword.LINE_NOTICE, new String[]{"Повідомлення", null});
         put(Keyword.LINE_RECEIPT, new String[]{"Квитанція", null});
         put(Keyword.LINE_TELLER, new String[]{"Касир", null});
+        // tabs
+        put(Keyword.TAB_TABLE, new String[]{"Дані у вигляді таблиці", "Данные в виде таблицы"});
+        // table columns
+        put(Keyword.TC_TIMESTAMP, new String[]{"Часовий маркер", "Часовой маркер"});
+        put(Keyword.TC_YEARMONTH, new String[]{"Рік-місяць", "Год-месяц"});
+        put(Keyword.TC_ELEC, new String[]{"Електроенергія", "Электроэнергия"});
+        put(Keyword.TC_RENT, new String[]{"Квартплата", "Квартплата"});
+        put(Keyword.TC_HEATING, new String[]{"Опалення", "Отопление"});
+        put(Keyword.TC_HOT_WATER, new String[]{"Гаряча вода", "Гарячая вода"});
+        put(Keyword.TC_COLD_WATER, new String[]{"Холодна вода", "Холодная вода"});
+        put(Keyword.TC_SEWERAGE, new String[]{"Каналізація", "Канализация"});
+        put(Keyword.TC_GAS, new String[]{"Газ", "Газ"});
+        put(Keyword.TC_GARBAGE, new String[]{"Вивіз сміття", "Вывоз мусора"});
+        put(Keyword.TC_INTERCOM, new String[]{"Домофон", "Домофон"});
+        put(Keyword.TC_TV, new String[]{"Телебачення", "Телевидение"});
+        put(Keyword.TC_KWH, new String[]{"Кіловат-годин", "Киловатт-часов"});
+        put(Keyword.TC_MCUBIC, new String[]{"Метрів кубічних", "Метров кубических"});
+        // language tag
+        put(Keyword.LANGUAGE_TAG, new String[]{"uk", "ru"});
     }};
 
     public void setLanguage(Language language) {
