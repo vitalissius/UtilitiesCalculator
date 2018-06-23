@@ -6,6 +6,7 @@ import java.util.Map;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
@@ -14,7 +15,9 @@ public enum Resizer {
 
     public enum FontSize {
         ELEVEN(11),
+        TWELVE(12),
         THIRTEEN(13),
+        FOURTEEN(14),
         FIFTEEN(15);
 
         private final int sizeCode;
@@ -81,8 +84,10 @@ public enum Resizer {
             if (border instanceof TitledBorder) {
                 ((TitledBorder) border).setTitleFont(map.get(fontSize));
             }
-        }
-        else {
+        } else {
+            if (component instanceof JTable) {
+                ((JTable) component).setRowHeight(fontSize.getSizeCode() + 5);
+            }
             component.setFont(map.get(fontSize));
         }
         updateTextBySize();
