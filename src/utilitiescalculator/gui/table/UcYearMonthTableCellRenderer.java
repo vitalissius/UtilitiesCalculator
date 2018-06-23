@@ -24,7 +24,6 @@ public class UcYearMonthTableCellRenderer extends DefaultTableCellRenderer {
         int yearNumber = ymValue.getYear();
         String monthLocalName = ymValue.getMonth().getDisplayName(TextStyle.FULL_STANDALONE, LOCALE);
         super.setValue(yearNumber + " " + monthLocalName);
-        System.out.println(LOCALE);
     }
 
     @Override

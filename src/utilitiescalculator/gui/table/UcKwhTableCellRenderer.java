@@ -11,7 +11,7 @@ public class UcKwhTableCellRenderer extends DefaultTableCellRenderer {
 
     private static final Color BACKGROUND_COLOR_RED = new Color(255, 128, 128);
     private static final Color BACKGROUND_COLOR_WHITE = Color.WHITE;
-    private static final int ELEC_BOUNDARY = Settings.INSTANCE.getElecBoundary();
+    private final int ELEC_BOUNDARY = Settings.INSTANCE.getElecBoundary();
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
