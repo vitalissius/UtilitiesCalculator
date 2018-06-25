@@ -67,7 +67,8 @@ public enum Settings {
         WindowPositionX("window.x", "0"),
         WindowPositionY("window.y", "0"),
         FontSize("font.size", Resizer.FontSize.ELEVEN.toString()),
-        Language("language", Dictionary.Language.UKRAINIAN.toString());
+        Language("language", Dictionary.Language.UKRAINIAN.toString()),
+        StatisticsColumnsMask("statistics.columns.mask", "");
 
         private final String key;
         private String value;
@@ -134,6 +135,7 @@ public enum Settings {
     private String lineMonth;
     private String lineYear;
     private double total;
+    private int statisticsColumnsMask;
 
     /*
      * Цель функций getInt(), getDouble(), getFontSize() и getLanguage() заключается в предотвращении
@@ -141,7 +143,7 @@ public enum Settings {
      * Функции getBoolean() и getString() используются просто для поддержания общего стиля кодирования
      * с вышеупомянутыми функциями.
      */
-    private static int getInt(Vls vls, int defaultValue) {
+    private int getInt(Vls vls, int defaultValue) {
         try {
             return Integer.parseInt(vls.get());
         } catch (NumberFormatException e) {
@@ -149,11 +151,11 @@ public enum Settings {
         }
     }
 
-    private static int getInt(Vls vls) {
+    private int getInt(Vls vls) {
         return getInt(vls, 0);
     }
 
-    private static double getDouble(Vls vls) {
+    private double getDouble(Vls vls) {
         try {
             return Double.parseDouble(vls.get());
         } catch (NumberFormatException e) {
@@ -161,7 +163,7 @@ public enum Settings {
         }
     }
 
-    private static Resizer.FontSize getFontSize(Vls vls) {
+    private Resizer.FontSize getFontSize(Vls vls) {
         try {
             return Resizer.FontSize.valueOf(vls.get());
         } catch (IllegalArgumentException e) {
@@ -169,7 +171,7 @@ public enum Settings {
         }
     }
 
-    private static Dictionary.Language getLanguage(Vls vls) {
+    private Dictionary.Language getLanguage(Vls vls) {
         try {
             return Dictionary.Language.valueOf(vls.get());
         } catch (IllegalArgumentException e) {
@@ -177,11 +179,11 @@ public enum Settings {
         }
     }
 
-    private static boolean getBoolean(Vls vls) {
+    private boolean getBoolean(Vls vls) {
         return Boolean.valueOf(vls.get());
     }
 
-    private static String getString(Vls vls) {
+    private String getString(Vls vls) {
         return vls.get();
     }
 
@@ -244,6 +246,8 @@ public enum Settings {
 
         fontSize = getFontSize(Vls.FontSize);
         language = getLanguage(Vls.Language);
+
+        statisticsColumnsMask = getInt(Vls.StatisticsColumnsMask);
     }
 
     public void storeProperties() {
@@ -296,6 +300,8 @@ public enum Settings {
         Vls.WindowPositionY.set(Integer.toString(windowPositionY));
         Vls.FontSize.set(fontSize.toString());
         Vls.Language.set(language.toString());
+
+        Vls.StatisticsColumnsMask.set("" + statisticsColumnsMask);
 
         File parent = UC_STATISTICS_FILE_PATH.toFile().getParentFile();
         if (!parent.exists()) {
@@ -479,6 +485,9 @@ public enum Settings {
     public double getTotal() {
         return total;
     }
+    public int getStatisticsColumnsMask() {
+        return statisticsColumnsMask;
+    }
 
     public void setUsedElecMeter(boolean elecMeter) {
         this.usedElecMeter = elecMeter;
@@ -620,5 +629,8 @@ public enum Settings {
     }
     public void setTotal(double total) {
         this.total = total;
+    }
+    public void setStatisticsColumnsMask(int statisticsColumnsMask) {
+        this.statisticsColumnsMask = statisticsColumnsMask;
     }
 }

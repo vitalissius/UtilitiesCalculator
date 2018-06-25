@@ -15,20 +15,30 @@ import utilitiescalculator.statistics.StatisticsReadWriter;
 public class UcStatisticsTableModel extends AbstractTableModel {
 
     public enum ColumnKind {
-        Timestamp,
-        YearMonth,
-        Electricity,
-        Rent,
-        Heating,
-        HotWater,
-        ColdWater,
-        Sewerage,
-        Gas,
-        Garbage,
-        Intercom,
-        Tv,
-        Kwh,
-        Mc;
+        Timestamp(Boolean.FALSE),
+        YearMonth(Boolean.TRUE),
+        Electricity(Boolean.FALSE),
+        Rent(Boolean.FALSE),
+        Heating(Boolean.FALSE),
+        HotWater(Boolean.FALSE),
+        ColdWater(Boolean.FALSE),
+        Sewerage(Boolean.FALSE),
+        Gas(Boolean.FALSE),
+        Garbage(Boolean.FALSE),
+        Intercom(Boolean.FALSE),
+        Tv(Boolean.FALSE),
+        Kwh(Boolean.FALSE),
+        Mc(Boolean.FALSE);
+
+        private final boolean alwaysShown;
+
+        private ColumnKind(boolean alwaysShown) {
+            this.alwaysShown = alwaysShown;
+        }
+
+        public boolean alwaysShown() {
+            return alwaysShown;
+        }
 
         public String columnName() {
             int firstTcKeywordOrdinal = Dictionary.Keyword.TC_TIMESTAMP.ordinal();
@@ -53,20 +63,20 @@ public class UcStatisticsTableModel extends AbstractTableModel {
     }
 
     private static final Map<ColumnKind, Boolean> FLAGS = new LinkedHashMap<ColumnKind, Boolean>(){{
-        put(ColumnKind.Timestamp, Boolean.FALSE);
-        put(ColumnKind.YearMonth, Boolean.FALSE);
-        put(ColumnKind.Electricity, Boolean.FALSE);
-        put(ColumnKind.Rent, Boolean.FALSE);
-        put(ColumnKind.Heating, Boolean.FALSE);
-        put(ColumnKind.HotWater, Boolean.FALSE);
-        put(ColumnKind.ColdWater, Boolean.FALSE);
-        put(ColumnKind.Sewerage, Boolean.FALSE);
-        put(ColumnKind.Gas, Boolean.FALSE);
-        put(ColumnKind.Garbage, Boolean.FALSE);
-        put(ColumnKind.Intercom, Boolean.FALSE);
-        put(ColumnKind.Tv, Boolean.FALSE);
-        put(ColumnKind.Kwh, Boolean.FALSE);
-        put(ColumnKind.Mc, Boolean.FALSE);
+        put(ColumnKind.Timestamp, Boolean.TRUE);
+        put(ColumnKind.YearMonth, Boolean.TRUE);
+        put(ColumnKind.Electricity, Boolean.TRUE);
+        put(ColumnKind.Rent, Boolean.TRUE);
+        put(ColumnKind.Heating, Boolean.TRUE);
+        put(ColumnKind.HotWater, Boolean.TRUE);
+        put(ColumnKind.ColdWater, Boolean.TRUE);
+        put(ColumnKind.Sewerage, Boolean.TRUE);
+        put(ColumnKind.Gas, Boolean.TRUE);
+        put(ColumnKind.Garbage, Boolean.TRUE);
+        put(ColumnKind.Intercom, Boolean.TRUE);
+        put(ColumnKind.Tv, Boolean.TRUE);
+        put(ColumnKind.Kwh, Boolean.TRUE);
+        put(ColumnKind.Mc, Boolean.TRUE);
     }};
 
     private static final Class<?>[] COLUMN_CLASSES = {
@@ -80,21 +90,88 @@ public class UcStatisticsTableModel extends AbstractTableModel {
     private List<Statistics> statistics;
     private List<ColumnKind> shownColumns = new ArrayList<>();
 
-    public UcStatisticsTableModel(List<Boolean> flags) {
+    private int allShownColumnsMask =
+            Integer.parseInt(new String(new char[ColumnKind.values().length]).replace('\0', '1'), 2);
+
+    {
         statistics = new StatisticsReadWriter().read(Settings.UC_STATISTICS_FILE_PATH);
         Collections.sort(statistics, Collections.reverseOrder((lhs, rhs) -> {
             return Long.compare(lhs.getTimestamp(), rhs.getTimestamp());
         }));
+    }
 
-        for (ColumnKind ct : ColumnKind.values()) {
-            FLAGS.put(ct, flags.get(ct.ordinal()));
-        }
+    private static final int ALWAYS_SHOWN_COLUMNS_MASK = alwaysShownColumnsMask();
 
-        for (int i = 0; i < flags.size(); i++) {
-            if (flags.get(i)) {
-                shownColumns.add(getColumnTypeByIndex(i));
+    private static int alwaysShownColumnsMask() {
+        int alwaysShownColumnsMask = 0;
+        for (ColumnKind ck : ColumnKind.values()) {
+            if (ck.alwaysShown()) {
+                alwaysShownColumnsMask = alwaysShownColumnsMask | (1 << ck.ordinal());
             }
         }
+        return alwaysShownColumnsMask;
+    }
+
+    public UcStatisticsTableModel(int shownColumnsMask) {
+        int flag = shownColumnsMask | ALWAYS_SHOWN_COLUMNS_MASK;
+        if (flag >= ALWAYS_SHOWN_COLUMNS_MASK && flag <= allShownColumnsMask) {
+            for (ColumnKind ck : ColumnKind.values()) {
+                int ordinal = ck.ordinal();
+                boolean isShown = ((flag & (1 << ordinal)) >>> ordinal) == 1;
+                FLAGS.put(ck, isShown ? Boolean.TRUE : Boolean.FALSE);
+                if (isShown) {
+                    shownColumns.add(ck);
+                }
+            }
+        } else {
+            for (ColumnKind ct : ColumnKind.values()) {
+                if (ct.isChecked()) {
+                    shownColumns.add(ct);
+                }
+            }
+        }
+    }
+
+    public UcStatisticsTableModel(List<Boolean> flags) {
+        for (ColumnKind ct : ColumnKind.values()) {
+            FLAGS.put(ct, flags.get(ct.ordinal()));
+            if (ct.isChecked()) {
+                shownColumns.add(ct);
+            }
+        }
+    }
+
+    public void checkUncheck(ColumnKind columnKind) {
+        boolean isChecked = columnKind.isChecked();
+        if (isChecked) {
+            shownColumns.remove(columnKind);
+        } else {
+            int ordinal = columnKind.ordinal();
+
+            List<Boolean> subList = new ArrayList<>(FLAGS.values()).subList(0, ordinal);
+            long columnAmountBeforeParamColumn = subList.stream().filter((f) -> f.equals(Boolean.TRUE)).count();
+            int index = (int) columnAmountBeforeParamColumn;
+
+            shownColumns.add(index, columnKind);
+        }
+        FLAGS.put(columnKind, !isChecked);
+        fireTableStructureChanged();
+    }
+
+    public List<Boolean> getFlags() {
+        return new ArrayList<>(FLAGS.values());
+    }
+
+    public int getShownColumnsMask() {
+        int shownColumnsMask = 0;
+        int shift = 0;
+        for (Boolean flag : FLAGS.values()) {
+            if (flag) {
+                shownColumnsMask = shownColumnsMask | (1 << shift);
+            }
+            shift++;
+        }
+        return shownColumnsMask;
     }
 
     @Override
@@ -120,31 +197,6 @@ public class UcStatisticsTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;
-    }
-
-    public void checkUncheck(ColumnKind columnKind) {
-        boolean isChecked = columnKind.isChecked();
-        if (isChecked) {
-            shownColumns.remove(columnKind);
-        } else {
-            int ordinal = columnKind.ordinal();
-
-            List<Boolean> subList = new ArrayList<>(FLAGS.values()).subList(0, ordinal);
-            long columnAmountBeforeParamColumn = subList.stream().filter((f) -> f.equals(Boolean.TRUE)).count();
-            int index = (int) columnAmountBeforeParamColumn;
-
-            shownColumns.add(index, columnKind);
-        }
-        FLAGS.put(columnKind, !isChecked);
-        fireTableStructureChanged();
-    }
-
-    private ColumnKind getColumnTypeByIndex(int columnIndex) {
-        return ColumnKind.values()[columnIndex];
-    }
-
-    public List<Boolean> getFlags() {
-        return new ArrayList<>(FLAGS.values());
     }
 
     @Override
