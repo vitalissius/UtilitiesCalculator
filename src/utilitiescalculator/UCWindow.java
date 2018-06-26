@@ -15,19 +15,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
-import java.time.Instant;
 import java.time.YearMonth;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
 import java.util.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
-import utilitiescalculator.statistics.Statistics;
-import utilitiescalculator.statistics.StatisticsReadWriter;
+import utilitiescalculator.gui.table.UcStatisticsTableModel;
+import utilitiescalculator.util.Utils;
 
 public class UCWindow extends JFrame {
     private static final Settings SETTINGS = Settings.INSTANCE;
@@ -139,7 +136,7 @@ public class UCWindow extends JFrame {
         frameStatistics = new javax.swing.JFrame();
         tbbPnStatistics = new javax.swing.JTabbedPane();
         scrPnStatistics = new javax.swing.JScrollPane();
-        tbStatistics = new javax.swing.JTable();
+        tbStatistics = new javax.swing.JTable(new UcStatisticsTableModel(SETTINGS.getStatisticsColumnsMask()));
         pnDate = new javax.swing.JPanel();
         lbMonth = new javax.swing.JLabel();
         cbMonth = new javax.swing.JComboBox<>();
@@ -400,6 +397,7 @@ public class UCWindow extends JFrame {
         );
 
         dialogGasTariff.setTitle("Тариф на газ");
+        dialogGasTariff.setIconImage(null);
         dialogGasTariff.setModal(true);
         dialogGasTariff.setResizable(false);
 
@@ -503,6 +501,7 @@ public class UCWindow extends JFrame {
         );
 
         dialogPersonalData.setTitle("Персональні дані платника");
+        dialogPersonalData.setIconImage(null);
         dialogPersonalData.setModal(true);
         dialogPersonalData.setResizable(false);
 
@@ -650,6 +649,7 @@ public class UCWindow extends JFrame {
         );
 
         dialogViewAndPrint.setTitle("Перегляд і роздруківка");
+        dialogViewAndPrint.setIconImage(null);
         dialogViewAndPrint.setModal(true);
         dialogViewAndPrint.setResizable(false);
         dialogViewAndPrint.setSize(new java.awt.Dimension(0, 0));
@@ -697,27 +697,15 @@ public class UCWindow extends JFrame {
                 .addContainerGap())
         );
 
-        frameStatistics.setPreferredSize(new java.awt.Dimension(800, 600));
+        frameStatistics.setMinimumSize(new java.awt.Dimension(600, 400));
+        frameStatistics.setPreferredSize(new java.awt.Dimension(1200, 600));
+        frameStatistics.setSize(new java.awt.Dimension(1200, 600));
 
-        scrPnStatistics.setBorder(null);
+        scrPnStatistics.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tbStatistics.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Маркер часу", "Маркер дати", "Електроенергія", "Квартплата", "Опалення", "Гаряча вода", "Холодна вода", "Каналізація", "Газ", "Вивіз мусора", "Домофон", "Воля т.п.", "Кіловат годин", "Кубічні метри"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        tbStatistics.setAutoCreateRowSorter(true);
         tbStatistics.setFillsViewportHeight(true);
+        tbStatistics.setGridColor(new java.awt.Color(176, 216, 244));
         tbStatistics.getTableHeader().setReorderingAllowed(false);
         scrPnStatistics.setViewportView(tbStatistics);
 
@@ -1649,8 +1637,6 @@ public class UCWindow extends JFrame {
         COMPONENTS.addAll(getAllComponents(dialogViewAndPrint));
         COMPONENTS.addAll(getAllComponents(dialogPersonalData));
         COMPONENTS.addAll(getAllComponents(frameStatistics));
-        COMPONENTS.addAll(getAllComponents(tbbPnStatistics));
-        COMPONENTS.addAll(getAllComponents(tbStatistics));
         COMPONENTS.add(tbStatistics.getTableHeader());
     }
 
@@ -1677,7 +1663,6 @@ public class UCWindow extends JFrame {
         dialogGasTariff.pack();
         dialogViewAndPrint.pack();
         dialogPersonalData.pack();
-//        jFrame1.pack();
     }
 
     private void applyLanguage() {
@@ -1785,6 +1770,10 @@ public class UCWindow extends JFrame {
         lbStreet.setText(DICT.getWord(Dictionary.Keyword.LB_STREET));
         lbBuilding.setText(DICT.getWord(Dictionary.Keyword.LB_BUILDING));
         lbApartment.setText(DICT.getWord(Dictionary.Keyword.LB_APARTMENT));
+        // tabs
+        tbbPnStatistics.setTitleAt(0, DICT.getWord(Dictionary.Keyword.TAB_TABLE));
+        // table
+        Utils.setStyleOfRenderingToUcStatisticsTable(tbStatistics);
 
         pack();
     }
@@ -2012,32 +2001,28 @@ public class UCWindow extends JFrame {
 
     private void btStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStatisticsActionPerformed
 
-        DefaultTableModel dtm = (DefaultTableModel) tbStatistics.getModel();
-        dtm.setRowCount(0); // ignore table rows if they already added (literally clear a table)
-
-        SwingUtilities.invokeLater(() -> {
-            List<Statistics> stats = new StatisticsReadWriter().read(Settings.UC_STATISTICS_FILE_PATH);
-
-            for (int i = stats.size() - 1; i >= 0; i--) {
-                Statistics stat = stats.get(i);
-                dtm.addRow(new Object[]{
-                    Instant.ofEpochMilli(stat.getTimestamp())
-                            .atZone(ZoneId.systemDefault())
-                            .format(DateTimeFormatter.ofPattern("dd-MM-yy hh:mm")),
-                    stat.getMonth() + "-" + stat.getYear(),
-                    stat.getElectricity().getPrice(),
-                    stat.getRent(),
-                    stat.getHeating(),
-                    stat.getHotWater(),
-                    stat.getColdWater(),
-                    stat.getSewerage(),
-                    stat.getGas().getPrice(),
-                    stat.getGarbage(),
-                    stat.getIntercom(),
-                    stat.getTv(),
-                    stat.getElectricity().getKwh(),
-                    stat.getGas().getMeterCubic()
-                });
+        final JTableHeader tableHeader = tbStatistics.getTableHeader();
+        tableHeader.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                if (SwingUtilities.isRightMouseButton(mouseEvent)) {
+                    final UcStatisticsTableModel ucModel = (UcStatisticsTableModel) tbStatistics.getModel();
+                    JPopupMenu popupMenu = new JPopupMenu();
+                    for (UcStatisticsTableModel.ColumnKind kind : UcStatisticsTableModel.ColumnKind.values()) {
+                        JCheckBoxMenuItem chbMenuItem = new JCheckBoxMenuItem(kind.columnName(), kind.isChecked());
+                        chbMenuItem.setEnabled(!kind.alwaysShown());
+                        chbMenuItem.addActionListener((actionEvent) -> {
+                            JCheckBoxMenuItem source = (JCheckBoxMenuItem) actionEvent.getSource();
+                            UcStatisticsTableModel.ColumnKind ct =
+                                    UcStatisticsTableModel.ColumnKind.columnKindByColumnName(source.getActionCommand());
+                            ucModel.checkUncheck(ct);
+                            Utils.resetStyleOfRenderingToUcStatisticsTable(tbStatistics);
+                            SETTINGS.setStatisticsColumnsMask(ucModel.getShownColumnsMask());
+                        });
+                        popupMenu.add(chbMenuItem);
+                    }
+                    popupMenu.show(tableHeader, mouseEvent.getX(), mouseEvent.getY());
+                }
             }
         });
 
