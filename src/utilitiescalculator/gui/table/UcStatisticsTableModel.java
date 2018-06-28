@@ -90,7 +90,7 @@ public class UcStatisticsTableModel extends AbstractTableModel {
     private List<Statistics> statistics;
     private List<ColumnKind> shownColumns = new ArrayList<>();
 
-    private int allShownColumnsMask =
+    private static final int ALL_SHOWN_COLUMNS_MASK =
             Integer.parseInt(new String(new char[ColumnKind.values().length]).replace('\0', '1'), 2);
 
     {
@@ -113,8 +113,10 @@ public class UcStatisticsTableModel extends AbstractTableModel {
     }
 
     public UcStatisticsTableModel(int shownColumnsMask) {
+        shownColumnsMask = shownColumnsMask & ALL_SHOWN_COLUMNS_MASK;
+
         int flag = shownColumnsMask | ALWAYS_SHOWN_COLUMNS_MASK;
-        if (flag >= ALWAYS_SHOWN_COLUMNS_MASK && flag <= allShownColumnsMask) {
+        if (flag >= ALWAYS_SHOWN_COLUMNS_MASK) {
             for (ColumnKind ck : ColumnKind.values()) {
                 int ordinal = ck.ordinal();
                 boolean isShown = ((flag & (1 << ordinal)) >>> ordinal) == 1;
