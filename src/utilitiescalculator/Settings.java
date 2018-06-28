@@ -1,11 +1,15 @@
 package utilitiescalculator;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Properties;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.nio.file.Files;
+import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -14,6 +18,8 @@ public enum Settings {
     INSTANCE;
 
     private static final Properties PROPERTIES = new Properties();
+
+    private static final Charset CHARSET_CP1251 = Charset.forName("cp1251");
 
     public static final String USER_HOME = System.getProperty("user.home");
     public static final String UC_FOLDER_NAME = ".ucfiles";
@@ -68,7 +74,7 @@ public enum Settings {
         WindowPositionY("window.y", "0"),
         FontSize("font.size", Resizer.FontSize.ELEVEN.toString()),
         Language("language", Dictionary.Language.UKRAINIAN.toString()),
-        StatisticsColumnsMask("statistics.columns.mask", "");
+        StatisticsColumnsMask("statistics.columns.mask", "11111111111111111111111111111111");//all possible columns
 
         private final String key;
         private String value;
@@ -187,8 +193,13 @@ public enum Settings {
         return vls.get();
     }
 
+    private int getIntMask(Vls vls) {
+        return Integer.parseUnsignedInt(vls.get(), 2);
+    }
+
     public void loadProperties() {
-        try (BufferedReader input = Files.newBufferedReader(UC_PROPERTIES_FILE_PATH)) {
+        try (BufferedReader input = new BufferedReader(new InputStreamReader(
+                new FileInputStream(UC_PROPERTIES_FILE_PATH.toFile()), CHARSET_CP1251))) {
 
             PROPERTIES.load(input);
 
@@ -247,7 +258,7 @@ public enum Settings {
         fontSize = getFontSize(Vls.FontSize);
         language = getLanguage(Vls.Language);
 
-        statisticsColumnsMask = getInt(Vls.StatisticsColumnsMask);
+        statisticsColumnsMask = getIntMask(Vls.StatisticsColumnsMask);
     }
 
     public void storeProperties() {
@@ -301,14 +312,15 @@ public enum Settings {
         Vls.FontSize.set(fontSize.toString());
         Vls.Language.set(language.toString());
 
-        Vls.StatisticsColumnsMask.set("" + statisticsColumnsMask);
+        Vls.StatisticsColumnsMask.set("" + Integer.toBinaryString(statisticsColumnsMask));
 
         File parent = UC_STATISTICS_FILE_PATH.toFile().getParentFile();
         if (!parent.exists()) {
             parent.mkdir();
         }
 
-        try (OutputStreamWriter output = new OutputStreamWriter(Files.newOutputStream(UC_PROPERTIES_FILE_PATH))) {
+        try (BufferedWriter output = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(UC_PROPERTIES_FILE_PATH.toFile()), CHARSET_CP1251))) {
 
             PROPERTIES.store(output, "Do not delete this file!");
 
