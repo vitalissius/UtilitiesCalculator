@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 import utilitiescalculator.Dictionary;
+import utilitiescalculator.Settings;
 import utilitiescalculator.gui.table.UcDoubleTableCellRenderer;
 import utilitiescalculator.gui.table.UcKwhTableCellRenderer;
 import utilitiescalculator.gui.table.UcMcTableCellRenderer;
@@ -46,9 +47,9 @@ public class Utils {
             } else if (clss == Integer.class) {
                 String columnName = table.getModel().getColumnName(i);
                 if (Dictionary.INSTANCE.getWord(Dictionary.Keyword.TC_KWH).equals(columnName)) {
-                    renderer = new UcKwhTableCellRenderer();
+                    renderer = new UcKwhTableCellRenderer(Settings.INSTANCE.getElecBoundary());
                 } else if (Dictionary.INSTANCE.getWord(Dictionary.Keyword.TC_MCUBIC).equals(columnName)) {
-                    renderer = new UcMcTableCellRenderer();
+                    renderer = new UcMcTableCellRenderer(Settings.INSTANCE.getGasBoundary());
                 }
             }
 

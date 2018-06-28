@@ -26,10 +26,12 @@ public class UcMcTableCellRenderer extends DefaultTableCellRenderer {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if (!isSelected) {
             Integer iValue = (Integer) value;
-            if (iValue > gasBoundary) {
-                setBackground(BACKGROUND_COLOR_RED);
-            } else {
-                setBackground(BACKGROUND_COLOR_WHITE);
+            if (gasBoundary != 0) {
+                if (iValue > gasBoundary) {
+                    setBackground(BACKGROUND_COLOR_RED);
+                } else {
+                    setBackground(BACKGROUND_COLOR_WHITE);
+                }
             }
         }
         setHorizontalAlignment(SwingConstants.RIGHT);

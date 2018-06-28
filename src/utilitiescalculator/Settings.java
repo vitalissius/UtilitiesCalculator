@@ -41,6 +41,7 @@ public enum Settings {
         GasMeter("gas.meter", "false"),
         GasBegin("gas.begin", "0"),
         GasEnd("gas.end", "0"),
+        GasBoundary("gas.boundary", "0"),
         GasPrice("gas.price", "0.00"),
         GasMeterMaxValue("gas.meterMaxValue", "99999"),
         PaymentsElec("payments.elec", "0.00"),
@@ -105,6 +106,7 @@ public enum Settings {
     private boolean usedGasMeter;
     private int gasBegin;
     private int gasEnd;
+    private int gasBoundary;
     private double gasPrice;
     private int gasMeterMaxValue;
     private String personalAccount = "";
@@ -219,6 +221,7 @@ public enum Settings {
         usedGasMeter = getBoolean(Vls.GasMeter);
         gasBegin = getInt(Vls.GasBegin);
         gasEnd = getInt(Vls.GasEnd);
+        gasBoundary = getInt(Vls.GasBoundary);
         gasPrice = getDouble(Vls.GasPrice);
         gasMeterMaxValue = getInt(Vls.GasMeterMaxValue, 99999);
 
@@ -274,6 +277,7 @@ public enum Settings {
         Vls.GasMeter.set(Boolean.toString(usedGasMeter));
         Vls.GasBegin.set(Integer.toString(gasBegin));
         Vls.GasEnd.set(Integer.toString(gasEnd));
+        Vls.GasBoundary.set("" + gasBoundary);
         Vls.GasPrice.set(Double.toString(gasPrice));
         Vls.GasMeterMaxValue.set(Integer.toString(gasMeterMaxValue));
 
@@ -368,6 +372,9 @@ public enum Settings {
     }
     public int getGasEnd() {
         return gasEnd;
+    }
+    public int getGasBoundary() {
+        return gasBoundary;
     }
     public int getGasTotal() {
         int result = gasEnd - gasBegin;
@@ -533,6 +540,9 @@ public enum Settings {
     }
     public void setGasEnd(int gasEnd) {
         this.gasEnd = gasEnd;
+    }
+    public void setGasBoundary(int gasBoundary) {
+        this.gasBoundary = gasBoundary;
     }
     public void setGasPrice(double gasPrice) {
         this.gasPrice = gasPrice;

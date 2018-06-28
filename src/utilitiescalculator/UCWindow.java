@@ -111,6 +111,9 @@ public class UCWindow extends JFrame {
         tfGasMaxValue = new javax.swing.JTextField();
         btGasTariffSave = new javax.swing.JButton();
         btGasTariffCancel = new javax.swing.JButton();
+        pnGasBoundary = new javax.swing.JPanel();
+        tfGasBoundary = new javax.swing.JTextField();
+        lbGasBoundary = new javax.swing.JLabel();
         dialogPersonalData = new javax.swing.JDialog();
         lbAccount = new javax.swing.JLabel();
         pnNames = new javax.swing.JPanel();
@@ -468,6 +471,33 @@ public class UCWindow extends JFrame {
             }
         });
 
+        pnGasBoundary.setBorder(javax.swing.BorderFactory.createTitledBorder("Граничне значення"));
+
+        tfGasBoundary.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        lbGasBoundary.setText("м куб");
+
+        javax.swing.GroupLayout pnGasBoundaryLayout = new javax.swing.GroupLayout(pnGasBoundary);
+        pnGasBoundary.setLayout(pnGasBoundaryLayout);
+        pnGasBoundaryLayout.setHorizontalGroup(
+            pnGasBoundaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnGasBoundaryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tfGasBoundary, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbGasBoundary)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnGasBoundaryLayout.setVerticalGroup(
+            pnGasBoundaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnGasBoundaryLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnGasBoundaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfGasBoundary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbGasBoundary))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout dialogGasTariffLayout = new javax.swing.GroupLayout(dialogGasTariff.getContentPane());
         dialogGasTariff.getContentPane().setLayout(dialogGasTariffLayout);
         dialogGasTariffLayout.setHorizontalGroup(
@@ -476,14 +506,15 @@ public class UCWindow extends JFrame {
                 .addContainerGap()
                 .addGroup(dialogGasTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnGasMaxValue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(dialogGasTariffLayout.createSequentialGroup()
-                        .addComponent(pnGasPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dialogGasTariffLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btGasTariffSave, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btGasTariffCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btGasTariffCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(dialogGasTariffLayout.createSequentialGroup()
+                        .addComponent(pnGasPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(pnGasBoundary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         dialogGasTariffLayout.setVerticalGroup(
@@ -492,8 +523,10 @@ public class UCWindow extends JFrame {
                 .addContainerGap()
                 .addComponent(pnGasPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(pnGasBoundary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(pnGasMaxValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(dialogGasTariffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btGasTariffCancel)
                     .addComponent(btGasTariffSave))
@@ -1343,9 +1376,11 @@ public class UCWindow extends JFrame {
         tfElecMaxValue.setText("" + SETTINGS.getElecMeterMaxValue());
 
         tfGasPrice.setInputVerifier(new LineInputVerifier("\\d+(\\.|,)\\d{1,4}")/*floatInputVerifier*/);
+        tfGasBoundary.setInputVerifier(integerInputVerifier);
         tfGasMaxValue.setInputVerifier(maxValueInputVerifier);          // new LineInputVerifier("9+"));
 
         tfGasPrice.setText(String.format("%.4f", SETTINGS.getGasPrice()));
+        tfGasBoundary.setText("" + SETTINGS.getGasBoundary());
         tfGasMaxValue.setText("" + SETTINGS.getGasMeterMaxValue());
     }
 
@@ -1725,6 +1760,7 @@ public class UCWindow extends JFrame {
         ((TitledBorder) pnElecPrice.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ELEC_PRICE));
         ((TitledBorder) pnElecPrivilege.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_ELEC_PRIVILEGE));
         ((TitledBorder) pnGas.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_GAS));
+        ((TitledBorder) pnGasBoundary.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_GAS_BOUNDARY));
         ((TitledBorder) pnGasMaxValue.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_GAS_MAX_VALUE));
         ((TitledBorder) pnGasPrice.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_GAS_PRICE));
         ((TitledBorder) pnNames.getBorder()).setTitle(DICT.getWord(Dictionary.Keyword.PN_NAMES));
@@ -1763,6 +1799,7 @@ public class UCWindow extends JFrame {
         lbElecPrivilege2.setText(DICT.getWord(Dictionary.Keyword.LB_PERCENT));
         lbGasPrice1.setText(DICT.getWord(Dictionary.Keyword.LB_PRICE));
         lbGasPrice2.setText(DICT.getWord(Dictionary.Keyword.LB_HRN_PER_MCUBIC));
+        lbGasBoundary.setText(DICT.getWord(Dictionary.Keyword.LB_MCUBIC));
         lbAccount.setText(DICT.getWord(Dictionary.Keyword.LB_PERSONAL_ACCOUNT));
         lbSurname.setText(DICT.getWord(Dictionary.Keyword.LB_SURNAME));
         lbFirstName.setText(DICT.getWord(Dictionary.Keyword.LB_FIRST_NAME));
@@ -1816,6 +1853,7 @@ public class UCWindow extends JFrame {
     private void btGasTariffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffActionPerformed
 
         tfGasPrice.setText(String.format("%.4f", SETTINGS.getGasPrice()));
+        tfGasBoundary.setText("" + SETTINGS.getGasBoundary());
         tfGasMaxValue.setText("" + SETTINGS.getGasMeterMaxValue());
         dialogGasTariff.setLocationRelativeTo(this);
         dialogGasTariff.setVisible(true);
@@ -1917,8 +1955,10 @@ public class UCWindow extends JFrame {
 
     private void btGasTariffSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGasTariffSaveActionPerformed
 
-        if (tfGasPrice.getInputVerifier().verify(tfGasPrice) && maxValueInputVerifier.verify(tfGasMaxValue)) {
+        if (tfGasPrice.getInputVerifier().verify(tfGasPrice) && maxValueInputVerifier.verify(tfGasMaxValue) &&
+                tfGasBoundary.getInputVerifier().verify(tfGasBoundary)) {
             SETTINGS.setGasPrice(Double.parseDouble(tfGasPrice.getText().replace(',', '.')));
+            SETTINGS.setGasBoundary(Integer.parseInt(tfGasBoundary.getText()));
             int maxValue = Integer.parseInt(tfGasMaxValue.getText());
             int digitsNumber = ("" + maxValue).length();
             if (digitsNumber != gasDigitsNumber) {
@@ -2001,6 +2041,8 @@ public class UCWindow extends JFrame {
 
     private void btStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStatisticsActionPerformed
 
+//        Utils.resetStyleOfRenderingToUcStatisticsTable(tbStatistics);
+        
         final JTableHeader tableHeader = tbStatistics.getTableHeader();
         tableHeader.addMouseListener(new MouseAdapter() {
             @Override
@@ -2102,6 +2144,7 @@ public class UCWindow extends JFrame {
     private javax.swing.JLabel lbElecTotal;
     private javax.swing.JLabel lbFirstName;
     private javax.swing.JLabel lbGasBegin;
+    private javax.swing.JLabel lbGasBoundary;
     private javax.swing.JLabel lbGasEnd;
     private javax.swing.JLabel lbGasMc;
     private javax.swing.JLabel lbGasPrice1;
@@ -2132,6 +2175,7 @@ public class UCWindow extends JFrame {
     private javax.swing.JPanel pnElecPrice;
     private javax.swing.JPanel pnElecPrivilege;
     private javax.swing.JPanel pnGas;
+    private javax.swing.JPanel pnGasBoundary;
     private javax.swing.JPanel pnGasMaxValue;
     private javax.swing.JPanel pnGasPrice;
     private javax.swing.JPanel pnNames;
@@ -2157,6 +2201,7 @@ public class UCWindow extends JFrame {
     private static javax.swing.JTextField tfGarbage;
     private static javax.swing.JTextField tfGas;
     private static javax.swing.JTextField tfGasBegin;
+    private javax.swing.JTextField tfGasBoundary;
     private static javax.swing.JTextField tfGasEnd;
     private javax.swing.JTextField tfGasMaxValue;
     private javax.swing.JTextField tfGasPrice;

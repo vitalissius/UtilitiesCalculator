@@ -15,7 +15,7 @@ public enum Dictionary {
         TITLE_MAIN, TITLE_ELEC, TITLE_GAS, TITLE_PERSONAL, TITLE_PRINT, TITLE_STATISTICS,
 
         PN_DATE, PN_ELEC, PN_GAS, PN_PAYMENT, PN_TOTAL, PN_ELEC_BOUNDARY, PN_ELEC_PRICE,
-        PN_ELEC_PRIVILEGE, PN_ELEC_MAX_VALUE, PN_GAS_PRICE, PN_GAS_MAX_VALUE, PN_NAMES, PN_ADDRESS,
+        PN_ELEC_PRIVILEGE, PN_ELEC_MAX_VALUE, PN_GAS_PRICE, PN_GAS_BOUNDARY, PN_GAS_MAX_VALUE, PN_NAMES, PN_ADDRESS,
 
         MTH_JAN, MTH_FEB, MTH_MAR, MTH_APR, MTH_MAY, MTH_JUN, MTH_JUL, MTH_AUG, MTH_SEP, MTH_OCT, MTH_NOV, MTH_DEC,
 
@@ -65,6 +65,7 @@ public enum Dictionary {
         put(Keyword.PN_ELEC_PRIVILEGE, new String[]{"Пільга", "Льгота"});
         put(Keyword.PN_ELEC_MAX_VALUE, new String[]{"Максимальне значення електролічильника", "Максимальное значение электросчётчика"});
         put(Keyword.PN_GAS_PRICE, new String[]{"Ціна на газ", "Цена на газ"});
+        put(Keyword.PN_GAS_BOUNDARY, new String[]{"Граничне значення (по бажанню)", "Граничное значение (по желанию)"});
         put(Keyword.PN_GAS_MAX_VALUE, new String[]{"Максимальне значення газового лічильника", "Максимальное значение электрического счётчика"});
         put(Keyword.PN_NAMES, new String[]{"Прізвище, ім’я та по батькові", "Фамилия, имя и отчество"});
         put(Keyword.PN_ADDRESS, new String[]{"Адреса", "Адрес"});
