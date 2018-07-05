@@ -38,7 +38,7 @@ public enum Dictionary {
 
         LINE_NOTICE, LINE_RECEIPT, LINE_TELLER,
 
-        TAB_TABLE,
+        TAB_TABLE, TAB_CHART,
 
         TC_TIMESTAMP, TC_YEARMONTH, TC_ELEC, TC_RENT, TC_HEATING, TC_HOT_WATER, TC_COLD_WATER, TC_SEWERAGE, TC_GAS,
         TC_GARBAGE, TC_INTERCOM, TC_TV, TC_KWH, TC_MCUBIC,
@@ -169,6 +169,7 @@ public enum Dictionary {
         put(Keyword.LINE_TELLER, new String[]{"Касир", null});
         // tabs
         put(Keyword.TAB_TABLE, new String[]{"Дані у вигляді таблиці", "Данные в виде таблицы"});
+        put(Keyword.TAB_CHART, new String[]{"Дані у вигляді діаграми", "Данные в виде диаграммы"});
         // table columns
         put(Keyword.TC_TIMESTAMP, new String[]{"Часовий маркер", "Часовой маркер"});
         put(Keyword.TC_YEARMONTH, new String[]{"Рік-місяць", "Год-месяц"});

@@ -140,6 +140,7 @@ public class UCWindow extends JFrame {
         tbbPnStatistics = new javax.swing.JTabbedPane();
         scrPnStatistics = new javax.swing.JScrollPane();
         tbStatistics = new javax.swing.JTable(new UcStatisticsTableModel(SETTINGS.getStatisticsColumnsMask()));
+        jPanel1 = new javax.swing.JPanel();
         pnDate = new javax.swing.JPanel();
         lbMonth = new javax.swing.JLabel();
         cbMonth = new javax.swing.JComboBox<>();
@@ -731,7 +732,6 @@ public class UCWindow extends JFrame {
         );
 
         frameStatistics.setMinimumSize(new java.awt.Dimension(600, 400));
-        frameStatistics.setPreferredSize(new java.awt.Dimension(1200, 600));
         frameStatistics.setSize(new java.awt.Dimension(1200, 600));
 
         scrPnStatistics.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -743,6 +743,19 @@ public class UCWindow extends JFrame {
         scrPnStatistics.setViewportView(tbStatistics);
 
         tbbPnStatistics.addTab("Таблиця", scrPnStatistics);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 454, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 404, Short.MAX_VALUE)
+        );
+
+        tbbPnStatistics.addTab("Діаграма", jPanel1);
 
         frameStatistics.getContentPane().add(tbbPnStatistics, java.awt.BorderLayout.CENTER);
 
@@ -1809,6 +1822,7 @@ public class UCWindow extends JFrame {
         lbApartment.setText(DICT.getWord(Dictionary.Keyword.LB_APARTMENT));
         // tabs
         tbbPnStatistics.setTitleAt(0, DICT.getWord(Dictionary.Keyword.TAB_TABLE));
+        tbbPnStatistics.setTitleAt(1, DICT.getWord(Dictionary.Keyword.TAB_CHART));
         // table
         Utils.setStyleOfRenderingToUcStatisticsTable(tbStatistics);
 
@@ -2042,7 +2056,7 @@ public class UCWindow extends JFrame {
     private void btStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStatisticsActionPerformed
 
 //        Utils.resetStyleOfRenderingToUcStatisticsTable(tbStatistics);
-        
+
         final JTableHeader tableHeader = tbStatistics.getTableHeader();
         tableHeader.addMouseListener(new MouseAdapter() {
             @Override
@@ -2069,6 +2083,7 @@ public class UCWindow extends JFrame {
         });
 
         frameStatistics.pack();
+        frameStatistics.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frameStatistics.setLocationRelativeTo(this);
         frameStatistics.setVisible(true);
 
@@ -2127,6 +2142,7 @@ public class UCWindow extends JFrame {
     private javax.swing.JDialog dialogViewAndPrint;
     private javax.swing.JFrame frameStatistics;
     private javax.swing.JFormattedTextField ftfAccount;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbAccount;
     private javax.swing.JLabel lbApartment;
     private javax.swing.JLabel lbBuilding;
