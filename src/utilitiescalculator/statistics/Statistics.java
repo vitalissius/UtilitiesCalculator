@@ -2,6 +2,8 @@ package utilitiescalculator.statistics;
 
 public class Statistics {
 
+    public static final int PAYMENTS_COUNT = 10;
+
     public static class Builder {
         private long timestamp;
         private String month;
