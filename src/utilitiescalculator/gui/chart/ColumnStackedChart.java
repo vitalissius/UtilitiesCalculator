@@ -21,6 +21,7 @@ public class ColumnStackedChart {
     private final int leftIndent;
 
     private final double[][] priceLevels;
+    private Point[][] pricePoints;
 
     public ColumnStackedChart(List<Statistics> statistics) {
         this(statistics, 0, 0, 0, 0);
@@ -43,7 +44,12 @@ public class ColumnStackedChart {
         this.bottomIndent = bottomIndent;
         this.leftIndent = leftIndent;
 
-
+        pricePoints = new Point[priceLevels.length][priceLevels[0].length];
+        for (int i = 0; i < priceLevels.length; i++) {
+            for (int j = 0; j < priceLevels[0].length; j++) {
+                pricePoints[i][j] = new Point();
+            }
+        }
     }
 
     private int computeMonthsCount() {
@@ -98,8 +104,6 @@ public class ColumnStackedChart {
         return (int) (maxColumnSum + alignmentValue);
     }
 
-
-
     public int getPaymentCeiling() {
         return paymentCeiling;
     }
@@ -113,21 +117,19 @@ public class ColumnStackedChart {
     private int monthWidth;
     private double oneBillHeight;
 
-    private Point[][] pricePoints;
-
     public void updateAttributesByWidthAndHeight(int width, int height) {
         chartWidth = ((width - (leftIndent + rightIndent)) / monthsCount) * monthsCount;
         chartHeight = (int) (((double) (height - (topIndent + bottomIndent)) / paymentCeiling) * paymentCeiling);
         monthWidth = chartWidth / monthsCount;
         oneBillHeight = ((double) chartHeight) / paymentCeiling;
 
-        pricePoints = new Point[priceLevels.length][priceLevels[0].length];
         for (int i = 0; i < priceLevels.length; i++) {
             int x = i * monthWidth + monthWidth / 2;
             int y1 = chartHeight;
             for (int j = 0; j < priceLevels[0].length; j++) {
                 int y2 = (int) (y1 - Math.ceil(priceLevels[i][j] * oneBillHeight));
-                pricePoints[i][j] = new Point(x, y2);
+                pricePoints[i][j].x = x;
+                pricePoints[i][j].y = y2;//= new Point(x, y2);
                 y1 = y2;
             }
         }
@@ -155,11 +157,29 @@ public class ColumnStackedChart {
 
     private String[] paymentNames;
 
+    private int longestPaymentNameIndex = 0;
+
+    private void calculateLongestPaymentNameIndex() {
+        int longestPaymentName = Integer.MIN_VALUE;
+        for (int i = 0; i < paymentNames.length; i++) {
+            if (longestPaymentName < paymentNames[i].length()) {
+                longestPaymentName = paymentNames[i].length();
+                longestPaymentNameIndex = i;
+            }
+        }
+    }
+
     public void setPaymentNames(String[] paymentNames) {
         if (paymentNames.length != paymentsCount) {
             throw new IllegalArgumentException("Array's length of the payment names must be " + paymentsCount);
         }
         this.paymentNames = paymentNames;
+
+        calculateLongestPaymentNameIndex();
+    }
+
+    public int getLongestPaymentNameIndex() {
+        return longestPaymentNameIndex;
     }
 
     public String[] getPaymentNames() {
@@ -190,6 +210,10 @@ public class ColumnStackedChart {
 
     public int getLeftIndent() {
         return leftIndent;
+    }
+
+    public String getMonthYear(int index) {
+        return statistics.get(index).getMonth() + " " + statistics.get(index).getYear();
     }
 
 }
