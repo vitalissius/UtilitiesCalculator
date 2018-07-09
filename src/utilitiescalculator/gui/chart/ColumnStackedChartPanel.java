@@ -2,12 +2,14 @@ package utilitiescalculator.gui.chart;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Panel;
 import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -18,18 +20,24 @@ import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 import java.awt.geom.Rectangle2D;
 import java.nio.file.Paths;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import utilitiescalculator.Dictionary;
+import utilitiescalculator.UCWindow;
 import utilitiescalculator.statistics.Statistics;
 import utilitiescalculator.statistics.StatisticsReadWriter;
 
-public class ColumnStackedChartPanel extends JPanel implements MouseListener, MouseMotionListener, ComponentListener {
+public class ColumnStackedChartPanel extends JPanel implements MouseListener, MouseMotionListener, ComponentListener, WindowStateListener {
 
     private static final Color CHART_BACKGROUND_COLOR = Color.WHITE;
     private static final Color CHART_BORDER_COLOR = Color.GRAY;
@@ -66,6 +74,11 @@ public class ColumnStackedChartPanel extends JPanel implements MouseListener, Mo
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        if (columnStackedChart.getMonthsCount() == 0) {
+            drawNoDataMessage(g);
+            return;
+        }
+
         Graphics2D gg = (Graphics2D) g;
 
         gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -88,6 +101,12 @@ public class ColumnStackedChartPanel extends JPanel implements MouseListener, Mo
         drawChart(gg);
 
         drawPaymentNamesAsButtons(gg);
+    }
+
+    private void drawNoDataMessage(Graphics g) {
+        String message = "No data";
+        Rectangle2D bounds = g.getFontMetrics(g.getFont()).getStringBounds(message, g);
+        g.drawString(message, getWidth() / 2 - (int) bounds.getCenterX(), getHeight() / 2 - (int) bounds.getCenterY());
     }
 
     private void drawChartPlace(Graphics2D gg) {
@@ -143,7 +162,8 @@ public class ColumnStackedChartPanel extends JPanel implements MouseListener, Mo
             }
             String text = hundredBillMarking + "\u20B4";
             gg.setColor(CHART_TEXT_COLOR);
-            gg.drawString(text, -(int) gg.getFontMetrics(getFont()).getStringBounds(text, gg).getWidth(), chartHeight - i);
+            Rectangle2D bounds = gg.getFontMetrics(DEFAULT_FONT).getStringBounds(text, gg);
+            gg.drawString(text, -(int) bounds.getWidth() - 2, chartHeight - i - (int) bounds.getCenterY());
             hundredBillMarking += 100;
         }
     }
@@ -359,13 +379,37 @@ public class ColumnStackedChartPanel extends JPanel implements MouseListener, Mo
 
 
 
+    /* WindowStateListener's method */
+
+    @Override
+    public void windowStateChanged(WindowEvent e) {
+        needUpdateAttributes = true;
+    }
+
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(UCWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
         List<Statistics> stats = new StatisticsReadWriter().read(Paths.get("C:", "Users", "vitalii", ".ucfiles", "statistics.ucs"));
 
         JFrame frame = new JFrame("title");
         frame.setLayout(new BorderLayout());
 
-        ColumnStackedChartPanel panel = new ColumnStackedChartPanel(new ColumnStackedChart(stats, 50, 160, 60, 50));
+        ColumnStackedChartPanel panel = new ColumnStackedChartPanel(new ColumnStackedChart(stats, 20, 160, 60, 50)){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                e = SwingUtilities.convertMouseEvent(this, e, this.getParent());
+                super.mouseClicked(e);
+            }
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                e = SwingUtilities.convertMouseEvent(this, e, this.getParent());
+                super.mouseMoved(e);
+            }
+        };
         Dictionary DICT = Dictionary.INSTANCE;
         panel.setPaymentNames(new String[]{
             DICT.getWord(Dictionary.Keyword.TC_ELEC),
@@ -379,11 +423,16 @@ public class ColumnStackedChartPanel extends JPanel implements MouseListener, Mo
             DICT.getWord(Dictionary.Keyword.TC_INTERCOM),
             DICT.getWord(Dictionary.Keyword.TC_TV),
         });
-        frame.add(panel);
+        panel.addMouseListener(panel);
+        panel.addMouseMotionListener(panel);
+        panel.addComponentListener(panel);
 
-        frame.addMouseListener(panel);
-        frame.addMouseMotionListener(panel);
-        frame.addComponentListener(panel);
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Пустая закладка", new Panel().add(new Button("Кнопка")));
+        tabbedPane.addTab("График", panel);
+
+        frame.add(tabbedPane);
+        frame.addWindowStateListener(panel);
 
         Dimension size = new Dimension(800, 600);
         frame.setPreferredSize(size);
