@@ -21,7 +21,7 @@ public class ColumnStackedChart {
     private final int leftIndent;
 
     private final double[][] priceLevels;
-    private Point[][] pricePoints;
+    private final Point[][] pricePoints;
 
     public ColumnStackedChart(List<Statistics> statistics) {
         this(statistics, 0, 0, 0, 0);
@@ -35,32 +35,38 @@ public class ColumnStackedChart {
             this.statistics = statistics;
         }
 
-        monthsCount = computeMonthsCount();
-        priceLevels = computePriceLevels();
-        paymentCeiling = computePaymentCeiling();
-
         this.topIndent = topIndent;
         this.rightIndent = rightIndent;
         this.bottomIndent = bottomIndent;
         this.leftIndent = leftIndent;
 
-        pricePoints = new Point[priceLevels.length][priceLevels[0].length];
-        for (int i = 0; i < priceLevels.length; i++) {
-            for (int j = 0; j < priceLevels[0].length; j++) {
-                pricePoints[i][j] = new Point();
+        paymentCeiling = computePaymentCeiling();
+
+        monthsCount = computeMonthsCount();
+        if (monthsCount == 0) {
+            priceLevels = null;
+            pricePoints = null;
+        } else {
+            priceLevels = computePriceLevels();
+
+            pricePoints = new Point[priceLevels.length][priceLevels[0].length];
+            for (int i = 0; i < priceLevels.length; i++) {
+                for (int j = 0; j < priceLevels[0].length; j++) {
+                    pricePoints[i][j] = new Point();
+                }
             }
         }
     }
 
     private int computeMonthsCount() {
-        return this.statistics.size();
+        return statistics.size();
     }
 
     private double[][] computePriceLevels() {
         double[][] levels = new double[monthsCount][priceLevelsCount];
 
         for (int i = 0; i < monthsCount; i++) {
-            Statistics stats = this.statistics.get(i);
+            Statistics stats = statistics.get(i);
             levels[i][0] = 0;                                      // bottom price level
             levels[i][1] = stats.getElectricity().getPrice();
             levels[i][2] = stats.getRent();
