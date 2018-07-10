@@ -23,7 +23,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.JTableHeader;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
+import utilitiescalculator.gui.chart.ColumnStackedChart;
+import utilitiescalculator.gui.chart.ColumnStackedChartPanel;
 import utilitiescalculator.gui.table.UcStatisticsTableModel;
+import utilitiescalculator.statistics.Statistics;
+import utilitiescalculator.statistics.StatisticsReadWriter;
 import utilitiescalculator.util.Utils;
 
 public class UCWindow extends JFrame {
@@ -46,6 +50,8 @@ public class UCWindow extends JFrame {
         @Override void update() { updateGasPanelComponents(); }
     };
 
+    private final static java.awt.Image UC_ICON = new ImageIcon("res/uc.png").getImage();
+
     private final LineInputVerifier integerInputVerifier = new LineInputVerifier("\\d+");
     private final LineInputVerifier floatInputVerifier = new LineInputVerifier("\\d+(\\.|,)\\d{1,2}");
     private final LineInputVerifier maxValueInputVerifier = new LineInputVerifier("9+");
@@ -67,6 +73,8 @@ public class UCWindow extends JFrame {
         gasMeterInputVerifier = new MeterInputVerifier(elecGasRegex, gasDigitsNumber);
 
         initComponents();
+
+        initChartTabOfTabbedPane();
 
         applyLanguage();
         applySize();
@@ -140,7 +148,6 @@ public class UCWindow extends JFrame {
         tbbPnStatistics = new javax.swing.JTabbedPane();
         scrPnStatistics = new javax.swing.JScrollPane();
         tbStatistics = new javax.swing.JTable(new UcStatisticsTableModel(SETTINGS.getStatisticsColumnsMask()));
-        jPanel1 = new javax.swing.JPanel();
         pnDate = new javax.swing.JPanel();
         lbMonth = new javax.swing.JLabel();
         cbMonth = new javax.swing.JComboBox<>();
@@ -212,7 +219,7 @@ public class UCWindow extends JFrame {
 
         dialogElecTariff.setTitle("Тариф на електроенергію");
         dialogElecTariff.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        dialogElecTariff.setIconImage(null);
+        dialogElecTariff.setIconImage(UC_ICON);
         dialogElecTariff.setModal(true);
         dialogElecTariff.setResizable(false);
 
@@ -401,7 +408,7 @@ public class UCWindow extends JFrame {
         );
 
         dialogGasTariff.setTitle("Тариф на газ");
-        dialogGasTariff.setIconImage(null);
+        dialogGasTariff.setIconImage(UC_ICON);
         dialogGasTariff.setModal(true);
         dialogGasTariff.setResizable(false);
 
@@ -535,7 +542,7 @@ public class UCWindow extends JFrame {
         );
 
         dialogPersonalData.setTitle("Персональні дані платника");
-        dialogPersonalData.setIconImage(null);
+        dialogPersonalData.setIconImage(UC_ICON);
         dialogPersonalData.setModal(true);
         dialogPersonalData.setResizable(false);
 
@@ -683,7 +690,7 @@ public class UCWindow extends JFrame {
         );
 
         dialogViewAndPrint.setTitle("Перегляд і роздруківка");
-        dialogViewAndPrint.setIconImage(null);
+        dialogViewAndPrint.setIconImage(UC_ICON);
         dialogViewAndPrint.setModal(true);
         dialogViewAndPrint.setResizable(false);
         dialogViewAndPrint.setSize(new java.awt.Dimension(0, 0));
@@ -731,8 +738,10 @@ public class UCWindow extends JFrame {
                 .addContainerGap())
         );
 
+        frameStatistics.setIconImage(UC_ICON);
         frameStatistics.setMinimumSize(new java.awt.Dimension(600, 400));
-        frameStatistics.setSize(new java.awt.Dimension(1200, 600));
+        frameStatistics.setPreferredSize(new java.awt.Dimension(1000, 600));
+        frameStatistics.setSize(new java.awt.Dimension(1000, 600));
 
         scrPnStatistics.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -744,23 +753,11 @@ public class UCWindow extends JFrame {
 
         tbbPnStatistics.addTab("Таблиця", scrPnStatistics);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 404, Short.MAX_VALUE)
-        );
-
-        tbbPnStatistics.addTab("Діаграма", jPanel1);
-
         frameStatistics.getContentPane().add(tbbPnStatistics, java.awt.BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Сплата за комунальні послуги");
+        setIconImage(UC_ICON);
         setResizable(false);
         setSize(new java.awt.Dimension(0, 0));
 
@@ -1823,10 +1820,54 @@ public class UCWindow extends JFrame {
         // tabs
         tbbPnStatistics.setTitleAt(0, DICT.getWord(Dictionary.Keyword.TAB_TABLE));
         tbbPnStatistics.setTitleAt(1, DICT.getWord(Dictionary.Keyword.TAB_CHART));
+        setPaymentNames((ColumnStackedChartPanel) tbbPnStatistics.getComponentAt(1));
         // table
         Utils.setStyleOfRenderingToUcStatisticsTable(tbStatistics);
 
         pack();
+    }
+
+    private void initChartTabOfTabbedPane() {
+        List<Statistics> stats = new StatisticsReadWriter().read(Settings.UC_STATISTICS_FILE_PATH);
+
+        ColumnStackedChart chartModel = new ColumnStackedChart(stats, 20, 160, 60, 50);
+
+        ColumnStackedChartPanel chartPanel = new ColumnStackedChartPanel(chartModel){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                e = SwingUtilities.convertMouseEvent(this, e, this.getParent());
+                super.mouseClicked(e);
+            }
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                e = SwingUtilities.convertMouseEvent(this, e, this.getParent());
+                super.mouseMoved(e);
+            }
+        };
+
+        setPaymentNames(chartPanel);
+
+        chartPanel.addMouseListener(chartPanel);
+        chartPanel.addMouseMotionListener(chartPanel);
+        chartPanel.addComponentListener(chartPanel);
+        frameStatistics.addWindowStateListener(chartPanel);
+
+        tbbPnStatistics.addTab(DICT.getWord(Dictionary.Keyword.TAB_CHART), chartPanel);
+    }
+
+    private void setPaymentNames(ColumnStackedChartPanel chartPanel) {
+        chartPanel.setPaymentNames(new String[]{
+            DICT.getWord(Dictionary.Keyword.TC_ELEC),
+            DICT.getWord(Dictionary.Keyword.TC_RENT),
+            DICT.getWord(Dictionary.Keyword.TC_HEATING),
+            DICT.getWord(Dictionary.Keyword.TC_HOT_WATER),
+            DICT.getWord(Dictionary.Keyword.TC_COLD_WATER),
+            DICT.getWord(Dictionary.Keyword.TC_SEWERAGE),
+            DICT.getWord(Dictionary.Keyword.TC_GAS),
+            DICT.getWord(Dictionary.Keyword.TC_GARBAGE),
+            DICT.getWord(Dictionary.Keyword.TC_INTERCOM),
+            DICT.getWord(Dictionary.Keyword.TC_TV),
+        });
     }
 
     private void btChangeSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChangeSizeActionPerformed
@@ -2055,7 +2096,7 @@ public class UCWindow extends JFrame {
 
     private void btStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStatisticsActionPerformed
 
-//        Utils.resetStyleOfRenderingToUcStatisticsTable(tbStatistics);
+        Utils.resetStyleOfRenderingToUcStatisticsTable(tbStatistics);
 
         final JTableHeader tableHeader = tbStatistics.getTableHeader();
         tableHeader.addMouseListener(new MouseAdapter() {
@@ -2083,7 +2124,7 @@ public class UCWindow extends JFrame {
         });
 
         frameStatistics.pack();
-        frameStatistics.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //frameStatistics.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frameStatistics.setLocationRelativeTo(this);
         frameStatistics.setVisible(true);
 
@@ -2142,7 +2183,6 @@ public class UCWindow extends JFrame {
     private javax.swing.JDialog dialogViewAndPrint;
     private javax.swing.JFrame frameStatistics;
     private javax.swing.JFormattedTextField ftfAccount;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbAccount;
     private javax.swing.JLabel lbApartment;
     private javax.swing.JLabel lbBuilding;
