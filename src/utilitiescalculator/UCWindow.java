@@ -50,7 +50,7 @@ public class UCWindow extends JFrame {
         @Override void update() { updateGasPanelComponents(); }
     };
 
-    private final static java.awt.Image UC_ICON = new ImageIcon("res/uc.png").getImage();
+    private final static java.awt.Image UC_ICON = new ImageIcon(UCWindow.class.getResource("uc.png")).getImage();
 
     private final LineInputVerifier integerInputVerifier = new LineInputVerifier("\\d+");
     private final LineInputVerifier floatInputVerifier = new LineInputVerifier("\\d+(\\.|,)\\d{1,2}");
