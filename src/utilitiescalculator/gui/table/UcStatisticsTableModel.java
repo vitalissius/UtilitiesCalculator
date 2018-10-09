@@ -27,6 +27,7 @@ public class UcStatisticsTableModel extends AbstractTableModel {
         Garbage(Boolean.FALSE),
         Intercom(Boolean.FALSE),
         Tv(Boolean.FALSE),
+        TotalAmount(Boolean.FALSE),
         Kwh(Boolean.FALSE),
         Mc(Boolean.FALSE);
 
@@ -75,6 +76,7 @@ public class UcStatisticsTableModel extends AbstractTableModel {
         put(ColumnKind.Garbage, Boolean.TRUE);
         put(ColumnKind.Intercom, Boolean.TRUE);
         put(ColumnKind.Tv, Boolean.TRUE);
+        put(ColumnKind.TotalAmount, Boolean.TRUE);
         put(ColumnKind.Kwh, Boolean.TRUE);
         put(ColumnKind.Mc, Boolean.TRUE);
     }};
@@ -83,6 +85,7 @@ public class UcStatisticsTableModel extends AbstractTableModel {
         Long.class, YearMonth.class,
         Double.class, Double.class, Double.class, Double.class, Double.class,
         Double.class, Double.class, Double.class, Double.class, Double.class,
+        Double.class,
         Integer.class, Integer.class,
     };
 
@@ -231,6 +234,10 @@ public class UcStatisticsTableModel extends AbstractTableModel {
                 return stat.getIntercom();
             case Tv:
                 return stat.getTv();
+            case TotalAmount:
+                return stat.getElectricity().getPrice() + stat.getRent() + stat.getHeating() + stat.getHotWater() +
+                        stat.getColdWater() + stat.getSewerage() + stat.getGas().getPrice() + stat.getGarbage() +
+                        stat.getIntercom() + stat.getTv();
             case Kwh:
                 return stat.getElectricity().getKwh();
             case Mc:

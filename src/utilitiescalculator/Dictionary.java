@@ -41,7 +41,9 @@ public enum Dictionary {
         TAB_TABLE, TAB_CHART,
 
         TC_TIMESTAMP, TC_YEARMONTH, TC_ELEC, TC_RENT, TC_HEATING, TC_HOT_WATER, TC_COLD_WATER, TC_SEWERAGE, TC_GAS,
-        TC_GARBAGE, TC_INTERCOM, TC_TV, TC_KWH, TC_MCUBIC,
+        TC_GARBAGE, TC_INTERCOM, TC_TV, TC_TOTAL_AMOUNT, TC_KWH, TC_MCUBIC,
+
+        OP_SET_BOUNDARY, OP_INPUT_BOUNDARY_VALUE,
 
         LANGUAGE_TAG,
     }
@@ -183,8 +185,12 @@ public enum Dictionary {
         put(Keyword.TC_GARBAGE, new String[]{"Вивіз сміття", "Вывоз мусора"});
         put(Keyword.TC_INTERCOM, new String[]{"Домофон", "Домофон"});
         put(Keyword.TC_TV, new String[]{"Телебачення", "Телевидение"});
+        put(Keyword.TC_TOTAL_AMOUNT, new String[]{"Всього", "Всего"});
         put(Keyword.TC_KWH, new String[]{"Кіловат-годин", "Киловатт-часов"});
         put(Keyword.TC_MCUBIC, new String[]{"Метрів кубічних", "Метров кубических"});
+        //
+        put(Keyword.OP_SET_BOUNDARY, new String[]{"Встановити граничну величину...", "Установить граничную величину..."});
+        put(Keyword.OP_INPUT_BOUNDARY_VALUE, new String[]{"Введіть граничну величину", "Введите граничную величину"});
         // language tag
         put(Keyword.LANGUAGE_TAG, new String[]{"uk", "ru"});
     }};

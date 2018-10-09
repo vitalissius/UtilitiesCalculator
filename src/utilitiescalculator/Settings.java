@@ -54,6 +54,7 @@ public enum Settings {
         PaymentsGarbage("payments.garbage", "0.00"),
         PaymentsIntercom("payments.intercom", "0.00"),
         PaymentsTv("payments.tv", "0.00"),
+        TotalAmountBoundary("totalAmount.boundary", "0.0"),
         UsedElec("used.elec", "false"),
         UsedRent("used.rent", "false"),
         UsedHeating("used.heating", "false"),
@@ -126,6 +127,7 @@ public enum Settings {
     private double paymentsGarbage;
     private double paymentsIntercom;
     private double paymentsTv;
+    private double totalAmountBoundary;
     private boolean usedElec;
     private boolean usedRent;
     private boolean usedHeating;
@@ -236,6 +238,8 @@ public enum Settings {
         paymentsIntercom = getDouble(Vls.PaymentsIntercom);
         paymentsTv = getDouble(Vls.PaymentsTv);
 
+        totalAmountBoundary = getDouble(Vls.TotalAmountBoundary);
+
         usedElec = getBoolean(Vls.UsedElec);
         usedRent = getBoolean(Vls.UsedRent);
         usedHeating = getBoolean(Vls.UsedHeating);
@@ -299,6 +303,8 @@ public enum Settings {
         Vls.PaymentsGarbage.set(Double.toString(paymentsGarbage));
         Vls.PaymentsIntercom.set(Double.toString(paymentsIntercom));
         Vls.PaymentsTv.set(Double.toString(paymentsTv));
+
+        Vls.TotalAmountBoundary.set(Double.toString(totalAmountBoundary));
 
         Vls.UsedElec.set(Boolean.toString(usedElec));
         Vls.UsedRent.set(Boolean.toString(usedRent));
@@ -439,6 +445,9 @@ public enum Settings {
     }
     public double getPaymentsTv() {
         return paymentsTv;
+    }
+    public double getTotalAmountBoundary() {
+        return totalAmountBoundary;
     }
     public boolean getUsedElec() {
         return usedElec;
@@ -600,6 +609,9 @@ public enum Settings {
     }
     public void setPaymentsTv(double paymentsTv) {
         this.paymentsTv = paymentsTv;
+    }
+    public void setTotalAmountBoundary(double totalAmountBoundary) {
+        this.totalAmountBoundary = totalAmountBoundary;
     }
     public void setUsedElec(boolean usedElec) {
         this.usedElec = usedElec;

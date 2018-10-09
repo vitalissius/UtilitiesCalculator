@@ -2096,27 +2096,45 @@ public class UCWindow extends JFrame {
 
     private void btStatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btStatisticsActionPerformed
 
-        Utils.resetStyleOfRenderingToUcStatisticsTable(tbStatistics);
+        Utils.resetRenderingStyleOf(tbStatistics);
 
         final JTableHeader tableHeader = tbStatistics.getTableHeader();
         tableHeader.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 if (SwingUtilities.isRightMouseButton(mouseEvent)) {
-                    final UcStatisticsTableModel ucModel = (UcStatisticsTableModel) tbStatistics.getModel();
                     JPopupMenu popupMenu = new JPopupMenu();
                     for (UcStatisticsTableModel.ColumnKind kind : UcStatisticsTableModel.ColumnKind.values()) {
-                        JCheckBoxMenuItem chbMenuItem = new JCheckBoxMenuItem(kind.columnName(), kind.isChecked());
-                        chbMenuItem.setEnabled(!kind.alwaysShown());
-                        chbMenuItem.addActionListener((actionEvent) -> {
-                            JCheckBoxMenuItem source = (JCheckBoxMenuItem) actionEvent.getSource();
-                            UcStatisticsTableModel.ColumnKind ct =
-                                    UcStatisticsTableModel.ColumnKind.columnKindByColumnName(source.getActionCommand());
-                            ucModel.checkUncheck(ct);
-                            Utils.resetStyleOfRenderingToUcStatisticsTable(tbStatistics);
-                            SETTINGS.setStatisticsColumnsMask(ucModel.getShownColumnsMask());
-                        });
-                        popupMenu.add(chbMenuItem);
+                        if (kind == UcStatisticsTableModel.ColumnKind.TotalAmount) {
+
+                            JMenu menu = new JMenu(kind.columnName());
+
+                            JMenuItem miSetBoundary = new JMenuItem(DICT.getWord(Dictionary.Keyword.OP_SET_BOUNDARY));
+                            miSetBoundary.addActionListener((ae) -> {
+                                while (true) {
+                                    String value = JOptionPane.showInputDialog(DICT.getWord(Dictionary.Keyword.OP_INPUT_BOUNDARY_VALUE), SETTINGS.getTotalAmountBoundary());
+                                    if (value != null) {
+                                        try {
+                                            double dv = Double.parseDouble(value);
+                                            SETTINGS.setTotalAmountBoundary(dv);
+                                            Utils.resetRenderingStyleOf(tbStatistics);
+                                        } catch (NumberFormatException nfe) {
+                                            continue;
+                                        }
+                                    }
+                                    break;
+                                }
+                            });
+
+                            JCheckBoxMenuItem chbMenuItem = makeCheckBoxMenuItem(kind);
+
+                            menu.add(chbMenuItem);
+                            menu.add(miSetBoundary);
+                            popupMenu.add(menu);
+                        } else {
+                            JCheckBoxMenuItem chbMenuItem = makeCheckBoxMenuItem(kind);
+                            popupMenu.add(chbMenuItem);
+                        }
                     }
                     popupMenu.show(tableHeader, mouseEvent.getX(), mouseEvent.getY());
                 }
@@ -2129,6 +2147,20 @@ public class UCWindow extends JFrame {
         frameStatistics.setVisible(true);
 
     }//GEN-LAST:event_btStatisticsActionPerformed
+
+    private JCheckBoxMenuItem makeCheckBoxMenuItem(final UcStatisticsTableModel.ColumnKind kind) {
+        final JCheckBoxMenuItem chbMenuItem = new JCheckBoxMenuItem(kind.columnName(), kind.isChecked());
+        chbMenuItem.setEnabled(!kind.alwaysShown());
+        chbMenuItem.addActionListener((actionEvent) -> {
+            final JCheckBoxMenuItem source = (JCheckBoxMenuItem) actionEvent.getSource();
+            final UcStatisticsTableModel.ColumnKind ck = UcStatisticsTableModel.ColumnKind.columnKindByColumnName(source.getActionCommand());
+            final UcStatisticsTableModel ucModel = (UcStatisticsTableModel) tbStatistics.getModel();
+            ucModel.checkUncheck(ck);
+            Utils.resetRenderingStyleOf(tbStatistics);
+            SETTINGS.setStatisticsColumnsMask(ucModel.getShownColumnsMask());
+        });
+        return chbMenuItem;
+    }
 
     public static void main(String args[]) {
         try {

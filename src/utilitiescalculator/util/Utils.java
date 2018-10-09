@@ -15,6 +15,7 @@ import utilitiescalculator.gui.table.UcKwhTableCellRenderer;
 import utilitiescalculator.gui.table.UcMcTableCellRenderer;
 import utilitiescalculator.gui.table.UcStatisticsTableModel;
 import utilitiescalculator.gui.table.UcTimestampTableCellRenderer;
+import utilitiescalculator.gui.table.UcTotalAmountTableCellRenderer;
 import utilitiescalculator.gui.table.UcYearMonthTableCellRenderer;
 
 public class Utils {
@@ -39,7 +40,12 @@ public class Utils {
 
             Class<?> clss = table.getColumnClass(i);
             if (clss == Double.class) {
-                renderer = new UcDoubleTableCellRenderer();
+                String columnName = table.getModel().getColumnName(i);
+                if (Dictionary.INSTANCE.getWord(Dictionary.Keyword.TC_TOTAL_AMOUNT).equals(columnName)) {
+                    renderer = new UcTotalAmountTableCellRenderer(Settings.INSTANCE.getTotalAmountBoundary());
+                } else {
+                    renderer = new UcDoubleTableCellRenderer();
+                }
             } else if (clss == Long.class) {
                 renderer = new UcTimestampTableCellRenderer();
             } else if (clss == YearMonth.class) {
@@ -57,7 +63,7 @@ public class Utils {
         }
     }
 
-    public static void resetStyleOfRenderingToUcStatisticsTable(JTable table) {
+    public static void resetRenderingStyleOf(JTable table) {
         setStyleOfRenderingToUcStatisticsTable(table);
     }
 
