@@ -2112,10 +2112,17 @@ public class UCWindow extends JFrame {
                             JMenuItem miSetBoundary = new JMenuItem(DICT.getWord(Dictionary.Keyword.OP_SET_BOUNDARY));
                             miSetBoundary.addActionListener((ae) -> {
                                 while (true) {
-                                    String value = JOptionPane.showInputDialog(DICT.getWord(Dictionary.Keyword.OP_INPUT_BOUNDARY_VALUE), SETTINGS.getTotalAmountBoundary());
-                                    if (value != null) {
+                                    String insertedValue = (String) JOptionPane.showInputDialog(
+                                            tbStatistics,
+                                            null,
+                                            DICT.getWord(Dictionary.Keyword.OP_INPUT_BOUNDARY_VALUE),
+                                            JOptionPane.QUESTION_MESSAGE,
+                                            null,
+                                            null,
+                                            SETTINGS.getTotalAmountBoundary());
+                                    if (insertedValue != null) {
                                         try {
-                                            double dv = Double.parseDouble(value);
+                                            double dv = Double.parseDouble(insertedValue);
                                             SETTINGS.setTotalAmountBoundary(dv);
                                             Utils.resetRenderingStyleOf(tbStatistics);
                                         } catch (NumberFormatException nfe) {

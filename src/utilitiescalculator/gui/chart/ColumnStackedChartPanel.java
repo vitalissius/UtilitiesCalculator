@@ -33,6 +33,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 import utilitiescalculator.Dictionary;
+import utilitiescalculator.Settings;
 import utilitiescalculator.UCWindow;
 import utilitiescalculator.statistics.Statistics;
 import utilitiescalculator.statistics.StatisticsReadWriter;
@@ -43,6 +44,7 @@ public class ColumnStackedChartPanel extends JPanel implements MouseListener, Mo
     private static final Color CHART_BORDER_COLOR = Color.GRAY;
     private static final Color CHART_GRIDLINES_COLOR = Color.LIGHT_GRAY;
     private static final Color CHART_TEXT_COLOR = Color.BLACK;
+    private static final Color BORDER_LINE_COLOR = Color.RED;
 
     private static final Font DEFAULT_FONT = new Font("Arial", Font.PLAIN, 12);
     private static final Font PAYMENT_NAMES_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 16);
@@ -50,6 +52,7 @@ public class ColumnStackedChartPanel extends JPanel implements MouseListener, Mo
     private static final Stroke DEFAULT_STROKE = new BasicStroke(1.f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL);
     private static final Stroke SELECTED_BUTTON_STROKE = new BasicStroke(6.f, BasicStroke.CAP_ROUND, BasicStroke.CAP_ROUND);
     private static final Stroke UNSELECTED_BUTTON_STROKE = new BasicStroke(1.f, BasicStroke.CAP_ROUND, BasicStroke.CAP_ROUND);
+    private static final Stroke BORDER_LINE_STROKE = new BasicStroke(1.3f);
 
     private final ColumnStackedChart columnStackedChart;
 
@@ -153,19 +156,36 @@ public class ColumnStackedChartPanel extends JPanel implements MouseListener, Mo
         int chartHeight = columnStackedChart.getChartHeight();
         double oneBillHeight = columnStackedChart.getOneBillHeight();
 
-        int hundredBillHeight = (int) (oneBillHeight * 100);
+        double hundredBillHeight = oneBillHeight * 100;
         int hundredBillMarking = 0;
-        for (int i = 0; i < chartHeight; i += hundredBillHeight) {
+        for (double i = 0; i < chartHeight; i += hundredBillHeight) {
             if (i > 0) {
                 gg.setColor(CHART_GRIDLINES_COLOR);
-                gg.drawLine(0, chartHeight - i, chartWidth, chartHeight - i);
+                gg.drawLine(0, (int) (chartHeight - i), chartWidth, (int) (chartHeight - i));
             }
             String text = hundredBillMarking + "\u20B4";
             gg.setColor(CHART_TEXT_COLOR);
             Rectangle2D bounds = gg.getFontMetrics(DEFAULT_FONT).getStringBounds(text, gg);
-            gg.drawString(text, -(int) bounds.getWidth() - 2, chartHeight - i - (int) bounds.getCenterY());
+            gg.drawString(text, -(int) bounds.getWidth() - 2, (int) (chartHeight - i - (int) bounds.getCenterY()));
             hundredBillMarking += 100;
         }
+
+        Point point = new Point(0, chartHeight - (int) (Settings.INSTANCE.getTotalAmountBoundary() * oneBillHeight));
+        System.out.println(point.x + " " + point.y);
+        drawHorizontalBoundaryLine(gg, point, chartWidth);
+    }
+
+    private void drawHorizontalBoundaryLine(Graphics2D gg, Point startPoint, int lineLength) {
+        Color prevColor = gg.getColor();
+        Stroke prevStroke = gg.getStroke();
+
+        gg.setColor(BORDER_LINE_COLOR);
+        gg.setStroke(BORDER_LINE_STROKE);
+
+        gg.drawLine(startPoint.x, startPoint.y, lineLength, startPoint.y);
+
+        gg.setStroke(prevStroke);
+        gg.setColor(prevColor);
     }
 
 
